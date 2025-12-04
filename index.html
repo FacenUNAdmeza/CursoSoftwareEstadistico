@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Curso Software Estadístico · Presentación Unidad 1</title>
+  <title>Curso Software Estadístico · Página principal</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -198,6 +198,28 @@
       margin-bottom: 0.75rem;
       color: var(--dark);
     }
+    /* Botones de enlace a materiales */
+    .stat-pres-link-btn {
+      display: inline-block;
+      margin-top: 0.6rem;
+      margin-right: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--primary);
+      background: white;
+      color: var(--primary);
+      font-size: 0.9rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .stat-pres-link-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+
     .stat-pres-ui-diagram {
       position: relative;
       width: 100%;
@@ -417,55 +439,61 @@
   </style>
 </head>
 <body>
-  <div id="stat-pres-widget" role="region" aria-label="Presentación interactiva de software estadístico">
+  <div id="stat-pres-widget" role="region" aria-label="Presentación interactiva del curso de software estadístico">
     <nav class="stat-pres-sidebar" aria-label="Navegación del curso">
       <div class="stat-pres-sidebar__logo" aria-hidden="true">
-        <i class="fas fa-chart-line"></i> Software Estadístico
+        <i class="fas fa-chart-line"></i> Curso Software Estadístico
       </div>
       <ul class="stat-pres-nav__list">
         <li class="stat-pres-nav__item">
           <a href="#portada" class="stat-pres-nav__link active" data-target="portada">
-            <i class="fas fa-home" aria-hidden="true"></i> Portada
+            <i class="fas fa-home" aria-hidden="true"></i> Inicio
+          </a>
+        </li>
+        <li class="stat-pres-nav__item">
+          <a href="#unidades" class="stat-pres-nav__link" data-target="unidades">
+            <i class="fas fa-layer-group" aria-hidden="true"></i> Mapa de unidades
           </a>
         </li>
         <li class="stat-pres-nav__item">
           <a href="#introduccion" class="stat-pres-nav__link" data-target="introduccion">
-            <i class="fas fa-info-circle" aria-hidden="true"></i> 1. Introducción
+            <i class="fas fa-info-circle" aria-hidden="true"></i> Unidad 1, introducción
           </a>
         </li>
         <li class="stat-pres-nav__item">
           <a href="#instalacion" class="stat-pres-nav__link" data-target="instalacion">
-            <i class="fas fa-download" aria-hidden="true"></i> 2. Instalación
+            <i class="fas fa-download" aria-hidden="true"></i> Unidad 1, instalación
           </a>
         </li>
         <li class="stat-pres-nav__item">
           <a href="#interfaz" class="stat-pres-nav__link" data-target="interfaz">
-            <i class="fas fa-desktop" aria-hidden="true"></i> 3. Interfaz
+            <i class="fas fa-desktop" aria-hidden="true"></i> Unidad 1, interfaz
           </a>
         </li>
         <li class="stat-pres-nav__item">
           <a href="#actividad" class="stat-pres-nav__link" data-target="actividad">
-            <i class="fas fa-puzzle-piece" aria-hidden="true"></i> Actividad
+            <i class="fas fa-puzzle-piece" aria-hidden="true"></i> Actividad Unidad 1
           </a>
         </li>
         <li class="stat-pres-nav__item">
           <a href="#buenas-practicas" class="stat-pres-nav__link" data-target="buenas-practicas">
-            <i class="fas fa-check-circle" aria-hidden="true"></i> 4. Buenas Prácticas
+            <i class="fas fa-check-circle" aria-hidden="true"></i> Buenas prácticas
           </a>
         </li>
         <li class="stat-pres-nav__item">
           <a href="#recursos" class="stat-pres-nav__link" data-target="recursos">
-            <i class="fas fa-external-link-alt" aria-hidden="true"></i> 5. Recursos
+            <i class="fas fa-external-link-alt" aria-hidden="true"></i> Recursos
           </a>
         </li>
       </ul>
     </nav>
 
     <main class="stat-pres-content-wrapper" id="stat-pres-content-wrapper" tabindex="0">
+      <!-- Portada general del curso -->
       <section id="portada" class="stat-pres-section stat-pres-hero" aria-labelledby="hero-title">
         <div class="stat-pres-hero__content" data-aos="zoom-in">
-          <h1 id="hero-title">INTRODUCCIÓN A LOS SOFTWARES ESTADÍSTICOS</h1>
-          <p>Unidad 1: Introducción, instalación y entorno de trabajo</p>
+          <h1 id="hero-title">CURSO: SOFTWARE ESTADÍSTICO</h1>
+          <p>Presentación general y acceso a las unidades 1 a 5</p>
           <div class="stat-pres-hero__institution">
             <p>FACULTAD DE CIENCIAS EXACTAS Y NATURALES</p>
             <p>UNIVERSIDAD NACIONAL DE ASUNCIÓN</p>
@@ -474,9 +502,91 @@
         </div>
       </section>
 
+      <!-- Mapa de unidades del curso -->
+      <section id="unidades" class="stat-pres-section" aria-labelledby="units-title">
+        <h2 id="units-title" class="stat-pres-section__title" data-aos="fade-right">
+          Mapa de unidades del curso
+        </h2>
+        <p class="stat-pres-paragraph" data-aos="fade-up">
+          Desde esta página principal puede acceder a los materiales de lectura y actividades de cada unidad. Las rutas están
+          organizadas según la estructura de directorios que definió para el repositorio del curso.
+        </p>
+
+        <div class="stat-pres-card-grid" data-aos="fade-up" data-aos-delay="100">
+          <!-- Unidad 1 -->
+          <article class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-play-circle" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Unidad 1 · Introducción, instalación y entorno de trabajo</h3>
+            <p>
+              Presentación de qué se entiende por software estadístico, instalación de los entornos básicos y reconocimiento
+              de los elementos principales de la interfaz de trabajo.
+            </p>
+            <a href="Unidad1/material_de_lectura/index.html" class="stat-pres-link-btn">
+              Material de lectura
+            </a>
+            <a href="Unidad1/actividad_aprendizaje/index.html" class="stat-pres-link-btn">
+              Actividad de aprendizaje
+            </a>
+          </article>
+
+          <!-- Unidad 2 -->
+          <article class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-chart-bar" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Unidad 2 · Visualización y exploración de datos</h3>
+            <p>
+              Análisis exploratorio de datos, selección de gráficos adecuados y uso de librerías para visualización
+              en R y Python aplicados a conjuntos de datos reales.
+            </p>
+            <a href="Unidad2/material_de_lectura/index.html" class="stat-pres-link-btn">
+              Material de lectura
+            </a>
+          </article>
+
+          <!-- Unidad 3 -->
+          <article class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-database" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Unidad 3 · Manejo y transformación de datos</h3>
+            <p>
+              Importación, limpieza, unión y transformación de bases de datos con herramientas como dplyr, data.table,
+              pandas o polars, enfatizando reproducibilidad.
+            </p>
+            <a href="Unidad3/material_de_lectura/index.html" class="stat-pres-link-btn">
+              Material de lectura
+            </a>
+          </article>
+
+          <!-- Unidad 4 -->
+          <article class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-superscript" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Unidad 4 · Modelos estadísticos básicos</h3>
+            <p>
+              Introducción a modelos de regresión, contraste de hipótesis y construcción de intervalos de confianza,
+              implementados en software estadístico.
+            </p>
+            <a href="Unidad4/material_de_lectura/index.html" class="stat-pres-link-btn">
+              Material de lectura
+            </a>
+          </article>
+
+          <!-- Unidad 5 -->
+          <article class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-file-signature" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Unidad 5 · Documentación y reproducibilidad</h3>
+            <p>
+              Uso de R Markdown, notebooks y otros entornos para generar informes reproducibles, integrando código, texto
+              y resultados en un mismo documento.
+            </p>
+            <a href="Unidad5/material_de_lectura/index.html" class="stat-pres-link-btn">
+              Material de lectura
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- Contenido específico de la Unidad 1 en la página principal -->
       <section id="introduccion" class="stat-pres-section" aria-labelledby="intro-title">
         <h2 id="intro-title" class="stat-pres-section__title" data-aos="fade-right">
-          1. Introducción a los Softwares Estadísticos
+          Unidad 1 · Introducción a los softwares estadísticos
         </h2>
         <p class="stat-pres-paragraph" data-aos="fade-up">
           En la práctica moderna de la estadística resulta prácticamente imprescindible utilizar un software especializado.
@@ -496,10 +606,10 @@
 
       <section id="instalacion" class="stat-pres-section" aria-labelledby="install-title">
         <h2 id="install-title" class="stat-pres-section__title" data-aos="fade-right">
-          2. Instalación Básica
+          Unidad 1 · Instalación básica
         </h2>
         <p class="stat-pres-paragraph" data-aos="fade-up">
-          Instalación de los principales entornos que utilizaremos en el curso.
+          Instalación de los principales entornos que se utilizarán en el curso.
         </p>
 
         <div class="stat-pres-tabs" data-aos="fade-up" data-aos-delay="100">
@@ -519,7 +629,7 @@
             <ol class="stat-pres-steps-list">
               <li class="stat-pres-step-item">Acceder al sitio oficial de R (CRAN) y descargar el instalador.</li>
               <li class="stat-pres-step-item">Instalar R utilizando la configuración por defecto.</li>
-              <li class="stat-pres-step-item">Descargar e instalar RStudio Desktop (versión gratuita).</li>
+              <li class="stat-pres-step-item">Descargar e instalar RStudio Desktop, versión gratuita.</li>
               <li class="stat-pres-step-item">Verificar que R y RStudio se inician correctamente.</li>
             </ol>
           </div>
@@ -534,8 +644,8 @@
           <div id="spss-tab" class="stat-pres-tab-content" role="tabpanel" hidden>
             <ol class="stat-pres-steps-list">
               <li class="stat-pres-step-item">Verificar si la institución dispone de licencia de SPSS.</li>
-              <li class="stat-pres-step-item">En caso de utilizar PSPP/Jamovi, descargar la versión libre desde su sitio oficial.</li>
-              <li class="stat-pres-step-item">Instalar el programa y comprobar la apertura de la hoja de datos y ventana de resultados.</li>
+              <li class="stat-pres-step-item">En caso de utilizar PSPP o Jamovi, descargar la versión libre desde su sitio oficial.</li>
+              <li class="stat-pres-step-item">Instalar el programa y comprobar la apertura de la hoja de datos y la ventana de resultados.</li>
             </ol>
           </div>
         </div>
@@ -543,10 +653,10 @@
 
       <section id="interfaz" class="stat-pres-section" aria-labelledby="ui-title">
         <h2 id="ui-title" class="stat-pres-section__title" data-aos="fade-right">
-          3. Elementos Visuales de la Interfaz
+          Unidad 1 · Elementos visuales de la interfaz
         </h2>
         <p class="stat-pres-paragraph" data-aos="fade-up">
-          Aunque cada software tiene su propio diseño, la mayoría comparte una estructura visual similar. Haz clic sobre las
+          Aunque cada software tiene su propio diseño, la mayoría comparte una estructura visual similar. Haga clic sobre las
           distintas áreas para ver una breve descripción.
         </p>
 
@@ -554,37 +664,37 @@
           <div class="menu-bar" role="button" tabindex="0" aria-label="Barra de menús">
             Archivo | Editar | Código | Gráficos | Sesión | Ayuda
             <span class="stat-pres-tooltip" role="tooltip">
-              Barra de menús: ofrece acceso organizado a todas las funciones del programa.
+              Barra de menús, ofrece acceso organizado a todas las funciones del programa.
             </span>
           </div>
           <div class="toolbar" role="button" tabindex="0" aria-label="Barra de herramientas">
             <i class="fas fa-save"></i> <i class="fas fa-play"></i> <i class="fas fa-cog"></i>
             <span class="stat-pres-tooltip">
-              Barra de herramientas: iconos para acciones frecuentes como guardar o ejecutar código.
+              Barra de herramientas, iconos para acciones frecuentes como guardar o ejecutar código.
             </span>
           </div>
           <div class="environment-pane" role="button" tabindex="0" aria-label="Panel de entorno">
             Environment / History
             <span class="stat-pres-tooltip">
-              Panel de entorno: muestra objetos y variables creados en la sesión.
+              Panel de entorno, muestra objetos y variables creados en la sesión.
             </span>
           </div>
           <div class="script-editor" role="button" tabindex="0" aria-label="Editor de scripts">
             # Mi primer script<br>summary(mis_datos)
             <span class="stat-pres-tooltip">
-              Editor de scripts: área para escribir, guardar y reutilizar secuencias de comandos.
+              Editor de scripts, área para escribir, guardar y reutilizar secuencias de comandos.
             </span>
           </div>
           <div class="plots-pane" role="button" tabindex="0" aria-label="Panel de gráficos">
             Plots
             <span class="stat-pres-tooltip">
-              Panel de gráficos: contiene las visualizaciones generadas durante el análisis.
+              Panel de gráficos, contiene las visualizaciones generadas durante el análisis.
             </span>
           </div>
           <div class="console" role="button" tabindex="0" aria-label="Consola">
             [1] "Hola mundo"
             <span class="stat-pres-tooltip">
-              Consola: ejecuta comandos y muestra resultados inmediatos.
+              Consola, ejecuta comandos y muestra resultados inmediatos.
             </span>
           </div>
         </div>
@@ -592,10 +702,10 @@
 
       <section id="actividad" class="stat-pres-section" aria-labelledby="activity-title">
         <h2 id="activity-title" class="stat-pres-section__title" data-aos="fade-right">
-          Actividad: Clasifica el Software
+          Actividad Unidad 1, clasifica el software
         </h2>
         <p class="stat-pres-paragraph" data-aos="fade-up">
-          Arrastra cada software a la categoría correcta: ¿se utiliza principalmente mediante interfaz gráfica o mediante código/comandos?
+          Arrastre cada software a la categoría correcta, según se utilice principalmente mediante interfaz gráfica o mediante código o comandos.
         </p>
 
         <div class="stat-pres-dnd-activity" aria-live="polite" data-aos="fade-up" data-aos-delay="100">
@@ -610,10 +720,10 @@
 
           <div class="stat-pres-dnd-container">
             <div class="stat-pres-dnd-bin" data-category="code" role="region" aria-label="Categoría basada en código">
-              <h4><i class="fas fa-code" aria-hidden="true"></i> Basado en Código</h4>
+              <h4><i class="fas fa-code" aria-hidden="true"></i> Basado en código</h4>
             </div>
             <div class="stat-pres-dnd-bin" data-category="gui" role="region" aria-label="Categoría con interfaz gráfica">
-              <h4><i class="fas fa-window-maximize" aria-hidden="true"></i> Interfaz Gráfica</h4>
+              <h4><i class="fas fa-window-maximize" aria-hidden="true"></i> Interfaz gráfica</h4>
             </div>
           </div>
 
@@ -626,7 +736,7 @@
 
       <section id="buenas-practicas" class="stat-pres-section" aria-labelledby="practices-title">
         <h2 id="practices-title" class="stat-pres-section__title" data-aos="fade-right">
-          4. Buenas Prácticas Iniciales
+          Buenas prácticas iniciales
         </h2>
         <div class="stat-pres-card-grid" data-aos="fade-up">
           <div class="stat-pres-card" role="article">
@@ -637,7 +747,7 @@
           <div class="stat-pres-card" role="article">
             <div class="stat-pres-card__icon"><i class="fas fa-file-alt" aria-hidden="true"></i></div>
             <h3 class="stat-pres-card__title">Nombres descriptivos</h3>
-            <p>Utilizar nombres consistentes y significativos para archivos y proyectos.</p>
+            <p>Utilizar nombres consistentes y significativos para archivos, proyectos y scripts.</p>
           </div>
           <div class="stat-pres-card" role="article">
             <div class="stat-pres-card__icon"><i class="fas fa-cloud-upload-alt" aria-hidden="true"></i></div>
@@ -649,14 +759,15 @@
 
       <section id="recursos" class="stat-pres-section" aria-labelledby="resources-title">
         <h2 id="resources-title" class="stat-pres-section__title" data-aos="fade-right">
-          5. Recursos para seguir aprendiendo
+          Recursos para seguir aprendiendo
         </h2>
         <div class="stat-pres-card-grid" data-aos="fade-up">
           <div class="stat-pres-card" role="article">
             <div class="stat-pres-card__icon"><i class="fas fa-book" aria-hidden="true"></i></div>
             <h3 class="stat-pres-card__title">Bibliografía recomendada</h3>
             <p>
-              Field (2018), Wickham y Grolemund (2017), VanderPlas (2016), entre otros textos introductorios a software estadístico.
+              Field (2018), Wickham y Grolemund (2017), VanderPlas (2016), entre otros textos introductorios al uso de software
+              estadístico para análisis de datos.
             </p>
           </div>
           <div class="stat-pres-card" role="article">
@@ -670,7 +781,7 @@
             <div class="stat-pres-card__icon"><i class="fas fa-users" aria-hidden="true"></i></div>
             <h3 class="stat-pres-card__title">Comunidades</h3>
             <p>
-              Stack Overflow, RStudio Community y foros de usuarios de Jamovi y PSPP para resolver dudas específicas.
+              Stack Overflow, RStudio Community y foros de usuarios de Jamovi y PSPP para resolver dudas específicas y compartir buenas prácticas.
             </p>
           </div>
         </div>
@@ -803,10 +914,10 @@
           });
 
           if (correctCount === 6) {
-            feedback.textContent = '¡Excelente! Ha clasificado todos correctamente.';
+            feedback.textContent = 'Excelente, ha clasificado todos correctamente.';
             feedback.className = 'stat-pres-dnd-feedback success';
           } else {
-            feedback.textContent = 'Aún hay elementos por revisar. Verifique su clasificación.';
+            feedback.textContent = 'Aún hay elementos por revisar, verifique la clasificación.';
             feedback.className = 'stat-pres-dnd-feedback error';
           }
         }
