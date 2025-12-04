@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Unidad 1 · Material de lectura</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --primary: #1d4ed8;
+      --accent: #e11d48;
+      --bg: #f3f4f6;
+      --text: #111827;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+      color: white;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 4px 12px rgba(15,23,42,0.4);
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+      margin-bottom: 0.3rem;
+    }
+    .curso {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+    main {
+      max-width: 960px;
+      margin: 1.5rem auto 2.5rem;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 8px 30px rgba(15,23,42,0.12);
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin: 1.5rem 0 0.5rem;
+      color: var(--primary);
+      border-bottom: 2px solid rgba(37,99,235,0.2);
+      padding-bottom: 0.25rem;
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin: 1.1rem 0 0.3rem;
+      color: #111827;
+    }
+    p {
+      margin-bottom: 0.8rem;
+      text-align: justify;
+    }
+    ul, ol {
+      margin: 0.6rem 0 0.8rem 1.4rem;
+    }
+    li { margin-bottom: 0.4rem; }
+    .highlight {
+      margin: 1.2rem 0;
+      padding: 0.9rem 1rem;
+      border-left: 4px solid var(--accent);
+      background: #fef2f2;
+      border-radius: 0 0.75rem 0.75rem 0;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(37,99,235,0.08);
+      color: #1d4ed8;
+      margin-left: 0.25rem;
+    }
+    .footer-nav {
+      margin-top: 1.8rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 640px) {
+      main { margin: 1rem; padding: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>Unidad 1 · Introducción, instalación y entorno de trabajo</h1>
+      <p class="curso">
+        Curso de Software Estadístico · FACEN–UNA
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. ¿Por qué necesitamos un software estadístico?</h2>
+      <p>
+        En la práctica profesional actual resulta prácticamente imprescindible utilizar un software estadístico.
+        Estos programas permiten gestionar bases de datos de gran tamaño, aplicar procedimientos de análisis estándar
+        y documentar de forma reproducible cada uno de los pasos realizados.
+      </p>
+      <p>
+        A diferencia de una calculadora o una hoja de cálculo genérica, los softwares estadísticos integran
+        funciones específicas para el tratamiento de datos, la estimación de modelos y la generación de reportes,
+        lo que reduce errores manuales y mejora la trazabilidad de los resultados.
+      </p>
+      <div class="highlight">
+        <strong>Idea clave:</strong> un software estadístico no es solo una calculadora potente, es el
+        eje organizador del flujo de trabajo de análisis de datos.
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Tipos de software estadístico</h2>
+      <p>
+        Existen dos familias principales de herramientas:
+      </p>
+      <ul>
+        <li>
+          <strong>Softwares basados en interfaz gráfica (GUI)</strong>,
+          como SPSS, PSPP o Jamovi, que se controlan principalmente mediante menús y cuadros de diálogo.
+        </li>
+        <li>
+          <strong>Softwares basados en código/comandos</strong>,
+          como R, Stata o Python con librerías estadísticas, que se utilizan escribiendo secuencias de instrucciones.
+        </li>
+      </ul>
+      <p>
+        En este curso se utilizará una combinación de ambas aproximaciones, enfatizando progresivamente
+        las ventajas de la programación reproducible.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Instalación básica de las herramientas</h2>
+
+      <h3>3.1 R y RStudio<span class="badge">entorno principal</span></h3>
+      <ol>
+        <li>Acceder al sitio oficial de R (CRAN) y descargar el instalador para el sistema operativo correspondiente.</li>
+        <li>Instalar R con la configuración por defecto.</li>
+        <li>Descargar RStudio Desktop (versión gratuita) desde su página oficial.</li>
+        <li>Verificar que RStudio reconoce la instalación de R y que la consola se encuentra operativa.</li>
+      </ol>
+
+      <h3>3.2 Python y Anaconda</h3>
+      <ol>
+        <li>Descargar el instalador de Anaconda para Python desde la página oficial.</li>
+        <li>Completar la instalación aceptando las opciones recomendadas.</li>
+        <li>Abrir Anaconda Navigator y lanzar JupyterLab o Jupyter Notebook.</li>
+        <li>Probar un pequeño script para confirmar que el entorno funciona correctamente.</li>
+      </ol>
+
+      <h3>3.3 SPSS / PSPP / Jamovi</h3>
+      <ol>
+        <li>Verificar si la institución dispone de licencia de SPSS u otro software comercial equivalente.</li>
+        <li>En caso de usar software libre PSPP o Jamovi, descargar el instalador desde la página oficial.</li>
+        <li>Instalar y comprobar la apertura de la ventana de datos y la ventana de resultados.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>4. Elementos visuales de la interfaz</h2>
+      <p>
+        Aunque el diseño específico varía entre programas, la mayoría de los entornos estadísticos comparten
+        una estructura general similar:
+      </p>
+      <ul>
+        <li><strong>Barra de menús</strong>: agrupa las funciones principales archivo, edición, análisis, gráficos, etc.</li>
+        <li><strong>Barras de herramientas</strong>: iconos para acciones frecuentes como guardar, ejecutar o detener código.</li>
+        <li><strong>Ventana de datos</strong>: presenta las variables en columnas y las observaciones en filas.</li>
+        <li><strong>Editor de scripts</strong>: área donde se escriben y guardan comandos reutilizables.</li>
+        <li><strong>Consola</strong>: ejecuta instrucciones individuales y muestra resultados inmediatos.</li>
+        <li><strong>Panel de gráficos y resultados</strong>: recoge salidas tabulares y visualizaciones.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. Flujo de trabajo básico</h2>
+      <p>
+        Antes de ejecutar técnicas avanzadas, es importante interiorizar una secuencia general de trabajo que
+        se repetirá en la mayoría de los proyectos de análisis de datos.
+      </p>
+      <ol>
+        <li>Definir una carpeta de trabajo para el proyecto.</li>
+        <li>Importar el conjunto de datos, por ejemplo, desde CSV o Excel.</li>
+        <li>Verificar tipos de variables, nombres y valores atípicos evidentes.</li>
+        <li>Realizar una primera exploración descriptiva tablas de frecuencia, medias, gráficos simples.</li>
+        <li>Guardar scripts y resultados relevantes.</li>
+        <li>Registrar la versión del software utilizada y la fecha del análisis.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>6. Buenas prácticas iniciales</h2>
+      <ul>
+        <li>Mantener datos originales inalterados y trabajar sobre copias derivadas.</li>
+        <li>Documentar las transformaciones realizadas sobre las variables.</li>
+        <li>Utilizar nombres consistentes para objetos, scripts y archivos de salida.</li>
+        <li>Respaldar periódicamente la carpeta del proyecto.</li>
+      </ul>
+    </section>
+
+    <div class="footer-nav">
+      <span><a href="../../index.html">← Volver a la página principal del curso</a></span>
+      <span><a href="../actividad_aprendizaje/index.html">Ir a la actividad de la Unidad 1 →</a></span>
+    </div>
+  </main>
+</body>
+</html>

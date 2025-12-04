@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Unidad 5 · Documentación y reproducibilidad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --primary: #1d4ed8; --bg: #f9fafb; --text: #111827; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #1d4ed8, #6366f1);
+      color: white;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 4px 12px rgba(15,23,42,0.4);
+    }
+    .header-inner { max-width: 960px; margin: 0 auto; }
+    h1 { font-size: clamp(1.8rem, 2.3vw, 2.4rem); margin-bottom: 0.35rem; }
+    .curso { font-size: 0.95rem; opacity: 0.9; }
+    main {
+      max-width: 960px;
+      margin: 1.5rem auto 2.5rem;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 8px 30px rgba(15,23,42,0.12);
+    }
+    h2 {
+      font-size: 1.35rem;
+      margin: 1.5rem 0 0.5rem;
+      color: #1d4ed8;
+      border-bottom: 2px solid rgba(129,140,248,0.25);
+      padding-bottom: 0.25rem;
+    }
+    p { margin-bottom: 0.8rem; text-align: justify; }
+    ul { margin: 0.6rem 0 0.8rem 1.4rem; }
+    li { margin-bottom: 0.4rem; }
+    .footer-nav {
+      margin-top: 1.8rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+    a { color: #1d4ed8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>Unidad 5 · Documentación, reportes y reproducibilidad</h1>
+      <p class="curso">Curso de Software Estadístico · FACEN–UNA</p>
+    </div>
+  </header>
+  <main>
+    <section>
+      <h2>Objetivos de la unidad</h2>
+      <p>
+        La unidad final se centra en la generación de reportes reproducibles y en la documentación rigurosa de los análisis realizados,
+        integrando código, resultados y texto en un único documento.
+      </p>
+    </section>
+    <section>
+      <h2>Contenidos sugeridos</h2>
+      <ul>
+        <li>Concepto de reproducibilidad y trazabilidad en análisis de datos.</li>
+        <li>Uso de R Markdown, Jupyter Notebook u otras herramientas equivalentes.</li>
+        <li>Buenas prácticas para versionar proyectos y compartir resultados.</li>
+        <li>Organización de entregables finales para proyectos de curso o trabajos finales.</li>
+      </ul>
+    </section>
+    <div class="footer-nav">
+      <span><a href="../../index.html">← Volver a la página principal del curso</a></span>
+      <span>Plantilla ampliable según el programa oficial</span>
+    </div>
+  </main>
+</body>
+</html>

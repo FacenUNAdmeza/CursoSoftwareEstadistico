@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curso Software Estadístico · Presentación Unidad 1</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #2980b9;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --success: #27ae60;
+      --warning: #f39c12;
+      --dark: #2c3e50;
+      --light: #ecf0f1;
+      --bg-content: #f4f7fa;
+      --text-dark: #333;
+      --shadow: rgba(0, 0, 0, 0.2);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f2f5;
+      line-height: 1.6;
+    }
+    #stat-pres-widget {
+      width: 90%;
+      max-width: 1400px;
+      height: 90vh;
+      max-height: 900px;
+      margin: 5vh auto;
+      background: var(--dark);
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      display: flex;
+      overflow: hidden;
+      color: var(--light);
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+    }
+    .stat-pres-sidebar {
+      width: 280px;
+      background: linear-gradient(135deg, #1a252f, var(--dark));
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+    .stat-pres-sidebar__logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      text-align: center;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--primary);
+      letter-spacing: 0.5px;
+    }
+    .stat-pres-nav__list {
+      list-style: none;
+    }
+    .stat-pres-nav__item {
+      margin-bottom: 1rem;
+    }
+    .stat-pres-nav__link {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .stat-pres-nav__link i {
+      margin-right: 0.75rem;
+      font-size: 1.2rem;
+    }
+    .stat-pres-nav__link:hover,
+    .stat-pres-nav__link.active {
+      background-color: var(--primary);
+      transform: translateX(4px);
+    }
+    .stat-pres-content-wrapper {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 2rem 3rem;
+      background-color: var(--bg-content);
+      color: var(--text-dark);
+    }
+    .stat-pres-section {
+      padding: 3rem 0;
+    }
+    .stat-pres-hero {
+      height: 90vh;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      color: var(--light);
+    }
+    .stat-pres-hero__content h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.2rem, 3vw, 3rem);
+      margin-bottom: 0.75rem;
+    }
+    .stat-pres-hero__content p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    .stat-pres-hero__institution p {
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
+    .stat-pres-section__title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    .stat-pres-section__title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+    }
+    .stat-pres-paragraph {
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+    .stat-pres-highlight-box {
+      background: linear-gradient(135deg, rgba(52,152,219,0.1), rgba(155,89,182,0.1));
+      border-left: 5px solid var(--secondary);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .stat-pres-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .stat-pres-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 16px var(--shadow);
+      border: 1px solid #e0e0e0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stat-pres-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px var(--shadow);
+    }
+    .stat-pres-card__icon {
+      font-size: 2rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+    .stat-pres-card__title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--dark);
+    }
+    .stat-pres-ui-diagram {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      background: #f0f0f0;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin: 2rem auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      grid-template-rows: 40px 1fr 1fr 30px;
+      gap: 2px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: #333;
+    }
+    .stat-pres-ui-diagram > div {
+      background: white;
+      padding: 6px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .stat-pres-ui-diagram > div:hover {
+      background-color: #e9e9e9;
+    }
+    .menu-bar { grid-column: 1 / -1; background: #e8e8e8; }
+    .toolbar { grid-column: 1 / -1; background: #f5f5f5; }
+    .script-editor { grid-column: 2; background: #282c34; color: #abb2bf; }
+    .console { grid-column: 2; background: #1e1e1e; color: #4ec9b0; }
+    .environment-pane { background: #fafafa; }
+    .plots-pane { background: #fdfdfd; }
+    .stat-pres-tooltip {
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--dark);
+      color: var(--light);
+      padding: 8px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+    }
+    .stat-pres-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border: 5px solid transparent;
+      border-top-color: var(--dark);
+    }
+    .stat-pres-ui-diagram > div:hover .stat-pres-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+    .stat-pres-dnd-activity {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 4px 15px var(--shadow);
+    }
+    .stat-pres-dnd-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .stat-pres-dnd-item {
+      background: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: grab;
+      user-select: none;
+      font-weight: 500;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    }
+    .stat-pres-dnd-item.dragging {
+      opacity: 0.6;
+      cursor: grabbing;
+      transform: scale(0.95);
+    }
+    .stat-pres-dnd-container {
+      display: flex;
+      justify-content: space-around;
+      gap: 2rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .stat-pres-dnd-bin {
+      width: 250px;
+      min-height: 200px;
+      border: 2px dashed var(--secondary);
+      border-radius: 8px;
+      padding: 1.2rem;
+      background: rgba(52,152,219,0.05);
+    }
+    .stat-pres-dnd-bin h4 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+    .stat-pres-dnd-bin.drag-over {
+      background: rgba(231, 76, 60, 0.1);
+      border-color: var(--accent);
+    }
+    .stat-pres-dnd-feedback {
+      text-align: center;
+      margin-top: 1.5rem;
+      min-height: 28px;
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+    .stat-pres-dnd-feedback.success { color: var(--success); }
+    .stat-pres-dnd-feedback.error { color: var(--accent); }
+    .stat-pres-reset-btn {
+      display: block;
+      margin: 1.2rem auto 0;
+      padding: 10px 24px;
+      background: var(--warning);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .stat-pres-reset-btn:hover {
+      background: #e67e22;
+    }
+    .stat-pres-tab-list {
+      display: flex;
+      list-style: none;
+      border-bottom: 2px solid var(--primary);
+      margin: 1.5rem 0;
+    }
+    .stat-pres-tab-button {
+      background: none;
+      border: none;
+      color: #555;
+      font: inherit;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+    .stat-pres-tab-button.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .stat-pres-tab-content {
+      display: none;
+    }
+    .stat-pres-tab-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .stat-pres-scroll-top {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+    .stat-pres-scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    @media (max-width: 1024px) {
+      #stat-pres-widget {
+        flex-direction: column;
+        height: auto;
+        max-height: none;
+      }
+      .stat-pres-sidebar {
+        width: 100%;
+        padding: 1.2rem;
+      }
+      .stat-pres-content-wrapper {
+        padding: 1.5rem;
+      }
+      .stat-pres-dnd-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .stat-pres-section__title {
+        font-size: 2.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="stat-pres-widget" role="region" aria-label="Presentación interactiva de software estadístico">
+    <nav class="stat-pres-sidebar" aria-label="Navegación del curso">
+      <div class="stat-pres-sidebar__logo" aria-hidden="true">
+        <i class="fas fa-chart-line"></i> Software Estadístico
+      </div>
+      <ul class="stat-pres-nav__list">
+        <li class="stat-pres-nav__item">
+          <a href="#portada" class="stat-pres-nav__link active" data-target="portada">
+            <i class="fas fa-home" aria-hidden="true"></i> Portada
+          </a>
+        </li>
+        <li class="stat-pres-nav__item">
+          <a href="#introduccion" class="stat-pres-nav__link" data-target="introduccion">
+            <i class="fas fa-info-circle" aria-hidden="true"></i> 1. Introducción
+          </a>
+        </li>
+        <li class="stat-pres-nav__item">
+          <a href="#instalacion" class="stat-pres-nav__link" data-target="instalacion">
+            <i class="fas fa-download" aria-hidden="true"></i> 2. Instalación
+          </a>
+        </li>
+        <li class="stat-pres-nav__item">
+          <a href="#interfaz" class="stat-pres-nav__link" data-target="interfaz">
+            <i class="fas fa-desktop" aria-hidden="true"></i> 3. Interfaz
+          </a>
+        </li>
+        <li class="stat-pres-nav__item">
+          <a href="#actividad" class="stat-pres-nav__link" data-target="actividad">
+            <i class="fas fa-puzzle-piece" aria-hidden="true"></i> Actividad
+          </a>
+        </li>
+        <li class="stat-pres-nav__item">
+          <a href="#buenas-practicas" class="stat-pres-nav__link" data-target="buenas-practicas">
+            <i class="fas fa-check-circle" aria-hidden="true"></i> 4. Buenas Prácticas
+          </a>
+        </li>
+        <li class="stat-pres-nav__item">
+          <a href="#recursos" class="stat-pres-nav__link" data-target="recursos">
+            <i class="fas fa-external-link-alt" aria-hidden="true"></i> 5. Recursos
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="stat-pres-content-wrapper" id="stat-pres-content-wrapper" tabindex="0">
+      <section id="portada" class="stat-pres-section stat-pres-hero" aria-labelledby="hero-title">
+        <div class="stat-pres-hero__content" data-aos="zoom-in">
+          <h1 id="hero-title">INTRODUCCIÓN A LOS SOFTWARES ESTADÍSTICOS</h1>
+          <p>Unidad 1: Introducción, instalación y entorno de trabajo</p>
+          <div class="stat-pres-hero__institution">
+            <p>FACULTAD DE CIENCIAS EXACTAS Y NATURALES</p>
+            <p>UNIVERSIDAD NACIONAL DE ASUNCIÓN</p>
+            <p>Carrera de Ciencias, mención Matemática Estadística</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="introduccion" class="stat-pres-section" aria-labelledby="intro-title">
+        <h2 id="intro-title" class="stat-pres-section__title" data-aos="fade-right">
+          1. Introducción a los Softwares Estadísticos
+        </h2>
+        <p class="stat-pres-paragraph" data-aos="fade-up">
+          En la práctica moderna de la estadística resulta prácticamente imprescindible utilizar un software especializado.
+        </p>
+        <p class="stat-pres-paragraph" data-aos="fade-up" data-aos-delay="100">
+          A diferencia de una calculadora o una hoja de cálculo básica, los softwares estadísticos están diseñados específicamente
+          para manejar volúmenes importantes de información y para implementar procedimientos estadísticos de forma confiable.
+        </p>
+        <div class="stat-pres-highlight-box" data-aos="fade-up" data-aos-delay="200">
+          <p>
+            El énfasis principal de la Unidad 1 se centra en tres ideas: (i) reconocer qué tipo de programas se consideran software
+            estadístico, (ii) aprender a instalar y ejecutar las herramientas básicas, y (iii) identificar las partes principales
+            de la interfaz.
+          </p>
+        </div>
+      </section>
+
+      <section id="instalacion" class="stat-pres-section" aria-labelledby="install-title">
+        <h2 id="install-title" class="stat-pres-section__title" data-aos="fade-right">
+          2. Instalación Básica
+        </h2>
+        <p class="stat-pres-paragraph" data-aos="fade-up">
+          Instalación de los principales entornos que utilizaremos en el curso.
+        </p>
+
+        <div class="stat-pres-tabs" data-aos="fade-up" data-aos-delay="100">
+          <ul class="stat-pres-tab-list" role="tablist">
+            <li role="presentation">
+              <button class="stat-pres-tab-button active" role="tab" aria-selected="true" data-tab="r-tab">R y RStudio</button>
+            </li>
+            <li role="presentation">
+              <button class="stat-pres-tab-button" role="tab" aria-selected="false" data-tab="python-tab">Python y Anaconda</button>
+            </li>
+            <li role="presentation">
+              <button class="stat-pres-tab-button" role="tab" aria-selected="false" data-tab="spss-tab">SPSS / PSPP</button>
+            </li>
+          </ul>
+
+          <div id="r-tab" class="stat-pres-tab-content active" role="tabpanel">
+            <ol class="stat-pres-steps-list">
+              <li class="stat-pres-step-item">Acceder al sitio oficial de R (CRAN) y descargar el instalador.</li>
+              <li class="stat-pres-step-item">Instalar R utilizando la configuración por defecto.</li>
+              <li class="stat-pres-step-item">Descargar e instalar RStudio Desktop (versión gratuita).</li>
+              <li class="stat-pres-step-item">Verificar que R y RStudio se inician correctamente.</li>
+            </ol>
+          </div>
+          <div id="python-tab" class="stat-pres-tab-content" role="tabpanel" hidden>
+            <ol class="stat-pres-steps-list">
+              <li class="stat-pres-step-item">Acceder al sitio oficial de Anaconda y descargar el instalador.</li>
+              <li class="stat-pres-step-item">Instalar la distribución de Python aceptando las opciones recomendadas.</li>
+              <li class="stat-pres-step-item">Abrir Anaconda Navigator y lanzar JupyterLab o Jupyter Notebook.</li>
+              <li class="stat-pres-step-item">Verificar que la consola de Python y los notebooks funcionan correctamente.</li>
+            </ol>
+          </div>
+          <div id="spss-tab" class="stat-pres-tab-content" role="tabpanel" hidden>
+            <ol class="stat-pres-steps-list">
+              <li class="stat-pres-step-item">Verificar si la institución dispone de licencia de SPSS.</li>
+              <li class="stat-pres-step-item">En caso de utilizar PSPP/Jamovi, descargar la versión libre desde su sitio oficial.</li>
+              <li class="stat-pres-step-item">Instalar el programa y comprobar la apertura de la hoja de datos y ventana de resultados.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="interfaz" class="stat-pres-section" aria-labelledby="ui-title">
+        <h2 id="ui-title" class="stat-pres-section__title" data-aos="fade-right">
+          3. Elementos Visuales de la Interfaz
+        </h2>
+        <p class="stat-pres-paragraph" data-aos="fade-up">
+          Aunque cada software tiene su propio diseño, la mayoría comparte una estructura visual similar. Haz clic sobre las
+          distintas áreas para ver una breve descripción.
+        </p>
+
+        <div class="stat-pres-ui-diagram" aria-label="Diagrama interactivo de interfaz de software estadístico" data-aos="zoom-in">
+          <div class="menu-bar" role="button" tabindex="0" aria-label="Barra de menús">
+            Archivo | Editar | Código | Gráficos | Sesión | Ayuda
+            <span class="stat-pres-tooltip" role="tooltip">
+              Barra de menús: ofrece acceso organizado a todas las funciones del programa.
+            </span>
+          </div>
+          <div class="toolbar" role="button" tabindex="0" aria-label="Barra de herramientas">
+            <i class="fas fa-save"></i> <i class="fas fa-play"></i> <i class="fas fa-cog"></i>
+            <span class="stat-pres-tooltip">
+              Barra de herramientas: iconos para acciones frecuentes como guardar o ejecutar código.
+            </span>
+          </div>
+          <div class="environment-pane" role="button" tabindex="0" aria-label="Panel de entorno">
+            Environment / History
+            <span class="stat-pres-tooltip">
+              Panel de entorno: muestra objetos y variables creados en la sesión.
+            </span>
+          </div>
+          <div class="script-editor" role="button" tabindex="0" aria-label="Editor de scripts">
+            # Mi primer script<br>summary(mis_datos)
+            <span class="stat-pres-tooltip">
+              Editor de scripts: área para escribir, guardar y reutilizar secuencias de comandos.
+            </span>
+          </div>
+          <div class="plots-pane" role="button" tabindex="0" aria-label="Panel de gráficos">
+            Plots
+            <span class="stat-pres-tooltip">
+              Panel de gráficos: contiene las visualizaciones generadas durante el análisis.
+            </span>
+          </div>
+          <div class="console" role="button" tabindex="0" aria-label="Consola">
+            [1] "Hola mundo"
+            <span class="stat-pres-tooltip">
+              Consola: ejecuta comandos y muestra resultados inmediatos.
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section id="actividad" class="stat-pres-section" aria-labelledby="activity-title">
+        <h2 id="activity-title" class="stat-pres-section__title" data-aos="fade-right">
+          Actividad: Clasifica el Software
+        </h2>
+        <p class="stat-pres-paragraph" data-aos="fade-up">
+          Arrastra cada software a la categoría correcta: ¿se utiliza principalmente mediante interfaz gráfica o mediante código/comandos?
+        </p>
+
+        <div class="stat-pres-dnd-activity" aria-live="polite" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-pres-dnd-items" id="items-container">
+            <div class="stat-pres-dnd-item" draggable="true" data-software="R" role="button" tabindex="0" aria-grabbed="false">R</div>
+            <div class="stat-pres-dnd-item" draggable="true" data-software="Python" role="button" tabindex="0" aria-grabbed="false">Python</div>
+            <div class="stat-pres-dnd-item" draggable="true" data-software="Stata" role="button" tabindex="0" aria-grabbed="false">Stata</div>
+            <div class="stat-pres-dnd-item" draggable="true" data-software="SPSS" role="button" tabindex="0" aria-grabbed="false">SPSS</div>
+            <div class="stat-pres-dnd-item" draggable="true" data-software="PSPP" role="button" tabindex="0" aria-grabbed="false">PSPP</div>
+            <div class="stat-pres-dnd-item" draggable="true" data-software="Jamovi" role="button" tabindex="0" aria-grabbed="false">Jamovi</div>
+          </div>
+
+          <div class="stat-pres-dnd-container">
+            <div class="stat-pres-dnd-bin" data-category="code" role="region" aria-label="Categoría basada en código">
+              <h4><i class="fas fa-code" aria-hidden="true"></i> Basado en Código</h4>
+            </div>
+            <div class="stat-pres-dnd-bin" data-category="gui" role="region" aria-label="Categoría con interfaz gráfica">
+              <h4><i class="fas fa-window-maximize" aria-hidden="true"></i> Interfaz Gráfica</h4>
+            </div>
+          </div>
+
+          <div id="feedback-message" class="stat-pres-dnd-feedback" role="status" aria-atomic="true"></div>
+          <button id="reset-activity" class="stat-pres-reset-btn" aria-label="Reiniciar la actividad de clasificación">
+            Reiniciar actividad
+          </button>
+        </div>
+      </section>
+
+      <section id="buenas-practicas" class="stat-pres-section" aria-labelledby="practices-title">
+        <h2 id="practices-title" class="stat-pres-section__title" data-aos="fade-right">
+          4. Buenas Prácticas Iniciales
+        </h2>
+        <div class="stat-pres-card-grid" data-aos="fade-up">
+          <div class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-folder-tree" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Estructura de carpetas</h3>
+            <p>Mantener carpetas separadas para datos originales, datos procesados, scripts y resultados.</p>
+          </div>
+          <div class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-file-alt" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Nombres descriptivos</h3>
+            <p>Utilizar nombres consistentes y significativos para archivos y proyectos.</p>
+          </div>
+          <div class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-cloud-upload-alt" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Respaldo frecuente</h3>
+            <p>Realizar copias de seguridad en dispositivos externos o servicios en la nube.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="recursos" class="stat-pres-section" aria-labelledby="resources-title">
+        <h2 id="resources-title" class="stat-pres-section__title" data-aos="fade-right">
+          5. Recursos para seguir aprendiendo
+        </h2>
+        <div class="stat-pres-card-grid" data-aos="fade-up">
+          <div class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-book" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Bibliografía recomendada</h3>
+            <p>
+              Field (2018), Wickham y Grolemund (2017), VanderPlas (2016), entre otros textos introductorios a software estadístico.
+            </p>
+          </div>
+          <div class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-laptop-code" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Cursos abiertos</h3>
+            <p>
+              Cursos básicos de R, Python y SPSS en plataformas como Coursera, edX o DataCamp en su modalidad gratuita.
+            </p>
+          </div>
+          <div class="stat-pres-card" role="article">
+            <div class="stat-pres-card__icon"><i class="fas fa-users" aria-hidden="true"></i></div>
+            <h3 class="stat-pres-card__title">Comunidades</h3>
+            <p>
+              Stack Overflow, RStudio Community y foros de usuarios de Jamovi y PSPP para resolver dudas específicas.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <button class="stat-pres-scroll-top" id="stat-pres-scroll-top" aria-label="Volver al inicio">
+      <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      var $ = function(selector, parent) { return (parent || document).querySelector(selector); };
+      var $$ = function(selector, parent) { return (parent || document).querySelectorAll(selector); };
+
+      var tabButtons = $$('[data-tab]');
+      tabButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var targetId = btn.dataset.tab;
+          tabButtons.forEach(function(b) { b.classList.remove('active'); });
+          $$('[role="tabpanel"]').forEach(function(p) {
+            p.classList.remove('active');
+            p.setAttribute('hidden', 'true');
+          });
+          btn.classList.add('active');
+          var tabPanel = document.getElementById(targetId);
+          tabPanel.classList.add('active');
+          tabPanel.removeAttribute('hidden');
+        });
+      });
+
+      var contentWrapper = $('.stat-pres-content-wrapper');
+      var links = $$('.stat-pres-nav__link');
+
+      function activateCurrentNavLink() {
+        var scrollPos = contentWrapper.scrollTop + 150;
+        var current = 'portada';
+        $$('.stat-pres-section').forEach(function(section) {
+          var top = section.offsetTop;
+          var id = section.id;
+          if (scrollPos >= top) current = id;
+        });
+        links.forEach(function(link) {
+          link.classList.toggle('active', link.getAttribute('href').slice(1) === current);
+        });
+      }
+
+      links.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          var targetId = link.getAttribute('href').substring(1);
+          var target = document.getElementById(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(activateCurrentNavLink, 100);
+          }
+        });
+      });
+
+      contentWrapper.addEventListener('scroll', function() {
+        activateCurrentNavLink();
+        var btn = $('.stat-pres-scroll-top');
+        if (contentWrapper.scrollTop > 300) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      });
+
+      $('.stat-pres-scroll-top').addEventListener('click', function() {
+        contentWrapper.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      function initDragAndDrop() {
+        var items = $$('.stat-pres-dnd-item');
+        var bins = $$('.stat-pres-dnd-bin');
+        var feedback = document.getElementById('feedback-message');
+        var reset = document.getElementById('reset-activity');
+
+        var correct = {
+          R: 'code', Python: 'code', Stata: 'code',
+          SPSS: 'gui', PSPP: 'gui', Jamovi: 'gui'
+        };
+
+        var dragged = null;
+
+        items.forEach(function(item) {
+          item.addEventListener('dragstart', function(e) {
+            dragged = item;
+            item.classList.add('dragging');
+            item.setAttribute('aria-grabbed', 'true');
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          item.addEventListener('dragend', function() {
+            item.classList.remove('dragging');
+            item.setAttribute('aria-grabbed', 'false');
+            dragged = null;
+          });
+        });
+
+        bins.forEach(function(bin) {
+          bin.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            bin.classList.add('drag-over');
+          });
+          bin.addEventListener('dragleave', function() {
+            bin.classList.remove('drag-over');
+          });
+          bin.addEventListener('drop', function(e) {
+            e.preventDefault();
+            bin.classList.remove('drag-over');
+            if (dragged && !bin.contains(dragged)) {
+              bin.appendChild(dragged);
+              checkStatus();
+            }
+          });
+        });
+
+        function checkStatus() {
+          var correctCount = 0;
+          bins.forEach(function(bin) {
+            var category = bin.dataset.category;
+            var children = bin.querySelectorAll('.stat-pres-dnd-item');
+            children.forEach(function(child) {
+              if (correct[child.dataset.software] === category) correctCount++;
+            });
+          });
+
+          if (correctCount === 6) {
+            feedback.textContent = '¡Excelente! Ha clasificado todos correctamente.';
+            feedback.className = 'stat-pres-dnd-feedback success';
+          } else {
+            feedback.textContent = 'Aún hay elementos por revisar. Verifique su clasificación.';
+            feedback.className = 'stat-pres-dnd-feedback error';
+          }
+        }
+
+        reset.addEventListener('click', function() {
+          var container = document.getElementById('items-container');
+          items.forEach(function(item) { container.appendChild(item); });
+          feedback.textContent = '';
+          feedback.className = 'stat-pres-dnd-feedback';
+        });
+      }
+
+      AOS.init({ duration: 800, once: true });
+      activateCurrentNavLink();
+      initDragAndDrop();
+    })();
+  </script>
+</body>
+</html>
