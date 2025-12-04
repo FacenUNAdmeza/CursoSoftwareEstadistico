@@ -2,379 +2,1172 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <title>Unidad 2 · Visualización y exploración de datos</title>
+  <title>Unidad 2 · Software SPSS - Licenciatura en Matemática Estadística</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Material de estudio completo para la Unidad 2: Software SPSS de la asignatura Softwares Estadísticos">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Highlight.js para sintaxis de código -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+  
   <style>
+    :root {
+      --primary-color: #1a56db;
+      --secondary-color: #047857;
+      --accent-color: #dc2626;
+      --light-color: #f9fafb;
+      --dark-color: #111827;
+      --gray-color: #6b7280;
+    }
+    
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+    
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f4f7fa;
-      color: #222;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8fafc;
+      color: var(--dark-color);
       line-height: 1.7;
-    }
-    header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 1rem 1.5rem;
-    }
-    header h1 {
-      font-size: 1.5rem;
-      margin-bottom: 0.25rem;
-    }
-    header p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-    header a {
-      color: #ecf0f1;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    header a:hover {
-      text-decoration: underline;
-    }
-    main {
-      max-width: 960px;
-      margin: 2rem auto 3rem auto;
-      padding: 0 1.5rem;
-    }
-    h2 {
-      font-size: 1.4rem;
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
-      color: #2980b9;
-    }
-    h3 {
-      font-size: 1.15rem;
-      margin-top: 1.3rem;
-      margin-bottom: 0.4rem;
-      color: #34495e;
-    }
-    p {
-      margin-bottom: 0.9rem;
       text-align: justify;
     }
-    ul {
-      margin: 0.3rem 0 0.9rem 1.3rem;
-      padding-left: 0.2rem;
+    
+    /* Header mejorado */
+    header {
+      background: linear-gradient(135deg, #1a56db 0%, #1e40af 100%);
+      color: white;
+      padding: 2rem 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
     }
-    li {
-      margin-bottom: 0.35rem;
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.1;
     }
-    .highlight {
-      background: #fdfdfd;
-      border-left: 4px solid #3498db;
-      padding: 0.9rem 1rem;
-      margin: 1.2rem 0;
-      border-radius: 4px;
+    
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
-    pre {
-      background: #2d2d2d;
-      color: #f8f8f2;
-      padding: 0.9rem 1rem;
-      border-radius: 4px;
-      overflow-x: auto;
+    
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .curso {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .curso-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
       font-size: 0.9rem;
-      line-height: 1.5;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    /* Main content */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    
+    .content-container {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+    }
+    
+    @media (max-width: 992px) {
+      .content-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+    
+    .sidebar h3 {
+      color: var(--primary-color);
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+    }
+    
+    .nav-links {
+      list-style: none;
+    }
+    
+    .nav-links li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .nav-links a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--dark-color);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.3s;
+      border-left: 3px solid transparent;
+    }
+    
+    .nav-links a:hover, .nav-links a.active {
+      background-color: #eff6ff;
+      color: var(--primary-color);
+      border-left-color: var(--primary-color);
+    }
+    
+    .nav-links i {
+      width: 20px;
+      text-align: center;
+      margin-right: 8px;
+    }
+    
+    /* Main content sections */
+    .main-content {
+      background: white;
+      border-radius: 10px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    h2 {
+      color: var(--primary-color);
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e5e7eb;
+      font-size: 1.8rem;
+    }
+    
+    h2:first-of-type {
+      margin-top: 0;
+    }
+    
+    h3 {
+      color: var(--secondary-color);
+      margin: 1.5rem 0 0.75rem;
+      font-size: 1.4rem;
+    }
+    
+    h4 {
+      color: var(--gray-color);
+      margin: 1.25rem 0 0.5rem;
+      font-size: 1.1rem;
+    }
+    
+    p {
       margin-bottom: 1rem;
     }
-    code {
-      font-family: Consolas, "Courier New", monospace;
+    
+    ul, ol {
+      margin: 0.75rem 0 1rem 1.5rem;
     }
-    .badge {
-      display: inline-block;
-      font-size: 0.8rem;
-      background: #ecf0f1;
-      color: #555;
-      padding: 0.1rem 0.5rem;
-      border-radius: 999px;
-      margin-right: 0.4rem;
-      margin-top: 0.1rem;
+    
+    li {
+      margin-bottom: 0.5rem;
     }
-    footer {
-      max-width: 960px;
-      margin: 0 auto 2rem auto;
-      padding: 0 1.5rem;
-      font-size: 0.85rem;
-      color: #777;
+    
+    /* Cards */
+    .card {
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    
+    .card-header {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 600;
+      padding: 1rem 1.5rem;
+      border: none;
+    }
+    
+    .card-body {
+      padding: 1.5rem;
+    }
+    
+    /* Tables */
+    .table {
+      margin: 1.5rem 0;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .table thead th {
+      background-color: #f1f5f9;
+      color: var(--dark-color);
+      font-weight: 600;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    
+    /* Code blocks */
+    .code-block {
+      background-color: #f8fafc;
+      border-left: 4px solid var(--primary-color);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+    }
+    
+    /* Alert boxes */
+    .alert {
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      border-left: 4px solid;
+    }
+    
+    .alert-info {
+      background-color: #eff6ff;
+      border-color: var(--primary-color);
+      color: #1e40af;
+    }
+    
+    .alert-warning {
+      background-color: #fef3c7;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    
+    .alert-success {
+      background-color: #d1fae5;
+      border-color: var(--secondary-color);
+      color: #065f46;
+    }
+    
+    /* Figures */
+    .figure {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    
+    .figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .figure-caption {
+      margin-top: 0.5rem;
+      font-style: italic;
+      color: var(--gray-color);
+    }
+    
+    /* Progress section */
+    .progress-section {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border: 1px solid #bae6fd;
+    }
+    
+    .progress-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+    
+    .progress-bar {
+      height: 8px;
+      background-color: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background-color: var(--primary-color);
+      border-radius: 4px;
+      width: 25%;
+    }
+    
+    /* Footer navigation */
+    .footer-nav {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 1rem;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #1e40af;
+      color: white;
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 86, 219, 0.3);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* Competencias box */
+    .competencias-box {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border: 1px solid #bbf7d0;
+    }
+    
+    .competencias-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+      color: var(--secondary-color);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .main-content {
+        padding: 1.5rem;
+      }
+      
+      .footer-nav {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <div style="display:flex;flex-direction:column;gap:0.2rem;">
-      <div>
-        <strong>Unidad 2 · Visualización y exploración de datos en Big Data</strong>
+    <div class="header-inner">
+      <h1>Unidad II: Software SPSS</h1>
+      <div class="curso">
+        <span><i class="fas fa-graduation-cap"></i> Softwares Estadísticos (Electiva)</span>
+        <span class="curso-badge"><i class="fas fa-university"></i> FACEN–UNA</span>
+        <span class="curso-badge"><i class="fas fa-calendar-alt"></i> Plan 2025</span>
+        <span class="curso-badge"><i class="fas fa-clock"></i> 16 sesiones · 5 horas/semana</span>
       </div>
-      <p>Curso de Software Estadístico · FACEN-UNA</p>
-      <a href="../../index.html">← Volver al inicio del curso</a>
     </div>
   </header>
-
+  
   <main>
-    <section>
-      <h2>1. Introducción al análisis exploratorio de datos</h2>
-      <p>
-        La visualización y exploración de datos, o análisis exploratorio de datos (EDA), constituye un pilar fundamental
-        en proyectos de ciencia de datos y Big Data. Antes de ajustar modelos o producir indicadores, es necesario
-        comprender la estructura de la información, detectar patrones, valores atípicos y posibles problemas de calidad.
-      </p>
-      <p>
-        En entornos de Big Data, donde el volumen, la variedad y la velocidad de los datos pueden ser muy elevados,
-        el EDA permite orientar decisiones sobre qué subconjuntos analizar, qué transformaciones aplicar y qué
-        modelos son razonables, evitando esfuerzos innecesarios y conclusiones engañosas.
-      </p>
-    </section>
-
-    <section>
-      <h2>2. Tipos de variables y distribuciones</h2>
-      <p>
-        El punto de partida para cualquier análisis es la correcta identificación de los tipos de variables, ya que de ello
-        dependen las técnicas de resumen, los gráficos apropiados y los modelos que pueden utilizarse.
-      </p>
-      <h3>2.1 Tipos de variables</h3>
-      <ul>
-        <li>
-          <strong>Cuantitativas discretas</strong>: toman valores enteros contables (por ejemplo, número de hijos, número de visitas).
-        </li>
-        <li>
-          <strong>Cuantitativas continuas</strong>: pueden asumir cualquier valor en un intervalo (por ejemplo, peso, tiempo, ingreso).
-        </li>
-        <li>
-          <strong>Cualitativas nominales</strong>: categorías sin orden inherente (por ejemplo, color, país, estado civil).
-        </li>
-        <li>
-          <strong>Cualitativas ordinales</strong>: categorías con un orden definido (por ejemplo, nivel educativo, satisfacción).
-        </li>
-      </ul>
-      <p>
-        Este esquema es esencial para decidir si es apropiado utilizar medias y desviaciones estándar, medianas y rangos,
-        tablas de frecuencia, gráficos de barras, histogramas u otras representaciones.
-      </p>
-
-      <h3>2.2 Distribuciones y transformaciones</h3>
-      <p>
-        Las distribuciones de las variables cuantitativas pueden ser aproximadamente simétricas o fuertemente sesgadas.
-        Cuando una variable presenta una cola larga hacia la derecha (por ejemplo, ingresos o montos de ventas),
-        suele ser útil aplicar transformaciones (logarítmica, Box-Cox) para estabilizar la variabilidad y mejorar
-        la interpretabilidad de los modelos posteriores.
-      </p>
-    </section>
-
-    <section>
-      <h2>3. Técnicas básicas de EDA</h2>
-      <p>
-        El EDA combina resúmenes numéricos y gráficos que permiten tener una visión integrada de los datos. Entre las
-        herramientas más utilizadas se encuentran:
-      </p>
-      <ul>
-        <li>
-          <strong>Estadísticas descriptivas</strong>: medidas de tendencia central (media, mediana) y dispersión
-          (desviación estándar, rango intercuartílico).
-        </li>
-        <li>
-          <strong>Histogramas y densidades</strong>: permiten visualizar la forma de la distribución de una variable
-          cuantitativa.
-        </li>
-        <li>
-          <strong>Boxplots</strong>: útiles para detectar valores atípicos y comparar distribuciones entre grupos.
-        </li>
-        <li>
-          <strong>Diagramas de dispersión</strong>: exploran relaciones entre pares de variables cuantitativas.
-        </li>
-        <li>
-          <strong>Mapas de calor de correlaciones</strong>: resumen las asociaciones lineales entre múltiples variables.
-        </li>
-      </ul>
-
-      <div class="highlight">
-        <p>
-          En un contexto de Big Data, muchas de estas técnicas se aplican a muestras o subconjuntos representativos,
-          o bien se apoyan en librerías optimizadas para trabajar con datos de gran tamaño.
-        </p>
+    <div class="content-container">
+      <div class="main-content">
+        <!-- Introducción -->
+        <section id="introduccion">
+          <h2><i class="fas fa-info-circle"></i> Introducción a la Unidad</h2>
+          <p>La Unidad II se centra en el <strong>Software SPSS (Statistical Package for the Social Sciences)</strong>, una de las herramientas estadísticas más utilizadas en el ámbito académico, gubernamental y empresarial. Desarrollado inicialmente por Norman H. Nie en 1968, SPSS se ha consolidado como un estándar en el análisis estadístico por su interfaz intuitiva y su poderosa capacidad de procesamiento.</p>
+          
+          <div class="alert alert-info">
+            <i class="fas fa-lightbulb"></i> <strong>Enfoque de la unidad:</strong> Esta unidad tiene un carácter eminentemente práctico, enfocándose en el desarrollo de habilidades para el manejo eficiente de SPSS en el procesamiento, manipulación y análisis exploratorio de datos estadísticos.
+          </div>
+          
+          <div class="competencias-box">
+            <h3 class="competencias-title"><i class="fas fa-bullseye"></i> Competencias a Desarrollar</h3>
+            <ul>
+              <li><strong>RA2.1:</strong> Emplear rutinas, comandos y funciones del software SPSS en el procesamiento y análisis exploratorios de datos</li>
+              <li><strong>Objetivo Específico 2:</strong> Aplicar el software estadístico SPSS utilizando rutinas, comandos y funciones para el procesamiento y el análisis exploratorio de datos</li>
+            </ul>
+          </div>
+        </section>
+        
+        <!-- Contenido Programático -->
+        <section id="contenidos">
+          <h2><i class="fas fa-list-ol"></i> Contenidos Programáticos</h2>
+          <p>La unidad se estructura en cinco componentes principales que guiarán el proceso de aprendizaje:</p>
+          
+          <div class="card">
+            <div class="card-header">
+              <i class="fas fa-sitemap"></i> Estructura de la Unidad II
+            </div>
+            <div class="card-body">
+              <ol>
+                <li><strong>2.1. Instalación de SPSS</strong> - Configuración del entorno de trabajo</li>
+                <li><strong>2.2. Ventanas de SPSS</strong> - Interfaz y componentes principales</li>
+                <li><strong>2.3. Entornos de trabajo</strong> - Flujos de trabajo y organización de proyectos</li>
+                <li><strong>2.4. Manipulación de datos</strong> - Importación, limpieza y transformación</li>
+                <li><strong>2.5. Análisis Exploratorio</strong> - Estadística descriptiva y visualización</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+        
+        <!-- 2.1 Instalación de SPSS -->
+        <section id="instalacion">
+          <h2><i class="fas fa-download"></i> 2.1. Instalación de SPSS</h2>
+          
+          <h3>Requisitos del Sistema</h3>
+          <p>Antes de proceder con la instalación, verifique que su equipo cumple con los siguientes requisitos:</p>
+          
+          <div class="card">
+            <div class="card-header">
+              <i class="fas fa-desktop"></i> Requisitos Técnicos (SPSS Statistics 28)
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Componente</th>
+                    <th>Requisito Mínimo</th>
+                    <th>Recomendado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sistema Operativo</td>
+                    <td>Windows 10 / macOS 10.14</td>
+                    <td>Windows 11 / macOS 12</td>
+                  </tr>
+                  <tr>
+                    <td>Procesador</td>
+                    <td>1.6 GHz x64</td>
+                    <td>2.0 GHz x64 o superior</td>
+                  </tr>
+                  <tr>
+                    <td>Memoria RAM</td>
+                    <td>4 GB</td>
+                    <td>8 GB o más</td>
+                  </tr>
+                  <tr>
+                    <td>Espacio en Disco</td>
+                    <td>2.5 GB</td>
+                    <td>5 GB</td>
+                  </tr>
+                  <tr>
+                    <td>Resolución Pantalla</td>
+                    <td>1024 x 768</td>
+                    <td>1920 x 1080</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <h3>Proceso de Instalación Paso a Paso</h3>
+          
+          <h4>Para Windows:</h4>
+          <ol>
+            <li>Descargue el instalador desde el portal oficial de IBM o el repositorio de la facultad</li>
+            <li>Ejecute el archivo .exe como administrador</li>
+            <li>Siga las instrucciones del asistente de instalación</li>
+            <li>Seleccione los componentes a instalar (recomendado: instalación completa)</li>
+            <li>Configure la ubicación de instalación (recomendado: ruta por defecto)</li>
+            <li>Complete el proceso y reinicie el equipo si es necesario</li>
+          </ol>
+          
+          <h4>Licenciamiento y Activación</h4>
+          <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i> <strong>Importante:</strong> La FACEN proporciona licencias académicas para estudiantes y docentes. Consulte con el departamento de Sistemas para obtener su código de licencia.
+          </div>
+          
+          <div class="code-block">
+            <strong>Nota sobre versiones alternativas:</strong><br>
+            • <strong>PSPP:</strong> Alternativa libre y gratuita compatible con sintaxis SPSS<br>
+            • <strong>IBM SPSS Statistics GradPack:</strong> Versión estudiantil con funcionalidad completa<br>
+            • <strong>IBM SPSS Statistics Campus Edition:</strong> Licencia institucional
+          </div>
+        </section>
+        
+        <!-- 2.2 Ventanas de SPSS -->
+        <section id="ventanas">
+          <h2><i class="fas fa-window-maximize"></i> 2.2. Ventanas de SPSS</h2>
+          
+          <p>SPSS organiza su funcionalidad en varias ventanas principales, cada una con un propósito específico:</p>
+          
+          <div class="figure">
+            <!-- Imagen representativa de las ventanas de SPSS -->
+            <div style="background: #f1f5f9; padding: 2rem; border-radius: 8px; text-align: center; margin: 1rem 0;">
+              <i class="fas fa-desktop" style="font-size: 4rem; color: #94a3b8; margin-bottom: 1rem;"></i>
+              <p class="figure-caption">Representación esquemática de la interfaz de SPSS con sus ventanas principales</p>
+            </div>
+          </div>
+          
+          <h3>Ventana del Editor de Datos (Data Editor)</h3>
+          <p>Es la ventana principal donde se visualizan y editan los datos. Presenta dos vistas:</p>
+          <ul>
+            <li><strong>Vista de Datos (Data View):</strong> Muestra los valores de las variables en formato de hoja de cálculo</li>
+            <li><strong>Vista de Variables (Variable View):</strong> Permite definir las propiedades de cada variable (nombre, tipo, etiqueta, valores, etc.)</li>
+          </ul>
+          
+          <h3>Ventana del Visor de Resultados (Output Viewer)</h3>
+          <p>Muestra todos los resultados de los análisis realizados, incluyendo tablas, gráficos y mensajes del sistema. Estructurado en dos paneles:</p>
+          <ul>
+            <li><strong>Panel de navegación (izquierda):</strong> Índice jerárquico de todos los elementos de salida</li>
+            <li><strong>Panel de contenido (derecha):</strong> Visualización de tablas, gráficos y texto de resultados</li>
+          </ul>
+          
+          <h3>Ventana del Editor de Sintaxis (Syntax Editor)</h3>
+          <p>Permite escribir, editar y ejecutar comandos de sintaxis SPSS. Fundamental para:</p>
+          <ul>
+            <li>Automatización de tareas repetitivas</li>
+            <li>Documentación del proceso de análisis</li>
+            <li>Reproducibilidad de resultados</li>
+            <li>Análisis complejos que no están disponibles en los menús</li>
+          </ul>
+          
+          <div class="code-block">
+            <strong>Ejemplo de sintaxis SPSS básica:</strong><br>
+            <code>
+            * Ejemplo de sintaxis para estadísticas descriptivas.<br>
+            DESCRIPTIVES VARIABLES=edad ingreso años_experiencia<br>
+            /STATISTICS=MEAN STDDEV MIN MAX.
+            </code>
+          </div>
+          
+          <h3>Otras Ventanas Importantes</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ventana</th>
+                <th>Función Principal</th>
+                <th>Acceso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Chart Editor</strong></td>
+                <td>Edición y personalización de gráficos</td>
+                <td>Doble clic en cualquier gráfico en el visor</td>
+              </tr>
+              <tr>
+                <td><strong>Pivot Table Editor</strong></td>
+                <td>Edición de tablas pivote de resultados</td>
+                <td>Doble clic en cualquier tabla en el visor</td>
+              </tr>
+              <tr>
+                <td><strong>Text Output Editor</strong></td>
+                <td>Edición de texto en los resultados</td>
+                <td>Doble clic en texto en el visor</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        
+        <!-- 2.3 Entornos de trabajo -->
+        <section id="entornos">
+          <h2><i class="fas fa-project-diagram"></i> 2.3. Entornos de Trabajo</h2>
+          
+          <p>SPSS ofrece diferentes enfoques para el trabajo estadístico, adaptándose a diversos perfiles de usuarios:</p>
+          
+          <h3>Flujos de Trabajo en SPSS</h3>
+          
+          <div class="card">
+            <div class="card-header">
+              <i class="fas fa-users"></i> Enfoques según Perfil de Usuario
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Perfil</th>
+                    <th>Enfoque Recomendado</th>
+                    <th>Ventana Principal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Principiante</strong></td>
+                    <td>Interfaz gráfica (menús)</td>
+                    <td>Editor de Datos + Cuadros de Diálogo</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Intermedio</strong></td>
+                    <td>Combinación menús + sintaxis</td>
+                    <td>Editor de Datos + Editor de Sintaxis</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Avanzado/Investigador</strong></td>
+                    <td>Sintaxis + Automatización</td>
+                    <td>Editor de Sintaxis + Extensiones</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <h3>Organización de Proyectos</h3>
+          <p>Para un trabajo eficiente, se recomienda la siguiente estructura de carpetas:</p>
+          
+          <div class="code-block">
+            <strong>Estructura recomendada para proyectos SPSS:</strong><br>
+            Proyecto_Investigacion/<br>
+            ├── 01_Datos/<br>
+            │   ├── Originales/          # Datos sin modificar<br>
+            │   ├── Procesados/          # Datos limpios y transformados<br>
+            │   └── Diccionarios/        # Documentación de variables<br>
+            ├── 02_Sintaxis/<br>
+            │   ├── Importacion.sps      # Sintaxis para importar datos<br>
+            │   ├── Limpieza.sps         # Sintaxis para limpieza<br>
+            │   ├── Analisis.sps         # Sintaxis para análisis<br>
+            │   └── Graficos.sps         # Sintaxis para gráficos<br>
+            ├── 03_Resultados/<br>
+            │   ├── Tablas/              # Tablas exportadas<br>
+            │   ├── Graficos/            # Gráficos exportados<br>
+            │   └── Reportes/            # Reportes completos<br>
+            └── 04_Documentacion/<br>
+                ├── Protocolo.docx       # Protocolo de investigación<br>
+                └── Bitacora.md          # Bitácora del análisis<br>
+          </div>
+          
+          <h3>Personalización del Entorno</h3>
+          <ul>
+            <li><strong>Opciones generales:</strong> Editar → Opciones (Edit → Options)</li>
+            <li><strong>Idioma de interfaz:</strong> Se puede configurar en español o inglés</li>
+            <li><strong>Formato de salida:</strong> Configuración de estilo de tablas y gráficos</li>
+            <li><strong>Plantillas:</strong> Creación de plantillas para tablas y gráficos recurrentes</li>
+          </ul>
+        </section>
+        
+        <!-- 2.4 Manipulación de datos -->
+        <section id="manipulacion">
+          <h2><i class="fas fa-database"></i> 2.4. Manipulación de Datos</h2>
+          
+          <h3>Importación de Datos</h3>
+          <p>SPSS puede importar datos desde múltiples formatos:</p>
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Formato</th>
+                <th>Procedimiento</th>
+                <th>Consideraciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Excel (.xlsx, .xls)</strong></td>
+                <td>Archivo → Abrir → Datos</td>
+                <td>Seleccionar hoja correcta, verificar nombres de variables</td>
+              </tr>
+              <tr>
+                <td><strong>CSV/TXT</strong></td>
+                <td>Archivo → Leer datos de texto</td>
+                <td>Especificar delimitador, formato decimal, codificación</td>
+              </tr>
+              <tr>
+                <td><strong>Bases de datos</strong></td>
+                <td>Archivo → Abrir base de datos</td>
+                <td>Requiere drivers ODBC, configuración de conexión</td>
+              </tr>
+              <tr>
+                <td><strong>Otros paquetes estadísticos</strong></td>
+                <td>Archivo → Abrir → Datos</td>
+                <td>SAS, Stata, R (mediante extensiones)</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <h3>Definición de Variables</h3>
+          <p>En la Vista de Variables, se definen las propiedades de cada variable:</p>
+          
+          <div class="code-block">
+            <strong>Propiedades clave de variables en SPSS:</strong><br>
+            1. <strong>Nombre:</strong> Identificador único (sin espacios, máximo 64 caracteres)<br>
+            2. <strong>Tipo:</strong> Numérico, cadena, fecha, moneda, etc.<br>
+            3. <strong>Ancho:</strong> Número de caracteres/dígitos<br>
+            4. <strong>Decimales:</strong> Número de decimales a mostrar<br>
+            5. <strong>Etiqueta:</strong> Descripción extensa de la variable<br>
+            6. <strong>Valores:</strong> Etiquetas para valores codificados (ej: 1="Hombre", 2="Mujer")<br>
+            7. <strong>Valores perdidos:</strong> Especificación de códigos para valores faltantes<br>
+            8. <strong>Columnas:</strong> Ancho de columna en la Vista de Datos<br>
+            9. <strong>Alineación:</strong> Alineación del texto en celdas<br>
+            10. <strong>Escala de medida:</strong> Nominal, ordinal, de intervalo/razón
+          </div>
+          
+          <h3>Transformación de Datos</h3>
+          
+          <h4>Transformaciones Básicas:</h4>
+          <ul>
+            <li><strong>Calcular variable:</strong> Transformar → Calcular variable</li>
+            <li><strong>Recodificar en diferentes variables:</strong> Transformar → Recodificar en diferentes variables</li>
+            <li><strong>Recodificar en la misma variable:</strong> Transformar → Recodificar en la misma variable</li>
+            <li><strong>Visualizar categorías (Visual Binning):</strong> Transformar → Visual Binning</li>
+          </ul>
+          
+          <div class="code-block">
+            <strong>Ejemplo de sintaxis para transformaciones:</strong><br>
+            <code>
+            * Crear nueva variable categórica a partir de edad.<br>
+            RECODE edad (18 thru 29=1) (30 thru 44=2) (45 thru 59=3) (60 thru 100=4)<br>
+            INTO grupo_edad.<br>
+            VARIABLE LABELS grupo_edad 'Grupos de edad'.<br>
+            VALUE LABELS grupo_edad 1 'Jóvenes (18-29)' 2 'Adultos jóvenes (30-44)'<br>
+            3 'Adultos (45-59)' 4 'Adultos mayores (60+)'.<br>
+            EXECUTE.
+            </code>
+          </div>
+          
+          <h3>Manejo de Valores Perdidos</h3>
+          <p>SPSS reconoce tres tipos de valores perdidos:</p>
+          <ol>
+            <li><strong>Sistema-missing:</strong> Celdas vacías (representadas por un punto)</li>
+            <li><strong>Definidos por el usuario:</strong> Valores específicos definidos como perdidos (ej: 99, 999)</li>
+            <li><strong>Rango más un valor discreto:</strong> Para variables numéricas con rangos de valores perdidos</li>
+          </ol>
+          
+          <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i> <strong>Importante:</strong> Los valores perdidos afectan los cálculos estadísticos. SPSS ofrece varias opciones para manejar valores perdidos en análisis (excluir por lista, excluir por parejas, etc.).
+          </div>
+        </section>
+        
+        <!-- 2.5 Análisis Exploratorio -->
+        <section id="analisis">
+          <h2><i class="fas fa-chart-bar"></i> 2.5. Análisis Exploratorio</h2>
+          
+          <p>El análisis exploratorio de datos (AED) en SPSS incluye estadísticas descriptivas y técnicas de visualización para comprender la estructura y características de los datos.</p>
+          
+          <h3>Estadísticas Descriptivas</h3>
+          
+          <h4>Procedimientos Principales:</h4>
+          <ul>
+            <li><strong>Frecuencias:</strong> Analizar → Estadísticos descriptivos → Frecuencias</li>
+            <li><strong>Descriptivos:</strong> Analizar → Estadísticos descriptivos → Descriptivos</li>
+            <li><strong>Explorar:</strong> Analizar → Estadísticos descriptivos → Explorar</li>
+            <li><strong>Tablas personalizadas:</strong> Analizar → Tablas → Tablas personalizadas</li>
+          </ul>
+          
+          <div class="card">
+            <div class="card-header">
+              <i class="fas fa-table"></i> Medidas Estadísticas Disponibles en SPSS
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <h5>Tendencia Central</h5>
+                  <ul>
+                    <li>Media</li>
+                    <li>Mediana</li>
+                    <li>Moda</li>
+                    <li>Suma</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <h5>Dispersión</h5>
+                  <ul>
+                    <li>Desviación estándar</li>
+                    <li>Varianza</li>
+                    <li>Rango</li>
+                    <li>Mínimo y máximo</li>
+                    <li>Rango intercuartílico</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <h5>Distribución</h5>
+                  <ul>
+                    <li>Asimetría (skewness)</li>
+                    <li>Curtosis</li>
+                    <li>Percentiles</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <h5>Otros</h5>
+                  <ul>
+                    <li>Error estándar de la media</li>
+                    <li>Intervalo de confianza</li>
+                    <li>Pruebas de normalidad</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <h3>Visualización de Datos</h3>
+          
+          <h4>Gráficos Disponibles en SPSS:</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Tipo de Gráfico</th>
+                <th>Uso Recomendado</th>
+                <th>Acceso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Histograma</strong></td>
+                <td>Distribución de variables continuas</td>
+                <td>Grafícos → Gráficos antiguos → Histograma</td>
+              </tr>
+              <tr>
+                <td><strong>Diagrama de cajas</strong></td>
+                <td>Comparación de grupos, detección de outliers</td>
+                <td>Grafícos → Gráficos antiguos → Cajas</td>
+              </tr>
+              <tr>
+                <td><strong>Gráfico de barras</strong></td>
+                <td>Variables categóricas, frecuencias</td>
+                <td>Grafícos → Gráficos antiguos → Barras</td>
+              </tr>
+              <tr>
+                <td><strong>Gráfico de sectores</strong></td>
+                <td>Proporciones de categorías</td>
+                <td>Grafícos → Gráficos antiguos → Sectores</td>
+              </tr>
+              <tr>
+                <td><strong>Dispersión</strong></td>
+                <td>Relación entre dos variables continuas</td>
+                <td>Grafícos → Gráficos antiguos → Dispersión</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="code-block">
+            <strong>Ejemplo de sintaxis para análisis exploratorio completo:</strong><br>
+            <code>
+            * Análisis exploratorio completo de variables demográficas.<br>
+            EXAMINE VARIABLES=edad ingreso años_educacion<br>
+            /PLOT BOXPLOT STEMLEAF HISTOGRAM NPPLOT<br>
+            /COMPARE VARIABLES<br>
+            /STATISTICS DESCRIPTIVES EXTREME<br>
+            /CINTERVAL 95<br>
+            /MISSING LISTWISE<br>
+            /NOTOTAL.
+            </code>
+          </div>
+          
+          <h3>Análisis de Normalidad</h3>
+          <p>SPSS ofrece varias pruebas para evaluar la normalidad de las variables:</p>
+          <ul>
+            <li><strong>Prueba de Kolmogorov-Smirnov:</strong> Para muestras grandes (>50)</li>
+            <li><strong>Prueba de Shapiro-Wilk:</strong> Para muestras pequeñas (<50)</li>
+            <li><strong>Gráficos Q-Q:</strong> Evaluación visual de normalidad</li>
+            <li><strong>Histogramas con curva normal:</strong> Comparación visual</li>
+          </ul>
+          
+          <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> <strong>Buenas prácticas:</strong> Siempre comience cualquier análisis con una exploración descriptiva completa de sus datos. Esto le permitirá detectar problemas, valores extremos, y comprender mejor las características de su muestra.
+          </div>
+        </section>
+        
+        <!-- Actividades de aprendizaje -->
+        <section id="actividades">
+          <h2><i class="fas fa-tasks"></i> Actividades de Aprendizaje</h2>
+          
+          <div class="progress-section">
+            <h3 class="progress-title"><i class="fas fa-chart-line"></i> Progreso de la Unidad</h3>
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+            <p>Completado: 25% | Sesiones: 4 de 16</p>
+          </div>
+          
+          <h3>Ejercicios Prácticos</h3>
+          
+          <div class="card">
+            <div class="card-header">
+              <i class="fas fa-laptop-code"></i> Ejercicio 1: Configuración inicial
+            </div>
+            <div class="card-body">
+              <p><strong>Objetivo:</strong> Instalar y configurar SPSS en su equipo personal.</p>
+              <p><strong>Tareas:</strong></p>
+              <ol>
+                <li>Descargar e instalar IBM SPSS Statistics (versión académica)</li>
+                <li>Configurar las opciones regionales (separador decimal, formato de fecha)</li>
+                <li>Personalizar la interfaz (idioma, colores, tamaño de fuente)</li>
+                <li>Crear un proyecto con la estructura de carpetas recomendada</li>
+              </ol>
+              <p><strong>Entregable:</strong> Captura de pantalla de SPSS instalado y funcionando.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <i class="fas fa-database"></i> Ejercicio 2: Manipulación básica de datos
+            </div>
+            <div class="card-body">
+              <p><strong>Objetivo:</strong> Importar datos y definir correctamente las variables.</p>
+              <p><strong>Tareas:</strong></p>
+              <ol>
+                <li>Importar el archivo "encuesta_salud.sav" disponible en el aula virtual</li>
+                <li>Revisar y corregir las propiedades de las variables (etiquetas, valores, etc.)</li>
+                <li>Crear una nueva variable categórica a partir de una variable continua</li>
+                <li>Identificar y definir valores perdidos apropiadamente</li>
+              </ol>
+              <p><strong>Entregable:</strong> Archivo .sav con datos corregidos y sintaxis .sps utilizada.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <i class="fas fa-chart-bar"></i> Ejercicio 3: Análisis exploratorio completo
+            </div>
+            <div class="card-body">
+              <p><strong>Objetivo:</strong> Realizar un análisis exploratorio completo de un conjunto de datos.</p>
+              <p><strong>Tareas:</strong></p>
+              <ol>
+                <li>Calcular estadísticas descriptivas para todas las variables cuantitativas</li>
+                <li>Generar tablas de frecuencia para las variables categóricas</li>
+                <li>Crear al menos 5 gráficos diferentes apropiados para los datos</li>
+                <li>Evaluar la normalidad de las distribuciones</li>
+                <li>Identificar y documentar valores atípicos</li>
+              </ol>
+              <p><strong>Entregable:</strong> Archivo .spv con resultados y reporte en Word con interpretación.</p>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Evaluación -->
+        <section id="evaluacion">
+          <h2><i class="fas fa-clipboard-check"></i> Evaluación de la Unidad</h2>
+          
+          <p>La evaluación de la Unidad II se realizará mediante los siguientes instrumentos:</p>
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Instrumento</th>
+                <th>Ponderación</th>
+                <th>Fecha</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Examen teórico-práctico</strong></td>
+                <td>30%</td>
+                <td>Sesión 8</td>
+                <td>Evaluación de conceptos y habilidades básicas</td>
+              </tr>
+              <tr>
+                <td><strong>Proyecto aplicado</strong></td>
+                <td>40%</td>
+                <td>Sesión 16</td>
+                <td>Análisis completo de un conjunto de datos reales</td>
+              </tr>
+              <tr>
+                <td><strong>Ejercicios prácticos</strong></td>
+                <td>20%</td>
+                <td>Semanales</td>
+                <td>3 ejercicios prácticos (6.7% cada uno)</td>
+              </tr>
+              <tr>
+                <td><strong>Participación</strong></td>
+                <td>10%</td>
+                <td>Continua</td>
+                <td>Foros, asistencia, contribuciones en clase</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> <strong>Criterios de evaluación del proyecto:</strong> Correcta manipulación de datos (25%), análisis estadístico apropiado (35%), calidad de visualizaciones (20%), claridad del reporte (20%).
+          </div>
+        </section>
+        
+        <!-- Bibliografía -->
+        <section id="bibliografia">
+          <h2><i class="fas fa-book"></i> Bibliografía Específica</h2>
+          
+          <h3>Bibliografía Básica (Unidad II)</h3>
+          <ol>
+            <li><strong>Quezada, N. (2014).</strong> <em>Estadística con SPSS 22.</em> Editorial Macro. <span class="badge bg-primary">Disponible en biblioteca FACEN</span></li>
+            <li><strong>Schmidt, W. (2019).</strong> <em>IBM SPSS: Guía Completa Para Principiantes Aprende Estadísticas Utilizando IBM SPSS De la A-Z.</em> Independently published.</li>
+            <li><strong>IBM SPSS Corporation. (s.f.).</strong> <em>Guía del usuario de IBM Statistics 26 Core System.</em> Disponible en: <a href="https://www.ibm.com/docs/en/SSLVMB_26.0.0/pdf/es/IBM_SPSS_Statistics_Core_System_User_Guide.pdf">Enlace oficial</a></li>
+          </ol>
+          
+          <h3>Bibliografía Complementaria</h3>
+          <ul>
+            <li><strong>Field, A. (2018).</strong> <em>Discovering Statistics Using IBM SPSS Statistics.</em> 5th Edition. Sage Publications.</li>
+            <li><strong>Pallant, J. (2020).</strong> <em>SPSS Survival Manual.</em> 7th Edition. Open University Press.</li>
+            <li><strong>George, D., & Mallery, P. (2019).</strong> <em>IBM SPSS Statistics 26 Step by Step.</em> Routledge.</li>
+          </ul>
+          
+          <h3>Recursos en Línea</h3>
+          <ul>
+            <li><strong>IBM SPSS Tutorials:</strong> <a href="https://www.ibm.com/support/pages/spss-statistics-documentation">Documentación oficial de IBM</a></li>
+            <li><strong>UCLA Institute for Digital Research and Education:</strong> <a href="https://stats.idre.ucla.edu/spss/">Tutoriales y ejemplos de SPSS</a></li>
+            <li><strong>Laerd Statistics:</strong> <a href="https://statistics.laerd.com/">Guías paso a paso para SPSS</a></li>
+            <li><strong>SPSS Video Tutorials:</strong> <a href="https://www.youtube.com/c/IBMAnalytics">Canal oficial de IBM Analytics</a></li>
+          </ul>
+        </section>
+        
+        <!-- Footer navigation -->
+        <div class="footer-nav">
+          <a href="../../index.html" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Volver al curso
+          </a>
+          
+          <div>
+            <a href="#introduccion" class="btn btn-primary">
+              <i class="fas fa-arrow-up"></i> Volver al inicio
+            </a>
+            <a href="unidad1.html" class="btn btn-outline">
+              <i class="fas fa-chevron-left"></i> Unidad I
+            </a>
+            <a href="unidad3.html" class="btn btn-outline">
+              Unidad III <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
       </div>
-
-      <h3>3.1 Ejemplo en Python</h3>
-      <p>
-        El siguiente fragmento ilustra un flujo básico de EDA utilizando pandas y seaborn en Python.
-      </p>
-      <pre><code>import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# Cargar dataset
-df = pd.read_csv("clientes_compras.csv")
-
-# Vista inicial
-print(df.head())
-
-# Estadísticas descriptivas
-print(df.describe())
-
-# Histograma de la variable edad
-sns.histplot(data=df, x="edad", kde=True)
-plt.title("Distribución de la edad de clientes")
-plt.show()
-
-# Mapa de calor de correlaciones
-corr = df.corr(numeric_only=True)
-sns.heatmap(corr, annot=True, cmap="coolwarm")
-plt.title("Matriz de correlaciones")
-plt.show()</code></pre>
-
-      <h3>3.2 Ejemplo en R</h3>
-      <p>
-        Un patrón análogo puede implementarse en R utilizando ggplot2 y, para correlaciones, el paquete GGally.
-      </p>
-      <pre><code>library(ggplot2)
-library(GGally)
-
-df &lt;- read.csv("clientes_compras.csv")
-
-# Vista inicial
-head(df)
-
-# Resumen descriptivo
-summary(df)
-
-# Histograma de edad
-ggplot(df, aes(x = edad)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
-  labs(title = "Distribución de la edad de clientes",
-       x = "Edad", y = "Frecuencia")
-
-# Matriz de correlaciones
-ggcorr(df, label = TRUE)</code></pre>
-    </section>
-
-    <section>
-      <h2>4. Preprocesado de datos</h2>
-      <p>
-        El preprocesado comprende el conjunto de operaciones necesarias para dejar los datos en condiciones adecuadas
-        para el análisis. Incluye tareas de limpieza, transformación y selección de variables.
-      </p>
-
-      <h3>4.1 Limpieza</h3>
-      <p>
-        La limpieza busca detectar y corregir problemas como registros duplicados, valores imposibles, inconsistencias
-        de codificación y errores tipográficos. En grandes volúmenes de datos, estas tareas requieren reglas claras y,
-        con frecuencia, procedimientos automatizados.
-      </p>
-
-      <h3>4.2 Transformación</h3>
-      <p>
-        La transformación puede incluir la estandarización o normalización de variables, la creación de nuevas variables
-        derivadas (por ejemplo, tasas o razones) y la recodificación de categorías para simplificar el análisis.
-      </p>
-
-      <h3>4.3 Selección y reducción</h3>
-      <p>
-        En Big Data es común enfrentar conjuntos con cientos o miles de variables. La selección de características
-        (feature selection) y los métodos de reducción de dimensión (como el análisis de componentes principales, PCA)
-        ayudan a concentrar el análisis en un subconjunto informativo de variables.
-      </p>
-
-      <div class="highlight">
-        <p>
-          Un buen preprocesado reduce ruido y redundancia, mejora el rendimiento de los algoritmos de modelado y facilita
-          la interpretación de los resultados.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <h2>5. Imputación de valores ausentes</h2>
-      <p>
-        La presencia de valores ausentes (missing values) es un problema recurrente en la práctica. Ignorarlos por completo
-        puede introducir sesgos, mientras que imputarlos sin criterio puede distorsionar la estructura de los datos.
-      </p>
-
-      <h3>5.1 Estrategias simples</h3>
-      <ul>
-        <li>
-          <strong>Eliminación de casos</strong>: funciona si la proporción de datos faltantes es pequeña y los casos
-          eliminados no generan sesgos graves.
-        </li>
-        <li>
-          <strong>Imputación con media o mediana</strong>: sencilla de implementar, pero puede subestimar la variabilidad.
-        </li>
-        <li>
-          <strong>Imputación con moda</strong>: útil para variables categóricas con pocas categorías.
-        </li>
-      </ul>
-
-      <h3>5.2 Métodos basados en modelos</h3>
-      <ul>
-        <li>
-          <strong>Imputación con K vecinos más cercanos (KNN)</strong>: utiliza observaciones similares para completar valores.
-        </li>
-        <li>
-          <strong>Imputación múltiple</strong>: genera varios conjuntos completos imputados y combina los resultados,
-          reflejando la incertidumbre asociada al proceso.
-        </li>
-      </ul>
-
-      <h3>5.3 Ejemplo en Python</h3>
-      <pre><code>import pandas as pd
-from sklearn.impute import KNNImputer
-
-df = pd.read_csv("datos_incompletos.csv")
-
-# Eliminación de filas con NA
-df_drop = df.dropna()
-
-# Imputación con medias
-df_mean = df.fillna(df.mean(numeric_only=True))
-
-# Imputación KNN para variables numéricas
-imputer = KNNImputer(n_neighbors=5)
-df_knn = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)</code></pre>
-
-      <h3>5.4 Ejemplo en R con mice</h3>
-      <pre><code>library(mice)
-
-df &lt;- read.csv("datos_incompletos.csv")
-
-# Eliminación de casos con NA
-df_drop &lt;- na.omit(df)
-
-# Imputación de una variable numérica con la media
-df$col_numerica[is.na(df$col_numerica)] &lt;- mean(df$col_numerica, na.rm = TRUE)
-
-# Imputación múltiple
-imp &lt;- mice(df, m = 5, maxit = 50, method = "pmm", seed = 500)
-df_complete &lt;- complete(imp, 1)</code></pre>
-    </section>
-
-    <section>
-      <h2>6. Bibliografía y recursos</h2>
-      <ul>
-        <li>Tukey, J. W. (1977). <em>Exploratory Data Analysis</em>. Addison-Wesley.</li>
-        <li>Cleveland, W. S. (1993). <em>Visualizing Data</em>. Hobart Press.</li>
-        <li>Wickham, H. (2016). <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer.</li>
-        <li>McKinney, W. (2017). <em>Python for Data Analysis</em>. O'Reilly Media.</li>
-        <li>VanderPlas, J. (2016). <em>Python Data Science Handbook</em>. O'Reilly Media.</li>
-      </ul>
-      <p>
-        Además de estos textos, la documentación oficial de librerías como
-        <span class="badge">pandas</span>
-        <span class="badge">seaborn</span>
-        <span class="badge">ggplot2</span>
-        y
-        <span class="badge">mice</span>
-        constituye una fuente actualizada de ejemplos y buenas prácticas.
-      </p>
-    </section>
+      
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3><i class="fas fa-map"></i> Navegación</h3>
+        <ul class="nav-links">
+          <li><a href="#introduccion" class="active"><i class="fas fa-info-circle"></i> Introducción</a></li>
+          <li><a href="#contenidos"><i class="fas fa-list-ol"></i> Contenidos</a></li>
+          <li><a href="#instalacion"><i class="fas fa-download"></i> 2.1 Instalación</a></li>
+          <li><a href="#ventanas"><i class="fas fa-window-maximize"></i> 2.2 Ventanas</a></li>
+          <li><a href="#entornos"><i class="fas fa-project-diagram"></i> 2.3 Entornos</a></li>
+          <li><a href="#manipulacion"><i class="fas fa-database"></i> 2.4 Manipulación</a></li>
+          <li><a href="#analisis"><i class="fas fa-chart-bar"></i> 2.5 Análisis</a></li>
+          <li><a href="#actividades"><i class="fas fa-tasks"></i> Actividades</a></li>
+          <li><a href="#evaluacion"><i class="fas fa-clipboard-check"></i> Evaluación</a></li>
+          <li><a href="#bibliografia"><i class="fas fa-book"></i> Bibliografía</a></li>
+        </ul>
+        
+        <h3 style="margin-top: 2rem;"><i class="fas fa-download"></i> Recursos</h3>
+        <ul class="nav-links">
+          <li><a href="#"><i class="fas fa-file-pdf"></i> Guía de instalación</a></li>
+          <li><a href="#"><i class="fas fa-file-code"></i> Ejemplos de sintaxis</a></li>
+          <li><a href="#"><i class="fas fa-database"></i> Datos de práctica</a></li>
+          <li><a href="#"><i class="fas fa-video"></i> Tutoriales en video</a></li>
+        </ul>
+        
+        <div class="alert alert-warning" style="margin-top: 1.5rem;">
+          <i class="fas fa-clock"></i> <strong>Próxima sesión:</strong><br>
+          Martes 10:00-13:00<br>
+          Laboratorio de Computación 3
+        </div>
+      </aside>
+    </div>
   </main>
-
-  <footer>
-    <p>
-      Material de lectura de la Unidad 2 del curso de Software Estadístico, elaborado para uso académico interno.
-    </p>
-  </footer>
+  
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Highlight.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  
+  <script>
+    // Smooth scroll para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 20,
+            behavior: 'smooth'
+          });
+          
+          // Actualizar enlace activo en sidebar
+          document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+          });
+          this.classList.add('active');
+        }
+      });
+    });
+    
+    // Actualizar enlace activo al hacer scroll
+    window.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollPosition = window.scrollY + 100;
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if(scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
