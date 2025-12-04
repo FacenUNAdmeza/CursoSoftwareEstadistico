@@ -5,84 +5,376 @@
   <title>Unidad 2 · Visualización y exploración de datos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    :root { --primary: #047857; --bg: #f9fafb; --text: #111827; }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     body {
-      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f4f7fa;
+      color: #222;
+      line-height: 1.7;
     }
     header {
-      background: linear-gradient(135deg, #047857, #22c55e);
-      color: white;
-      padding: 1.5rem 1rem;
-      box-shadow: 0 4px 12px rgba(15,23,42,0.4);
+      background: #2c3e50;
+      color: #fff;
+      padding: 1rem 1.5rem;
     }
-    .header-inner { max-width: 960px; margin: 0 auto; }
-    h1 { font-size: clamp(1.8rem, 2.3vw, 2.4rem); margin-bottom: 0.35rem; }
-    .curso { font-size: 0.95rem; opacity: 0.9; }
-    main {
-      max-width: 960px;
-      margin: 1.5rem auto 2.5rem;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 0.75rem;
-      box-shadow: 0 8px 30px rgba(15,23,42,0.12);
+    header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
     }
-    h2 {
-      font-size: 1.35rem;
-      margin: 1.5rem 0 0.5rem;
-      color: #065f46;
-      border-bottom: 2px solid rgba(22,163,74,0.25);
-      padding-bottom: 0.25rem;
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.9;
     }
-    p { margin-bottom: 0.8rem; text-align: justify; }
-    ul { margin: 0.6rem 0 0.8rem 1.4rem; }
-    li { margin-bottom: 0.4rem; }
-    .footer-nav {
-      margin-top: 1.8rem;
-      padding-top: 1rem;
-      border-top: 1px solid #e5e7eb;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+    header a {
+      color: #ecf0f1;
+      text-decoration: none;
       font-size: 0.9rem;
     }
-    a { color: #047857; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    header a:hover {
+      text-decoration: underline;
+    }
+    main {
+      max-width: 960px;
+      margin: 2rem auto 3rem auto;
+      padding: 0 1.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: #2980b9;
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.3rem;
+      margin-bottom: 0.4rem;
+      color: #34495e;
+    }
+    p {
+      margin-bottom: 0.9rem;
+      text-align: justify;
+    }
+    ul {
+      margin: 0.3rem 0 0.9rem 1.3rem;
+      padding-left: 0.2rem;
+    }
+    li {
+      margin-bottom: 0.35rem;
+    }
+    .highlight {
+      background: #fdfdfd;
+      border-left: 4px solid #3498db;
+      padding: 0.9rem 1rem;
+      margin: 1.2rem 0;
+      border-radius: 4px;
+    }
+    pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 0.9rem 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      background: #ecf0f1;
+      color: #555;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      margin-right: 0.4rem;
+      margin-top: 0.1rem;
+    }
+    footer {
+      max-width: 960px;
+      margin: 0 auto 2rem auto;
+      padding: 0 1.5rem;
+      font-size: 0.85rem;
+      color: #777;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="header-inner">
-      <h1>Unidad 2 · Visualización y exploración de datos</h1>
-      <p class="curso">Curso de Software Estadístico · FACEN–UNA</p>
+    <div style="display:flex;flex-direction:column;gap:0.2rem;">
+      <div>
+        <strong>Unidad 2 · Visualización y exploración de datos en Big Data</strong>
+      </div>
+      <p>Curso de Software Estadístico · FACEN-UNA</p>
+      <a href="../../index.html">← Volver al inicio del curso</a>
     </div>
   </header>
+
   <main>
     <section>
-      <h2>Objetivos de la unidad</h2>
+      <h2>1. Introducción al análisis exploratorio de datos</h2>
       <p>
-        Esta unidad introduce el análisis exploratorio de datos y las principales herramientas de visualización gráfica
-        disponibles en software estadístico. El énfasis está puesto en detectar patrones, valores atípicos y relaciones
-        entre variables antes de aplicar modelos más complejos.
+        La visualización y exploración de datos, o análisis exploratorio de datos (EDA), constituye un pilar fundamental
+        en proyectos de ciencia de datos y Big Data. Antes de ajustar modelos o producir indicadores, es necesario
+        comprender la estructura de la información, detectar patrones, valores atípicos y posibles problemas de calidad.
+      </p>
+      <p>
+        En entornos de Big Data, donde el volumen, la variedad y la velocidad de los datos pueden ser muy elevados,
+        el EDA permite orientar decisiones sobre qué subconjuntos analizar, qué transformaciones aplicar y qué
+        modelos son razonables, evitando esfuerzos innecesarios y conclusiones engañosas.
       </p>
     </section>
+
     <section>
-      <h2>Contenidos sugeridos</h2>
+      <h2>2. Tipos de variables y distribuciones</h2>
+      <p>
+        El punto de partida para cualquier análisis es la correcta identificación de los tipos de variables, ya que de ello
+        dependen las técnicas de resumen, los gráficos apropiados y los modelos que pueden utilizarse.
+      </p>
+      <h3>2.1 Tipos de variables</h3>
       <ul>
-        <li>Resúmenes numéricos básicos: medias, medianas, percentiles y medidas de dispersión.</li>
-        <li>Gráficos univariados: histogramas, densidades y diagramas de caja.</li>
-        <li>Gráficos bivariados: dispersogramas y diagramas de barras agrupadas.</li>
-        <li>Uso de librerías de visualización en R y Python por ejemplo, ggplot2 y matplotlib.</li>
+        <li>
+          <strong>Cuantitativas discretas</strong>: toman valores enteros contables (por ejemplo, número de hijos, número de visitas).
+        </li>
+        <li>
+          <strong>Cuantitativas continuas</strong>: pueden asumir cualquier valor en un intervalo (por ejemplo, peso, tiempo, ingreso).
+        </li>
+        <li>
+          <strong>Cualitativas nominales</strong>: categorías sin orden inherente (por ejemplo, color, país, estado civil).
+        </li>
+        <li>
+          <strong>Cualitativas ordinales</strong>: categorías con un orden definido (por ejemplo, nivel educativo, satisfacción).
+        </li>
       </ul>
+      <p>
+        Este esquema es esencial para decidir si es apropiado utilizar medias y desviaciones estándar, medianas y rangos,
+        tablas de frecuencia, gráficos de barras, histogramas u otras representaciones.
+      </p>
+
+      <h3>2.2 Distribuciones y transformaciones</h3>
+      <p>
+        Las distribuciones de las variables cuantitativas pueden ser aproximadamente simétricas o fuertemente sesgadas.
+        Cuando una variable presenta una cola larga hacia la derecha (por ejemplo, ingresos o montos de ventas),
+        suele ser útil aplicar transformaciones (logarítmica, Box-Cox) para estabilizar la variabilidad y mejorar
+        la interpretabilidad de los modelos posteriores.
+      </p>
     </section>
-    <div class="footer-nav">
-      <span><a href="../../index.html">← Volver a la página principal del curso</a></span>
-      <span>Plantilla ampliable según el programa oficial</span>
-    </div>
+
+    <section>
+      <h2>3. Técnicas básicas de EDA</h2>
+      <p>
+        El EDA combina resúmenes numéricos y gráficos que permiten tener una visión integrada de los datos. Entre las
+        herramientas más utilizadas se encuentran:
+      </p>
+      <ul>
+        <li>
+          <strong>Estadísticas descriptivas</strong>: medidas de tendencia central (media, mediana) y dispersión
+          (desviación estándar, rango intercuartílico).
+        </li>
+        <li>
+          <strong>Histogramas y densidades</strong>: permiten visualizar la forma de la distribución de una variable
+          cuantitativa.
+        </li>
+        <li>
+          <strong>Boxplots</strong>: útiles para detectar valores atípicos y comparar distribuciones entre grupos.
+        </li>
+        <li>
+          <strong>Diagramas de dispersión</strong>: exploran relaciones entre pares de variables cuantitativas.
+        </li>
+        <li>
+          <strong>Mapas de calor de correlaciones</strong>: resumen las asociaciones lineales entre múltiples variables.
+        </li>
+      </ul>
+
+      <div class="highlight">
+        <p>
+          En un contexto de Big Data, muchas de estas técnicas se aplican a muestras o subconjuntos representativos,
+          o bien se apoyan en librerías optimizadas para trabajar con datos de gran tamaño.
+        </p>
+      </div>
+
+      <h3>3.1 Ejemplo en Python</h3>
+      <p>
+        El siguiente fragmento ilustra un flujo básico de EDA utilizando pandas y seaborn en Python.
+      </p>
+      <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Cargar dataset
+df = pd.read_csv("clientes_compras.csv")
+
+# Vista inicial
+print(df.head())
+
+# Estadísticas descriptivas
+print(df.describe())
+
+# Histograma de la variable edad
+sns.histplot(data=df, x="edad", kde=True)
+plt.title("Distribución de la edad de clientes")
+plt.show()
+
+# Mapa de calor de correlaciones
+corr = df.corr(numeric_only=True)
+sns.heatmap(corr, annot=True, cmap="coolwarm")
+plt.title("Matriz de correlaciones")
+plt.show()</code></pre>
+
+      <h3>3.2 Ejemplo en R</h3>
+      <p>
+        Un patrón análogo puede implementarse en R utilizando ggplot2 y, para correlaciones, el paquete GGally.
+      </p>
+      <pre><code>library(ggplot2)
+library(GGally)
+
+df &lt;- read.csv("clientes_compras.csv")
+
+# Vista inicial
+head(df)
+
+# Resumen descriptivo
+summary(df)
+
+# Histograma de edad
+ggplot(df, aes(x = edad)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+  labs(title = "Distribución de la edad de clientes",
+       x = "Edad", y = "Frecuencia")
+
+# Matriz de correlaciones
+ggcorr(df, label = TRUE)</code></pre>
+    </section>
+
+    <section>
+      <h2>4. Preprocesado de datos</h2>
+      <p>
+        El preprocesado comprende el conjunto de operaciones necesarias para dejar los datos en condiciones adecuadas
+        para el análisis. Incluye tareas de limpieza, transformación y selección de variables.
+      </p>
+
+      <h3>4.1 Limpieza</h3>
+      <p>
+        La limpieza busca detectar y corregir problemas como registros duplicados, valores imposibles, inconsistencias
+        de codificación y errores tipográficos. En grandes volúmenes de datos, estas tareas requieren reglas claras y,
+        con frecuencia, procedimientos automatizados.
+      </p>
+
+      <h3>4.2 Transformación</h3>
+      <p>
+        La transformación puede incluir la estandarización o normalización de variables, la creación de nuevas variables
+        derivadas (por ejemplo, tasas o razones) y la recodificación de categorías para simplificar el análisis.
+      </p>
+
+      <h3>4.3 Selección y reducción</h3>
+      <p>
+        En Big Data es común enfrentar conjuntos con cientos o miles de variables. La selección de características
+        (feature selection) y los métodos de reducción de dimensión (como el análisis de componentes principales, PCA)
+        ayudan a concentrar el análisis en un subconjunto informativo de variables.
+      </p>
+
+      <div class="highlight">
+        <p>
+          Un buen preprocesado reduce ruido y redundancia, mejora el rendimiento de los algoritmos de modelado y facilita
+          la interpretación de los resultados.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Imputación de valores ausentes</h2>
+      <p>
+        La presencia de valores ausentes (missing values) es un problema recurrente en la práctica. Ignorarlos por completo
+        puede introducir sesgos, mientras que imputarlos sin criterio puede distorsionar la estructura de los datos.
+      </p>
+
+      <h3>5.1 Estrategias simples</h3>
+      <ul>
+        <li>
+          <strong>Eliminación de casos</strong>: funciona si la proporción de datos faltantes es pequeña y los casos
+          eliminados no generan sesgos graves.
+        </li>
+        <li>
+          <strong>Imputación con media o mediana</strong>: sencilla de implementar, pero puede subestimar la variabilidad.
+        </li>
+        <li>
+          <strong>Imputación con moda</strong>: útil para variables categóricas con pocas categorías.
+        </li>
+      </ul>
+
+      <h3>5.2 Métodos basados en modelos</h3>
+      <ul>
+        <li>
+          <strong>Imputación con K vecinos más cercanos (KNN)</strong>: utiliza observaciones similares para completar valores.
+        </li>
+        <li>
+          <strong>Imputación múltiple</strong>: genera varios conjuntos completos imputados y combina los resultados,
+          reflejando la incertidumbre asociada al proceso.
+        </li>
+      </ul>
+
+      <h3>5.3 Ejemplo en Python</h3>
+      <pre><code>import pandas as pd
+from sklearn.impute import KNNImputer
+
+df = pd.read_csv("datos_incompletos.csv")
+
+# Eliminación de filas con NA
+df_drop = df.dropna()
+
+# Imputación con medias
+df_mean = df.fillna(df.mean(numeric_only=True))
+
+# Imputación KNN para variables numéricas
+imputer = KNNImputer(n_neighbors=5)
+df_knn = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)</code></pre>
+
+      <h3>5.4 Ejemplo en R con mice</h3>
+      <pre><code>library(mice)
+
+df &lt;- read.csv("datos_incompletos.csv")
+
+# Eliminación de casos con NA
+df_drop &lt;- na.omit(df)
+
+# Imputación de una variable numérica con la media
+df$col_numerica[is.na(df$col_numerica)] &lt;- mean(df$col_numerica, na.rm = TRUE)
+
+# Imputación múltiple
+imp &lt;- mice(df, m = 5, maxit = 50, method = "pmm", seed = 500)
+df_complete &lt;- complete(imp, 1)</code></pre>
+    </section>
+
+    <section>
+      <h2>6. Bibliografía y recursos</h2>
+      <ul>
+        <li>Tukey, J. W. (1977). <em>Exploratory Data Analysis</em>. Addison-Wesley.</li>
+        <li>Cleveland, W. S. (1993). <em>Visualizing Data</em>. Hobart Press.</li>
+        <li>Wickham, H. (2016). <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer.</li>
+        <li>McKinney, W. (2017). <em>Python for Data Analysis</em>. O'Reilly Media.</li>
+        <li>VanderPlas, J. (2016). <em>Python Data Science Handbook</em>. O'Reilly Media.</li>
+      </ul>
+      <p>
+        Además de estos textos, la documentación oficial de librerías como
+        <span class="badge">pandas</span>
+        <span class="badge">seaborn</span>
+        <span class="badge">ggplot2</span>
+        y
+        <span class="badge">mice</span>
+        constituye una fuente actualizada de ejemplos y buenas prácticas.
+      </p>
+    </section>
   </main>
+
+  <footer>
+    <p>
+      Material de lectura de la Unidad 2 del curso de Software Estadístico, elaborado para uso académico interno.
+    </p>
+  </footer>
 </body>
 </html>

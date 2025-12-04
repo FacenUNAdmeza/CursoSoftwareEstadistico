@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    /* Reseteo básico */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,10 +20,10 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      overflow: hidden; /* Vista tipo portada de una sola pantalla */
+      overflow: hidden;
+      background: #000;
     }
 
-    /* Contenedor del video de fondo */
     .fondo-video {
       position: fixed;
       inset: 0;
@@ -45,7 +44,6 @@
       object-fit: cover;
     }
 
-    /* Capa de degradado suave para contraste */
     .fondo-video::after {
       content: "";
       position: absolute;
@@ -58,7 +56,6 @@
       pointer-events: none;
     }
 
-    /* Contenido principal */
     .contenido {
       position: relative;
       z-index: 1;
@@ -80,14 +77,15 @@
     }
 
     .subtitulo {
-      font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+      font-size: clamp(1.05rem, 1.5vw, 1.3rem);
       margin-bottom: 1rem;
       opacity: 0.95;
+      max-width: 800px;
     }
 
     .institucion {
-      font-size: 0.95rem;
-      letter-spacing: 0.05em;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       opacity: 0.9;
       margin-bottom: 2rem;
@@ -97,7 +95,6 @@
       margin-top: 0.1rem;
     }
 
-    /* Contenedor de unidades */
     .unidades-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -110,7 +107,7 @@
       background: rgba(0, 0, 0, 0.45);
       border-radius: 18px;
       padding: 1rem 1.2rem;
-      border: 1px solid rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.40);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       color: #ffffff;
@@ -125,24 +122,25 @@
     .unidad-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
-      background: rgba(0, 0, 0, 0.60);
-      border-color: rgba(255, 255, 255, 0.8);
+      background: rgba(0, 0, 0, 0.65);
+      border-color: rgba(255, 255, 255, 0.85);
     }
 
     .unidad-titulo {
       font-size: 1.05rem;
       font-weight: 700;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.2rem;
     }
 
     .unidad-sub {
       font-size: 0.9rem;
       opacity: 0.9;
       margin-bottom: 0.4rem;
+      text-align: left;
     }
 
     .unidad-etiquetas {
-      margin-top: 0.2rem;
+      margin-top: 0.3rem;
       font-size: 0.8rem;
       opacity: 0.9;
     }
@@ -151,38 +149,11 @@
       display: inline-block;
       padding: 0.12rem 0.55rem;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.5);
       margin-right: 0.3rem;
       margin-top: 0.25rem;
     }
 
-    /* Botón global para ir a una vista interactiva general (opcional) */
-    .btn-curso {
-      margin-top: 1.5rem;
-      padding: 0.75rem 1.75rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      background: rgba(0, 0, 0, 0.25);
-      color: #ffffff;
-      font-size: 0.95rem;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .btn-curso:hover {
-      background: rgba(0, 0, 0, 0.45);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-    }
-
-    .btn-curso a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* Fallback de animación si el video no carga */
     .no-video {
       animation: fondo-pulso 8s ease-in-out infinite alternate;
     }
@@ -199,7 +170,6 @@
       }
     }
 
-    /* Adaptación responsive */
     @media (max-width: 768px) {
       body {
         overflow: auto;
@@ -218,7 +188,6 @@
   </style>
 </head>
 <body>
-  <!-- Fondo tipo GIF / video -->
   <div class="fondo-video" id="fondo">
     <video
       src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
@@ -233,11 +202,11 @@
     </video>
   </div>
 
-  <!-- Contenido principal -->
   <main class="contenido">
     <h1 class="titulo-principal">Curso de Software Estadístico</h1>
     <p class="subtitulo">
-      Navegador de unidades para acceder al material de lectura y espacios interactivos del curso.
+      Punto de entrada para acceder al material de lectura y a las actividades de aprendizaje
+      de cada unidad del curso.
     </p>
 
     <div class="institucion">
@@ -245,9 +214,7 @@
       <p>Carrera de Ciencias, mención Matemática Estadística</p>
     </div>
 
-    <!-- Tarjetas de acceso a las unidades -->
     <section class="unidades-grid" aria-label="Unidades del curso">
-      <!-- Unidad 1 -->
       <a class="unidad-card" href="Unidad1/material_de_lectura/index.html">
         <div>
           <div class="unidad-titulo">Unidad 1. Introducción a los softwares estadísticos</div>
@@ -261,12 +228,11 @@
         </div>
       </a>
 
-      <!-- Unidad 1 – Actividad de aprendizaje (opcional, si existe la ruta) -->
       <a class="unidad-card" href="Unidad1/actividad_aprendizaje/index.html">
         <div>
-          <div class="unidad-titulo">Unidad 1. Actividad interactiva</div>
+          <div class="unidad-titulo">Unidad 1. Actividad de clasificación</div>
           <div class="unidad-sub">
-            Clasificación de software, reconocimiento de interfaz e interpretación del flujo de trabajo.
+            Clasificación de software según interfaz gráfica o uso de código/comandos.
           </div>
         </div>
         <div class="unidad-etiquetas">
@@ -275,7 +241,6 @@
         </div>
       </a>
 
-      <!-- Unidad 2 -->
       <a class="unidad-card" href="Unidad2/material_de_lectura/index.html">
         <div>
           <div class="unidad-titulo">Unidad 2. Visualización y exploración de datos</div>
@@ -289,12 +254,24 @@
         </div>
       </a>
 
-      <!-- Unidad 3 -->
+      <a class="unidad-card" href="Unidad2/actividad_aprendizaje/index.html">
+        <div>
+          <div class="unidad-titulo">Unidad 2. Actividad de autoevaluación</div>
+          <div class="unidad-sub">
+            Preguntas interactivas sobre tipos de variables, EDA y preprocesado de datos.
+          </div>
+        </div>
+        <div class="unidad-etiquetas">
+          <span>Actividad</span>
+          <span>Cuestionario</span>
+        </div>
+      </a>
+
       <a class="unidad-card" href="Unidad3/material_de_lectura/index.html">
         <div>
-          <div class="unidad-titulo">Unidad 3. (Completar título)</div>
+          <div class="unidad-titulo">Unidad 3. Material de lectura</div>
           <div class="unidad-sub">
-            Espacio reservado para el contenido de la Unidad 3 del curso.
+            Espacio reservado para el contenido teórico de la Unidad 3 del curso.
           </div>
         </div>
         <div class="unidad-etiquetas">
@@ -302,12 +279,23 @@
         </div>
       </a>
 
-      <!-- Unidad 4 -->
+      <a class="unidad-card" href="Unidad3/actividad_aprendizaje/index.html">
+        <div>
+          <div class="unidad-titulo">Unidad 3. Actividad</div>
+          <div class="unidad-sub">
+            Actividad práctica asociada a la Unidad 3 (en preparación).
+          </div>
+        </div>
+        <div class="unidad-etiquetas">
+          <span>Actividad</span>
+        </div>
+      </a>
+
       <a class="unidad-card" href="Unidad4/material_de_lectura/index.html">
         <div>
-          <div class="unidad-titulo">Unidad 4. (Completar título)</div>
+          <div class="unidad-titulo">Unidad 4. Material de lectura</div>
           <div class="unidad-sub">
-            Espacio reservado para el contenido de la Unidad 4 del curso.
+            Espacio reservado para el contenido teórico de la Unidad 4 del curso.
           </div>
         </div>
         <div class="unidad-etiquetas">
@@ -315,26 +303,42 @@
         </div>
       </a>
 
-      <!-- Unidad 5 -->
+      <a class="unidad-card" href="Unidad4/actividad_aprendizaje/index.html">
+        <div>
+          <div class="unidad-titulo">Unidad 4. Actividad</div>
+          <div class="unidad-sub">
+            Actividad práctica asociada a la Unidad 4 (en preparación).
+          </div>
+        </div>
+        <div class="unidad-etiquetas">
+          <span>Actividad</span>
+        </div>
+      </a>
+
       <a class="unidad-card" href="Unidad5/material_de_lectura/index.html">
         <div>
-          <div class="unidad-titulo">Unidad 5. (Completar título)</div>
+          <div class="unidad-titulo">Unidad 5. Material de lectura</div>
           <div class="unidad-sub">
-            Espacio reservado para el contenido de la Unidad 5 del curso.
+            Espacio reservado para el contenido teórico de la Unidad 5 del curso.
           </div>
         </div>
         <div class="unidad-etiquetas">
           <span>Lectura</span>
+        </div>
+      </a>
+
+      <a class="unidad-card" href="Unidad5/actividad_aprendizaje/index.html">
+        <div>
+          <div class="unidad-titulo">Unidad 5. Actividad</div>
+          <div class="unidad-sub">
+            Actividad práctica asociada a la Unidad 5 (en preparación).
+          </div>
+        </div>
+        <div class="unidad-etiquetas">
+          <span>Actividad</span>
         </div>
       </a>
     </section>
-
-    <!-- Botón general opcional (puede apuntar a un dashboard global si lo creas más adelante) -->
-    <!--
-    <button class="btn-curso">
-      <a href="tablero_global/index.html">Ir al tablero global del curso</a>
-    </button>
-    -->
   </main>
 </body>
 </html>

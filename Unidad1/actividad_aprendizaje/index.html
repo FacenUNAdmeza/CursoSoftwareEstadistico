@@ -2,296 +2,272 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <title>Unidad 1 · Actividad de aprendizaje</title>
+  <title>Unidad 1 · Actividad de clasificación de software</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    :root {
-      --primary: #2563eb;
-      --accent: #e11d48;
-      --bg: #0f172a;
-      --card: #020617;
-      --text: #e5e7eb;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-      background: radial-gradient(circle at top, #1e293b, #020617);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f2f5;
+      color: #222;
+      line-height: 1.6;
     }
-    .wrapper {
-      max-width: 960px;
-      width: 100%;
-      background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(15,23,42,0.98));
-      border-radius: 1rem;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.7);
-      padding: 1.8rem 1.5rem 2.2rem;
-      border: 1px solid rgba(148,163,184,0.4);
+    header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 1rem 1.5rem;
     }
-    h1 {
-      font-size: clamp(1.6rem, 2.2vw, 2.1rem);
-      margin-bottom: 0.3rem;
+    header h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.15rem;
     }
-    .subtitle {
+    header p {
       font-size: 0.95rem;
-      color: #cbd5f5;
-      margin-bottom: 1.2rem;
-    }
-    p {
-      font-size: 0.95rem;
-      margin-bottom: 0.75rem;
-    }
-    .badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      background: rgba(59,130,246,0.2);
-      color: #bfdbfe;
-      margin-left: 0.25rem;
-    }
-    .dnd-area {
-      margin-top: 1.2rem;
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 1.5rem;
-    }
-    .items, .bins {
-      background: rgba(15,23,42,0.9);
-      border-radius: 0.85rem;
-      padding: 1rem;
-      border: 1px solid rgba(148,163,184,0.35);
-    }
-    .items-title, .bins h2 {
-      font-size: 1rem;
-      margin-bottom: 0.75rem;
-      color: #e5e7eb;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .pill {
-      font-size: 0.7rem;
-      padding: 0.1rem 0.45rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      color: #9ca3af;
-    }
-    .dnd-items-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-    .dnd-item {
-      background: linear-gradient(135deg, #2563eb, #38bdf8);
-      color: white;
-      padding: 0.45rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      cursor: grab;
-      user-select: none;
-      box-shadow: 0 6px 18px rgba(37,99,235,0.6);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-    }
-    .dnd-item.dragging {
-      transform: scale(0.96);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.5);
-      opacity: 0.7;
-      cursor: grabbing;
-    }
-    .bins-container {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-    .bin {
-      border-radius: 0.75rem;
-      padding: 0.9rem;
-      min-height: 130px;
-      border: 1px dashed rgba(148,163,184,0.7);
-      background: radial-gradient(circle at top left, rgba(15,118,110,0.18), transparent);
-    }
-    .bin h3 {
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .bin h3 span.icon {
-      width: 1.6rem;
-      height: 1.6rem;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(15,23,42,0.9);
-      font-size: 0.95rem;
-    }
-    .bin.drag-over {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(248,113,113,0.5);
-    }
-    .feedback {
-      margin-top: 1.1rem;
-      min-height: 1.4rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-    .feedback.ok { color: #4ade80; }
-    .feedback.error { color: #fb7185; }
-    button.reset {
-      margin-top: 0.6rem;
-      font-size: 0.9rem;
-      padding: 0.45rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(15,23,42,0.8);
-      color: #e5e7eb;
-      cursor: pointer;
-    }
-    button.reset:hover {
-      background: rgba(30,64,175,0.9);
-    }
-    .bottom-nav {
-      margin-top: 1.3rem;
-      font-size: 0.9rem;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.4rem;
       opacity: 0.9;
     }
-    a { color: #93c5fd; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    @media (max-width: 768px) {
-      .wrapper { padding: 1.4rem 1.1rem 1.8rem; }
-      .dnd-area { grid-template-columns: 1fr; }
+    header a {
+      color: #ecf0f1;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    header a:hover {
+      text-decoration: underline;
+    }
+    main {
+      max-width: 960px;
+      margin: 2rem auto 3rem auto;
+      padding: 0 1.5rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #2980b9;
+    }
+    .activity-box {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      margin-top: 1.5rem;
+    }
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+    .item {
+      background: #2980b9;
+      color: #fff;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      cursor: grab;
+      user-select: none;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+    .item.dragging {
+      opacity: 0.6;
+      transform: scale(0.96);
+      cursor: grabbing;
+    }
+    .bins {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: space-around;
+      margin-top: 0.5rem;
+    }
+    .bin {
+      flex: 1 1 260px;
+      min-height: 180px;
+      border-radius: 10px;
+      border: 2px dashed #3498db;
+      background: #f7fbff;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .bin h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+      text-align: center;
+      color: #2c3e50;
+    }
+    .bin.drag-over {
+      background: #fff7f4;
+      border-color: #e67e22;
+    }
+    .feedback {
+      margin-top: 1.2rem;
+      text-align: center;
+      font-weight: 600;
+      min-height: 1.4rem;
+    }
+    .feedback.ok {
+      color: #27ae60;
+    }
+    .feedback.error {
+      color: #e74c3c;
+    }
+    .reset-btn {
+      margin-top: 1rem;
+      display: inline-block;
+      padding: 0.55rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      background: #f39c12;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .reset-btn:hover {
+      background: #e67e22;
+      transform: translateY(-1px);
+    }
+    .nota {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="wrapper" aria-label="Actividad de clasificación de software estadístico">
-    <header>
-      <h1>Unidad 1 · Actividad de clasificación</h1>
-      <p class="subtitle">
-        Clasifique cada software según su forma predominante de uso.
-        <span class="badge">Actividad interactiva</span>
+  <header>
+    <h1>Unidad 1 · Actividad de clasificación de software</h1>
+    <p>Arrastre cada software a la categoría que considere más adecuada.</p>
+    <a href="../../index.html">← Volver al inicio del curso</a>
+  </header>
+
+  <main>
+    <section>
+      <h2>Objetivo</h2>
+      <p>
+        Clasificar diferentes programas según el tipo de interacción predominante: si se utilizan principalmente
+        mediante una <strong>interfaz gráfica</strong> (menús, ventanas, formularios) o mediante
+        <strong>código/comandos</strong> (scripts, consola).
       </p>
-    </header>
+    </section>
 
-    <p>
-      Arrastre cada tarjeta de software estadístico hacia la categoría que considere más adecuada. Algunos programas pueden utilizarse de más de una forma,
-      pero aquí se busca identificar su <strong>modo de uso predominante</strong> en la práctica habitual.
-    </p>
+    <section class="activity-box" aria-label="Actividad de clasificación de software">
+      <div class="items" id="items">
+        <div class="item" draggable="true" data-software="R">R</div>
+        <div class="item" draggable="true" data-software="Python">Python</div>
+        <div class="item" draggable="true" data-software="Stata">Stata</div>
+        <div class="item" draggable="true" data-software="SPSS">SPSS</div>
+        <div class="item" draggable="true" data-software="PSPP">PSPP</div>
+        <div class="item" draggable="true" data-software="Jamovi">Jamovi</div>
+      </div>
 
-    <div class="dnd-area">
-      <section class="items" aria-label="Lista de softwares para clasificar">
-        <div class="items-title">
-          <span>Softwares disponibles</span>
-          <span class="pill">Arrastrar y soltar</span>
+      <div class="bins">
+        <div class="bin" data-category="code" aria-label="Basado en código">
+          <h3>Basado en código / comandos</h3>
         </div>
-        <div class="dnd-items-list" id="items-source">
-          <div class="dnd-item" draggable="true" data-software="R">R</div>
-          <div class="dnd-item" draggable="true" data-software="Python">Python</div>
-          <div class="dnd-item" draggable="true" data-software="Stata">Stata</div>
-          <div class="dnd-item" draggable="true" data-software="SPSS">SPSS</div>
-          <div class="dnd-item" draggable="true" data-software="PSPP">PSPP</div>
-          <div class="dnd-item" draggable="true" data-software="Jamovi">Jamovi</div>
+        <div class="bin" data-category="gui" aria-label="Interfaz gráfica">
+          <h3>Interfaz gráfica (menús y ventanas)</h3>
         </div>
-      </section>
+      </div>
 
-      <section class="bins" aria-label="Categorías de clasificación">
-        <h2>Categorías</h2>
-        <div class="bins-container">
-          <div class="bin" data-category="code" aria-label="Softwares basados principalmente en código">
-            <h3><span class="icon">λ</span> Basado en código / comandos</h3>
-          </div>
-          <div class="bin" data-category="gui" aria-label="Softwares basados principalmente en interfaz gráfica">
-            <h3><span class="icon">UI</span> Basado en interfaz gráfica</h3>
-          </div>
-        </div>
-      </section>
-    </div>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+      <button class="reset-btn" id="reset-btn">Reiniciar actividad</button>
 
-    <div id="feedback" class="feedback" role="status" aria-atomic="true"></div>
-    <button type="button" class="reset" id="reset-btn">Reiniciar actividad</button>
-
-    <div class="bottom-nav">
-      <span><a href="../material_de_lectura/index.html">← Volver al material de lectura de la Unidad 1</a></span>
-      <span><a href="../../index.html">Ir a la página principal del curso →</a></span>
-    </div>
-  </div>
+      <p class="nota">
+        Nota: la clasificación tiene un carácter orientativo. Muchos programas ofrecen tanto interfaz gráfica como
+        posibilidades de programación (por ejemplo, RStudio o SPSS con sintaxis).
+      </p>
+    </section>
+  </main>
 
   <script>
-    (function() {
+    (function () {
+      var items = document.querySelectorAll(".item");
+      var bins = document.querySelectorAll(".bin");
+      var feedback = document.getElementById("feedback");
+      var resetBtn = document.getElementById("reset-btn");
+      var container = document.getElementById("items");
+
       var correct = {
-        R: 'code', Python: 'code', Stata: 'code',
-        SPSS: 'gui', PSPP: 'gui', Jamovi: 'gui'
+        "R": "code",
+        "Python": "code",
+        "Stata": "code",
+        "SPSS": "gui",
+        "PSPP": "gui",
+        "Jamovi": "gui"
       };
-      var itemsSource = document.getElementById('items-source');
-      var items = Array.prototype.slice.call(itemsSource.querySelectorAll('.dnd-item'));
-      var bins = Array.prototype.slice.call(document.querySelectorAll('.bin'));
-      var feedback = document.getElementById('feedback');
-      var resetBtn = document.getElementById('reset-btn');
+
       var dragged = null;
 
-      items.forEach(function(item) {
-        item.addEventListener('dragstart', function(e) {
+      items.forEach(function (item) {
+        item.addEventListener("dragstart", function (e) {
           dragged = item;
-          item.classList.add('dragging');
-          e.dataTransfer.effectAllowed = 'move';
+          item.classList.add("dragging");
+          e.dataTransfer.effectAllowed = "move";
         });
-        item.addEventListener('dragend', function() {
-          item.classList.remove('dragging');
+
+        item.addEventListener("dragend", function () {
+          item.classList.remove("dragging");
           dragged = null;
         });
       });
 
-      bins.forEach(function(bin) {
-        bin.addEventListener('dragover', function(e) {
+      bins.forEach(function (bin) {
+        bin.addEventListener("dragover", function (e) {
           e.preventDefault();
-          bin.classList.add('drag-over');
+          bin.classList.add("drag-over");
         });
-        bin.addEventListener('dragleave', function() {
-          bin.classList.remove('drag-over');
+
+        bin.addEventListener("dragleave", function () {
+          bin.classList.remove("drag-over");
         });
-        bin.addEventListener('drop', function(e) {
+
+        bin.addEventListener("drop", function (e) {
           e.preventDefault();
-          bin.classList.remove('drag-over');
+          bin.classList.remove("drag-over");
           if (dragged && !bin.contains(dragged)) {
             bin.appendChild(dragged);
-            check();
+            checkStatus();
           }
         });
       });
 
-      function check() {
-        var count = 0;
-        bins.forEach(function(bin) {
-          var cat = bin.getAttribute('data-category');
-          var children = Array.prototype.slice.call(bin.querySelectorAll('.dnd-item'));
-          children.forEach(function(ch) {
-            if (correct[ch.getAttribute('data-software')] === cat) count++;
+      function checkStatus() {
+        var correctCount = 0;
+        var total = items.length;
+
+        bins.forEach(function (bin) {
+          var category = bin.getAttribute("data-category");
+          var children = bin.querySelectorAll(".item");
+          children.forEach(function (child) {
+            var software = child.getAttribute("data-software");
+            if (correct[software] === category) {
+              correctCount += 1;
+            }
           });
         });
-        if (count === items.length) {
-          feedback.textContent = 'Clasificación correcta, ha ubicado todos los softwares en la categoría predominante adecuada.';
-          feedback.className = 'feedback ok';
+
+        if (correctCount === total) {
+          feedback.textContent = "Excelente, ha clasificado correctamente todos los softwares.";
+          feedback.className = "feedback ok";
         } else {
-          feedback.textContent = 'Aún hay elementos por revisar. Verifique en qué categoría suele utilizarse cada software.';
-          feedback.className = 'feedback error';
+          feedback.textContent = "Hay elementos por revisar. Intente ajustar su clasificación.";
+          feedback.className = "feedback error";
         }
       }
 
-      resetBtn.addEventListener('click', function() {
-        items.forEach(function(it) { itemsSource.appendChild(it); });
-        feedback.textContent = '';
-        feedback.className = 'feedback';
+      resetBtn.addEventListener("click", function () {
+        items.forEach(function (item) {
+          container.appendChild(item);
+        });
+        feedback.textContent = "";
+        feedback.className = "feedback";
       });
     })();
   </script>
