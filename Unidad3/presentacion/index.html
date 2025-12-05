@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOMINANDO STATA - Presentación completa</title>
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Contenedor genérico de diapositivas */
+        .slide {
+            width: 100%;
+            max-width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, rgba(26, 95, 122, 0.05), rgba(22, 79, 107, 0.1));
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            margin: 20px auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+
+        /* Diapositiva de portada */
+        .slide-cover {
+            background: linear-gradient(135deg, rgba(26, 95, 122, 0.85), rgba(22, 79, 107, 0.85)),
+                        url('https://sfile.chatglm.cn/images-ppt/aabd1b6edc9e.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-cover .content {
+            text-align: center;
+            z-index: 2;
+            max-width: 80%;
+        }
+
+        .slide-cover .title {
+            font-size: 68px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .slide-cover .subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .slide-cover .logo-container {
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+
+        .slide-cover .logo {
+            max-height: 120px;
+            object-fit: contain;
+        }
+
+        .slide-cover .info {
+            position: absolute;
+            bottom: 40px;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        /* Cabecera estándar para el resto de las diapositivas */
+        .header {
+            padding: 40px 70px 20px;
+            background-color: #1a5f7a;
+            color: white;
+        }
+
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Contenido genérico */
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px 50px;
+        }
+
+        /* Úsalo cuando se requieran dos columnas (izquierda/derecha) */
+        .content-row {
+            flex-direction: row;
+        }
+
+        .left-content {
+            flex: 1;
+            padding-right: 30px;
+        }
+
+        .right-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Diapositiva: ¿Qué es Stata? */
+        .intro-text {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            color: #1a5f7a;
+            font-size: 28px;
+        }
+
+        .feature-text {
+            font-size: 20px;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #1a5f7a;
+            margin-bottom: 5px;
+        }
+
+        .highlight-box {
+            background-color: rgba(26, 95, 122, 0.1);
+            border-left: 5px solid #1a5f7a;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+
+        .highlight-title {
+            font-weight: 600;
+            font-size: 22px;
+            color: #1a5f7a;
+            margin-bottom: 10px;
+        }
+
+        .highlight-text {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            max-height: 120px;
+            object-fit: contain;
+        }
+
+        /* Diapositiva: Guía de instalación */
+        .requirements {
+            background-color: rgba(26, 95, 122, 0.1);
+            border-left: 5px solid #1a5f7a;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+
+        .requirements-title {
+            font-weight: 600;
+            font-size: 22px;
+            color: #1a5f7a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .requirements-title .material-icons {
+            margin-right: 10px;
+        }
+
+        .requirements-list {
+            font-size: 20px;
+            line-height: 1.5;
+            padding-left: 20px;
+        }
+
+        .requirements-list li {
+            margin-bottom: 5px;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .step-number {
+            background-color: #1a5f7a;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            font-size: 20px;
+            line-height: 1.4;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #1a5f7a;
+        }
+
+        .tip-box {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tip-box .material-icons {
+            color: #ffc107;
+            flex-shrink: 0;
+        }
+
+        .tip-text {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .installation-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Diapositiva: Interfaz */
+        .interface-intro {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .windows-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .window-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .window-icon {
+            color: #1a5f7a;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .window-content {
+            flex-grow: 1;
+        }
+
+        .window-name {
+            font-weight: 600;
+            font-size: 20px;
+            color: #1a5f7a;
+            margin-bottom: 5px;
+        }
+
+        .window-desc {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .interface-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .tip-box-blue {
+            background-color: rgba(26, 95, 122, 0.1);
+            border-left: 5px solid #1a5f7a;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tip-box-blue .material-icons {
+            color: #1a5f7a;
+            flex-shrink: 0;
+        }
+
+        .tip-box-blue .tip-text {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        /* Diapositiva: Do-files */
+        .alert-box {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .alert-box .material-icons {
+            color: #ffc107;
+            flex-shrink: 0;
+            font-size: 24px;
+        }
+
+        .alert-text {
+            font-size: 20px;
+            line-height: 1.4;
+        }
+
+        .alert-text strong {
+            color: #1a5f7a;
+        }
+
+        .section-block {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a5f7a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title .material-icons {
+            margin-right: 10px;
+            color: #1a5f7a;
+        }
+
+        .section-text {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        .practices-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .practice-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .practice-item .material-icons {
+            color: #1a5f7a;
+            flex-shrink: 0;
+        }
+
+        .practice-text {
+            font-size: 20px;
+            line-height: 1.4;
+        }
+
+        .code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            overflow-x: auto;
+            border-left: 5px solid #4caf50;
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .code-comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
+        .code-command {
+            color: #569cd6;
+            font-weight: bold;
+        }
+
+        .dofile-image {
+            max-width: 100%;
+            max-height: 320px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .tip-box-do {
+            background-color: rgba(26, 95, 122, 0.1);
+            border-left: 5px solid #1a5f7a;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tip-box-do .material-icons {
+            color: #1a5f7a;
+            flex-shrink: 0;
+        }
+
+        .tip-box-do .tip-text {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        /* Diapositiva: Comandos básicos */
+        .intro {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .commands-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            flex-grow: 1;
+        }
+
+        .command-section {
+            flex: 1;
+            min-width: 350px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        .section-icon {
+            color: #1a5f7a;
+            font-size: 28px;
+        }
+
+        .section-header-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a5f7a;
+        }
+
+        .command-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-grow: 1;
+        }
+
+        .command-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .command-name {
+            font-weight: 600;
+            font-size: 20px;
+            color: #1a5f7a;
+        }
+
+        .command-desc {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .code-example {
+            background-color: #f0f0f0;
+            border-left: 3px solid #1a5f7a;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .tip-box-commands {
+            background-color: rgba(26, 95, 122, 0.1);
+            border-left: 5px solid #1a5f7a;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tip-box-commands .material-icons {
+            color: #1a5f7a;
+            flex-shrink: 0;
+        }
+
+        .tip-box-commands .tip-text {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        /* Diapositiva: Manipulación y visualización */
+        .sections-container {
+            display: flex;
+            gap: 30px;
+            flex-grow: 1;
+            flex-wrap: wrap;
+        }
+
+        .section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 25px;
+            min-width: 350px;
+        }
+
+        .section-header-main {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+        }
+
+        .section-header-main .section-icon {
+            font-size: 32px;
+        }
+
+        .section-title-main {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a5f7a;
+        }
+
+        .subsection {
+            margin-bottom: 20px;
+        }
+
+        .subsection-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a5f7a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subsection-title .material-icons {
+            font-size: 20px;
+            color: #1a5f7a;
+        }
+
+        .graphic-item {
+            flex: 1 1 calc(50% - 8px);
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .graphics-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .graphic-name {
+            font-weight: 600;
+            font-size: 18px;
+            color: #1a5f7a;
+        }
+
+        .graphic-desc {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .graphic-code {
+            background-color: #f0f0f0;
+            border-left: 3px solid #1a5f7a;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+        }
+
+        .graphic-example {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .tip-box-visual {
+            background-color: rgba(26, 95, 122, 0.1);
+            border-left: 5px solid #1a5f7a;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tip-box-visual .material-icons {
+            color: #1a5f7a;
+            flex-shrink: 0;
+        }
+
+        .tip-box-visual .tip-text {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* Diapositiva: Nivel experto */
+        .methods-container {
+            display: flex;
+            gap: 30px;
+            flex-grow: 1;
+            flex-wrap: wrap;
+        }
+
+        .method-card {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            min-width: 350px;
+        }
+
+        .method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+        }
+
+        .method-icon {
+            color: #1a5f7a;
+            font-size: 32px;
+        }
+
+        .method-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a5f7a;
+        }
+
+        .method-desc {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #1a5f7a;
+            font-weight: 600;
+        }
+
+        .code-example-merge {
+            background-color: #f0f0f0;
+            border-left: 3px solid #1a5f7a;
+            padding: 12px 15px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 18px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .tip-box-merge {
+            background-color: rgba(26, 95, 122, 0.1);
+            border-left: 5px solid #1a5f7a;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tip-box-merge .material-icons {
+            color: #1a5f7a;
+            flex-shrink: 0;
+        }
+
+        .tip-box-merge .tip-text {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .key-points {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .key-point .material-icons {
+            color: #1a5f7a;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .key-point-text {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .merge-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .merge-type {
+            background-color: rgba(26, 95, 122, 0.1);
+            border: 1px solid rgba(26, 95, 122, 0.3);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a5f7a;
+        }
+
+        /* Separador visual opcional entre diapositivas */
+        .slide-separator {
+            height: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- DIAPOSITIVA 1: PORTADA -->
+    <section class="slide slide-cover" id="slide1">
+        <div class="content">
+            <div class="logo-container">
+                <img src="https://sfile.chatglm.cn/images-ppt/70f36c192f6a.png" alt="Stata Logo" class="logo">
+            </div>
+            <h1 class="title">DOMINANDO STATA</h1>
+            <p class="subtitle">Tu guía completa para el análisis de datos, desde la instalación hasta la visualización</p>
+        </div>
+        <div class="info">
+            Software estadístico para profesionales y estudiantes
+        </div>
+    </section>
+
+    <div class="slide-separator"></div>
+
+    <!-- DIAPOSITIVA 2: ¿Qué es Stata? -->
+    <section class="slide" id="slide2">
+        <div class="header">
+            <h1 class="title">¿Qué es Stata?</h1>
+        </div>
+        <div class="content content-row">
+            <div class="left-content">
+                <p class="intro-text">
+                    Software estadístico integral desarrollado por StataCorp desde 1985, fundamental para análisis de datos en ciencias sociales, economía, bioestadística y epidemiología.
+                </p>
+
+                <div class="features">
+                    <div class="feature-item">
+                        <i class="material-icons feature-icon">storage</i>
+                        <div class="feature-text">
+                            <div class="feature-title">Manejo de grandes bases de datos</div>
+                            Procesa eficientemente miles de observaciones y variables
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="material-icons feature-icon">analytics</i>
+                        <div class="feature-text">
+                            <div class="feature-title">Análisis complejos</div>
+                            Desde pruebas t hasta regresiones multivariadas
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="material-icons feature-icon">bar_chart</i>
+                        <div class="feature-text">
+                            <div class="feature-title">Gráficos profesionales</div>
+                            Visualizaciones de alta calidad para publicaciones
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="highlight-title">Ciclo completo de datos</div>
+                    <p class="highlight-text">Stata cubre todo el proceso: gestión, análisis y visualización de datos</p>
+                </div>
+            </div>
+
+            <div class="right-content">
+                <div class="logo-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/cf7d315a39b1.png" alt="Stata Logo" class="logo">
+                </div>
+                <img src="https://sfile.chatglm.cn/images-ppt/17b139a9dd3c.svg"
+                     alt="Ejemplo de gráfico Stata"
+                     style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </section>
+
+    <div class="slide-separator"></div>
+
+    <!-- DIAPOSITIVA 3: Guía de instalación -->
+    <section class="slide" id="slide3">
+        <div class="header">
+            <h1 class="title">Guía de Instalación</h1>
+        </div>
+        <div class="content content-row">
+            <div class="left-content">
+                <div class="requirements">
+                    <div class="requirements-title">
+                        <i class="material-icons">computer</i>
+                        Requisitos mínimos
+                    </div>
+                    <ul class="requirements-list">
+                        <li>Windows 10 u 11</li>
+                        <li>Al menos 4 GB de memoria (versión MP)</li>
+                        <li>Conexión a internet</li>
+                    </ul>
+                </div>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <span class="step-title">Descarga:</span>
+                            Accede al archivo de instalación mediante el link oficial proporcionado con tu licencia
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <span class="step-title">Ejecución:</span>
+                            Ubica el archivo descargado, haz clic derecho y selecciona "Ejecutar como administrador"
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <span class="step-title">Asistente:</span>
+                            Sigue las instrucciones del InstallShield Wizard, acepta el contrato de licencia
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <span class="step-title">Información:</span>
+                            Ingresa tu nombre, organización y selecciona "Anyone who uses this computer"
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <span class="step-title">Edición:</span>
+                            Elige la versión que adquiriste (Stata/MP, Stata/SE o Stata/BE)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <span class="step-title">Ubicación:</span>
+                            Deja la carpeta de destino por defecto (generalmente en el disco C)
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">7</div>
+                        <div class="step-content">
+                            <span class="step-title">Activación:</span>
+                            Al abrir el software por primera vez, activa la licencia con tu Serial number, Code y Authorization
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <i class="material-icons">lightbulb</i>
+                    <div class="tip-text">
+                        Ten a mano tu información de licencia antes de iniciar la instalación
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-content">
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/73014736bf9b.png"
+                         alt="Interfaz de instalación de Stata"
+                         class="installation-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="slide-separator"></div>
+
+    <!-- DIAPOSITIVA 4: Interfaz -->
+    <section class="slide" id="slide4">
+        <div class="header">
+            <h1 class="title">La Interfaz: Tu Cabina de Mando</h1>
+        </div>
+        <div class="content content-row">
+            <div class="left-content" style="display:flex; flex-direction:column; justify-content:space-between;">
+                <div>
+                    <p class="interface-intro">
+                        Al abrir Stata, verás una interfaz dividida en varias ventanas clave. Entenderlas es vital para no perderse:
+                    </p>
+
+                    <div class="windows-container">
+                        <div class="window-item">
+                            <i class="material-icons window-icon">desktop_windows</i>
+                            <div class="window-content">
+                                <div class="window-name">Results (Centro)</div>
+                                <div class="window-desc">Aquí aparecen los resultados de tus análisis, tablas, errores y mensajes del sistema</div>
+                            </div>
+                        </div>
+
+                        <div class="window-item">
+                            <i class="material-icons window-icon">keyboard</i>
+                            <div class="window-content">
+                                <div class="window-name">Command (Abajo)</div>
+                                <div class="window-desc">La barra donde escribes órdenes directas. Al presionar Enter, se ejecutan</div>
+                            </div>
+                        </div>
+
+                        <div class="window-item">
+                            <i class="material-icons window-icon">history</i>
+                            <div class="window-content">
+                                <div class="window-name">History / Review (Izquierda)</div>
+                                <div class="window-desc">Muestra el historial de todos los comandos que has ejecutado</div>
+                            </div>
+                        </div>
+
+                        <div class="window-item">
+                            <i class="material-icons window-icon">data_object</i>
+                            <div class="window-content">
+                                <div class="window-name">Variables (Arriba derecha)</div>
+                                <div class="window-desc">Lista todas las variables cargadas en tu base de datos actual</div>
+                            </div>
+                        </div>
+
+                        <div class="window-item">
+                            <i class="material-icons window-icon">settings</i>
+                            <div class="window-content">
+                                <div class="window-name">Properties (Abajo derecha)</div>
+                                <div class="window-desc">Muestra detalles de la variable seleccionada o de la base de datos en general</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box-blue">
+                    <i class="material-icons">lightbulb</i>
+                    <div class="tip-text">
+                        Puedes hacer clic en cualquier comando del historial para ejecutarlo nuevamente
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-content">
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/7aeaed136327.png"
+                         alt="Interfaz de Stata"
+                         class="interface-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="slide-separator"></div>
+
+    <!-- DIAPOSITIVA 5: Do-files -->
+    <section class="slide" id="slide5">
+        <div class="header">
+            <h1 class="title">¡El Secreto del Éxito! Trabaja con Do-files</h1>
+        </div>
+        <div class="content content-row">
+            <div class="left-content" style="display:flex; flex-direction:column;">
+                <div class="alert-box">
+                    <i class="material-icons">warning</i>
+                    <div class="alert-text">
+                        <strong>Regla de Oro:</strong> Aunque puedes escribir comandos directamente en la ventana principal,
+                        <strong>siempre debes trabajar en un Do-file</strong> para proyectos serios
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="section-title">
+                        <i class="material-icons">description</i>
+                        ¿Qué es un Do-file?
+                    </div>
+                    <div class="section-text">
+                        Archivo de texto simple (extensión .do) que guarda todas tus instrucciones. Te permite corregir errores,
+                        guardar tu trabajo y reproducir el análisis en el futuro
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="section-title">
+                        <i class="material-icons">lightbulb</i>
+                        Buenas Prácticas
+                    </div>
+                    <div class="practices-list">
+                        <div class="practice-item">
+                            <i class="material-icons">comment</i>
+                            <div class="practice-text">
+                                <strong>Comenta tu código:</strong> Usa asteriscos (*) al inicio de una línea o /* */ para bloques
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <i class="material-icons">folder</i>
+                            <div class="practice-text">
+                                <strong>Organización:</strong> Usa un encabezado para describir qué hace el archivo
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <i class="material-icons">cleaning_services</i>
+                            <div class="practice-text">
+                                <strong>Limpieza:</strong> Limpia la memoria al inicio con clear all
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <span class="code-comment">* Ejemplo de estructura de un Do-file</span><br>
+                    <span class="code-command">clear all</span> <span class="code-comment">// Limpia la memoria</span><br>
+                    <span class="code-command">cd</span> "C:\MisDocumentos\ProyectoStata" <span class="code-comment">// Define carpeta de trabajo</span><br>
+                    <br>
+                    <span class="code-comment">/* Importar datos */</span><br>
+                    <span class="code-command">sysuse</span> auto, <span class="code-command">clear</span> <span class="code-comment">// Carga una base de ejemplo</span><br>
+                    <br>
+                    <span class="code-comment">* Análisis descriptivo</span><br>
+                    <span class="code-command">summarize</span> price mpg
+                </div>
+            </div>
+
+            <div class="right-content" style="justify-content:space-between;">
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/8bbaf7c69a60.png"
+                         alt="Editor de Do-files de Stata"
+                         class="dofile-image">
+                </div>
+
+                <div class="tip-box-do">
+                    <i class="material-icons">tips_and_updates</i>
+                    <div class="tip-text">
+                        Los Do-files son tu mejor amigo, guardan tu trabajo, permiten reproducir análisis y facilitan la colaboración con otros investigadores
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="slide-separator"></div>
+
+    <!-- DIAPOSITIVA 6: Comandos básicos -->
+    <section class="slide" id="slide6">
+        <div class="header">
+            <h1 class="title">Comandos Básicos de Exploración</h1>
+        </div>
+        <div class="content">
+            <p class="intro">
+                Antes de analizar, necesitas conocer tus datos. Aquí tienes los comandos esenciales que debes memorizar:
+            </p>
+
+            <div class="commands-container">
+                <div class="command-section">
+                    <div class="section-header">
+                        <i class="material-icons section-icon">folder_open</i>
+                        <div class="section-header-title">Cargar y Ver Datos</div>
+                    </div>
+                    <div class="command-list">
+                        <div class="command-item">
+                            <div class="command-name">browse</div>
+                            <div class="command-desc">Abre una ventana tipo hoja de cálculo para ver los datos (solo lectura)</div>
+                            <div class="code-example">browse</div>
+                        </div>
+                        <div class="command-item">
+                            <div class="command-name">edit</div>
+                            <div class="command-desc">Similar a browse, pero permite modificar datos manualmente</div>
+                            <div class="code-example">edit</div>
+                        </div>
+                        <div class="command-item">
+                            <div class="command-name">list</div>
+                            <div class="command-desc">Muestra observaciones específicas en la ventana de resultados</div>
+                            <div class="code-example">list in 1/10</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="command-section">
+                    <div class="section-header">
+                        <i class="material-icons section-icon">description</i>
+                        <div class="section-header-title">Describir Datos</div>
+                    </div>
+                    <div class="command-list">
+                        <div class="command-item">
+                            <div class="command-name">describe</div>
+                            <div class="command-desc">Muestra la estructura de la base, observaciones, variables y tipos</div>
+                            <div class="code-example">describe</div>
+                        </div>
+                        <div class="command-item">
+                            <div class="command-name">codebook</div>
+                            <div class="command-desc">Diccionario de datos con detalles profundos de cada variable</div>
+                            <div class="code-example">codebook variable</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="command-section">
+                    <div class="section-header">
+                        <i class="material-icons section-icon">calculate</i>
+                        <div class="section-header-title">Estadísticos Resumen</div>
+                    </div>
+                    <div class="command-list">
+                        <div class="command-item">
+                            <div class="command-name">summarize</div>
+                            <div class="command-desc">Reporta observaciones, media, desviación estándar, mínimo y máximo</div>
+                            <div class="code-example">summarize variable, detail</div>
+                        </div>
+                        <div class="command-item">
+                            <div class="command-name">tabulate</div>
+                            <div class="command-desc">Crea tablas de frecuencia para variables categóricas</div>
+                            <div class="code-example">tabulate variable</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box-commands">
+                <i class="material-icons">lightbulb</i>
+                <div class="tip-text">
+                    Usa <strong>summarize variable, detail</strong> para ver percentiles y curtosis
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="slide-separator"></div>
+
+    <!-- DIAPOSITIVA 7: Manipulación y visualización -->
+    <section class="slide" id="slide7">
+        <div class="header">
+            <h1 class="title">Manipulación y Visualización de Datos</h1>
+        </div>
+        <div class="content">
+            <div class="sections-container">
+                <div class="section">
+                    <div class="section-header-main">
+                        <i class="material-icons section-icon">edit</i>
+                        <div class="section-title-main">Manipulación de Datos</div>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">
+                            <i class="material-icons">add_circle</i>
+                            Crear y Modificar Variables
+                        </div>
+                        <div class="command-list">
+                            <div class="command-item">
+                                <div class="command-name">generate</div>
+                                <div class="command-desc">Crea una variable nueva</div>
+                                <div class="code-example">generate edad2 = edad^2</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">replace</div>
+                                <div class="command-desc">Modifica una variable existente</div>
+                                <div class="code-example">replace edad = 25 if id_persona == 104</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">
+                            <i class="material-icons">label</i>
+                            Etiquetas (Labels)
+                        </div>
+                        <div class="command-item">
+                            <div class="command-desc">Esencial para entender códigos numéricos</div>
+                            <div class="code-example">
+                                label define sexo_lbl 1 "Hombre" 2 "Mujer"<br>
+                                label values sexo sexo_lbl
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">
+                            <i class="material-icons">cleaning_services</i>
+                            Limpieza
+                        </div>
+                        <div class="command-list">
+                            <div class="command-item">
+                                <div class="command-name">drop</div>
+                                <div class="command-desc">Elimina variables u observaciones</div>
+                                <div class="code-example">
+                                    drop variable<br>
+                                    drop if edad &lt; 18
+                                </div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">destring</div>
+                                <div class="command-desc">Convierte texto a números</div>
+                                <div class="code-example">destring variable, replace</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header-main">
+                        <i class="material-icons section-icon">bar_chart</i>
+                        <div class="section-title-main">Visualización de Datos</div>
+                    </div>
+
+                    <div class="graphics-container">
+                        <div class="graphic-item">
+                            <div class="graphic-name">Histograma</div>
+                            <div class="graphic-desc">Muestra la distribución de una variable numérica</div>
+                            <div class="graphic-code">histogram edad, frequency</div>
+                            <img src="https://sfile.chatglm.cn/images-ppt/322bf55da012.svg"
+                                 alt="Ejemplo de histograma"
+                                 class="graphic-example">
+                        </div>
+
+                        <div class="graphic-item">
+                            <div class="graphic-name">Diagrama de Caja</div>
+                            <div class="graphic-desc">Ideal para ver dispersión y valores atípicos</div>
+                            <div class="graphic-code">graph box peso, over(sexo)</div>
+                            <img src="https://sfile.chatglm.cn/images-ppt/9eb38648e593.svg"
+                                 alt="Ejemplo de diagrama de caja"
+                                 class="graphic-example">
+                        </div>
+
+                        <div class="graphic-item">
+                            <div class="graphic-name">Gráfico de Barras</div>
+                            <div class="graphic-desc">Para comparar categorías</div>
+                            <div class="graphic-code">graph bar (mean) ingresos, over(educacion)</div>
+                            <img src="https://sfile.chatglm.cn/images-ppt/79d1d1b22f72.svg"
+                                 alt="Ejemplo de gráfico de barras"
+                                 class="graphic-example">
+                        </div>
+
+                        <div class="graphic-item">
+                            <div class="graphic-name">Gráfico de Sectores</div>
+                            <div class="graphic-desc">Para mostrar proporciones</div>
+                            <div class="graphic-code">graph pie, over(nacionalidad)</div>
+                            <img src="https://sfile.chatglm.cn/images-ppt/d95380c4af34.svg"
+                                 alt="Ejemplo de gráfico de sectores"
+                                 class="graphic-example">
+                        </div>
+                    </div>
+
+                    <div class="tip-box-visual">
+                        <i class="material-icons">tips_and_updates</i>
+                        <div class="tip-text">
+                            Usa el editor de gráficos de la interfaz para ajustar colores y títulos manualmente, luego copia el comando que Stata genera
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="slide-separator"></div>
+
+    <!-- DIAPOSITIVA 8: Nivel experto -->
+    <section class="slide" id="slide8">
+        <div class="header">
+            <h1 class="title">Nivel Experto: Unir Bases de Datos</h1>
+        </div>
+        <div class="content">
+            <p class="intro">
+                A veces tus datos están en dos archivos separados. ¿Cómo los unes?
+            </p>
+
+            <div class="methods-container">
+                <div class="method-card">
+                    <div class="method-header">
+                        <i class="material-icons method-icon">vertical_align_bottom</i>
+                        <div class="method-title">Append (Agregar Filas)</div>
+                    </div>
+                    <p class="method-desc">
+                        Úsalo cuando tienes las <span class="highlight">mismas variables</span> pero
+                        <span class="highlight">nuevas observaciones</span> (ej. datos de enero y datos de febrero)
+                    </p>
+
+                    <div class="code-example-merge">
+                        use datos_enero.dta, clear<br>
+                        append using datos_febrero.dta
+                    </div>
+
+                    <div class="key-points">
+                        <div class="key-point">
+                            <i class="material-icons">check_circle</i>
+                            <div class="key-point-text">Pone una base "debajo" de la otra</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">check_circle</i>
+                            <div class="key-point-text">Ideal para agregar datos temporales</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <i class="material-icons method-icon">merge_type</i>
+                        <div class="method-title">Merge (Agregar Columnas)</div>
+                    </div>
+                    <p class="method-desc">
+                        Úsalo cuando tienes los <span class="highlight">mismos sujetos</span> (identificados por una variable llave o ID)
+                        pero quieres agregar <span class="highlight">nuevas variables</span>
+                    </p>
+
+                    <div class="code-example-merge">
+                        use datos_demograficos.dta, clear<br>
+                        merge 1:1 id_estudiante using datos_notas.dta
+                    </div>
+
+                    <div class="key-points">
+                        <div class="key-point">
+                            <i class="material-icons">info</i>
+                            <div class="key-point-text">Define la relación (1:1, 1:m, m:1)</div>
+                        </div>
+                        <div class="merge-types">
+                            <div class="merge-type">1:1</div>
+                            <div class="merge-type">1:m</div>
+                            <div class="merge-type">m:1</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">check_circle</i>
+                            <div class="key-point-text">Stata crea la variable _merge que indica si el cruce fue exitoso</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box-merge">
+                <i class="material-icons">lightbulb</i>
+                <div class="tip-text">
+                    Después de unir bases, siempre verifica la variable <strong>_merge</strong> para asegurar que todos los datos se combinaron correctamente
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
