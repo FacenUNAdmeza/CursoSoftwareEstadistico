@@ -1,57 +1,220 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>Unidad 4 · Material de lectura</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f4f7fa;
-      color: #222;
-      line-height: 1.7;
-    }
-    header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 1rem 1.5rem;
-    }
-    header h1 {
-      font-size: 1.4rem;
-      margin-bottom: 0.2rem;
-    }
-    header a {
-      color: #ecf0f1;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    header a:hover { text-decoration: underline; }
-    main {
-      max-width: 800px;
-      margin: 2rem auto 3rem auto;
-      padding: 0 1.5rem;
-    }
-    h2 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-      color: #2980b9;
-    }
-    p { margin-bottom: 0.9rem; text-align: justify; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a R: Guía para Estudiantes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #16a085;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        code {
+            background-color: #e8e8e8;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #c7254e;
+        }
+        pre {
+            background-color: #2d3436;
+            color: #dfe6e9;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        .note {
+            background-color: #e8f6f3;
+            border-left: 5px solid #1abc9c;
+            padding: 10px;
+            margin: 20px 0;
+        }
+        .citation {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            vertical-align: super;
+        }
+        footer {
+            margin-top: 50px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Unidad 4 · Material de lectura</h1>
-    <a href="../../index.html">← Volver al inicio del curso</a>
-  </header>
-  <main>
-    <h2>Contenido en preparación</h2>
+
+    <h1>Introducción a R: Guía Básica para Estudiantes</h1>
+
+    <p>Bienvenidos a esta guía introductoria. Aquí aprenderán qué es R, cómo funciona y cómo dar sus primeros pasos en el análisis de datos.</p>
+
+    <h2>1. ¿Qué es R?</h2>
     <p>
-      El material de lectura detallado para la Unidad 4 estará disponible próximamente.
-      Esta página se actualizará con los contenidos teóricos, ejemplos y referencias bibliográficas
-      correspondientes.
+        R es un entorno y lenguaje de programación diseñado para el análisis estadístico y la creación de gráficos. Es una herramienta poderosa que permite manipular datos, realizar cálculos y generar visualizaciones de alta calidad,.
     </p>
-  </main>
+    <p>
+        A diferencia de programas como Excel o SPSS donde se usan muchos menús, R funciona principalmente a través de una <strong>línea de comandos</strong>, lo que le da una gran flexibilidad y potencia. R permite realizar un análisis estadístico en una serie de pasos, guardando resultados intermedios en "objetos" para ser usados posteriormente.
+    </p>
+
+    <h2>2. ¿Qué significa "Open Source" (Código Abierto)?</h2>
+    <p>
+        R es una implementación <em>open source</em> del lenguaje S. Esto implica varias ventajas clave para estudiantes y profesionales:
+    </p>
+    <ul>
+        <li><strong>Es gratuito:</strong> A diferencia de otros softwares comerciales como S-Plus o SPSS, R se puede descargar y usar sin costo alguno.</li>
+        <li><strong>Comunidad activa:</strong> Existe una comunidad global de desarrolladores y usuarios que constantemente mejoran el programa y crean nuevas herramientas (paquetes) para ampliar sus capacidades.</li>
+        <li><strong>Transparencia:</strong> Al ser de código abierto, se puede examinar cómo están hechos los análisis.</li>
+    </ul>
+
+    <h2>3. Instalación: R y RStudio</h2>
+    <p>
+        Para trabajar cómodamente, necesitamos instalar dos cosas: el "motor" (R) y la "interfaz" (RStudio). RStudio es una máscara visual que hace que usar R sea más fácil, ordenado y fluido.
+    </p>
+
+    <h3>Paso 1: Instalar R</h3>
+    <p>
+        Debes descargar el paquete base desde CRAN (Comprehensive R Archive Network).
+    </p>
+    <ul>
+        <li><strong>Windows:</strong> Navega a <a href="http://cran.r-project.org/bin/windows/base/">cran.r-project.org/bin/windows/base/</a> y descarga el ejecutable.</li>
+        <li><strong>Mac:</strong> Navega a <a href="http://cran.r-project.org/bin/macosx/">cran.r-project.org/bin/macosx/</a> y descarga el paquete correspondiente.</li>
+        <li><strong>Linux (Ubuntu):</strong> Se suele instalar mediante la terminal usando el comando <code>sudo apt-get install r-base</code>.</li>
+    </ul>
+
+    <h3>Paso 2: Instalar RStudio</h3>
+    <p>
+        Una vez instalado R, descarga RStudio desde su sitio oficial. RStudio te permitirá ver tus scripts, gráficos y objetos al mismo tiempo en diferentes ventanas,.
+    </p>
+
+    <h2>4. Comandos Básicos y Sintaxis</h2>
+    <p>
+        R distingue entre mayúsculas y minúsculas (es <em>case-sensitive</em>), por lo que <code>Variable</code> y <code>variable</code> serían objetos distintos,.
+    </p>
+
+    <h3>Asignación de variables</h3>
+    <p>
+        Para guardar un valor en un objeto (variable), usamos el símbolo <code>&lt;-</code> (una flecha apuntando a la izquierda).
+    </p>
+<pre>
+x <- 10        # Guarda el número 10 en el objeto 'x'
+y <- 5         # Guarda el número 5 en el objeto 'y'
+nombre <- "Ana" # Guarda texto (siempre entre comillas)
+</pre>
+
+    <h3>Vectores</h3>
+    <p>
+        La estructura de datos más básica es el vector. Para crear uno con varios valores, usamos la función <code>c()</code> (concatenar),.
+    </p>
+<pre>
+edades <- c(15, 12, 27, 55)  # Crea un vector numérico
+nombres <- c("Juan", "Pedro") # Crea un vector de caracteres
+</pre>
+
+    <h3>Operaciones Matemáticas</h3>
+    <p>
+        Puedes usar R como una calculadora,:
+    </p>
+<pre>
+suma <- 5 + 5
+multiplicacion <- 10 * 2
+raiz <- sqrt(16)  # Raíz cuadrada
+</pre>
+
+    <h3>Ayuda</h3>
+    <p>
+        Si no sabes qué hace una función, usa el signo de interrogación antes del nombre del comando,.
+    </p>
+<pre>
+?mean   # Muestra la ayuda para la función de promedio (media)
+</pre>
+
+    <h2>5. Ejemplo Introductorio: Cargando y Leyendo Datos</h2>
+    <p>
+        A continuación, veremos un ejemplo sencillo de cómo cargar datos que ya vienen en R y cómo leer un archivo externo.
+    </p>
+
+    <h3>A. Usando datos internos (Dataset Iris)</h3>
+    <p>
+        R incluye conjuntos de datos de prueba. Uno muy famoso es <code>iris</code>, que contiene medidas de flores.
+    </p>
+<pre>
+# 1. Cargar los datos en el entorno
+data(iris)
+
+# 2. Ver los nombres de las variables (columnas)
+names(iris) 
+# Resultado: "Sepal.Length" "Sepal.Width" "Petal.Length" "Petal.Width" "Species"
+
+# 3. Ver un resumen estadístico rápido (mínimo, media, máximo)
+summary(iris)
+
+# 4. Ver las primeras filas de la tabla
+head(iris)
+</pre>
+
+    <h3>B. Creación y Lectura de una Tabla</h3>
+    <p>
+        Imagina que tienes datos de personas. Podemos crear una tabla pequeña (Data Frame) manualmente,.
+    </p>
+<pre>
+# Crear las variables (columnas)
+genero <- c("Hombre", "Mujer", "Mujer")
+edad <- c(24, 32, 28)
+
+# Crear la tabla (Data Frame) juntando las variables
+datos_personas <- data.frame(genero, edad)
+
+# Ver la tabla en pantalla
+print(datos_personas)
+</pre>
+
+    <h3>C. Leer datos desde un archivo</h3>
+    <p>
+        Si tienes un archivo de texto (por ejemplo, <code>datos.txt</code>) con encabezados, puedes cargarlo usando <code>read.table</code>. El resultado será un <em>data frame</em>,.
+    </p>
+<pre>
+# Leer una tabla desde un archivo
+# header=TRUE indica que la primera línea tiene los nombres de las columnas
+mi_tabla <- read.table("datos.txt", header = TRUE)
+</pre>
+
+    <div class="note">
+        <strong>Tip:</strong> Para acceder a una columna específica dentro de tu tabla, usa el símbolo de dólar <code>$</code>. Por ejemplo: <code>iris$Species</code> accede a la columna de especies del conjunto de datos iris,.
+    </div>
+
+    <footer>
+        <h2>Referencias Bibliográficas (APA)</h2>
+        <ul>
+            <li>Boccardo Bosoni, G., & Ruiz Bruzzone, F. (2018). <em>Capítulo 4 Uso básico de RStudio</em>. En RStudio para Estadística Descriptiva en Ciencias Sociales.</li>
+            <li>Bravo-Marquez, F. (2020). <em>Análisis Exploratorio de Datos en R</em>.</li>
+            <li>Ciencia de Datos para Ciencias Naturales. (s.f.). <em>Capítulo 2 Técnicas de Manipulación de Datos</em>.</li>
+            <li>Pérez Esteso, M. (s.f.). <em>Instalación de R y RStudio en Windows, GNU/Linux y Mac OS X</em>. Center for Open Middleware.</li>
+            <li>R Development Core Team. (2000). <em>Introducción a R: Notas sobre R: Un entorno de programación para Análisis de Datos y Gráficos</em>. Versión 1.0.1.</li>
+            <li>Solé, X., & Valls, J. (2004). <em>Curso de introducción a R</em>.</li>
+            <li>Wickham, H., & Grolemund, G. (s.f.). <em>15 Factores</em>. En R Para Ciencia de Datos.</li>
+        </ul>
+    </footer>
+
 </body>
 </html>
