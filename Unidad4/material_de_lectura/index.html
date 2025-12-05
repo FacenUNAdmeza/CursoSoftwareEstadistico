@@ -1,220 +1,1167 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introducción a R: Guía para Estudiantes</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #2980b9;
-            margin-top: 30px;
-        }
-        h3 {
-            color: #16a085;
-        }
-        p {
-            margin-bottom: 15px;
-        }
-        code {
-            background-color: #e8e8e8;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-family: 'Consolas', 'Courier New', monospace;
-            color: #c7254e;
-        }
-        pre {
-            background-color: #2d3436;
-            color: #dfe6e9;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-family: 'Consolas', 'Courier New', monospace;
-        }
-        .note {
-            background-color: #e8f6f3;
-            border-left: 5px solid #1abc9c;
-            padding: 10px;
-            margin: 20px 0;
-        }
-        .citation {
-            font-size: 0.8em;
-            color: #7f8c8d;
-            vertical-align: super;
-        }
-        footer {
-            margin-top: 50px;
-            border-top: 1px solid #ccc;
-            padding-top: 20px;
-            font-size: 0.9em;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <title>Ciencia de Datos: R, Python, Stata y SPSS - FACEN UNA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Curso de Ciencias de Datos con R, Python, Stata y SPSS para análisis estadístico avanzado y visualización de datos.">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       VARIABLES Y RESET
+    ========================================================================== */
+    :root {
+      --primary-color: #3b82f6;
+      --secondary-color: #8b5cf6;
+      --accent-color: #06b6d4;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --danger-color: #ef4444;
+      --r-color: #276dc3;
+      --python-color: #3776ab;
+      --stata-color: #1a5fb4;
+      --spss-color: #e6194b;
+      
+      --dark-1: #0f172a;
+      --dark-2: #1e293b;
+      --dark-3: #334155;
+      --light-1: #f8fafc;
+      --light-2: #e2e8f0;
+      --light-3: #cbd5e1;
+      
+      --card-bg: rgba(15, 23, 42, 0.7);
+      --card-bg-hover: rgba(30, 41, 59, 0.8);
+      --border-color: rgba(148, 163, 184, 0.1);
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.2);
+      --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.25);
+      
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--dark-1);
+      color: var(--light-1);
+      overflow-x: hidden;
+    }
+    
+    /* ==========================================================================
+       FONDO DE PARTÍCULAS
+    ========================================================================== */
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+    }
+    
+    #particles-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.7;
+    }
+    
+    /* Elementos decorativos flotantes */
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.15;
+      animation: float 20s infinite linear;
+    }
+    
+    .floating-shape:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: 10%;
+      left: 5%;
+      background: radial-gradient(circle, var(--r-color) 0%, transparent 70%);
+      animation-duration: 25s;
+    }
+    
+    .floating-shape:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      top: 70%;
+      left: 85%;
+      background: radial-gradient(circle, var(--python-color) 0%, transparent 70%);
+      animation-duration: 20s;
+      animation-direction: reverse;
+    }
+    
+    .floating-shape:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      top: 20%;
+      left: 90%;
+      background: radial-gradient(circle, var(--stata-color) 0%, transparent 70%);
+      animation-duration: 30s;
+    }
+    
+    .floating-shape:nth-child(4) {
+      width: 250px;
+      height: 250px;
+      top: 80%;
+      left: 10%;
+      background: radial-gradient(circle, var(--spss-color) 0%, transparent 70%);
+      animation-duration: 22s;
+      animation-direction: reverse;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(50px, -30px) rotate(90deg);
+      }
+      50% {
+        transform: translate(0, -60px) rotate(180deg);
+      }
+      75% {
+        transform: translate(-50px, -30px) rotate(270deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+    
+    /* ==========================================================================
+       CONTENIDO PRINCIPAL
+    ========================================================================== */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Header */
+    .header {
+      padding: 2.5rem 0 3rem;
+      text-align: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .logo-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      }
+      100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+      }
+    }
+    
+    .logo-text h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 10px rgba(59, 130, 246, 0.2);
+    }
+    
+    .course-subtitle {
+      font-size: 1.2rem;
+      color: var(--light-2);
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+    
+    .institution-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 0.75rem 1.5rem;
+      backdrop-filter: blur(10px);
+      margin: 0.5rem;
+      transition: var(--transition);
+    }
+    
+    .institution-badge:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .institution-badge i {
+      color: var(--accent-color);
+    }
+    
+    /* Tabs de Software */
+    .software-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0 3rem;
+      flex-wrap: wrap;
+    }
+    
+    .software-tab {
+      padding: 0.75rem 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      color: var(--light-2);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .software-tab:hover {
+      transform: translateY(-3px);
+    }
+    
+    .software-tab.active {
+      background: var(--card-bg-hover);
+      border-color: var(--primary-color);
+      color: var(--light-1);
+    }
+    
+    .software-tab.r.active {
+      border-color: var(--r-color);
+      box-shadow: 0 0 15px rgba(39, 109, 195, 0.3);
+    }
+    
+    .software-tab.python.active {
+      border-color: var(--python-color);
+      box-shadow: 0 0 15px rgba(55, 118, 171, 0.3);
+    }
+    
+    .software-tab.stata.active {
+      border-color: var(--stata-color);
+      box-shadow: 0 0 15px rgba(26, 95, 180, 0.3);
+    }
+    
+    .software-tab.spss.active {
+      border-color: var(--spss-color);
+      box-shadow: 0 0 15px rgba(230, 25, 75, 0.3);
+    }
+    
+    /* Stats Cards */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0 3.5rem;
+    }
+    
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    }
+    
+    .stat-card:hover {
+      background: var(--card-bg-hover);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .stat-card i {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .stat-card .number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(90deg, var(--light-1), var(--light-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .stat-card .label {
+      font-size: 0.9rem;
+      color: var(--light-3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Unidades */
+    .units-section {
+      margin-bottom: 4rem;
+    }
+    
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .section-title i {
+      color: var(--primary-color);
+    }
+    
+    /* Grid de unidades */
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .unit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .unit-card:hover {
+      background: var(--card-bg-hover);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .unit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    }
+    
+    .unit-card.r::before {
+      background: linear-gradient(to bottom, var(--r-color), #5b9bd5);
+    }
+    
+    .unit-card.python::before {
+      background: linear-gradient(to bottom, var(--python-color), #4b8bbe);
+    }
+    
+    .unit-card.stata::before {
+      background: linear-gradient(to bottom, var(--stata-color), #3a7bd5);
+    }
+    
+    .unit-card.spss::before {
+      background: linear-gradient(to bottom, var(--spss-color), #f47a7a);
+    }
+    
+    .unit-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    
+    .unit-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: white;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.25s ease;
+    }
+    
+    .unit-card.r .unit-number {
+      background: linear-gradient(135deg, var(--r-color), #5b9bd5);
+    }
+    
+    .unit-card.python .unit-number {
+      background: linear-gradient(135deg, var(--python-color), #4b8bbe);
+    }
+    
+    .unit-card.stata .unit-number {
+      background: linear-gradient(135deg, var(--stata-color), #3a7bd5);
+    }
+    
+    .unit-card.spss .unit-number {
+      background: linear-gradient(135deg, var(--spss-color), #f47a7a);
+    }
+    
+    .unit-type {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 20px;
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+    
+    .unit-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    
+    .unit-description {
+      color: var(--light-2);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .unit-software {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    
+    .software-tag {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.85rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      color: var(--light-2);
+      font-weight: 500;
+    }
+    
+    .unit-links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    
+    .unit-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--light-1);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+      justify-content: center;
+    }
+    
+    .unit-link:hover {
+      transform: translateY(-2px);
+    }
+    
+    .unit-link.lecture {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+    
+    .unit-link.lecture:hover {
+      background: rgba(16, 185, 129, 0.2);
+    }
+    
+    .unit-link.presentation {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+    
+    .unit-link.presentation:hover {
+      background: rgba(245, 158, 11, 0.2);
+    }
+    
+    .unit-link.video {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+    
+    .unit-link.video:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+    
+    .unit-link.activity {
+      background: rgba(124, 58, 237, 0.1);
+      border-color: rgba(124, 58, 237, 0.2);
+    }
+    
+    .unit-link.activity:hover {
+      background: rgba(124, 58, 237, 0.2);
+    }
+    
+    /* Progreso del curso */
+    .progress-section {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(10px);
+    }
+    
+    .progress-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    
+    .progress-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .progress-percentage {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .progress-bar {
+      height: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      border-radius: 6px;
+      width: 20%;
+      transition: width 1s ease;
+    }
+    
+    .progress-stats {
+      display: flex;
+      justify-content: space-between;
+      color: var(--light-3);
+      font-size: 0.9rem;
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem 0 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--light-3);
+      font-size: 0.9rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .footer-link {
+      color: var(--light-2);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .footer-link:hover {
+      color: var(--primary-color);
+    }
+    
+    .copyright {
+      margin-top: 1rem;
+    }
+    
+    /* ==========================================================================
+       RESPONSIVE
+    ========================================================================== */
+    @media (max-width: 1200px) {
+      .units-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1.25rem;
+      }
+      
+      .logo-text h1 {
+        font-size: 2rem;
+      }
+      
+      .course-subtitle {
+        font-size: 1rem;
+      }
+      
+      .units-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .unit-links {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .progress-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .unit-header {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      
+      .unit-type {
+        align-self: flex-start;
+      }
+      
+      .software-tabs {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .software-tab {
+        width: 80%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <h1>Introducción a R: Guía Básica para Estudiantes</h1>
-
-    <p>Bienvenidos a esta guía introductoria. Aquí aprenderán qué es R, cómo funciona y cómo dar sus primeros pasos en el análisis de datos.</p>
-
-    <h2>1. ¿Qué es R?</h2>
-    <p>
-        R es un entorno y lenguaje de programación diseñado para el análisis estadístico y la creación de gráficos. Es una herramienta poderosa que permite manipular datos, realizar cálculos y generar visualizaciones de alta calidad,.
-    </p>
-    <p>
-        A diferencia de programas como Excel o SPSS donde se usan muchos menús, R funciona principalmente a través de una <strong>línea de comandos</strong>, lo que le da una gran flexibilidad y potencia. R permite realizar un análisis estadístico en una serie de pasos, guardando resultados intermedios en "objetos" para ser usados posteriormente.
-    </p>
-
-    <h2>2. ¿Qué significa "Open Source" (Código Abierto)?</h2>
-    <p>
-        R es una implementación <em>open source</em> del lenguaje S. Esto implica varias ventajas clave para estudiantes y profesionales:
-    </p>
-    <ul>
-        <li><strong>Es gratuito:</strong> A diferencia de otros softwares comerciales como S-Plus o SPSS, R se puede descargar y usar sin costo alguno.</li>
-        <li><strong>Comunidad activa:</strong> Existe una comunidad global de desarrolladores y usuarios que constantemente mejoran el programa y crean nuevas herramientas (paquetes) para ampliar sus capacidades.</li>
-        <li><strong>Transparencia:</strong> Al ser de código abierto, se puede examinar cómo están hechos los análisis.</li>
-    </ul>
-
-    <h2>3. Instalación: R y RStudio</h2>
-    <p>
-        Para trabajar cómodamente, necesitamos instalar dos cosas: el "motor" (R) y la "interfaz" (RStudio). RStudio es una máscara visual que hace que usar R sea más fácil, ordenado y fluido.
-    </p>
-
-    <h3>Paso 1: Instalar R</h3>
-    <p>
-        Debes descargar el paquete base desde CRAN (Comprehensive R Archive Network).
-    </p>
-    <ul>
-        <li><strong>Windows:</strong> Navega a <a href="http://cran.r-project.org/bin/windows/base/">cran.r-project.org/bin/windows/base/</a> y descarga el ejecutable.</li>
-        <li><strong>Mac:</strong> Navega a <a href="http://cran.r-project.org/bin/macosx/">cran.r-project.org/bin/macosx/</a> y descarga el paquete correspondiente.</li>
-        <li><strong>Linux (Ubuntu):</strong> Se suele instalar mediante la terminal usando el comando <code>sudo apt-get install r-base</code>.</li>
-    </ul>
-
-    <h3>Paso 2: Instalar RStudio</h3>
-    <p>
-        Una vez instalado R, descarga RStudio desde su sitio oficial. RStudio te permitirá ver tus scripts, gráficos y objetos al mismo tiempo en diferentes ventanas,.
-    </p>
-
-    <h2>4. Comandos Básicos y Sintaxis</h2>
-    <p>
-        R distingue entre mayúsculas y minúsculas (es <em>case-sensitive</em>), por lo que <code>Variable</code> y <code>variable</code> serían objetos distintos,.
-    </p>
-
-    <h3>Asignación de variables</h3>
-    <p>
-        Para guardar un valor en un objeto (variable), usamos el símbolo <code>&lt;-</code> (una flecha apuntando a la izquierda).
-    </p>
-<pre>
-x <- 10        # Guarda el número 10 en el objeto 'x'
-y <- 5         # Guarda el número 5 en el objeto 'y'
-nombre <- "Ana" # Guarda texto (siempre entre comillas)
-</pre>
-
-    <h3>Vectores</h3>
-    <p>
-        La estructura de datos más básica es el vector. Para crear uno con varios valores, usamos la función <code>c()</code> (concatenar),.
-    </p>
-<pre>
-edades <- c(15, 12, 27, 55)  # Crea un vector numérico
-nombres <- c("Juan", "Pedro") # Crea un vector de caracteres
-</pre>
-
-    <h3>Operaciones Matemáticas</h3>
-    <p>
-        Puedes usar R como una calculadora,:
-    </p>
-<pre>
-suma <- 5 + 5
-multiplicacion <- 10 * 2
-raiz <- sqrt(16)  # Raíz cuadrada
-</pre>
-
-    <h3>Ayuda</h3>
-    <p>
-        Si no sabes qué hace una función, usa el signo de interrogación antes del nombre del comando,.
-    </p>
-<pre>
-?mean   # Muestra la ayuda para la función de promedio (media)
-</pre>
-
-    <h2>5. Ejemplo Introductorio: Cargando y Leyendo Datos</h2>
-    <p>
-        A continuación, veremos un ejemplo sencillo de cómo cargar datos que ya vienen en R y cómo leer un archivo externo.
-    </p>
-
-    <h3>A. Usando datos internos (Dataset Iris)</h3>
-    <p>
-        R incluye conjuntos de datos de prueba. Uno muy famoso es <code>iris</code>, que contiene medidas de flores.
-    </p>
-<pre>
-# 1. Cargar los datos en el entorno
-data(iris)
-
-# 2. Ver los nombres de las variables (columnas)
-names(iris) 
-# Resultado: "Sepal.Length" "Sepal.Width" "Petal.Length" "Petal.Width" "Species"
-
-# 3. Ver un resumen estadístico rápido (mínimo, media, máximo)
-summary(iris)
-
-# 4. Ver las primeras filas de la tabla
-head(iris)
-</pre>
-
-    <h3>B. Creación y Lectura de una Tabla</h3>
-    <p>
-        Imagina que tienes datos de personas. Podemos crear una tabla pequeña (Data Frame) manualmente,.
-    </p>
-<pre>
-# Crear las variables (columnas)
-genero <- c("Hombre", "Mujer", "Mujer")
-edad <- c(24, 32, 28)
-
-# Crear la tabla (Data Frame) juntando las variables
-datos_personas <- data.frame(genero, edad)
-
-# Ver la tabla en pantalla
-print(datos_personas)
-</pre>
-
-    <h3>C. Leer datos desde un archivo</h3>
-    <p>
-        Si tienes un archivo de texto (por ejemplo, <code>datos.txt</code>) con encabezados, puedes cargarlo usando <code>read.table</code>. El resultado será un <em>data frame</em>,.
-    </p>
-<pre>
-# Leer una tabla desde un archivo
-# header=TRUE indica que la primera línea tiene los nombres de las columnas
-mi_tabla <- read.table("datos.txt", header = TRUE)
-</pre>
-
-    <div class="note">
-        <strong>Tip:</strong> Para acceder a una columna específica dentro de tu tabla, usa el símbolo de dólar <code>$</code>. Por ejemplo: <code>iris$Species</code> accede a la columna de especies del conjunto de datos iris,.
+  <!-- Fondo de partículas animadas -->
+  <div class="particles-container">
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+    
+    <canvas id="particles-canvas"></canvas>
+  </div>
+  
+  <!-- Contenido principal -->
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="logo-text">
+          <h1>Ciencia de Datos: R, Python, Stata y SPSS</h1>
+        </div>
+      </div>
+      
+      <p class="course-subtitle">
+        Domina las herramientas más potentes para el análisis estadístico y la visualización de datos. Aprende a manipular, analizar y presentar datos de manera efectiva con R, Python, Stata y SPSS.
+      </p>
+      
+      <div class="institution-badge">
+        <i class="fas fa-university"></i>
+        <span>FACEN - Universidad Nacional de Asunción · Departamento de Estadística</span>
+      </div>
+    </header>
+    
+    <!-- Tabs de Software -->
+    <div class="software-tabs">
+      <div class="software-tab r active" data-software="r">
+        <i class="fab fa-r-project"></i> R
+      </div>
+      <div class="software-tab python" data-software="python">
+        <i class="fab fa-python"></i> Python
+      </div>
+      <div class="software-tab stata" data-software="stata">
+        <i class="fas fa-chart-bar"></i> Stata
+      </div>
+      <div class="software-tab spss" data-software="spss">
+        <i class="fas fa-chart-pie"></i> SPSS
+      </div>
     </div>
-
-    <footer>
-        <h2>Referencias Bibliográficas (APA)</h2>
-        <ul>
-            <li>Boccardo Bosoni, G., & Ruiz Bruzzone, F. (2018). <em>Capítulo 4 Uso básico de RStudio</em>. En RStudio para Estadística Descriptiva en Ciencias Sociales.</li>
-            <li>Bravo-Marquez, F. (2020). <em>Análisis Exploratorio de Datos en R</em>.</li>
-            <li>Ciencia de Datos para Ciencias Naturales. (s.f.). <em>Capítulo 2 Técnicas de Manipulación de Datos</em>.</li>
-            <li>Pérez Esteso, M. (s.f.). <em>Instalación de R y RStudio en Windows, GNU/Linux y Mac OS X</em>. Center for Open Middleware.</li>
-            <li>R Development Core Team. (2000). <em>Introducción a R: Notas sobre R: Un entorno de programación para Análisis de Datos y Gráficos</em>. Versión 1.0.1.</li>
-            <li>Solé, X., & Valls, J. (2004). <em>Curso de introducción a R</em>.</li>
-            <li>Wickham, H., & Grolemund, G. (s.f.). <em>15 Factores</em>. En R Para Ciencia de Datos.</li>
-        </ul>
+    
+    <!-- Estadísticas del curso -->
+    <div class="stats-container">
+      <div class="stat-card">
+        <i class="fas fa-database"></i>
+        <div class="number">4</div>
+        <div class="label">Herramientas</div>
+      </div>
+      
+      <div class="stat-card">
+        <i class="fas fa-code"></i>
+        <div class="number">50+</div>
+        <div class="label">Tutoriales</div>
+      </div>
+      
+      <div class="stat-card">
+        <i class="fas fa-project-diagram"></i>
+        <div class="number">20</div>
+        <div class="label">Proyectos</div>
+      </div>
+      
+      <div class="stat-card">
+        <i class="fas fa-clock"></i>
+        <div class="number">80h</div>
+        <div class="label">Contenido</div>
+      </div>
+    </div>
+    
+    <!-- Progreso del curso -->
+    <section class="progress-section">
+      <div class="progress-header">
+        <div class="progress-title">Progreso del Curso</div>
+        <div class="progress-percentage">20%</div>
+      </div>
+      
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      
+      <div class="progress-stats">
+        <span>Herramienta R en desarrollo</span>
+        <span>3 herramientas restantes</span>
+      </div>
+    </section>
+    
+    <!-- Unidades del curso -->
+    <section class="units-section">
+      <h2 class="section-title">
+        <i class="fas fa-layer-group"></i> Módulos de Aprendizaje
+      </h2>
+      
+      <div class="units-grid">
+        <!-- Módulo R -->
+        <div class="unit-card r">
+          <div class="unit-header">
+            <div class="unit-number">R</div>
+            <div class="unit-type">Software Libre</div>
+          </div>
+          
+          <h3 class="unit-title">Análisis de Datos con R</h3>
+          
+          <p class="unit-description">
+            Domina R para análisis estadístico avanzado, visualización de datos y creación de reportes reproducibles con R Markdown y Shiny.
+          </p>
+          
+          <div class="unit-software">
+            <span class="software-tag">R</span>
+            <span class="software-tag">RStudio</span>
+            <span class="software-tag">Tidyverse</span>
+            <span class="software-tag">ggplot2</span>
+          </div>
+          
+          <div class="unit-links">
+            <a href="#" class="unit-link lecture">
+              <i class="fas fa-book"></i> Material
+            </a>
+            <a href="#" class="unit-link presentation">
+              <i class="fas fa-tv"></i> Presentación
+            </a>
+            <a href="#" class="unit-link video">
+              <i class="fas fa-play"></i> Video
+            </a>
+            <a href="#" class="unit-link activity">
+              <i class="fas fa-puzzle-piece"></i> Actividad
+            </a>
+          </div>
+        </div>
+        
+        <!-- Módulo Python -->
+        <div class="unit-card python">
+          <div class="unit-header">
+            <div class="unit-number">Py</div>
+            <div class="unit-type">Software Libre</div>
+          </div>
+          
+          <h3 class="unit-title">Ciencia de Datos con Python</h3>
+          
+          <p class="unit-description">
+            Aprende a manipular y analizar datos con Python utilizando Pandas, NumPy, Matplotlib y Scikit-learn para machine learning.
+          </p>
+          
+          <div class="unit-software">
+            <span class="software-tag">Python</span>
+            <span class="software-tag">Jupyter</span>
+            <span class="software-tag">Pandas</span>
+            <span class="software-tag">Scikit-learn</span>
+          </div>
+          
+          <div class="unit-links">
+            <a href="#" class="unit-link lecture">
+              <i class="fas fa-book"></i> Material
+            </a>
+            <a href="#" class="unit-link presentation">
+              <i class="fas fa-tv"></i> Presentación
+            </a>
+            <a href="#" class="unit-link video">
+              <i class="fas fa-play"></i> Video
+            </a>
+            <a href="#" class="unit-link activity">
+              <i class="fas fa-puzzle-piece"></i> Actividad
+            </a>
+          </div>
+        </div>
+        
+        <!-- Módulo Stata -->
+        <div class="unit-card stata">
+          <div class="unit-header">
+            <div class="unit-number">St</div>
+            <div class="unit-type">Software Propietario</div>
+          </div>
+          
+          <h3 class="unit-title">Análisis Estadístico con Stata</h3>
+          
+          <p class="unit-description">
+            Utiliza Stata para análisis econométrico, modelos de regresión avanzados y visualización de datos para investigación cuantitativa.
+          </p>
+          
+          <div class="unit-software">
+            <span class="software-tag">Stata</span>
+            <span class="software-tag">Do-files</span>
+            <span class="software-tag">Regresión</span>
+            <span class="software-tag">Econometría</span>
+          </div>
+          
+          <div class="unit-links">
+            <a href="#" class="unit-link lecture">
+              <i class="fas fa-book"></i> Material
+            </a>
+            <a href="#" class="unit-link presentation">
+              <i class="fas fa-tv"></i> Presentación
+            </a>
+            <a href="#" class="unit-link video">
+              <i class="fas fa-play"></i> Video
+            </a>
+            <a href="#" class="unit-link activity">
+              <i class="fas fa-puzzle-piece"></i> Actividad
+            </a>
+          </div>
+        </div>
+        
+        <!-- Módulo SPSS -->
+        <div class="unit-card spss">
+          <div class="unit-header">
+            <div class="unit-number">SP</div>
+            <div class="unit-type">Software Propietario</div>
+          </div>
+          
+          <h3 class="unit-title">Análisis con SPSS</h3>
+          
+          <p class="unit-description">
+            Aprende a utilizar SPSS para análisis estadístico, pruebas de hipótesis, análisis factorial y creación de informes visuales.
+          </p>
+          
+          <div class="unit-software">
+            <span class="software-tag">SPSS</span>
+            <span class="software-tag">Syntax</span>
+            <span class="software-tag">Output</span>
+            <span class="software-tag">Gráficos</span>
+          </div>
+          
+          <div class="unit-links">
+            <a href="#" class="unit-link lecture">
+              <i class="fas fa-book"></i> Material
+            </a>
+            <a href="#" class="unit-link presentation">
+              <i class="fas fa-tv"></i> Presentación
+            </a>
+            <a href="#" class="unit-link video">
+              <i class="fas fa-play"></i> Video
+            </a>
+            <a href="#" class="unit-link activity">
+              <i class="fas fa-puzzle-piece"></i> Actividad
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="#" class="footer-link">
+          <i class="fas fa-info-circle"></i> Información del Curso
+        </a>
+        <a href="#" class="footer-link">
+          <i class="fas fa-download"></i> Recursos Descargables
+        </a>
+        <a href="#" class="footer-link">
+          <i class="fas fa-envelope"></i> Contacto
+        </a>
+      </div>
+      
+      <div class="institution-info">
+        <p><strong>FACULTAD DE CIENCIAS EXACTAS Y NATURALES · UNIVERSIDAD NACIONAL DE ASUNCIÓN</strong></p>
+        <p>Carrera de Ciencias, mención Matemática Estadística · Plan 2025</p>
+      </div>
+      
+      <div class="copyright">
+        © 2025 Ciencia de Datos: R, Python, Stata y SPSS · Todos los derechos reservados
+      </div>
     </footer>
-
+  </div>
+  
+  <!-- Script para partículas animadas -->
+  <script>
+    // Configuración del canvas de partículas
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    const particles = [];
+    const particleCount = 150;
+    const colors = [
+      'rgba(39, 109, 195, 0.7)',  // R
+      'rgba(55, 118, 171, 0.7)',  // Python
+      'rgba(26, 95, 180, 0.7)',   // Stata
+      'rgba(230, 25, 75, 0.7)',   // SPSS
+    ];
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.alpha = Math.random() * 0.5 + 0.3;
+        this.waveOffset = Math.random() * Math.PI * 2;
+      }
+      
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        if (Math.random() > 0.7) {
+          this.x += Math.sin(this.waveOffset + Date.now() * 0.001) * 0.3;
+          this.y += Math.cos(this.waveOffset + Date.now() * 0.001) * 0.3;
+        }
+        
+        if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+        if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+        
+        this.size = Math.max(1, this.size + Math.sin(Date.now() * 0.001 + this.waveOffset) * 0.1);
+      }
+      
+      draw() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color.replace('0.7', this.alpha.toString());
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+    
+    function drawConnections() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            const opacity = 0.2 * (1 - distance / 100);
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(150, 150, 255, ${opacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    
+    function animate() {
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      
+      drawConnections();
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Interacción con las tarjetas
+    document.querySelectorAll('.unit-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        const number = this.querySelector('.unit-number');
+        number.style.transform = 'scale(1.2) rotate(10deg)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        const number = this.querySelector('.unit-number');
+        number.style.transform = 'scale(1) rotate(0deg)';
+      });
+    });
+    
+    // Interacción con las partículas
+    canvas.addEventListener('mousemove', (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      
+      particles.forEach(particle => {
+        const dx = mouseX - particle.x;
+        const dy = mouseY - particle.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 100) {
+          particle.x -= dx * 0.02;
+          particle.y -= dy * 0.02;
+        }
+      });
+    });
+    
+    // Animación de la barra de progreso
+    const progressFill = document.querySelector('.progress-fill');
+    const progressPercentage = document.querySelector('.progress-percentage');
+    
+    setTimeout(() => {
+      progressFill.style.width = '20%';
+      progressPercentage.textContent = '20%';
+    }, 500);
+    
+    // Tabs de software
+    const softwareTabs = document.querySelectorAll('.software-tab');
+    
+    softwareTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        // Remover clase active de todas las tabs
+        softwareTabs.forEach(t => t.classList.remove('active'));
+        
+        // Agregar clase active a la tab seleccionada
+        this.classList.add('active');
+        
+        // Aquí podrías agregar lógica para mostrar/ocultar contenido según la tab seleccionada
+        const software = this.getAttribute('data-software');
+        console.log(`Software seleccionado: ${software}`);
+      });
+    });
+  </script>
 </body>
 </html>
