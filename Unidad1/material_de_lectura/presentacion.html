@@ -27,6 +27,7 @@
             gap: 40px;
         }
 
+        /* Diapositivas en modo presentación */
         .slide {
             width: 1280px;
             min-height: 720px;
@@ -35,8 +36,12 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            display: flex;
             flex-direction: column;
+            display: none;          /* ocultas por defecto */
+        }
+
+        .slide.active {
+            display: flex;          /* solo la diapositiva activa se muestra */
         }
 
         .slide-main {
@@ -1330,6 +1335,44 @@
             color: #1a56db;
             font-weight: bold;
         }
+
+        /* Controles de navegación tipo presentación */
+        .controls {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .controls button {
+            pointer-events: auto;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid #1a56db;
+            background: #ffffff;
+            color: #1a56db;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .controls button:hover {
+            background: #1a56db;
+            color: #ffffff;
+        }
+
+        .controls .material-icons {
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -2366,7 +2409,7 @@
         </div>
     </section>
 
-    <!-- Bibliografía específica (reconstruida en un bloque único) -->
+    <!-- Bibliografía específica -->
     <section class="slide" id="bibliografia-especifica">
         <div class="header">
             <h1>Bibliografía Específica</h1>
@@ -2416,5 +2459,95 @@
     </section>
 
 </div>
+
+<!-- Controles de navegación -->
+<div class="controls">
+    <button id="btn-home">
+        <i class="material-icons">home</i>
+        Inicio
+    </button>
+    <button id="btn-prev">
+        <i class="material-icons">navigate_before</i>
+        Anterior
+    </button>
+    <button id="btn-next">
+        Siguiente
+        <i class="material-icons">navigate_next</i>
+    </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    if (!slides.length) return;
+
+    let current = 0;
+
+    function showSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= slides.length) index = slides.length - 1;
+
+        slides.forEach((slide, i) => {
+            if (i === index) {
+                slide.classList.add('active');
+                slide.setAttribute('aria-hidden', 'false');
+            } else {
+                slide.classList.remove('active');
+                slide.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        current = index;
+    }
+
+    function nextSlide() {
+        if (current < slides.length - 1) {
+            showSlide(current + 1);
+        }
+    }
+
+    function prevSlide() {
+        if (current > 0) {
+            showSlide(current - 1);
+        }
+    }
+
+    function firstSlide() {
+        showSlide(0);
+    }
+
+    const btnNext = document.getElementById('btn-next');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnHome = document.getElementById('btn-home');
+
+    if (btnNext) btnNext.addEventListener('click', nextSlide);
+    if (btnPrev) btnPrev.addEventListener('click', prevSlide);
+    if (btnHome) btnHome.addEventListener('click', firstSlide);
+
+    // Navegación con teclado
+    document.addEventListener('keydown', function (e) {
+        const tag = e.target.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            prevSlide();
+        } else if (e.key === 'Home') {
+            firstSlide();
+        }
+    });
+
+    // Clic en la diapositiva para avanzar
+    slides.forEach(slide => {
+        slide.addEventListener('click', function () {
+            nextSlide();
+        });
+    });
+
+    // Mostrar la primera diapositiva al cargar
+    showSlide(0);
+});
+</script>
 </body>
 </html>
