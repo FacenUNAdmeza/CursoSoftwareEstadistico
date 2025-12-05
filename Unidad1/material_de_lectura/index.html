@@ -1,188 +1,287 @@
+Aquí tienes una versión completamente reescrita del material. Esta versión ha sido **diseñada pedagógicamente para el estudiante**, utilizando un tono más cercano, explicativo y motivador ("Tú"), sin perder el rigor académico. Se han estructurado los contenidos para facilitar la lectura en pantalla (Moodle), con cuadros de resumen, consejos prácticos y una narrativa fluida.
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recurso Didáctico: Herramientas Estadísticas</title>
 <style>
+    /* Estilos Generales para Lectura en Moodle */
     body {
-        font-family: 'Segoe UI', Arial, sans-serif;
-        line-height: 1.6;
-        color: #333;
-        max-width: 900px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 1.8;
+        color: #2c3e50;
+        background-color: #f4f6f9;
+        margin: 0;
+        padding: 20px;
+    }
+    .content-wrapper {
+        max-width: 950px;
         margin: 0 auto;
-        background-color: #f9f9f9;
-    }
-    .moodle-container {
         background-color: #ffffff;
-        padding: 40px;
-        border: 1px solid #e0e0e0;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        padding: 50px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
+    
+    /* Tipografía y Encabezados */
     h1 {
-        color: #003366;
-        border-bottom: 2px solid #cc0000;
-        padding-bottom: 10px;
-        margin-top: 0;
+        color: #2c3e50;
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 20px;
+    }
+    h1 span {
+        display: block;
+        font-size: 0.5em;
+        color: #7f8c8d;
+        font-weight: normal;
+        margin-top: 10px;
     }
     h2 {
-        color: #0055a5;
-        margin-top: 30px;
-        background-color: #f0f4f8;
-        padding: 10px;
-        border-left: 5px solid #0055a5;
+        color: #2980b9;
+        margin-top: 40px;
+        border-left: 5px solid #2980b9;
+        padding-left: 15px;
     }
     h3 {
-        color: #333;
-        margin-top: 25px;
-        border-bottom: 1px dashed #ccc;
+        color: #16a085;
+        margin-top: 30px;
     }
     p {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         text-align: justify;
     }
-    .illustration-box {
-        background-color: #eef;
-        border: 2px dashed #99a;
+
+    /* Cajas Didácticas */
+    .definition-box {
+        background-color: #e8f6f3;
+        border: 1px solid #1abc9c;
+        border-radius: 5px;
         padding: 20px;
-        text-align: center;
-        margin: 20px 0;
-        color: #556;
-        font-style: italic;
+        margin: 25px 0;
     }
-    .citation-box {
-        background-color: #fff3cd;
-        border-left: 6px solid #ffc107;
-        padding: 15px;
-        margin: 15px 0;
+    .definition-title {
+        font-weight: bold;
+        color: #16a085;
+        display: block;
+        margin-bottom: 10px;
+        text-transform: uppercase;
         font-size: 0.9em;
     }
+    .tip-box {
+        background-color: #fef9e7;
+        border-left: 5px solid #f1c40f;
+        padding: 15px;
+        margin: 20px 0;
+        font-style: italic;
+    }
+    .warning-box {
+        background-color: #fdedec;
+        border: 1px solid #e74c3c;
+        padding: 15px;
+        border-radius: 5px;
+        color: #c0392b;
+    }
+
+    /* Tablas */
     table {
         width: 100%;
         border-collapse: collapse;
-        margin: 20px 0;
-    }
-    th, td {
-        border: 1px solid #ddd;
-        padding: 12px;
-        text-align: left;
+        margin: 30px 0;
+        font-size: 0.95em;
     }
     th {
-        background-color: #003366;
-        color: white;
+        background-color: #34495e;
+        color: #ffffff;
+        padding: 15px;
+        text-align: left;
+    }
+    td {
+        border-bottom: 1px solid #bdc3c7;
+        padding: 12px;
     }
     tr:nth-child(even) {
         background-color: #f2f2f2;
     }
-    .references {
-        font-size: 0.85em;
-        margin-top: 40px;
-        border-top: 1px solid #ccc;
-        padding-top: 20px;
+
+    /* Elementos Visuales */
+    .img-placeholder {
+        background-color: #ecf0f1;
+        border: 2px dashed #95a5a6;
+        color: #7f8c8d;
+        padding: 40px;
+        text-align: center;
+        margin: 30px 0;
+        border-radius: 10px;
     }
+    .img-caption {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.9em;
+        font-weight: bold;
+    }
+
+    /* Navegación y Referencias */
     .toc {
-        background-color: #efefef;
-        padding: 15px;
-        border-radius: 5px;
-        margin-bottom: 30px;
+        background-color: #eaeded;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 40px;
     }
     .toc ul {
-        list-style-type: none;
+        list-style: none;
         padding-left: 0;
     }
     .toc a {
         text-decoration: none;
-        color: #0055a5;
+        color: #2980b9;
+        font-weight: bold;
     }
     .toc a:hover {
         text-decoration: underline;
+    }
+    .references {
+        font-size: 0.85em;
+        color: #555;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+        margin-top: 50px;
+    }
+    .citation {
+        color: #2980b9;
+        font-weight: bold;
+        font-size: 0.8em;
+        vertical-align: super;
     }
 </style>
 </head>
 <body>
 
-<div class="moodle-container">
+<div class="content-wrapper">
 
-    <h1>Módulo de Estudio: Herramientas Tecnológicas para el Análisis Estadístico en la Investigación</h1>
-    
+    <h1>Dominando el Análisis de Datos<span>Guía esencial de Software Estadístico para Estudiantes Universitarios</span></h1>
+
+    <div class="tip-box">
+        <strong>👋 Hola estudiante:</strong> Este material ha sido diseñado para guiarte en el complejo mundo del software estadístico. No importa si eres de Ciencias Sociales, Ingeniería, Salud o Economía; aquí descubrirás qué herramienta aprender, por qué es importante y cómo puede impulsar tu futuro profesional.
+    </div>
+
     <div class="toc">
-        <h3>Tabla de Contenidos</h3>
+        <h3>📚 Tabla de Contenidos</h3>
         <ul>
-            <li><a href="#intro">1. Introducción a los Paquetes Estadísticos</a></li>
-            <li><a href="#panorama">2. Panorama de Software: Opciones y Características</a></li>
-            <li><a href="#profundo">3. Análisis Profundo: Los Gigantes del Mercado (SPSS, R, Python)</a></li>
-            <li><a href="#comparativa">4. Comparativa Técnica: SPSS vs. R vs. Python</a></li>
-            <li><a href="#barreras">5. Barreras en el Uso de Software en la Educación Superior</a></li>
-            <li><a href="#casos">6. Aplicación Práctica: Estudio de Caso COVID-19 con Python</a></li>
-            <li><a href="#conclusiones">7. Recomendaciones Finales y Estrategias Didácticas</a></li>
+            <li><a href="#intro">1. ¿Qué es un Paquete Estadístico y por qué lo necesitas?</a></li>
+            <li><a href="#menu-vs-codigo">2. El gran dilema: ¿Menús (GUI) o Código (CLI)?</a></li>
+            <li><a href="#gigantes">3. Conociendo a los gigantes: SPSS, R y Python</a></li>
+            <li><a href="#comparativa">4. Comparativa: ¿Cuál elijo para mi tesis o trabajo?</a></li>
+            <li><a href="#barreras">5. La realidad académica: Retos y brechas digitales</a></li>
+            <li><a href="#caso-practico">6. En acción: Un caso real con Python (COVID-19)</a></li>
+            <li><a href="#conclusion">7. Conclusión: Tu ruta de aprendizaje</a></li>
             <li><a href="#referencias">8. Referencias Bibliográficas</a></li>
         </ul>
     </div>
 
-    <h2 id="intro">1. Introducción a los Paquetes Estadísticos</h2>
-    <p>El análisis de datos se ha convertido en una competencia transversal fundamental en la era de la información. Un <strong>paquete estadístico</strong> se define como un programa informático especialmente diseñado para resolver problemas en el área de la estadística. Estas herramientas han impulsado enormemente la labor de los investigadores, permitiendo realizar cálculos complejos, desde contrastes de hipótesis hasta modelos de regresión y algoritmos de optimización, que manualmente tomarían un tiempo inviable.</p>
-
-    <p>La evolución de estas herramientas ha generado una división principal en la forma en que los usuarios interactúan con ellas:</p>
-    <ul>
-        <li><strong>Interfaz Gráfica de Usuario (GUI):</strong> Programas basados en ventanas, menús desplegables y uso del ratón. Son intuitivos y fáciles de aprender, pero pueden ser más rígidos ("encorsetados") si la función deseada no está predefinida en el menú.</li>
-        <li><strong>Interfaz de Línea de Comandos (CLI):</strong> Requiere que el usuario escriba comandos o código en un lenguaje de programación específico. Aunque la curva de aprendizaje es más pronunciada, ofrecen mayor flexibilidad, personalización y reproducibilidad.</li>
-    </ul>
-
-    <div class="illustration-box">
-        <strong>[ILUSTRACIÓN SUGERIDA 1]</strong><br>
-        <em>Inserte aquí una imagen dividida: A la izquierda, una captura de pantalla de SPSS mostrando sus menús desplegables (GUI). A la derecha, una captura de RStudio mostrando código (CLI).</em><br>
-        <small>Objetivo: Visualizar la diferencia entre interactuar con menús vs. interactuar con código.</small>
+    <!-- SECCIÓN 1 -->
+    <h2 id="intro">1. ¿Qué es un Paquete Estadístico y por qué lo necesitas?</h2>
+    
+    <p>Imagina que tienes que analizar una encuesta con 1,000 respuestas o una base de datos con millones de registros médicos. Hacerlo a mano o con una calculadora es imposible. Aquí es donde entra el <strong>paquete estadístico</strong>.</p>
+    
+    <div class="definition-box">
+        <span class="definition-title">Definición Clave</span>
+        Un <strong>paquete estadístico</strong> es un programa informático diseñado específicamente para resolver problemas en el área de la estadística. Permiten realizar desde cálculos básicos hasta modelos complejos de predicción e inteligencia artificial.
     </div>
 
-    <p>Al elegir un software, es crucial considerar factores como el sistema operativo, el presupuesto (licencia perpetua, suscripción o gratuito), la disponibilidad de métodos específicos y la aceptación en la comunidad científica del área de estudio.</p>
+    <p>Estas herramientas han revolucionado la investigación. Lo que antes tomaba meses de cálculos manuales, ahora un ordenador lo resuelve en segundos, permitiendo realizar cientos de contrastes de hipótesis o iteraciones de algoritmos al instante.</p>
 
-    <h2 id="panorama">2. Panorama de Software: Opciones y Características</h2>
-    <p>El mercado actual ofrece una amplia gama de herramientas, cada una con enfoques distintos. A continuación, se presenta una clasificación basada en su popularidad y uso:</p>
-
-    <h3>2.1. Software Comercial (Pago)</h3>
-    <p>A menudo se asume erróneamente que el software de pago es siempre superior al gratuito, lo cual no es necesariamente cierto en estadística. Sin embargo, ofrecen soporte técnico y estabilidad.</p>
+    <p>Para elegir el adecuado, debes hacerte preguntas estratégicas antes de empezar:</p>
     <ul>
-        <li><strong>SPSS (IBM):</strong> Es uno de los más populares en ciencias sociales. Destaca por su interfaz amigable y capacidad de gestión de datos.</li>
-        <li><strong>Stata:</strong> Muy utilizado en economía y epidemiología. Ofrece un equilibrio entre interfaz gráfica y línea de comandos.</li>
-        <li><strong>SAS:</strong> Un estándar industrial potente, especialmente en el sector corporativo y farmacéutico, aunque costoso.</li>
-        <li><strong>Prism (GraphPad):</strong> Enfocado en biociencias, es valorado por ser intuitivo y generar gráficos de alta calidad rápidamente.</li>
-        <li><strong>Excel (Microsoft):</strong> Aunque es omnipresente, por sí solo es básico para estadística avanzada y puede entorpecer el flujo de trabajo científico, a menos que se usen complementos.</li>
+        <li>¿Funciona en mi ordenador (Windows/Mac/Linux)?</li>
+        <li>¿Tengo dinero para la licencia o necesito algo gratuito?</li>
+        <li>¿Qué usan mis profesores y futuros colegas?</li>
+        <li>¿Tengo tiempo para aprender a programar o necesito algo visual?</li>
     </ul>
 
-    <h3>2.2. Software de Código Abierto (Gratuito)</h3>
-    <p>El movimiento de software libre ha democratizado el análisis de datos de alto nivel.</p>
+    <hr>
+
+    <!-- SECCIÓN 2 -->
+    <h2 id="menu-vs-codigo">2. El gran dilema: ¿Menús (GUI) o Código (CLI)?</h2>
+    
+    <p>Antes de ver nombres de programas, debes entender que existen dos "filosofías" de trabajo. En el mundo del análisis de datos, te encontrarás con este debate constantemente,:</p>
+
+    <h3>A. Interfaz Gráfica de Usuario (GUI)</h3>
+    <p>Es lo que probablemente ya conoces. Ventanas, botones y menús desplegables. Usas el ratón para decir "Analizar -> Estadísticos Descriptivos -> Frecuencias".</p>
     <ul>
-        <li><strong>R:</strong> Diseñado específicamente por y para estadísticos. Es extremadamente potente y el estándar en muchas áreas científicas.</li>
-        <li><strong>Python:</strong> Un lenguaje de programación de propósito general que, mediante librerías como Pandas y Matplotlib, se ha convertido en líder en ciencia de datos y <em>machine learning</em>.</li>
-        <li><strong>JASP y Jamovi:</strong> Alternativas gratuitas y modernas a SPSS que buscan simplificar la estadística bayesiana y frecuentista.</li>
+        <li><strong>Ventaja:</strong> Muy fácil de aprender. Intuitivo.</li>
+        <li><strong>Desventaja:</strong> Es "encorsetado". Solo puedes hacer lo que el menú te permite. Si quieres hacer algo muy nuevo o específico, quizás no puedas.</li>
+        <li><strong>Ejemplos:</strong> SPSS, Excel, JASP.</li>
     </ul>
 
-    <div class="illustration-box">
-        <strong>[ILUSTRACIÓN SUGERIDA 2]</strong><br>
-        <em>Inserte aquí una infografía de logotipos de software organizados en dos ejes: Eje X (Facilidad de uso) vs Eje Y (Potencia/Flexibilidad).</em><br>
-        <small>Nota: SPSS y Excel estarían en alta facilidad/menor flexibilidad; R y Python en baja facilidad inicial/máxima flexibilidad.</small>
+    <h3>B. Interfaz de Línea de Comandos (CLI)</h3>
+    <p>Aquí escribes instrucciones (código) en un lenguaje de programación. Puede parecer intimidante al principio ("parece la NASA en 1968" dirían algunos), pero es increíblemente poderoso.</p>
+    <ul>
+        <li><strong>Ventaja:</strong> Flexibilidad total. Puedes crear nuevos métodos, automatizar tareas repetitivas y compartir tu código para que otros repliquen tu trabajo exactamente,.</li>
+        <li><strong>Desventaja:</strong> La curva de aprendizaje es alta. Es como aprender un nuevo idioma.</li>
+        <li><strong>Ejemplos:</strong> R, Python.</li>
+    </ul>
+
+    <div class="img-placeholder">
+        [ILUSTRACIÓN 1: GUI vs CLI]
+        <span class="img-caption">Imagen sugerida: A la izquierda, una captura de pantalla de SPSS mostrando sus menús desplegables. A la derecha, una captura de RStudio mostrando un script de código.</span>
     </div>
 
-    <h2 id="profundo">3. Análisis Profundo: Los Gigantes del Mercado</h2>
+    <hr>
 
-    <h3>3.1. IBM SPSS Statistics</h3>
-    <p>Lanzado originalmente en 1968 como <em>Statistical Package for the Social Sciences</em>, SPSS fue adquirido por IBM en 2009. Su estructura de datos es rectangular (filas como casos, columnas como variables) y ofrece dos vistas principales: <strong>Vista de Datos</strong> y <strong>Vista de Variables</strong> (donde se definen metadatos).</p>
-    <p>SPSS permite operar mediante menús desplegables que generan internamente una sintaxis de comandos, lo que facilita automatizar tareas repetitivas una vez que se aprende su lenguaje de <em>scripts</em>. Sin embargo, versiones recientes han integrado extensiones para ejecutar código de Python y R dentro de SPSS, ampliando sus capacidades.</p>
+    <!-- SECCIÓN 3 -->
+    <h2 id="gigantes">3. Conociendo a los gigantes: SPSS, R y Python</h2>
 
-    <h3>3.2. El Lenguaje R</h3>
-    <p>R nació en 1993 como una reimplementación libre del lenguaje S, creado por Robert Gentleman y Ross Ihaka en la Universidad de Auckland. Es un entorno multiparadigma (funcional, vectorial, orientado a objetos) enfocado en el análisis estadístico y gráfico.</p>
-    <p>Su mayor fortaleza reside en CRAN (Comprehensive R Archive Network), un repositorio con miles de paquetes desarrollados por la comunidad que extienden sus funcionalidades a casi cualquier campo del conocimiento, desde la genómica hasta la econometría. Herramientas como <strong>RStudio</strong> han mejorado significativamente su usabilidad, proporcionando un entorno de desarrollo integrado (IDE) amigable.</p>
+    <p>El mercado está lleno de opciones. Analicemos las tres más importantes que encontrarás en tu vida universitaria y profesional.</p>
 
-    <h3>3.3. Python en la Ciencia de Datos</h3>
-    <p>Aunque no fue diseñado exclusivamente para estadística, Python es un lenguaje poderoso y multifuncional. Su adopción en el análisis de datos se debe a bibliotecas especializadas:</p>
+    <h3>3.1. IBM SPSS Statistics: El clásico confiable</h3>
+    <p>Nació en 1968 (¡hace más de 50 años!) como <em>Statistical Package for the Social Sciences</em>. Fue creado para que los investigadores sociales pudieran hacer sus propios análisis sin depender de programadores,.</p>
+    
     <ul>
-        <li><strong>NumPy:</strong> Para cálculo numérico y manejo de matrices.</li>
-        <li><strong>Pandas:</strong> Ofrece estructuras de datos (DataFrames) para la manipulación y limpieza eficiente de grandes volúmenes de información.</li>
-        <li><strong>Matplotlib:</strong> Para la generación de gráficos 2D de alta calidad.</li>
+        <li><strong>¿Cómo es?</strong> Funciona como una hoja de cálculo vitaminada. Tiene una "Vista de Datos" (números) y una "Vista de Variables" (donde defines qué significa cada número).</li>
+        <li><strong>Puntos fuertes:</strong> Es el rey en Ciencias Sociales (Psicología, Sociología). Muy fácil de usar mediante menús.</li>
+        <li><strong>Puntos débiles:</strong> Es caro. Las licencias cuestan miles de dólares (aunque las universidades suelen tener convenios). Sus gráficos son funcionales pero difíciles de personalizar estéticamente.</li>
     </ul>
-    <p>Python es preferido cuando el análisis estadístico es parte de un flujo de trabajo mayor que incluye desarrollo web, automatización o inteligencia artificial.</p>
 
-    <h2 id="comparativa">4. Comparativa Técnica: SPSS vs. R vs. Python</h2>
-    <p>La elección entre estas herramientas suele generar debate. A continuación, se presenta una comparativa basada en factores críticos para la docencia y la investigación:</p>
+    <h3>3.2. R: La potencia estadística gratuita</h3>
+    <p>R es un lenguaje de programación creado en 1993 por estadísticos (Ross Ihaka y Robert Gentleman). Es Software Libre (gratuito) y parte del proyecto GNU,.</p>
+    
+    <ul>
+        <li><strong>¿Cómo es?</strong> Se usa escribiendo código, aunque programas como <strong>RStudio</strong> facilitan mucho la vida.</li>
+        <li><strong>Puntos fuertes:</strong> Está diseñado <em>para</em> estadística. Tiene miles de paquetes gratuitos (en CRAN) para cualquier cosa imaginable (Bioinformática, Econometría, etc.). Sus gráficos con la librería <code>ggplot2</code> son de calidad profesional.</li>
+        <li><strong>Puntos débiles:</strong> Curva de aprendizaje empinada al inicio. Si te equivocas en una coma, el código no funciona.</li>
+    </ul>
+
+    <h3>3.3. Python: El todoterreno de la Ciencia de Datos</h3>
+    <p>Python es un lenguaje de programación general (se usa para hacer webs, juegos, etc.), pero recientemente se ha convertido en líder para el análisis de datos gracias a bibliotecas específicas.</p>
+    
+    <ul>
+        <li><strong>¿Cómo es?</strong> Programación pura. Usas entornos como Jupyter Notebooks que mezclan código, resultados y texto explicativo.</li>
+        <li><strong>Bibliotecas clave:</strong>
+            <ul>
+                <li><em>Pandas:</em> Para manipular datos como si fueran tablas de Excel.</li>
+                <li><em>Matplotlib:</em> Para crear gráficos.</li>
+            </ul>
+        </li>
+        <li><strong>Puntos fuertes:</strong> Maneja "Big Data" mejor que nadie. Es ideal si quieres dedicarte a la Inteligencia Artificial o al Aprendizaje Automático (Machine Learning).</li>
+    </ul>
+
+    <div class="img-placeholder">
+        [ILUSTRACIÓN 2: Logos de Software]
+        <span class="img-caption">Imagen sugerida: Logotipos de SPSS, R y Python dispuestos horizontalmente. Debajo de SPSS poner "Ciencias Sociales / GUI"; debajo de R poner "Estadística Pura / Académico"; debajo de Python poner "Data Science / Big Data".</span>
+    </div>
+
+    <hr>
+
+    <!-- SECCIÓN 4 -->
+    <h2 id="comparativa">4. Comparativa: ¿Cuál elijo para mi tesis o trabajo?</h2>
+
+    <p>No existe el "mejor" software, sino el más adecuado para ti. Aquí tienes una guía rápida basada en experiencias docentes,:</p>
 
     <table>
         <thead>
@@ -196,128 +295,124 @@
         <tbody>
             <tr>
                 <td><strong>Curva de Aprendizaje</strong></td>
-                <td>Baja. Ideal para principiantes gracias a su interfaz gráfica (GUI).</td>
-                <td>Alta al inicio. Requiere aprender sintaxis de código, aunque RStudio ayuda.</td>
-                <td>Media-Alta. Sintaxis legible, pero requiere lógica de programación general.</td>
+                <td>🟢 Baja (Fácil)</td>
+                <td>🔴 Alta (Difícil al inicio)</td>
+                <td>🟡 Media (Lógica general)</td>
             </tr>
             <tr>
                 <td><strong>Costo</strong></td>
-                <td>Alto (Licencias costosas), aunque existen versiones académicas.</td>
-                <td>Gratuito y Código Abierto (GPL).</td>
-                <td>Gratuito y Código Abierto.</td>
+                <td>💰 Pago (Licencias caras)</td>
+                <td>🆓 Gratis (Open Source)</td>
+                <td>🆓 Gratis (Open Source)</td>
             </tr>
             <tr>
                 <td><strong>Flexibilidad</strong></td>
-                <td>Limitada a las funciones predefinidas en el menú (aunque extensible con scripts).</td>
-                <td>Extrema. Permite modificar algoritmos y crear nuevos paquetes.</td>
-                <td>Extrema. Ideal para integrar análisis en aplicaciones y automatización.</td>
+                <td>Limitada a los menús</td>
+                <td>Extrema (Creas lo que quieras)</td>
+                <td>Extrema (Integración con Apps)</td>
             </tr>
             <tr>
-                <td><strong>Visualización</strong></td>
-                <td>Gráficos estándar, difíciles de personalizar estéticamente.</td>
-                <td>Calidad de publicación superior (especialmente con el paquete <em>ggplot2</em>).</td>
-                <td>Alta personalización con librerías como Matplotlib y Seaborn.</td>
+                <td><strong>Gráficos</strong></td>
+                <td>Estándar / Rígidos</td>
+                <td>Calidad de publicación</td>
+                <td>Altamente personalizables</td>
             </tr>
             <tr>
-                <td><strong>Reproducibilidad</strong></td>
-                <td>Menor si solo se usa el ratón. Requiere guardar archivos de sintaxis.</td>
-                <td>Nativa. Todo el análisis queda registrado en el script.</td>
-                <td>Nativa. Favorecida por el uso de Jupyter Notebooks.</td>
+                <td><strong>Recomendado para:</strong></td>
+                <td>Principiantes, Ciencias Sociales, Salud.</td>
+                <td>Investigadores, Estadísticos, Biólogos.</td>
+                <td>Ingenieros, Data Scientists, Big Data.</td>
             </tr>
         </tbody>
     </table>
 
-    <p><strong>Opinión de expertos:</strong> Mientras que SPSS sigue siendo útil para análisis estándar en ciencias sociales por su rapidez, R y Python son superiores para manejo de datos complejos, reproducibilidad y técnicas avanzadas. En el ámbito laboral, el conocimiento de R o Python suele ser más valorado y transferible debido a su gratuidad y potencia.</p>
-
-    <h2 id="barreras">5. Barreras en el Uso de Software en la Educación Superior</h2>
-    <p>A pesar de la disponibilidad de estas herramientas, existen barreras significativas para su adopción en la investigación académica, como evidencia un estudio reciente en el contexto de la educación superior en Ecuador.</p>
-
-    <h3>5.1. La Brecha Digital Docente</h3>
-    <p>Se identificó que aproximadamente el <strong>57.0% de los docentes</strong> no utilizan softwares estadísticos en sus investigaciones. Las causas principales incluyen:</p>
-    <ul>
-        <li><strong>Falta de formación específica:</strong> Muchos docentes desconocen cómo operar estas herramientas más allá de un nivel básico.</li>
-        <li><strong>Limitaciones presupuestarias:</strong> Las instituciones a menudo no pueden costear licencias de software propietario como SPSS, limitando el acceso a versiones legales y actualizadas.</li>
-        <li><strong>Resistencia al cambio tecnológico:</strong> Existe una actitud negativa o miedo hacia la estadística y la adopción de nuevas tecnologías.</li>
-        <li><strong>Barrera del idioma:</strong> Muchos programas avanzados (como Stata o ciertas librerías de R) tienen documentación predominante en inglés.</li>
-    </ul>
-
-    <h3>5.2. Consecuencias en la Calidad Investigativa</h3>
-    <p>La falta de uso de estas herramientas repercute directamente en la producción científica. Los estudios realizados sin software estadístico adecuado tienden a tener menor rigor científico, validez limitada y menor probabilidad de ser publicados en revistas de alto impacto. A menudo, los análisis se limitan a estadística descriptiva básica o se recurre a software pirateado (cracked), lo que impide acceder a funciones actualizadas y supone riesgos de seguridad.</p>
-
-    <div class="illustration-box">
-        <strong>[ILUSTRACIÓN SUGERIDA 3]</strong><br>
-        <em>Inserte aquí un gráfico de barras basado en los datos del estudio: Barras mostrando las razones del no uso de software (Falta de formación, Costo, Resistencia, etc.).</em>
+    <div class="tip-box">
+        <strong>💡 Consejo Pro:</strong> Si estás empezando y tu universidad te da SPSS, úsalo para entender los conceptos. Pero si quieres destacar en el mercado laboral actual, aprender <strong>R</strong> o <strong>Python</strong> es una inversión que te diferenciará del resto.
     </div>
 
-    <h2 id="casos">6. Aplicación Práctica: Estudio de Caso COVID-19 con Python</h2>
-    <p>Para ilustrar la potencia del software de programación frente a las hojas de cálculo tradicionales, analizamos un estudio que utilizó <strong>Python</strong> para procesar datos de COVID-19 en México.</p>
+    <hr>
 
-    <h3>6.1. El Desafío de los Grandes Datos</h3>
-    <p>La base de datos de la Dirección General de Epidemiología contenía más de <strong>18 millones de registros</strong> combinados (años 2020-2022), ocupando más de 3 GB en memoria. Excel, por ejemplo, tiene un límite de aproximadamente 1 millón de filas por hoja, lo que haría este análisis directo imposible sin herramientas avanzadas como Power Query.</p>
+    <!-- SECCIÓN 5 -->
+    <h2 id="barreras">5. La realidad académica: Retos y brechas digitales</h2>
+    
+    <p>Es posible que notes que algunos de tus profesores no utilizan estas herramientas modernas. Un estudio reciente sobre docentes universitarios en Ecuador reveló datos preocupantes que afectan tu formación.</p>
 
-    <h3>6.2. Metodología con Python</h3>
-    <p>El estudio utilizó el siguiente flujo de trabajo tecnológico:</p>
+    <h3>¿Por qué no se usan más?</h3>
+    <p>El estudio encontró que el <strong>57% de los docentes</strong> no utilizan softwares estadísticos en sus investigaciones. Las razones principales son:</p>
     <ol>
-        <li><strong>Pandas:</strong> Para la carga, limpieza y manipulación del dataset masivo (DataFrames).</li>
-        <li><strong>Jupyter Notebook:</strong> Como interfaz de desarrollo interactiva que permite documentar el código y los resultados.</li>
-        <li><strong>Matplotlib y Seaborn:</strong> Para generar visualizaciones como diagramas de violín (que muestran distribución y densidad de datos, por ejemplo, edad vs. hipertensión).</li>
-        <li><strong>Folium:</strong> Para crear mapas coropléticos interactivos que muestran la intensidad de casos por estado geográfico.</li>
+        <li><strong>Falta de formación:</strong> Muchos desconocen cómo usarlos más allá de lo básico.</li>
+        <li><strong>Costos:</strong> Las universidades a veces no pueden pagar las licencias de programas como SPSS.</li>
+        <li><strong>Resistencia:</strong> Miedo al cambio tecnológico o barreras con el idioma (mucho software está en inglés),.</li>
     </ol>
 
-    <h3>6.3. Resultados Obtenidos</h3>
-    <p>El análisis permitió identificar patrones complejos con rapidez, como que la hipertensión y la diabetes fueron las principales comorbilidades en fallecidos, y visualizar la distribución geográfica de las pruebas mediante mapas interactivos, algo complejo de realizar en software básico.</p>
-
-    <div class="illustration-box">
-        <strong>[ILUSTRACIÓN SUGERIDA 4]</strong><br>
-        <em>Inserte aquí ejemplos de los gráficos generados en el estudio: Un diagrama de violín comparando edades y un mapa de calor de México.</em><br>
-        <small>Referencia visual: Figuras 9 y 12 del texto fuente.</small>
+    <div class="warning-box">
+        <strong>⚠️ Impacto en la calidad:</strong> Cuando no se usa software adecuado, las investigaciones tienden a ser menos rigurosas, con análisis superficiales y menor probabilidad de ser publicadas en revistas importantes,. Como estudiante, debes romper este ciclo aprendiendo herramientas digitales desde ahora.
     </div>
 
-    <h2 id="conclusiones">7. Recomendaciones Finales y Estrategias Didácticas</h2>
-    <p>La elección del software no debe ser una cuestión de "cuál es mejor" en abstracto, sino "cuál se adapta mejor a mis necesidades".</p>
+    <hr>
 
-    <h3>7.1. Guía de Selección</h3>
+    <!-- SECCIÓN 6 -->
+    <h2 id="caso-practico">6. En acción: Un caso real con Python (COVID-19)</h2>
+    
+    <p>Para que veas que esto no es solo teoría, veamos un ejemplo real de investigación utilizando <strong>Python</strong>. Se analizó una base de datos masiva sobre COVID-19 en México.</p>
+
+    <h3>El problema de los "Grandes Datos"</h3>
+    <p>La base de datos tenía más de <strong>18 millones de registros</strong>. Si intentaras abrir esto en Excel tradicional, el programa colapsaría (Excel tiene un límite de 1 millón de filas). Python, sin embargo, pudo manejarlo sin problemas,.</p>
+
+    <h3>¿Qué hicieron?</h3>
+    <ol>
+        <li><strong>Procesamiento:</strong> Usaron la librería <em>Pandas</em> para limpiar y organizar esos 18 millones de filas.</li>
+        <li><strong>Visualización:</strong> Crearon gráficos avanzados como "Diagramas de Violín" (ver ilustración abajo) para entender la relación entre edad, sexo e hipertensión en pacientes positivos.</li>
+        <li><strong>Mapas:</strong> Usaron una librería llamada <em>Folium</em> para crear mapas interactivos de calor sobre los casos por estado.</li>
+    </ol>
+
+    <div class="img-placeholder">
+        [ILUSTRACIÓN 3: Diagrama de Violín]
+        <span class="img-caption">Referencia visual: Un gráfico en forma de violín (ancho en el medio, estrecho en los extremos) comparando edades y enfermedades. Esto muestra la densidad de los datos mejor que un simple promedio. Fuente:.</span>
+    </div>
+
+    <p><strong>Resultado:</strong> Descubrieron patrones complejos, como que la hipertensión y la diabetes eran las comorbilidades principales en los fallecidos, con una precisión que hubiera sido difícil de lograr manualmente.</p>
+
+    <hr>
+
+    <!-- SECCIÓN 7 -->
+    <h2 id="conclusion">7. Conclusión: Tu ruta de aprendizaje</h2>
+    
+    <p>Dominar estas herramientas es un superpoder en el mundo moderno. Ya no basta con tener los datos; necesitas saber interrogarlos.</p>
+    
     <ul>
-        <li><strong>Use SPSS si:</strong> Es principiante, prefiere interfaces visuales, tiene presupuesto (o licencia institucional) y necesita análisis estándar rápidos para ciencias sociales.</li>
-        <li><strong>Use R si:</strong> Busca una herramienta gratuita potente para estadística pura, desea gráficos de publicación personalizados y está dispuesto a superar una curva de aprendizaje inicial.</li>
-        <li><strong>Use Python si:</strong> Trabaja con grandes volúmenes de datos (Big Data), necesita integración con aplicaciones web o inteligencia artificial, y busca un lenguaje de propósito general.</li>
+        <li>Si tu carrera es humanista y buscas rapidez: <strong>Domina SPSS.</strong></li>
+        <li>Si te apasiona la investigación científica y quieres publicar: <strong>Aprende R.</strong></li>
+        <li>Si te ves trabajando con tecnología, apps y big data: <strong>Lánzate a por Python.</strong></li>
     </ul>
 
-    <h3>7.2. Integración Curricular</h3>
-    <p>Para superar las barreras formativas, se sugiere un enfoque progresivo en las mallas curriculares, comenzando con conceptos generales y avanzando hacia herramientas de programación. Un programa de asignatura ideal podría estructurarse en unidades que cubran secuencialmente SPSS (para perder el miedo), Stata, R y finalmente Python, asegurando que el estudiante adquiera destrezas tanto en GUI como en CLI.</p>
+    <p>Recuerda: <em>"Sea SPSS o R, lo esencial es transformar los datos en conocimiento y tomar decisiones basadas en análisis rigurosos"</em>. ¡No tengas miedo de empezar!</p>
 
-    <div class="citation-box">
-        <p><strong>Reflexión Final:</strong> "Sea SPSS o R, lo esencial es transformar los datos en conocimiento y tomar decisiones basadas en análisis rigurosos."</p>
-    </div>
+    <hr>
 
     <h2 id="referencias">8. Referencias Bibliográficas</h2>
     <div class="references">
+        <p>Canaldocente.es. (2025, 9 de abril). <em>SPSS versus R: Mi experiencia en el aula y recomendaciones para elegir la herramienta adecuada</em>.</p>
+        
         <p>Guamán Tacuri, J. D. (2025). Barreras en el uso de softwares estadísticos en la investigación académica de docentes de educación superior. <em>Revista Científica Multidisciplinar SAGA, 2</em>(2), 749-760. https://doi.org/10.63415/saga.v2i2.151</p>
         
         <p>IBM. (s.f.). <em>IBM SPSS Statistics</em>. Recuperado de https://www.ibm.com/spss</p>
         
         <p>Molina, R. (2021, 6 de mayo). <em>16 Software para Análisis Estadísticos y Visualización de Datos</em>. Reptantia.</p>
         
-        <p>Nie, N. H., Bent, D. H., & Hull, C. H. (1970). <em>SPSS: Statistical package for the social sciences</em>. McGraw-Hill.</p>
-        
-        <p>R Development Core Team. (s.f.). <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing.</p>
-        
         <p>Rodriguez-Rivas, J. G., & Rodríguez Castillo, S. (s.f.). Uso de Python para el análisis de datos aplicado en la investigación. <em>Revista INCAING</em>.</p>
+        
+        <p>Reddit. (s.f.). <em>Programación R vs SPSS: ¿beneficios de cada uno?</em> r/AskStatistics.</p>
         
         <p>Wikipedia. (s.f.). <em>Paquete estadístico</em>. Recuperado de https://es.wikipedia.org/wiki/Paquete_estadístico</p>
         
         <p>Wikipedia. (s.f.). <em>R (lenguaje de programación)</em>. Recuperado de https://es.wikipedia.org/wiki/R_(lenguaje_de_programación)</p>
         
         <p>Wikipedia. (s.f.). <em>SPSS</em>. Recuperado de https://en.wikipedia.org/wiki/SPSS</p>
-        
-        <p>Canaldocente.es. (2025, 9 de abril). <em>SPSS versus R: Mi experiencia en el aula y recomendaciones para elegir la herramienta adecuada</em>.</p>
-        
-        <p>Universidad Nacional de Asunción. (2025). <em>Programa de Asignatura: Softwares Estadísticos (Electiva)</em>. Licenciatura en Matemática Estadística.</p>
-        
-        <p>Reddit. (s.f.). <em>Programación R vs SPSS: ¿beneficios de cada uno?</em> r/AskStatistics.</p>
     </div>
 
 </div>
 
 </body>
 </html>
+```
