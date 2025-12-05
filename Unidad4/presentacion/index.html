@@ -1,1 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a R: Guía para Estudiantes</title>
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f5f7fa;
+            overflow: hidden;
+        }
+        #slides-container {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            margin: 40px auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateX(100%);
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        /* Estilos comunes para slides 2-7 */
+        .slide:not(:first-child) {
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #1a73e8;
+            padding: 30px 70px;
+            color: white;
+        }
+        .header .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+
+        /* Controles de navegación */
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 15px;
+        }
+        .btn {
+            background-color: rgba(26, 115, 232, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #1557b0;
+            transform: scale(1.1);
+        }
+        .btn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Indicador de slide */
+        .indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        .dot.active {
+            background: #fff;
+        }
+
+        /* Contenido ampliado */
+        .highlight { color: #1a73e8; font-weight: 600; }
+        .code-block {
+            background-color: #2d3436;
+            color: #dfe6e9;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 18px;
+            overflow-x: auto;
+        }
+        .code-comment { color: #74b9ff; }
+    </style>
+</head>
+<body>
+
+<div id="slides-container">
+
+    <!-- Slide 1: Portada -->
+    <div class="slide active">
+        <div style="width:100%;height:100%;background: linear-gradient(rgba(0,32,96,0.85), rgba(0,32,96,0.85)), url('https://sfile.chatglm.cn/images-ppt/a6caab61b41b.jpg');background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;">
+            <div style="max-width:80%;">
+                <div style="margin-bottom:40px;">
+                    <img src="https://sfile.chatglm.cn/images-ppt/ca4db64533de.jpg" alt="R Programming Logo" style="width:150px;height:150px;object-fit:contain;">
+                </div>
+                <h1 style="font-size:64px;font-weight:700;margin-bottom:20px;">Introducción a <span style="color:#64B5F6;">R</span></h1>
+                <div style="width:80px;height:4px;background:#64B5F6;margin:0 auto 30px;"></div>
+                <p style="font-size:20px;color:#e0e0e0;">Aprende a analizar datos con el lenguaje de programación estadístico más popular del mundo.<br><br>Ideal para estadística, ciencia de datos, investigación y visualización profesional.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: ¿Qué es R? -->
+    <div class="slide">
+        <div class="header"><h1 class="title">¿Qué es R?</h1></div>
+        <div style="display:flex;flex-grow:1;padding:40px 0;">
+            <div style="flex:3;padding:0 70px;display:flex;flex-direction:column;justify-content:center;">
+                <div style="display:flex;align-items:flex-start;margin-bottom:25px;">
+                    <i class="material-icons" style="color:#1a73e8;margin-right:15px;font-size:28px;">code</i>
+                    <div style="font-size:20px;line-height:1.5;">R es un <span class="highlight">entorno y lenguaje de programación</span> especializado en análisis estadístico, manipulación de datos y gráficos de alta calidad.</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;margin-bottom:25px;">
+                    <i class="material-icons" style="color:#1a73e8;margin-right:15px;font-size:28px;">terminal</i>
+                    <div style="font-size:20px;line-height:1.5;">Funciona principalmente por <span class="highlight">línea de comandos</span>, lo que permite reproducibilidad total de los análisis (a diferencia de SPSS o Excel).</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;margin-bottom:25px;">
+                    <i class="material-icons" style="color:#1a73e8;margin-right:15px;font-size:28px;">save</i>
+                    <div style="font-size:20px;line-height:1.5;">Los resultados se guardan en <span class="highlight">objetos reutilizables</span>, facilitando análisis complejos paso a paso.</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;margin-bottom:25px;">
+                    <i class="material-icons" style="color:#1a73e8;margin-right:15px;font-size:28px;">trending_up</i>
+                    <div style="font-size:20px;line-height:1.5;">Es el estándar en universidades y empresas para <span class="highlight">ciencia de datos</span> y estadística avanzada.</div>
+                </div>
+            </div>
+            <div style="flex:2;display:flex;align-items:center;justify-content:center;padding:0 70px 0 20px;">
+                <img src="https://sfile.chatglm.cn/images-ppt/312cae10537e.jpg" alt="R Programming" style="max-width:100%;border-radius:10px;box-shadow:0 8px 16px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Open Source -->
+    <div class="slide">
+        <div class="header"><h1 class="title">¿Qué significa "Open Source"?</h1></div>
+        <div style="display:flex;flex-grow:1;padding:40px 0;">
+            <div style="flex:1;padding:0 20px 0 70px;display:flex;flex-direction:column;justify-content:center;">
+                <div style="background:#f8f9fa;border-radius:10px;padding:25px;margin-bottom:20px;box-shadow:0 4px 8px rgba(0,0,0,0.05);display:flex;align-items:center;">
+                    <div style="background:#e8f0fe;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:20px;">
+                        <i class="material-icons" style="color:#1a73e8;font-size:30px;">savings</i>
+                    </div>
+                    <div>
+                        <h3 style="font-size:22px;color:#1a73e8;font-weight:600;margin-bottom:8px;">Completamente gratuito</h3>
+                        <p style="font-size:18px;line-height:1.4;">Sin licencias ni costos ocultos, a diferencia de SPSS, SAS o Stata.</p>
+                    </div>
+                </div>
+                <div style="background:#f8f9fa;border-radius:10px;padding:25px;margin-bottom:20px;box-shadow:0 4px 8px rgba(0,0,0,0.05);display:flex;align-items:center;">
+                    <div style="background:#e8f0fe;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:20px;">
+                        <i class="material-icons" style="color:#1a73e8;font-size:30px;">groups</i>
+                    </div>
+                    <div>
+                        <h3 style="font-size:22px;color:#1a73e8;font-weight:600;margin-bottom:8px;">Comunidad global activa</h3>
+                        <p style="font-size:18px;line-height:1.4;">Miles de paquetes gratuitos en CRAN (más de 20.000) que amplían sus funciones constantemente.</p>
+                    </div>
+                </div>
+                <div style="background:#f8f9fa;border-radius:10px;padding:25px;margin-bottom:20px;box-shadow:0 4px 8px rgba(0,0,0,0.05);display:flex;align-items:center;">
+                    <div style="background:#e8f0fe;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:20px;">
+                        <i class="material-icons" style="color:#1a73e8;font-size:30px;">visibility</i>
+                    </div>
+                    <div>
+                        <h3 style="font-size:22px;color:#1a73e8;font-weight:600;margin-bottom:8px;">Transparencia total</h3>
+                        <p style="font-size:18px;line-height:1.4;">Puedes ver y verificar el código de todos los métodos estadísticos.</p>
+                    </div>
+                </div>
+                <div style="background:#f8f9fa;border-radius:10px;padding:25px;box-shadow:0 4px 8px rgba(0,0,0,0.05);display:flex;align-items:center;">
+                    <div style="background:#e8f0fe;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:20px;">
+                        <i class="material-icons" style="color:#1a73e8;font-size:30px;">update</i>
+                    </div>
+                    <div>
+                        <h3 style="font-size:22px;color:#1a73e8;font-weight:600;margin-bottom:8px;">Actualizaciones constantes</h3>
+                        <p style="font-size:18px;line-height:1.4;">Nuevas técnicas estadísticas aparecen primero en R.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:0 70px 0 20px;">
+                <img src="https://sfile.chatglm.cn/images-ppt/8455dd325f31.jpg" alt="Open Source" style="max-width:100%;border-radius:10px;box-shadow:0 8px 16px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Instalación -->
+    <div class="slide">
+        <div class="header"><h1 class="title">Instalación: R y RStudio</h1></div>
+        <div style="display:flex;flex-grow:1;padding:40px 0;">
+            <div style="flex:1;padding:0 20px 0 70px;display:flex;flex-direction:column;justify-content:center;">
+                <div style="background:#f8f9fa;border-radius:10px;padding:25px;margin-bottom:30px;box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+                    <h3 style="font-size:24px;color:#1a73e8;font-weight:600;margin-bottom:15px;display:flex;align-items:center;">
+                        <i class="material-icons" style="margin-right:10px;font-size:28px;">download</i> Paso 1: Instalar R (el motor)
+                    </h3>
+                    <p style="font-size:19px;line-height:1.6;margin-bottom:15px;">Descarga desde <strong>CRAN</strong>: <a href="https://cran.r-project.org/" target="_blank" style="color:#1a73e8;">https://cran.r-project.org/</a></p>
+                    <ul style="font-size:18px;line-height:1.6;margin-left:20px;">
+                        <li>Windows y Mac: instalador gráfico sencillo</li>
+                        <li>Linux: <code style="background:#e8f0fe;padding:4px 8px;border-radius:4px;">sudo apt-get install r-base</code></li>
+                    </ul>
+                </div>
+                <div style="background:#f8f9fa;border-radius:10px;padding:25px;box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+                    <h3 style="font-size:24px;color:#1a73e8;font-weight:600;margin-bottom:15px;display:flex;align-items:center;">
+                        <i class="material-icons" style="margin-right:10px;font-size:28px;">desktop_windows</i> Paso 2: Instalar RStudio (la interfaz recomendada)
+                    </h3>
+                    <p style="font-size:19px;line-height:1.6;">Descarga gratuita desde: <a href="https://posit.co/download/rstudio-desktop/" target="_blank" style="color:#1a73e8;">posit.co/download</a></p>
+                    <p style="font-size:19px;line-height:1.6;margin-top:15px;"><strong>Ventajas de RStudio:</strong> scripts, consola, gráficos y archivos en una sola ventana organizada.</p>
+                </div>
+            </div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:0 70px 0 20px;">
+                <img src="https://sfile.chatglm.cn/images-ppt/b90669d1d214.png" alt="RStudio Interface" style="max-width:100%;border-radius:10px;box-shadow:0 8px 16px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Comandos Básicos -->
+    <div class="slide">
+        <div class="header"><h1 class="title">Comandos Básicos y Sintaxis</h1></div>
+        <div style="padding:40px 70px;display:grid;grid-template-columns:1fr 1fr;gap:30px;flex-grow:1;">
+            <div style="background:#f8f9fa;border-radius:10px;padding:25px;box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+                <h3 style="font-size:24px;color:#1a73e8;margin-bottom:15px;">Asignación</h3>
+                <div class="code-block">
+                    x &lt;- 42<br>
+                    nombre &lt;- "María"<br>
+                    activo &lt;- TRUE
+                </div>
+                <p style="margin-top:15px;font-size:18px;">Usa <code>&lt;-</code> (o =). R distingue mayúsculas.</p>
+            </div>
+            <div style="background:#f8f9fa;border-radius:10px;padding:25px;box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+                <h3 style="font-size:24px;color:#1a73e8;margin-bottom:15px;">Vectores (estructura básica)</h3>
+                <div class="code-block">
+                    edades &lt;- c(23, 29, 35, 41)<br>
+                    nombres &lt;- c("Ana", "Luis", "Sofía")<br>
+                    mixto &lt;- c(1, "texto", FALSE)
+                </div>
+            </div>
+            <div style="background:#f8f9fa;border-radius:10px;padding:25px;box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+                <h3 style="font-size:24px;color:#1a73e8;margin-bottom:15px;">Operaciones</h3>
+                <div class="code-block">
+                    suma &lt;- 10 + 20<br>
+                    media &lt;- mean(edades)<br>
+                    logaritmo &lt;- log(100)<br>
+                    potencia &lt;- 3^4  # 81
+                </div>
+            </div>
+            <div style="background:#f8f9fa;border-radius:10px;padding:25px;box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+                <h3 style="font-size:24px;color:#1a73e8;margin-bottom:15px;">Ayuda</h3>
+                <div class="code-block">
+                    ?mean<br>
+                    ?plot<br>
+                    help.search("regression")
+                </div>
+                <p style="margin-top:15px;font-size:18px;">¡La documentación es excelente!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Ejemplo Introductorio -->
+    <div class="slide">
+        <div class="header"><h1 class="title">Ejemplo Introductorio: Trabajando con Datos</h1></div>
+        <div style="padding:30px 70px;display:flex;flex-direction:column;flex-grow:1;gap:20px;">
+            <div style="display:flex;gap:25px;flex-grow:1;">
+                <div style="flex:1;background:#f8f9fa;border-radius:10px;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+                    <h3 style="font-size:22px;color:#1a73e8;margin-bottom:15px;">Dataset interno: iris</h3>
+                    <div class="code-block">
+                        data(iris)<br>
+                        head(iris)<br>
+                        summary(iris)<br>
+                        str(iris)
+                    </div>
+                </div>
+                <div style="flex:1;background:#f8f9fa;border-radius:10px;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+                    <h3 style="font-size:22px;color:#1a73e8;margin-bottom:15px;">Crear data.frame</h3>
+                    <div class="code-block">
+                        alumnos &lt;- data.frame(<br>
+                        &nbsp;&nbsp;nombre = c("Ana","Luis"),<br>
+                        &nbsp;&nbsp;edad = c(22, 25),<br>
+                        &nbsp;&nbsp;nota = c(8.5, 9.2)<br>
+                        )<br>
+                        alumnos
+                    </div>
+                </div>
+                <div style="flex:1;background:#f8f9fa;border-radius:10px;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+                    <h3 style="font-size:22px;color:#1a73e8;margin-bottom:15px;">Leer archivos</h3>
+                    <div class="code-block">
+                        # CSV<br>
+                        datos &lt;- read.csv("archivo.csv")<br><br>
+                        # Excel (con paquete readxl)<br>
+                        library(readxl)<br>
+                        datos &lt;- read_excel("datos.xlsx")
+                    </div>
+                </div>
+            </div>
+            <div style="background:#e8f0fe;padding:20px;border-radius:10px;border-left:5px solid #1a73e8;">
+                <strong style="color:#1a73e8;">Tip importante:</strong> Usa <code>datos$columna</code> para acceder a una variable específica, por ejemplo <code>iris$Sepal.Length</code>.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Resumen -->
+    <div class="slide">
+        <div class="header"><h1 class="title">Resumen y Próximos Pasos</h1></div>
+        <div style="display:flex;flex-grow:1;padding:40px 70px;">
+            <div style="flex:1;padding-right:30px;">
+                <h2 style="font-size:28px;color:#1a73e8;margin-bottom:20px;">Lo que has aprendido</h2>
+                <ul style="font-size:20px;line-height:1.8;">
+                    <li>R es gratuito, potente y open source</li>
+                    <li>Instalación sencilla de R + RStudio</li>
+                    <li>Sintaxis básica: asignación, vectores, funciones</li>
+                    <li>Cómo cargar y explorar datos</li>
+                    <li>Uso de la ayuda integrada</li>
+                </ul>
+                <div style="margin-top:30px;background:#e8f0fe;padding:25px;border-radius:10px;display:flex;align-items:center;">
+                    <div style="background:#1a73e8;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:20px;">
+                        <i class="material-icons" style="font-size:32px;">rocket_launch</i>
+                    </div>
+                    <div style="font-size:22px;font-weight:600;">
+                        ¡Ahora practica! Abre RStudio y prueba los ejemplos vistos.
+                    </div>
+                </div>
+            </div>
+            <div style="flex:1;padding-left:30px;border-left:1px solid #ddd;">
+                <h2 style="font-size:28px;color:#1a73e8;margin-bottom:20px;">Recursos recomendados</h2>
+                <ul style="font-size:17px;line-height:1.6;">
+                    <li><strong>R para Ciencia de Datos</strong> – Hadley Wickham (gratuito online)</li>
+                    <li><strong>Introducción a R</strong> – CRAN manuals</li>
+                    <li><strong>Swirl</strong> – Paquete interactivo para aprender dentro de R</li>
+                    <li><strong>DataCamp</strong> y <strong>Coursera</strong> – cursos introductorios</li>
+                    <li>Documentación oficial: <a href="https://cran.r-project.org/" style="color:#1a73e8;">cran.r-project.org</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controles -->
+    <div class="controls">
+        <button class="btn" id="home-btn"><span class="material-icons">home</span></button>
+        <button class="btn" id="prev-btn"><span class="material-icons">chevron_left</span></button>
+        <button class="btn" id="next-btn"><span class="material-icons">chevron_right</span></button>
+    </div>
+
+    <div class="indicator" id="indicator"></div>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(n) {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active', 'prev');
+            if (index === n) {
+                slide.classList.add('active');
+            } else if (index < n) {
+                slide.classList.add('prev');
+            }
+        });
+
+        // Actualizar puntos indicadores
+        document.querySelectorAll('.dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === n);
+        });
+
+        // Deshabilitar botones si es necesario
+        document.getElementById('prev-btn').disabled = n === 0;
+    }
+
+    function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+    }
+
+    function goHome() {
+        currentSlide = 0;
+        showSlide(currentSlide);
+    }
+
+    // Crear indicadores
+    const indicator = document.getElementById('indicator');
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        indicator.appendChild(dot);
+    });
+
+    // Eventos
+    document.getElementById('next-btn').addEventListener('click', nextSlide);
+    document.getElementById('prev-btn').addEventListener('click', prevSlide);
+    document.getElementById('home-btn').addEventListener('click', goHome);
+
+    // Teclado
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'Home') goHome();
+    });
+</script>
+
+</body>
+</html>
