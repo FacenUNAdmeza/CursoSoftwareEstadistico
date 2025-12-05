@@ -1,1 +1,2554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad II: Software SPSS – Presentación completa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f5f5f5;
+            padding: 40px 0 80px 0;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* Diapositivas en modo presentación */
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+            color: #333;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            display: none;          /* ocultas por defecto */
+        }
+
+        .slide.active {
+            display: flex;          /* solo la diapositiva activa se muestra */
+        }
+
+        .slide-main {
+            background: linear-gradient(135deg, #1a56db 0%, #1e40af 100%);
+            color: white;
+        }
+
+        .slide-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+
+        .slide-main .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a56db 0%, #1e40af 100%);
+            color: white;
+            padding: 20px 70px;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+
+        .header h1 {
+            font-size: 40px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 40px 70px;
+        }
+
+        .left-content {
+            width: 55%;
+            padding-right: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-content {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .material-icons {
+            vertical-align: middle;
+        }
+
+        /* Portada Unidad II */
+
+        .slide-main .left-content {
+            width: 60%;
+            padding-left: 70px;
+            padding-right: 20px;
+        }
+
+        .slide-main .right-content {
+            width: 40%;
+            padding-right: 70px;
+        }
+
+        .slide-main h1 {
+            font-size: 60px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .course-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .course-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 18px;
+            width: fit-content;
+        }
+
+        .logo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            width: 80%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Introducción a SPSS */
+
+        .intro-text {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .key-points {
+            margin-top: 20px;
+        }
+
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .key-point .material-icons {
+            color: #1a56db;
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .key-point-text {
+            font-size: 20px;
+        }
+
+        .highlight {
+            color: #1a56db;
+            font-weight: 600;
+        }
+
+        .fact-box {
+            background: rgba(26, 86, 219, 0.08);
+            border-left: 4px solid #1a56db;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 30px;
+        }
+
+        .fact-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a56db;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .fact-title .material-icons {
+            margin-right: 10px;
+        }
+
+        .fact-content {
+            font-size: 18px;
+        }
+
+        /* Contenidos programáticos */
+
+        .content-modules {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .module {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .module:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-icon {
+            background: rgba(26, 86, 219, 0.1);
+            color: #1a56db;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .module-icon .material-icons {
+            font-size: 28px;
+        }
+
+        .module-content {
+            flex-grow: 1;
+        }
+
+        .module-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a56db;
+            margin-bottom: 5px;
+        }
+
+        .module-desc {
+            font-size: 16px;
+            color: #6b7280;
+        }
+
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .image {
+            width: 90%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight-box {
+            background: rgba(26, 86, 219, 0.08);
+            border-left: 4px solid #1a56db;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 20px;
+            width: 90%;
+        }
+
+        .highlight-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a56db;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .highlight-title .material-icons {
+            margin-right: 10px;
+        }
+
+        .highlight-content {
+            font-size: 18px;
+        }
+
+        /* Títulos de sección genéricos */
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a56db;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title .material-icons {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        /* 2.1 Instalación de SPSS */
+
+        .requirements-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .requirements-table th {
+            background-color: #1a56db;
+            color: white;
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .requirements-table td {
+            background-color: white;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .requirements-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .requirements-table .highlight {
+            color: #1a56db;
+            font-weight: 600;
+        }
+
+        .installation-steps {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            background: #1a56db;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 18px;
+            padding-top: 2px;
+        }
+
+        .info-box {
+            background: rgba(26, 86, 219, 0.08);
+            border-left: 4px solid #1a56db;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+        }
+
+        .info-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a56db;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-title .material-icons {
+            margin-right: 10px;
+        }
+
+        .info-content {
+            font-size: 18px;
+        }
+
+        .alternatives {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .alternative {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .alternative:last-child {
+            margin-bottom: 0;
+        }
+
+        .alternative .material-icons {
+            color: #1a56db;
+            margin-right: 10px;
+        }
+
+        .alternative-text {
+            font-size: 18px;
+        }
+
+        /* 2.2 Ventanas de SPSS */
+
+        .window-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex-grow: 1;
+        }
+
+        .window-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .window-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .window-header {
+            background-color: #1a56db;
+            color: white;
+            padding: 12px 20px;
+            font-weight: 600;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .window-header .material-icons {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .window-content {
+            padding: 15px 20px;
+        }
+
+        .window-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            background: rgba(26, 86, 219, 0.08);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .feature .material-icons {
+            color: #1a56db;
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        .syntax-example {
+            background: #f8fafc;
+            border-left: 4px solid #1a56db;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-top: auto;
+        }
+
+        .syntax-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1a56db;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        /* 2.3 Entornos de trabajo */
+
+        .user-profiles {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .user-profiles th {
+            background-color: #1a56db;
+            color: white;
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .user-profiles td {
+            background-color: white;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .user-profiles tr:last-child td {
+            border-bottom: none;
+        }
+
+        .folder-structure {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .folder {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .folder:last-child {
+            margin-bottom: 0;
+        }
+
+        .folder .material-icons {
+            color: #1a56db;
+            margin-right: 10px;
+            font-size: 22px;
+        }
+
+        .folder-text {
+            font-size: 18px;
+        }
+
+        .folder-sub {
+            margin-left: 30px;
+            margin-top: 5px;
+        }
+
+        .folder-sub .folder-text {
+            font-size: 16px;
+            color: #6b7280;
+        }
+
+        .workflow-diagram {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .workflow-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a56db;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .workflow-title .material-icons {
+            margin-right: 10px;
+        }
+
+        .workflow-steps {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .workflow-step {
+            text-align: center;
+            width: 30%;
+        }
+
+        .step-icon {
+            background: rgba(26, 86, 219, 0.1);
+            color: #1a56db;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 10px;
+        }
+
+        .step-icon .material-icons {
+            font-size: 30px;
+        }
+
+        .step-text {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .customization {
+            background: rgba(26, 86, 219, 0.08);
+            border-left: 4px solid #1a56db;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .customization-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a56db;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .customization-title .material-icons {
+            margin-right: 10px;
+        }
+
+        .customization-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .customization-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            width: calc(50% - 8px);
+        }
+
+        .customization-item .material-icons {
+            color: #1a56db;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .customization-text {
+            font-size: 16px;
+        }
+
+        /* 2.4 Manipulación de datos */
+
+        .import-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .import-table th {
+            background-color: #1a56db;
+            color: white;
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .import-table td {
+            background-color: white;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 16px;
+        }
+
+        .import-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .variable-properties {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .property-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .property {
+            display: flex;
+            align-items: center;
+        }
+
+        .property .material-icons {
+            color: #1a56db;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .property-text {
+            font-size: 16px;
+        }
+
+        .transformations {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .transformation-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .transformation {
+            display: flex;
+            align-items: center;
+            background: rgba(26, 86, 219, 0.08);
+            padding: 12px 15px;
+            border-radius: 6px;
+            width: calc(50% - 8px);
+        }
+
+        .transformation .material-icons {
+            color: #1a56db;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .transformation-text {
+            font-size: 16px;
+        }
+
+        .warning-box {
+            background: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: auto;
+        }
+
+        .warning-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #d97706;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .warning-title .material-icons {
+            margin-right: 10px;
+        }
+
+        .warning-content {
+            font-size: 16px;
+            color: #92400e;
+        }
+
+        /* 2.5 Análisis exploratorio */
+
+        .procedures {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .procedure {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            width: calc(50% - 8px);
+        }
+
+        .procedure .material-icons {
+            color: #1a56db;
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .procedure-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .measures {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .measures-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .measure-category {
+            margin-bottom: 15px;
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a56db;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .category-title .material-icons {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .measure-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .measure-item {
+            background: rgba(26, 86, 219, 0.08);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .chart-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .chart-table th {
+            background-color: #1a56db;
+            color: white;
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .chart-table td {
+            background-color: white;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 16px;
+        }
+
+        .chart-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tip-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #047857;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: auto;
+        }
+
+        .tip-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #047857;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tip-title .material-icons {
+            margin-right: 10px;
+        }
+
+        .tip-content {
+            font-size: 16px;
+            color: #065f46;
+        }
+
+        /* Actividades de aprendizaje */
+
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 40px 70px;
+        }
+
+        .progress-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #bae6fd;
+            display: flex;
+            align-items: center;
+        }
+
+        .progress-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 20px;
+            color: #1a56db;
+            font-size: 20px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .progress-bar-container {
+            flex-grow: 1;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #e5e7eb;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #1a56db;
+            border-radius: 5px;
+            width: 25%;
+        }
+
+        .progress-text {
+            font-size: 16px;
+            color: #6b7280;
+        }
+
+        .exercises-container {
+            display: flex;
+            gap: 25px;
+            flex-grow: 1;
+        }
+
+        .exercise-card {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .exercise-header {
+            background-color: #1a56db;
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .exercise-header .material-icons {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .exercise-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .objective {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1a56db;
+        }
+
+        .tasks-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tasks-title .material-icons {
+            font-size: 20px;
+            margin-right: 8px;
+            color: #1a56db;
+        }
+
+        .tasks-list {
+            margin-bottom: 15px;
+            padding-left: 15px;
+        }
+
+        .task-item {
+            font-size: 16px;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .task-item:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #1a56db;
+            font-weight: bold;
+        }
+
+        .deliverable {
+            background: rgba(26, 86, 219, 0.08);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: auto;
+        }
+
+        .deliverable-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #1a56db;
+            display: flex;
+            align-items: center;
+        }
+
+        .deliverable-title .material-icons {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        .deliverable-text {
+            font-size: 16px;
+        }
+
+        /* Evaluación de la unidad */
+
+        .evaluation-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .evaluation-table th {
+            background-color: #1a56db;
+            color: white;
+            font-weight: 600;
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .evaluation-table td {
+            background-color: white;
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 16px;
+        }
+
+        .evaluation-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .weightage {
+            font-weight: 600;
+            font-size: 20px;
+            color: #1a56db;
+        }
+
+        .criteria-box {
+            background: rgba(26, 86, 219, 0.08);
+            border-left: 4px solid #1a56db;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: auto;
+        }
+
+        .criteria-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a56db;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .criteria-title .material-icons {
+            margin-right: 10px;
+        }
+
+        .criteria-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .criteria-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            width: calc(50% - 8px);
+        }
+
+        .criteria-item .material-icons {
+            color: #1a56db;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .criteria-text {
+            font-size: 16px;
+        }
+
+        .criteria-percentage {
+            font-weight: 600;
+            color: #1a56db;
+            margin-left: auto;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a56db;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .chart {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+        }
+
+        .bar {
+            width: 60px;
+            background: linear-gradient(to top, #1a56db, #4285f4);
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .bar:hover {
+            transform: translateY(-5px);
+        }
+
+        .bar-label {
+            position: absolute;
+            top: -30px;
+            font-weight: 600;
+            font-size: 18px;
+            color: #1a56db;
+        }
+
+        .bar-name {
+            position: absolute;
+            bottom: -30px;
+            text-align: center;
+            font-size: 14px;
+            width: 100px;
+            line-height: 1.2;
+        }
+
+        .bar-1 { height: 75px; }
+        .bar-2 { height: 100px; }
+        .bar-3 { height: 50px; }
+        .bar-4 { height: 25px; }
+
+        .tip-box-eval {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #047857;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip-title-eval {
+            font-size: 18px;
+            font-weight: 600;
+            color: #047857;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tip-title-eval .material-icons {
+            margin-right: 10px;
+        }
+
+        .tip-content-eval {
+            font-size: 16px;
+            color: #065f46;
+        }
+
+        /* Bibliografía */
+
+        .biblio-list {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .biblio-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .biblio-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #1a56db;
+            font-weight: bold;
+        }
+
+        /* Controles de navegación tipo presentación */
+        .controls {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .controls button {
+            pointer-events: auto;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid #1a56db;
+            background: #ffffff;
+            color: #1a56db;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .controls button:hover {
+            background: #1a56db;
+            color: #ffffff;
+        }
+
+        .controls .material-icons {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="slides-wrapper">
+
+    <!-- Portada Unidad II -->
+    <section class="slide slide-main" id="portada-unidad-2">
+        <div class="content">
+            <div class="left-content">
+                <h1>Unidad II: Software SPSS</h1>
+                <div class="subtitle">Softwares Estadísticos (Electiva)</div>
+                <div class="course-info">
+                    <div class="course-badge">
+                        <i class="material-icons">school</i>
+                        FACEN-UNA
+                    </div>
+                    <div class="course-badge">
+                        <i class="material-icons">event</i>
+                        Plan 2025
+                    </div>
+                    <div class="course-badge">
+                        <i class="material-icons">schedule</i>
+                        16 sesiones · 5 horas/semana
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="logo-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/e45d2bd33390.png"
+                         alt="IBM SPSS Statistics Logo" class="logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introducción a SPSS -->
+    <section class="slide" id="introduccion-spss">
+        <div class="header">
+            <h1>Introducción a SPSS</h1>
+        </div>
+        <div class="content">
+            <div class="left-content">
+                <p class="intro-text">
+                    <span class="highlight">SPSS</span> (Statistical Package for the Social Sciences) es un software estadístico ampliamente utilizado en investigación académica, gubernamental y empresarial.
+                </p>
+                <div class="key-points">
+                    <div class="key-point">
+                        <i class="material-icons">history</i>
+                        <div class="key-point-text">
+                            <strong>Origen:</strong> Desarrollado por <span class="highlight">Norman H. Nie</span> en 1968
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">star</i>
+                        <div class="key-point-text">
+                            <strong>Características:</strong> Interfaz intuitiva y poderosa capacidad de procesamiento
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">trending_up</i>
+                        <div class="key-point-text">
+                            <strong>Aplicaciones:</strong> Análisis de datos en ciencias sociales, investigación de mercado, salud pública
+                        </div>
+                    </div>
+                </div>
+                <div class="fact-box">
+                    <div class="fact-title">
+                        <i class="material-icons">lightbulb</i>
+                        Enfoque de la unidad
+                    </div>
+                    <div class="fact-content">
+                        Desarrollo de habilidades para el manejo eficiente de SPSS en el procesamiento, manipulación y análisis exploratorio de datos estadísticos.
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/fb33e2a47ed9.jpg"
+                         alt="IBM SPSS Statistics Logo" class="image">
+                </div>
+                <div class="key-points">
+                    <div class="key-point">
+                        <i class="material-icons">school</i>
+                        <div class="key-point-text">
+                            <strong>Estándar académico</strong> en análisis estadístico
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">business</i>
+                        <div class="key-point-text">
+                            <strong>Adopción empresarial</strong> en múltiples industrias
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">public</i>
+                        <div class="key-point-text">
+                            <strong>Presencia global</strong> en más de 150 países
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenidos programáticos -->
+    <section class="slide" id="contenidos-programaticos">
+        <div class="header">
+            <h1>Contenidos Programáticos</h1>
+        </div>
+        <div class="content">
+            <div class="left-content">
+                <p class="intro-text">
+                    La unidad se estructura en cinco componentes principales que guiarán el proceso de aprendizaje:
+                </p>
+                <div class="content-modules">
+                    <div class="module">
+                        <div class="module-icon">
+                            <i class="material-icons">download</i>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-title">2.1. Instalación de SPSS</div>
+                            <div class="module-desc">Configuración del entorno de trabajo</div>
+                        </div>
+                    </div>
+                    <div class="module">
+                        <div class="module-icon">
+                            <i class="material-icons">window_maximize</i>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-title">2.2. Ventanas de SPSS</div>
+                            <div class="module-desc">Interfaz y componentes principales</div>
+                        </div>
+                    </div>
+                    <div class="module">
+                        <div class="module-icon">
+                            <i class="material-icons">schema</i>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-title">2.3. Entornos de trabajo</div>
+                            <div class="module-desc">Flujos de trabajo y organización de proyectos</div>
+                        </div>
+                    </div>
+                    <div class="module">
+                        <div class="module-icon">
+                            <i class="material-icons">database</i>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-title">2.4. Manipulación de datos</div>
+                            <div class="module-desc">Importación, limpieza y transformación</div>
+                        </div>
+                    </div>
+                    <div class="module">
+                        <div class="module-icon">
+                            <i class="material-icons">analytics</i>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-title">2.5. Análisis Exploratorio</div>
+                            <div class="module-desc">Estadística descriptiva y visualización</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/f54a33e51c79.png"
+                         alt="SPSS Data Editor Interface" class="image">
+                </div>
+                <div class="highlight-box">
+                    <div class="highlight-title">
+                        <i class="material-icons">lightbulb</i>
+                        Enfoque de aprendizaje
+                    </div>
+                    <div class="highlight-content">
+                        Esta unidad tiene un carácter eminentemente práctico, enfocándose en el desarrollo de habilidades para el manejo eficiente de SPSS en el procesamiento y análisis de datos estadísticos.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.1 Instalación de SPSS -->
+    <section class="slide" id="instalacion-spss">
+        <div class="header">
+            <h1>2.1. Instalación de SPSS</h1>
+        </div>
+        <div class="content">
+            <div class="left-content">
+                <div class="section-title">
+                    <i class="material-icons">desktop_windows</i>
+                    Requisitos del Sistema
+                </div>
+                <table class="requirements-table">
+                    <thead>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Mínimo</th>
+                        <th>Recomendado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Sistema Operativo</td>
+                        <td>Windows 10 / macOS 10.14</td>
+                        <td class="highlight">Windows 11 / macOS 12</td>
+                    </tr>
+                    <tr>
+                        <td>Procesador</td>
+                        <td>1.6 GHz x64</td>
+                        <td class="highlight">2.0 GHz x64 o superior</td>
+                    </tr>
+                    <tr>
+                        <td>Memoria RAM</td>
+                        <td>4 GB</td>
+                        <td class="highlight">8 GB o más</td>
+                    </tr>
+                    <tr>
+                        <td>Espacio en Disco</td>
+                        <td>2.5 GB</td>
+                        <td class="highlight">5 GB</td>
+                    </tr>
+                    <tr>
+                        <td>Resolución Pantalla</td>
+                        <td>1024 x 768</td>
+                        <td class="highlight">1920 x 1080</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="section-title">
+                    <i class="material-icons">settings</i>
+                    Proceso de Instalación
+                </div>
+                <div class="installation-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Descargue el instalador desde el portal oficial de IBM</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Ejecute el archivo .exe como administrador</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Siga las instrucciones del asistente de instalación</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-text">Seleccione los componentes (recomendado: instalación completa)</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-text">Complete el proceso y reinicie el equipo si es necesario</div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/c8309f1d9d21.png"
+                         alt="SPSS Installation Process" class="image">
+                </div>
+
+                <div class="info-box">
+                    <div class="info-title">
+                        <i class="material-icons">warning</i>
+                        Licenciamiento y Activación
+                    </div>
+                    <div class="info-content">
+                        La FACEN proporciona licencias académicas para estudiantes y docentes. Consulte con el departamento de Sistemas para obtener su código de licencia.
+                    </div>
+                </div>
+
+                <div class="alternatives">
+                    <div class="section-title">
+                        <i class="material-icons">apps</i>
+                        Versiones Alternativas
+                    </div>
+                    <div class="alternative">
+                        <i class="material-icons">check_circle</i>
+                        <div class="alternative-text"><strong>PSPP:</strong> Alternativa libre y gratuita</div>
+                    </div>
+                    <div class="alternative">
+                        <i class="material-icons">check_circle</i>
+                        <div class="alternative-text"><strong>GradPack:</strong> Versión estudiantil completa</div>
+                    </div>
+                    <div class="alternative">
+                        <i class="material-icons">check_circle</i>
+                        <div class="alternative-text"><strong>Campus Edition:</strong> Licencia institucional</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.2 Ventanas de SPSS -->
+    <section class="slide" id="ventanas-spss">
+        <div class="header">
+            <h1>2.2. Ventanas de SPSS</h1>
+        </div>
+        <div class="content">
+            <div class="left-content">
+                <p class="intro-text">
+                    SPSS organiza su funcionalidad en varias ventanas principales, cada una con un propósito específico:
+                </p>
+                <div class="window-cards">
+                    <div class="window-card">
+                        <div class="window-header">
+                            <i class="material-icons">table_chart</i>
+                            Editor de Datos
+                        </div>
+                        <div class="window-content">
+                            <div class="window-features">
+                                <div class="feature">
+                                    <i class="material-icons">grid_on</i>
+                                    Vista de Datos
+                                </div>
+                                <div class="feature">
+                                    <i class="material-icons">format_list_bulleted</i>
+                                    Vista de Variables
+                                </div>
+                                <div class="feature">
+                                    <i class="material-icons">edit</i>
+                                    Edición directa
+                                </div>
+                                <div class="feature">
+                                    <i class="material-icons">settings</i>
+                                    Definición de propiedades
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="window-card">
+                        <div class="window-header">
+                            <i class="material-icons">visibility</i>
+                            Visor de Resultados
+                        </div>
+                        <div class="window-content">
+                            <div class="window-features">
+                                <div class="feature">
+                                    <i class="material-icons">account_tree</i>
+                                    Panel de navegación
+                                </div>
+                                <div class="feature">
+                                    <i class="material-icons">insert_chart</i>
+                                    Visualización de gráficos
+                                </div>
+                                <div class="feature">
+                                    <i class="material-icons">table_chart</i>
+                                    Tablas de resultados
+                                </div>
+                                <div class="feature">
+                                    <i class="material-icons">save</i>
+                                    Exportación de informes
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="window-card">
+                        <div class="window-header">
+                            <i class="material-icons">code</i>
+                            Editor de Sintaxis
+                        </div>
+                        <div class="window-content">
+                            <div class="window-features">
+                                <div class="feature">
+                                    <i class="material-icons">repeat</i>
+                                    Automatización de tareas
+                                </div>
+                                <div class="feature">
+                                    <i class="material-icons">description</i>
+                                    Documentación
+                                </div>
+                                <div class="feature">
+                                    <i class="material-icons">replay</i>
+                                    Reproducibilidad
+                                </div>
+                                <div class="feature">
+                                    <i class="material-icons">extension</i>
+                                    Análisis avanzados
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/b9af8184a10f.png"
+                         alt="SPSS Output Viewer" class="image">
+                </div>
+
+                <div class="syntax-example">
+                    <div class="syntax-title">Ejemplo de sintaxis SPSS:</div>
+                    <div>
+                        <span class="highlight">DESCRIPTIVES</span> VARIABLES=edad ingreso años_experiencia<br>
+                        /STATISTICS=MEAN STDDEV MIN MAX.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.3 Entornos de trabajo -->
+    <section class="slide" id="entornos-trabajo">
+        <div class="header">
+            <h1>2.3. Entornos de Trabajo</h1>
+        </div>
+        <div class="content">
+            <div class="left-content">
+                <p class="intro-text">
+                    SPSS ofrece diferentes enfoques para el trabajo estadístico, adaptándose a diversos perfiles de usuarios:
+                </p>
+
+                <table class="user-profiles">
+                    <thead>
+                    <tr>
+                        <th>Perfil</th>
+                        <th>Enfoque Recomendado</th>
+                        <th>Ventana Principal</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Principiante</strong></td>
+                        <td>Interfaz gráfica (menús)</td>
+                        <td>Editor de Datos + Cuadros de Diálogo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intermedio</strong></td>
+                        <td>Combinación menús + sintaxis</td>
+                        <td>Editor de Datos + Editor de Sintaxis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avanzado/Investigador</strong></td>
+                        <td>Sintaxis + Automatización</td>
+                        <td>Editor de Sintaxis + Extensiones</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="folder-structure">
+                    <div class="section-title">
+                        <i class="material-icons">folder</i>
+                        Estructura de Proyectos
+                    </div>
+                    <div class="folder">
+                        <i class="material-icons">folder</i>
+                        <div class="folder-text">Proyecto_Investigacion/</div>
+                    </div>
+                    <div class="folder-sub">
+                        <div class="folder">
+                            <i class="material-icons">folder</i>
+                            <div class="folder-text">01_Datos/</div>
+                        </div>
+                        <div class="folder">
+                            <i class="material-icons">folder</i>
+                            <div class="folder-text">02_Sintaxis/</div>
+                        </div>
+                        <div class="folder">
+                            <i class="material-icons">folder</i>
+                            <div class="folder-text">03_Resultados/</div>
+                        </div>
+                        <div class="folder">
+                            <i class="material-icons">folder</i>
+                            <div class="folder-text">04_Documentacion/</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="workflow-diagram">
+                    <div class="workflow-title">
+                        <i class="material-icons">account_tree</i>
+                        Flujos de Trabajo
+                    </div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="material-icons">input</i>
+                            </div>
+                            <div class="step-text">Importación</div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="material-icons">cleaning_services</i>
+                            </div>
+                            <div class="step-text">Limpieza</div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="material-icons">insights</i>
+                            </div>
+                            <div class="step-text">Análisis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customization">
+                    <div class="customization-title">
+                        <i class="material-icons">settings</i>
+                        Personalización del Entorno
+                    </div>
+                    <div class="customization-items">
+                        <div class="customization-item">
+                            <i class="material-icons">language</i>
+                            <div class="customization-text">Idioma de interfaz</div>
+                        </div>
+                        <div class="customization-item">
+                            <i class="material-icons">format_paint</i>
+                            <div class="customization-text">Formato de salida</div>
+                        </div>
+                        <div class="customization-item">
+                            <i class="material-icons">dashboard</i>
+                            <div class="customization-text">Opciones generales</div>
+                        </div>
+                        <div class="customization-item">
+                            <i class="material-icons">style</i>
+                            <div class="customization-text">Plantillas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.4 Manipulación de datos -->
+    <section class="slide" id="manipulacion-datos">
+        <div class="header">
+            <h1>2.4. Manipulación de Datos</h1>
+        </div>
+        <div class="content">
+            <div class="left-content">
+                <div class="section-title">
+                    <i class="material-icons">file_download</i>
+                    Importación de Datos
+                </div>
+                <table class="import-table">
+                    <thead>
+                    <tr>
+                        <th>Formato</th>
+                        <th>Procedimiento</th>
+                        <th>Consideraciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Excel</strong></td>
+                        <td>Archivo → Abrir → Datos</td>
+                        <td>Seleccionar hoja correcta</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CSV/TXT</strong></td>
+                        <td>Leer datos de texto</td>
+                        <td>Especificar delimitador</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bases de datos</strong></td>
+                        <td>Abrir base de datos</td>
+                        <td>Requiere drivers ODBC</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Otros paquetes</strong></td>
+                        <td>Abrir → Datos</td>
+                        <td>SAS, Stata, R</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="variable-properties">
+                    <div class="section-title">
+                        <i class="material-icons">settings</i>
+                        Definición de Variables
+                    </div>
+                    <div class="property-list">
+                        <div class="property">
+                            <i class="material-icons">label</i>
+                            <div class="property-text">Nombre</div>
+                        </div>
+                        <div class="property">
+                            <i class="material-icons">category</i>
+                            <div class="property-text">Tipo</div>
+                        </div>
+                        <div class="property">
+                            <i class="material-icons">text_fields</i>
+                            <div class="property-text">Etiqueta</div>
+                        </div>
+                        <div class="property">
+                            <i class="material-icons">format_list_numbered</i>
+                            <div class="property-text">Valores</div>
+                        </div>
+                        <div class="property">
+                            <i class="material-icons">horizontal_rule</i>
+                            <div class="property-text">Ancho</div>
+                        </div>
+                        <div class="property">
+                            <i class="material-icons">format_align_center</i>
+                            <div class="property-text">Alineación</div>
+                        </div>
+                        <div class="property">
+                            <i class="material-icons">donut_large</i>
+                            <div class="property-text">Escala de medida</div>
+                        </div>
+                        <div class="property">
+                            <i class="material-icons">highlight_off</i>
+                            <div class="property-text">Valores perdidos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="transformations">
+                    <div class="section-title">
+                        <i class="material-icons">transform</i>
+                        Transformación de Datos
+                    </div>
+                    <div class="transformation-list">
+                        <div class="transformation">
+                            <i class="material-icons">calculate</i>
+                            <div class="transformation-text">Calcular variable</div>
+                        </div>
+                        <div class="transformation">
+                            <i class="material-icons">swap_horiz</i>
+                            <div class="transformation-text">Recodificar variables</div>
+                        </div>
+                        <div class="transformation">
+                            <i class="material-icons">category</i>
+                            <div class="transformation-text">Visual Binning</div>
+                        </div>
+                        <div class="transformation">
+                            <i class="material-icons">filter_list</i>
+                            <div class="transformation-text">Seleccionar casos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-example">
+                    <div class="syntax-title">Ejemplo de sintaxis para transformaciones:</div>
+                    <div>
+                        <span class="highlight">RECODE</span> edad (18 thru 29=1) (30 thru 44=2)<br>
+                        (45 thru 59=3) (60 thru 100=4)<br>
+                        <span class="highlight">INTO</span> grupo_edad.<br>
+                        <span class="highlight">VARIABLE LABELS</span> grupo_edad 'Grupos de edad'.<br>
+                        <span class="highlight">VALUE LABELS</span> grupo_edad 1 'Jóvenes (18-29)'<br>
+                        2 'Adultos jóvenes (30-44)'<br>
+                        3 'Adultos (45-59)'<br>
+                        4 'Adultos mayores (60+)'.<br>
+                        <span class="highlight">EXECUTE</span>.
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-title">
+                        <i class="material-icons">warning</i>
+                        Manejo de Valores Perdidos
+                    </div>
+                    <div class="warning-content">
+                        SPSS reconoce tres tipos: sistema-missing, definidos por el usuario, y rango más un valor discreto. Los valores perdidos afectan los cálculos estadísticos.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.5 Análisis Exploratorio -->
+    <section class="slide" id="analisis-exploratorio">
+        <div class="header">
+            <h1>2.5. Análisis Exploratorio</h1>
+        </div>
+        <div class="content">
+            <div class="left-content">
+                <p class="intro-text">
+                    El análisis exploratorio de datos (AED) en SPSS incluye estadísticas descriptivas y técnicas de visualización para comprender la estructura y características de los datos.
+                </p>
+
+                <div class="section-title">
+                    <i class="material-icons">analytics</i>
+                    Procedimientos Principales
+                </div>
+                <div class="procedures">
+                    <div class="procedure">
+                        <i class="material-icons">bar_chart</i>
+                        <div class="procedure-text">Frecuencias</div>
+                    </div>
+                    <div class="procedure">
+                        <i class="material-icons">functions</i>
+                        <div class="procedure-text">Descriptivos</div>
+                    </div>
+                    <div class="procedure">
+                        <i class="material-icons">explore</i>
+                        <div class="procedure-text">Explorar</div>
+                    </div>
+                    <div class="procedure">
+                        <i class="material-icons">table_chart</i>
+                        <div class="procedure-text">Tablas personalizadas</div>
+                    </div>
+                </div>
+
+                <div class="measures">
+                    <div class="section-title">
+                        <i class="material-icons">calculate</i>
+                        Medidas Estadísticas
+                    </div>
+                    <div class="measures-grid">
+                        <div class="measure-category">
+                            <div class="category-title">
+                                <i class="material-icons">trending_up</i>
+                                Tendencia Central
+                            </div>
+                            <div class="measure-list">
+                                <div class="measure-item">Media</div>
+                                <div class="measure-item">Mediana</div>
+                                <div class="measure-item">Moda</div>
+                                <div class="measure-item">Suma</div>
+                            </div>
+                        </div>
+                        <div class="measure-category">
+                            <div class="category-title">
+                                <i class="material-icons">scatter_plot</i>
+                                Dispersión
+                            </div>
+                            <div class="measure-list">
+                                <div class="measure-item">Desviación estándar</div>
+                                <div class="measure-item">Varianza</div>
+                                <div class="measure-item">Rango</div>
+                                <div class="measure-item">Rango intercuartílico</div>
+                            </div>
+                        </div>
+                        <div class="measure-category">
+                            <div class="category-title">
+                                <i class="material-icons">show_chart</i>
+                                Distribución
+                            </div>
+                            <div class="measure-list">
+                                <div class="measure-item">Asimetría</div>
+                                <div class="measure-item">Curtosis</div>
+                                <div class="measure-item">Percentiles</div>
+                            </div>
+                        </div>
+                        <div class="measure-category">
+                            <div class="category-title">
+                                <i class="material-icons">more_horiz</i>
+                                Otros
+                            </div>
+                            <div class="measure-list">
+                                <div class="measure-item">Error estándar</div>
+                                <div class="measure-item">Intervalo de confianza</div>
+                                <div class="measure-item">Pruebas de normalidad</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/a74aa91bdeb6.png"
+                         alt="SPSS Histogram Chart" class="image">
+                </div>
+
+                <table class="chart-table">
+                    <thead>
+                    <tr>
+                        <th>Tipo de Gráfico</th>
+                        <th>Uso Recomendado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Histograma</strong></td>
+                        <td>Distribución de variables continuas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Diagrama de cajas</strong></td>
+                        <td>Comparación de grupos, detección de outliers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gráfico de barras</strong></td>
+                        <td>Variables categóricas, frecuencias</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gráfico de sectores</strong></td>
+                        <td>Proporciones de categorías</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dispersión</strong></td>
+                        <td>Relación entre variables continuas</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="syntax-example">
+                    <div class="syntax-title">Ejemplo de sintaxis para análisis exploratorio:</div>
+                    <div>
+                        <span class="highlight">EXAMINE</span> VARIABLES=edad ingreso años_educacion<br>
+                        /PLOT BOXPLOT STEMLEAF HISTOGRAM NPPLOT<br>
+                        /STATISTICS DESCRIPTIVES EXTREME<br>
+                        /CINTERVAL 95<br>
+                        /MISSING LISTWISE.
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <div class="tip-title">
+                        <i class="material-icons">tips_and_updates</i>
+                        Buenas Prácticas
+                    </div>
+                    <div class="tip-content">
+                        Siempre comience cualquier análisis con una exploración descriptiva completa de sus datos. Esto permite detectar problemas, valores extremos y comprender mejor las características de la muestra.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Actividades de aprendizaje -->
+    <section class="slide" id="actividades-aprendizaje">
+        <div class="header">
+            <h1>Actividades de Aprendizaje</h1>
+        </div>
+        <div class="content-column">
+            <div class="progress-section">
+                <div class="progress-title">
+                    <i class="material-icons">bar_chart</i>
+                    Progreso de la Unidad
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">Completado: 25% | Sesiones: 4 de 16</div>
+                </div>
+            </div>
+
+            <div class="exercises-container">
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <i class="material-icons">laptop_mac</i>
+                        Ejercicio 1: Configuración inicial
+                    </div>
+                    <div class="exercise-content">
+                        <div class="objective">Objetivo: Instalar y configurar SPSS en su equipo personal</div>
+
+                        <div class="tasks-title">
+                            <i class="material-icons">assignment</i>
+                            Tareas:
+                        </div>
+                        <div class="tasks-list">
+                            <div class="task-item">Descargar e instalar IBM SPSS Statistics</div>
+                            <div class="task-item">Configurar opciones regionales</div>
+                            <div class="task-item">Personalizar la interfaz</div>
+                            <div class="task-item">Crear estructura de carpetas</div>
+                        </div>
+
+                        <div class="deliverable">
+                            <div class="deliverable-title">
+                                <i class="material-icons">screenshot</i>
+                                Entregable:
+                            </div>
+                            <div class="deliverable-text">Captura de pantalla de SPSS instalado y funcionando</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <i class="material-icons">database</i>
+                        Ejercicio 2: Manipulación básica de datos
+                    </div>
+                    <div class="exercise-content">
+                        <div class="objective">Objetivo: Importar datos y definir correctamente las variables</div>
+
+                        <div class="tasks-title">
+                            <i class="material-icons">assignment</i>
+                            Tareas:
+                        </div>
+                        <div class="tasks-list">
+                            <div class="task-item">Importar archivo "encuesta_salud.sav"</div>
+                            <div class="task-item">Revisar y corregir propiedades de variables</div>
+                            <div class="task-item">Crear nueva variable categórica</div>
+                            <div class="task-item">Identificar y definir valores perdidos</div>
+                        </div>
+
+                        <div class="deliverable">
+                            <div class="deliverable-title">
+                                <i class="material-icons">file_present</i>
+                                Entregable:
+                            </div>
+                            <div class="deliverable-text">Archivo .sav con datos corregidos y sintaxis .sps utilizada</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <i class="material-icons">insights</i>
+                        Ejercicio 3: Análisis exploratorio completo
+                    </div>
+                    <div class="exercise-content">
+                        <div class="objective">Objetivo: Realizar un análisis exploratorio completo de un conjunto de datos</div>
+
+                        <div class="tasks-title">
+                            <i class="material-icons">assignment</i>
+                            Tareas:
+                        </div>
+                        <div class="tasks-list">
+                            <div class="task-item">Calcular estadísticas descriptivas</div>
+                            <div class="task-item">Generar tablas de frecuencia</div>
+                            <div class="task-item">Crear al menos 5 gráficos diferentes</div>
+                            <div class="task-item">Evaluar normalidad de distribuciones</div>
+                            <div class="task-item">Identificar valores atípicos</div>
+                        </div>
+
+                        <div class="deliverable">
+                            <div class="deliverable-title">
+                                <i class="material-icons">description</i>
+                                Entregable:
+                            </div>
+                            <div class="deliverable-text">Archivo .spv con resultados y reporte en Word con interpretación</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Evaluación de la unidad -->
+    <section class="slide" id="evaluacion-unidad">
+        <div class="header">
+            <h1>Evaluación de la Unidad</h1>
+        </div>
+        <div class="content">
+            <div class="left-content" style="width:60%; padding-right:40px; display:flex; flex-direction:column;">
+                <p class="intro-text">
+                    La evaluación de la Unidad II se realizará mediante los siguientes instrumentos:
+                </p>
+
+                <table class="evaluation-table">
+                    <thead>
+                    <tr>
+                        <th>Instrumento</th>
+                        <th>Ponderación</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Examen teórico-práctico</strong></td>
+                        <td class="weightage">30%</td>
+                        <td>Sesión 8</td>
+                        <td>Evaluación de conceptos y habilidades básicas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Proyecto aplicado</strong></td>
+                        <td class="weightage">40%</td>
+                        <td>Sesión 16</td>
+                        <td>Análisis completo de un conjunto de datos reales</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ejercicios prácticos</strong></td>
+                        <td class="weightage">20%</td>
+                        <td>Semanales</td>
+                        <td>3 ejercicios prácticos (6.7% cada uno)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Participación</strong></td>
+                        <td class="weightage">10%</td>
+                        <td>Continua</td>
+                        <td>Foros, asistencia, contribuciones en clase</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="criteria-box">
+                    <div class="criteria-title">
+                        <i class="material-icons">assignment</i>
+                        Criterios de evaluación del proyecto
+                    </div>
+                    <div class="criteria-list">
+                        <div class="criteria-item">
+                            <i class="material-icons">cleaning_services</i>
+                            <div class="criteria-text">Manipulación de datos</div>
+                            <div class="criteria-percentage">25%</div>
+                        </div>
+                        <div class="criteria-item">
+                            <i class="material-icons">analytics</i>
+                            <div class="criteria-text">Análisis estadístico</div>
+                            <div class="criteria-percentage">35%</div>
+                        </div>
+                        <div class="criteria-item">
+                            <i class="material-icons">insert_chart</i>
+                            <div class="criteria-text">Visualizaciones</div>
+                            <div class="criteria-percentage">20%</div>
+                        </div>
+                        <div class="criteria-item">
+                            <i class="material-icons">description</i>
+                            <div class="criteria-text">Claridad del reporte</div>
+                            <div class="criteria-percentage">20%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content" style="width:40%; display:flex; flex-direction:column; justify-content:space-between;">
+                <div class="chart-container">
+                    <div class="chart-title">Distribución de la Evaluación</div>
+                    <div class="chart">
+                        <div class="bar bar-1">
+                            <div class="bar-label">30%</div>
+                            <div class="bar-name">Examen teórico-práctico</div>
+                        </div>
+                        <div class="bar bar-2">
+                            <div class="bar-label">40%</div>
+                            <div class="bar-name">Proyecto aplicado</div>
+                        </div>
+                        <div class="bar bar-3">
+                            <div class="bar-label">20%</div>
+                            <div class="bar-name">Ejercicios prácticos</div>
+                        </div>
+                        <div class="bar bar-4">
+                            <div class="bar-label">10%</div>
+                            <div class="bar-name">Participación</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box-eval">
+                    <div class="tip-title-eval">
+                        <i class="material-icons">tips_and_updates</i>
+                        Recomendación
+                    </div>
+                    <div class="tip-content-eval">
+                        Se recomienda iniciar el proyecto aplicado desde la primera semana de la unidad para garantizar un desarrollo adecuado y evitar acumulación de trabajo al final del período.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bibliografía específica -->
+    <section class="slide" id="bibliografia-especifica">
+        <div class="header">
+            <h1>Bibliografía Específica</h1>
+        </div>
+        <div class="content">
+            <div class="left-content">
+                <p class="intro-text">
+                    A continuación se presenta una selección de textos de referencia recomendados para profundizar en el uso de SPSS en el contexto de la estadística aplicada.
+                </p>
+                <div class="section-title">
+                    <i class="material-icons">menu_book</i>
+                    Libros y manuales
+                </div>
+                <div class="biblio-list">
+                    <div class="biblio-item">
+                        Norusis, M. J. <em>SPSS Statistics Guide</em>. IBM Corporation.
+                    </div>
+                    <div class="biblio-item">
+                        Field, A. P. <em>Discovering Statistics Using IBM SPSS Statistics</em>. SAGE Publications.
+                    </div>
+                    <div class="biblio-item">
+                        Pérez-López, C. <em>IBM SPSS Statistics: Análisis de datos en ciencias sociales y de la salud</em>. Pearson.
+                    </div>
+                    <div class="biblio-item">
+                        George, D., &amp; Mallery, P. <em>IBM SPSS Statistics: Step by Step</em>. Routledge.
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="section-title">
+                    <i class="material-icons">link</i>
+                    Recursos en línea
+                </div>
+                <div class="biblio-list">
+                    <div class="biblio-item">
+                        Documentación oficial de IBM SPSS Statistics, disponible en el portal de IBM.
+                    </div>
+                    <div class="biblio-item">
+                        Tutoriales de SPSS de universidades y organismos de investigación (departamentos de estadística y métodos cuantitativos).
+                    </div>
+                    <div class="biblio-item">
+                        Cursos abiertos en plataformas de e-learning sobre análisis de datos con SPSS.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Controles de navegación -->
+<div class="controls">
+    <button id="btn-home">
+        <i class="material-icons">home</i>
+        Inicio
+    </button>
+    <button id="btn-prev">
+        <i class="material-icons">navigate_before</i>
+        Anterior
+    </button>
+    <button id="btn-next">
+        Siguiente
+        <i class="material-icons">navigate_next</i>
+    </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    if (!slides.length) return;
+
+    let current = 0;
+
+    function showSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= slides.length) index = slides.length - 1;
+
+        slides.forEach((slide, i) => {
+            if (i === index) {
+                slide.classList.add('active');
+                slide.setAttribute('aria-hidden', 'false');
+            } else {
+                slide.classList.remove('active');
+                slide.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        current = index;
+    }
+
+    function nextSlide() {
+        if (current < slides.length - 1) {
+            showSlide(current + 1);
+        }
+    }
+
+    function prevSlide() {
+        if (current > 0) {
+            showSlide(current - 1);
+        }
+    }
+
+    function firstSlide() {
+        showSlide(0);
+    }
+
+    const btnNext = document.getElementById('btn-next');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnHome = document.getElementById('btn-home');
+
+    if (btnNext) btnNext.addEventListener('click', nextSlide);
+    if (btnPrev) btnPrev.addEventListener('click', prevSlide);
+    if (btnHome) btnHome.addEventListener('click', firstSlide);
+
+    // Navegación con teclado
+    document.addEventListener('keydown', function (e) {
+        const tag = e.target.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            prevSlide();
+        } else if (e.key === 'Home') {
+            firstSlide();
+        }
+    });
+
+    // Clic en la diapositiva para avanzar
+    slides.forEach(slide => {
+        slide.addEventListener('click', function () {
+            nextSlide();
+        });
+    });
+
+    // Mostrar la primera diapositiva al cargar
+    showSlide(0);
+});
+</script>
+</body>
+</html>
 
