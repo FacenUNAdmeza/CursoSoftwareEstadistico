@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a Python para Análisis de Datos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            overflow-x: hidden;
+        }
+        .slide {
+            min-height: 100vh;
+            padding: 60px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            transition: background 0.5s ease;
+        }
+        .slide:nth-child(even) {
+            background-color: #ffffff;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(25, 118, 210, 0.85) 0%, rgba(25, 118, 210, 0.6) 100%);
+            z-index: -1;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1976d2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            color: #555;
+        }
+        .content {
+            display: flex;
+            gap: 40px;
+        }
+        .left-content, .right-content {
+            flex: 1;
+        }
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        .key-point i {
+            color: #1976d2;
+            margin-right: 15px;
+            font-size: 24px;
+        }
+        .key-point-text {
+            font-size: 20px;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #1976d2;
+            font-weight: 600;
+        }
+        .libraries, .benefits {
+            margin-top: 20px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .library-list, .benefit-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .library-item, .benefit-item {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 6px;
+            padding: 10px 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .library-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .library-name {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .benefit-text {
+            font-size: 18px;
+        }
+        .option, .syntax-example, .step {
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .option-header, .example-header, .step-header {
+            background-color: #1976d2;
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+        }
+        .option-title, .example-title, .step-title {
+            font-size: 22px;
+            font-weight: 600;
+        }
+        .option-content, .example-content, .step-content {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .code-block {
+            background-color: #263238;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 18px;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+        .comment { color: #608b4e; }
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .function { color: #dcdcaa; }
+        .note, .analogy-box, .next-steps {
+            margin-top: 20px;
+            background-color: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            border-radius: 4px;
+            padding: 15px;
+        }
+        .note-title, .analogy-title, .next-steps-title {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1976d2;
+        }
+        .note-text, .analogy-text, .next-step-text {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .references-list {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-height: 450px;
+            overflow-y: auto;
+        }
+        .reference-item {
+            margin-bottom: 15px;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        .accordion {
+            background-color: #2c3e50;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.2em;
+            transition: 0.4s;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .accordion:hover {
+            background-color: #34495e;
+        }
+        .panel {
+            padding: 0 18px;
+            background-color: #34495e;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="slide" style="background-image: url('https://sfile.chatglm.cn/images-ppt/1df7bd3f4553.jpg');">
+        <div class="overlay"></div>
+        <div class="content" style="z-index: 1; position: relative; text-align: center;">
+            <img src="https://sfile.chatglm.cn/images-ppt/23c6dbfe9a7a.png" alt="Python Logo" style="width: 120px; margin-bottom: 30px;">
+            <h1 style="font-size: 64px; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">Introducción a <span style="color: #FFB74D;">Python</span> y <span style="color: #FFB74D;">Ciencia de Datos</span></h1>
+            <p style="font-size: 24px; color: white; opacity: 0.9;">Material de lectura para estudiantes de grado</p>
+        </div>
+    </div>
+    
+    <div class="slide">
+        <div class="header" style="background-color: #1976d2; color: white; padding: 40px 70px 20px;">
+            <h1 style="font-size: 40px; font-weight: 700;">¿Qué es Python?</h1>
+        </div>
+        <div class="content" style="display: flex; padding: 0 70px 40px;">
+            <div style="flex: 3; padding: 30px 30px 0 0;">
+                <div style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">code</i>
+                    <p style="font-size: 20px; line-height: 1.4;">Lenguaje de programación <span style="color: #1976d2; font-weight: 600;">potente</span>, <span style="color: #1976d2; font-weight: 600;">fácil de aprender</span> y de <span style="color: #1976d2; font-weight: 600;">alto nivel</span></p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">auto_fix_high</i>
+                    <p style="font-size: 20px; line-height: 1.4;">Sintaxis <span style="color: #1976d2; font-weight: 600;">elegante</span> y <span style="color: #1976d2; font-weight: 600;">tipado dinámico</span></p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">play_arrow</i>
+                    <p style="font-size: 20px; line-height: 1.4;">Lenguaje <span style="color: #1976d2; font-weight: 600;">interpretado</span> - ejecución línea por línea</p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">data_object</i>
+                    <p style="font-size: 20px; line-height: 1.4;">Herramienta ideal para <span style="color: #1976d2; font-weight: 600;">análisis de datos</span> y <span style="color: #1976d2; font-weight: 600;">ciencia de datos</span></p>
+                </div>
+                <div style="margin-top: 20px; background-color: #e3f2fd; border-radius: 8px; padding: 20px;">
+                    <h3 style="font-size: 22px; font-weight: 600; margin-bottom: 15px; color: #1976d2;">Bibliotecas Esenciales</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                        <div style="display: flex; align-items: center; background-color: white; border-radius: 6px; padding: 10px 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <div style="width: 40px; height: 40px; margin-right: 10px; background-image: url('https://sfile.chatglm.cn/images-ppt/6edd592bc978.webp'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 18px;">NumPy</div>
+                                <div style="font-size: 14px; color: #555;">Cálculo numérico</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; background-color: white; border-radius: 6px; padding: 10px 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <div style="width: 40px; height: 40px; margin-right: 10px; background-image: url('https://sfile.chatglm.cn/images-ppt/b051fce05e5b.jpg'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 18px;">Pandas</div>
+                                <div style="font-size: 14px; color: #555;">Manipulación de datos</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; background-color: white; border-radius: 6px; padding: 10px 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <div style="width: 40px; height: 40px; margin-right: 10px; background-image: url('https://sfile.chatglm.cn/images-ppt/914baf0e7731.png'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 18px;">Matplotlib</div>
+                                <div style="font-size: 14px; color: #555;">Visualización gráfica</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <img src="https://sfile.chatglm.cn/images-ppt/df28c1f712ac.png" alt="Python para Ciencia de Datos" style="width: 100%; max-width: 350px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="header" style="background-color: #1976d2; color: white; padding: 40px 70px 20px;">
+            <h1 style="font-size: 40px; font-weight: 700;">¿Qué significa "Open Source"?</h1>
+        </div>
+        <div class="content" style="display: flex; padding: 0 70px 40px;">
+            <div style="flex: 3; padding: 30px 30px 0 0;">
+                <div style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">public</i>
+                    <p style="font-size: 20px; line-height: 1.4;">Python es un software de <span style="color: #1976d2; font-weight: 600;">código abierto (Open Source)</span></p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">code</i>
+                    <p style="font-size: 20px; line-height: 1.4;">Intérprete y biblioteca estándar disponibles <span style="color: #1976d2; font-weight: 600;">libremente</span></p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">devices</i>
+                    <p style="font-size: 20px; line-height: 1.4;">Compatible con <span style="color: #1976d2; font-weight: 600;">todas las plataformas principales</span></p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">attach_money</i>
+                    <p style="font-size: 20px; line-height: 1.4;">Puede ser distribuido <span style="color: #1976d2; font-weight: 600;">sin costo alguno</span></p>
+                </div>
+                
+                <div style="margin-top: 20px; background-color: #e3f2fd; border-radius: 8px; padding: 20px;">
+                    <h3 style="font-size: 22px; font-weight: 600; margin-bottom: 15px; color: #1976d2;">Ventajas del Código Abierto</h3>
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">groups</i>
+                        <p style="font-size: 18px;">Comunidad global activa</p>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">extension</i>
+                        <p style="font-size: 18px;">Módulos y herramientas adicionales gratuitas</p>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">update</i>
+                        <p style="font-size: 18px;">Actualizaciones y mejoras constantes</p>
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 0 0 30px;">
+                <img src="https://sfile.chatglm.cn/images-ppt/cf1d6b510091.jpg" alt="Open Source Concept" style="width: 100%; max-width: 350px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <div style="margin-top: 20px; padding: 15px; background-color: #f5f5f5; border-left: 4px solid #1976d2; border-radius: 4px; font-style: italic; font-size: 18px;">
+                    "El código abierto permite que cualquiera pueda contribuir, mejorar y adaptar el software a sus necesidades específicas."
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="header" style="background-color: #1976d2; color: white; padding: 40px 70px 20px;">
+            <h1 style="font-size: 40px; font-weight: 700;">Instalación de Python</h1>
+        </div>
+        <div class="content" style="display: flex; padding: 0 70px 40px;">
+            <div style="flex: 3; padding: 30px 30px 0 0;">
+                <div style="margin-bottom: 25px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="background-color: #1976d2; color: white; padding: 12px 20px; display: flex; align-items: center;">
+                        <i class="material-icons" style="margin-right: 15px; font-size: 24px;">star</i>
+                        <div style="font-size: 22px; font-weight: 600;">Opción 1: Anaconda (Recomendado)</div>
+                    </div>
+                    <div style="background-color: #f5f5f5; padding: 20px;">
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                            <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">check_circle</i>
+                            <p style="font-size: 20px; line-height: 1.4;">Incluye <span style="color: #1976d2; font-weight: 600;">Python</span> y bibliotecas útiles preinstaladas</p>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                            <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">check_circle</i>
+                            <p style="font-size: 20px; line-height: 1.4;">Viene con <span style="color: #1976d2; font-weight: 600;">Jupyter Notebook</span> para análisis interactivo</p>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                            <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">check_circle</i>
+                            <p style="font-size: 20px; line-height: 1.4;">Interfaz amigable para gestión de paquetes</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div style="margin-bottom: 25px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="background-color: #1976d2; color: white; padding: 12px 20px; display: flex; align-items: center;">
+                        <i class="material-icons" style="margin-right: 15px; font-size: 24px;">code</i>
+                        <div style="font-size: 22px; font-weight: 600;">Opción 2: Instalación Estándar</div>
+                    </div>
+                    <div style="background-color: #f5f5f5; padding: 20px;">
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                            <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">check_circle</i>
+                            <p style="font-size: 20px; line-height: 1.4;">Descargar desde <span style="color: #1976d2; font-weight: 600;">python.org</span></p>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                            <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">check_circle</i>
+                            <p style="font-size: 20px; line-height: 1.4;">En Linux: <code style="background-color: #263238; color: #e0e0e0; padding: 2px 5px; border-radius: 3px; font-size: 18px;">sudo apt-get install python3</code></p>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                            <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">check_circle</i>
+                            <p style="font-size: 20px; line-height: 1.4;">Requiere instalación manual de librerías</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div style="margin-top: 20px; background-color: #e3f2fd; border-left: 4px solid #1976d2; border-radius: 4px; padding: 15px;">
+                    <div style="display: flex; align-items: center; font-size: 20px; font-weight: 600; margin-bottom: 10px; color: #1976d2;">
+                        <i class="material-icons" style="margin-right: 10px;">info</i>
+                        <div>Nota sobre librerías</div>
+                    </div>
+                    <p style="font-size: 18px; line-height: 1.4;">
+                        Si usas la versión estándar, instala librerías con <code style="background-color: #263238; color: #e0e0e0; padding: 2px 5px; border-radius: 3px; font-size: 18px;">pip install pandas</code>
+                    </p>
+                </div>
+               
+                <div style="display: flex; align-items: center; background-color: #fff3e0; border-radius: 8px; padding: 15px; margin-top: 20px;">
+                    <i class="material-icons" style="color: #ff9800; font-size: 28px; margin-right: 15px;">lightbulb</i>
+                    <p style="font-size: 18px; line-height: 1.4;">
+                        <span style="color: #ff9800; font-weight: 600;">Para estudiantes y científicos de datos</span>, Anaconda es la opción más recomendada por su simplicidad y herramientas preconfiguradas.
+                    </p>
+                </div>
+            </div>
+            <div style="flex: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 0 0 30px;">
+                <img src="https://sfile.chatglm.cn/images-ppt/89dfc35aa535.png" alt="Instalación de Anaconda" style="width: 100%; max-width: 350px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
+                <img src="https://sfile.chatglm.cn/images-ppt/0605b75963df.png" alt="Sitio web de Anaconda" style="width: 100%; max-width: 350px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="header" style="background-color: #1976d2; color: white; padding: 40px 70px 20px;">
+            <h1 style="font-size: 40px; font-weight: 700;">Comandos Básicos y Sintaxis</h1>
+        </div>
+        <div class="content" style="display: flex; padding: 0 70px 40px;">
+            <div style="flex: 1; padding: 30px 30px 0 0;">
+                <div style="margin-bottom: 25px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="background-color: #1976d2; color: white; padding: 12px 20px; display: flex; align-items: center;">
+                        <i class="material-icons" style="margin-right: 15px; font-size: 24px;">list</i>
+                        <div style="font-size: 22px; font-weight: 600;">Variables y Listas</div>
+                    </div>
+                    <div style="background-color: #263238; color: #e0e0e0; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 18px; line-height: 1.5; overflow-x: auto;">
+                        <span style="color: #608b4e;"># Creación de una lista simple</span><br>
+                        <span style="color: #569cd6;">numeros</span> = [<span style="color: #b5cea8;">1</span>, <span style="color: #b5cea8;">2</span>, <span style="color: #b5cea8;">3</span>, <span style="color: #b5cea8;">4</span>, <span style="color: #b5cea8;">5</span>]<br><br>
+                        <span style="color: #608b4e;"># Imprimir en pantalla</span><br>
+                        <span style="color: #dcdcaa;">print</span>(<span style="color: #ce9178;">"Mi lista:"</span>, <span style="color: #569cd6;">numeros</span>)<br><br>
+                        <span style="color: #608b4e;"># Acceder a elementos</span><br>
+                        <span style="color: #dcdcaa;">print</span>(<span style="color: #569cd6;">numeros</span>[<span style="color: #b5cea8;">0</span>]) <span style="color: #608b4e;"># Salida: 1</span>
+                    </div>
+                </div>
+               
+                <div style="margin-bottom: 25px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="background-color: #1976d2; color: white; padding: 12px 20px; display: flex; align-items: center;">
+                        <i class="material-icons" style="margin-right: 15px; font-size: 24px;">functions</i>
+                        <div style="font-size: 22px; font-weight: 600;">Definición de Funciones</div>
+                    </div>
+                    <div style="background-color: #263238; color: #e0e0e0; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 18px; line-height: 1.5; overflow-x: auto;">
+                        <span style="color: #608b4e;"># Definición de una función para sumar</span><br>
+                        <span style="color: #569cd6;">def</span> <span style="color: #dcdcaa;">sumar</span>(x, y):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #569cd6;">return</span> x + y<br><br>
+                        <span style="color: #608b4e;"># Uso de la función</span><br>
+                        <span style="color: #569cd6;">resultado</span> = <span style="color: #dcdcaa;">sumar</span>(<span style="color: #b5cea8;">1</span>, <span style="color: #b5cea8;">3</span>)<br>
+                        <span style="color: #dcdcaa;">print</span>(<span style="color: #ce9178;">"El resultado es:"</span>, <span style="color: #569cd6;">resultado</span>) <span style="color: #608b4e;"># Salida: 4</span>
+                    </div>
+                </div>
+               
+                <div style="background-color: #e3f2fd; border-left: 4px solid #1976d2; border-radius: 4px; padding: 15px; margin-top: 20px;">
+                    <div style="display: flex; align-items: center; font-size: 20px; font-weight: 600; margin-bottom: 10px; color: #1976d2;">
+                        <i class="material-icons" style="margin-right: 10px;">lightbulb</i>
+                        <div>Tip de Sintaxis</div>
+                    </div>
+                    <p style="font-size: 18px; line-height: 1.4;">
+                        En Python, <span style="color: #1976d2; font-weight: 600;">la indentación (sangría)</span> es obligatoria para definir bloques de código, a diferencia de otros lenguajes que usan llaves {}.
+                    </p>
+                </div>
+            </div>
+            <div style="flex: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 0 0 30px;">
+                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">auto_fix_high</i>
+                    <p style="font-size: 20px; line-height: 1.4;"><span style="color: #1976d2; font-weight: 600;">Sintaxis limpia</span> y legible</p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">format_list_numbered</i>
+                    <p style="font-size: 20px; line-height: 1.4;"><span style="color: #1976d2; font-weight: 600;">Tipado dinámico</span> - no se declara tipo de variable</p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">tab</i>
+                    <p style="font-size: 20px; line-height: 1.4;"><span style="color: #1976d2; font-weight: 600;">Indentación</span> define bloques de código</p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">code</i>
+                    <p style="font-size: 20px; line-height: 1.4;"><span style="color: #1976d2; font-weight: 600;">Comentarios</span> con # para documentación</p>
+                </div>
+               
+                <img src="https://sfile.chatglm.cn/images-ppt/b2d94dd28174.png" alt="Sintaxis de funciones en Python" style="width: 100%; max-width: 500px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="header" style="background-color: #1976d2; color: white; padding: 40px 70px 20px;">
+            <h1 style="font-size: 40px; font-weight: 700;">Ejemplo Práctico: Datos con Pandas</h1>
+        </div>
+        <div class="content" style="display: flex; padding: 0 70px 40px;">
+            <div style="flex: 1; padding: 30px 30px 0 0;">
+                <div style="margin-bottom: 25px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="background-color: #1976d2; color: white; padding: 12px 20px; display: flex; align-items: center;">
+                        <i class="material-icons" style="margin-right: 15px; font-size: 24px;">import_export</i>
+                        <div style="font-size: 22px; font-weight: 600;">Paso 1: Importar la librería</div>
+                    </div>
+                    <div style="background-color: #f5f5f5; padding: 20px;">
+                        <p style="font-size: 20px; line-height: 1.4; margin-bottom: 10px;">
+                            Por convención, Pandas se importa con el alias <span style="color: #1976d2; font-weight: 600;">pd</span>
+                        </p>
+                        <div style="background-color: #263238; color: #e0e0e0; padding: 15px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-size: 18px; line-height: 1.5; overflow-x: auto;">
+                            <span style="color: #569cd6;">import</span> pandas <span style="color: #569cd6;">as</span> pd
+                        </div>
+                    </div>
+                </div>
+               
+                <div style="margin-bottom: 25px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="background-color: #1976d2; color: white; padding: 12px 20px; display: flex; align-items: center;">
+                        <i class="material-icons" style="margin-right: 15px; font-size: 24px;">table_chart</i>
+                        <div style="font-size: 22px; font-weight: 600;">Paso 2: Crear un DataFrame</div>
+                    </div>
+                    <div style="background-color: #f5f5f5; padding: 20px;">
+                        <p style="font-size: 20px; line-height: 1.4; margin-bottom: 10px;">
+                            Crear un DataFrame a partir de un diccionario de datos
+                        </p>
+                        <div style="background-color: #263238; color: #e0e0e0; padding: 15px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-size: 18px; line-height: 1.5; overflow-x: auto;">
+                            <span style="color: #608b4e;"># Datos simulados: Estudiantes y sus calificaciones</span><br>
+                            <span style="color: #569cd6;">datos</span> = {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ce9178;">'Estudiante'</span>: [<span style="color: #ce9178;">'Ana'</span>, <span style="color: #ce9178;">'Luis'</span>, <span style="color: #ce9178;">'Marta'</span>, <span style="color: #ce9178;">'Pedro'</span>],<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ce9178;">'Edad'</span>: [<span style="color: #b5cea8;">20</span>, <span style="color: #b5cea8;">22</span>, <span style="color: #b5cea8;">21</span>, <span style="color: #b5cea8;">23</span>],<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ce9178;">'Nota_Final'</span>: [<span style="color: #b5cea8;">8.5</span>, <span style="color: #b5cea8;">7.0</span>, <span style="color: #b5cea8;">9.2</span>, <span style="color: #b5cea8;">6.5</span>]<br>
+                            }<br><br>
+                            <span style="color: #608b4e;"># Crear el DataFrame (tabla)</span><br>
+                            <span style="color: #569cd6;">df</span> = pd.<span style="color: #dcdcaa;">DataFrame</span>(<span style="color: #569cd6;">datos</span>)
+                        </div>
+                    </div>
+                </div>
+               
+                <div style="margin-bottom: 25px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="background-color: #1976d2; color: white; padding: 12px 20px; display: flex; align-items: center;">
+                        <i class="material-icons" style="margin-right: 15px; font-size: 24px;">search</i>
+                        <div style="font-size: 22px; font-weight: 600;">Paso 3: Explorar los datos</div>
+                    </div>
+                    <div style="background-color: #f5f5f5; padding: 20px;">
+                        <p style="font-size: 20px; line-height: 1.4; margin-bottom: 10px;">
+                            Comandos básicos para entender la estructura de los datos
+                        </p>
+                        <div style="background-color: #263238; color: #e0e0e0; padding: 15px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-size: 18px; line-height: 1.5; overflow-x: auto;">
+                            <span style="color: #608b4e;"># Ver las primeras filas</span><br>
+                            <span style="color: #dcdcaa;">print</span>(<span style="color: #569cd6;">df</span>.<span style="color: #dcdcaa;">head</span>())<br><br>
+                            <span style="color: #608b4e;"># Ver estadísticas básicas</span><br>
+                            <span style="color: #dcdcaa;">print</span>(<span style="color: #569cd6;">df</span>.<span style="color: #dcdcaa;">describe</span>())<br><br>
+                            <span style="color: #608b4e;"># Seleccionar una columna específica</span><br>
+                            <span style="color: #dcdcaa;">print</span>(<span style="color: #569cd6;">df</span>[<span style="color: #ce9178;">'Nota_Final'</span>])
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 1; padding: 30px 0 0 30px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">data_object</i>
+                    <p style="font-size: 20px; line-height: 1.4;"><span style="color: #1976d2; font-weight: 600;">DataFrame</span>: estructura de datos tabular con filas y columnas</p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">analytics</i>
+                    <p style="font-size: 20px; line-height: 1.4;">Herramienta principal para <span style="color: #1976d2; font-weight: 600;">manipulación de datos</span></p>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                    <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 24px;">view_list</i>
+                    <p style="font-size: 20px; line-height: 1.4;">Métodos útiles: <span style="color: #1976d2; font-weight: 600;">head()</span>, <span style="color: #1976d2; font-weight: 600;">info()</span>, <span style="color: #1976d2; font-weight: 600;">describe()</span></p>
+                </div>
+               
+                <img src="https://sfile.chatglm.cn/images-ppt/43d0be9bdaff.png" alt="Ejemplo de DataFrame de Pandas" style="width: 100%; max-width: 500px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 20px;">
+               
+                <div style="background-color: #e3f2fd; border-left: 4px solid #1976d2; border-radius: 4px; padding: 15px; margin-top: 20px;">
+                    <div style="display: flex; align-items: center; font-size: 20px; font-weight: 600; margin-bottom: 10px; color: #1976d2;">
+                        <i class="material-icons" style="margin-right: 10px;">lightbulb</i>
+                        <div>Analogía</div>
+                    </div>
+                    <p style="font-size: 18px; line-height: 1.4;">
+                        Piensa en un <span style="color: #1976d2; font-weight: 600;">DataFrame</span> como una hoja de cálculo de Excel superpotente, pero controlada con código en lugar de con el ratón.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="header" style="background-color: #1976d2; color: white; padding: 40px 70px 20px;">
+            <h1 style="font-size: 40px; font-weight: 700;">Visualización con Matplotlib</h1>
+        </div>
+        <div class="content" style="display: flex; padding: 0 70px 40px;">
+            <div style="flex: 3; padding: 30px 30px 0 0;">
+                <p style="font-size: 20px; line-height: 1.4; margin-bottom: 20px;">
+                    Matplotlib permite crear <span style="color: #1976d2; font-weight: 600;">gráficos profesionales</span> para visualizar datos.
+                </p>
+                <div style="background-color: #263238; color: #e0e0e0; padding: 15px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-size: 18px; line-height: 1.5; overflow-x: auto;">
+                    <span style="color: #608b4e;"># Importar la librería</span><br>
+                    <span style="color: #569cd6;">import</span> matplotlib.pyplot <span style="color: #569cd6;">as</span> plt<br><br>
+                    <span style="color: #608b4e;"># Gráfico simple</span><br>
+                    <span style="color: #569cd6;">x</span> = [<span style="color: #b5cea8;">1</span>, <span style="color: #b5cea8;">2</span>, <span style="color: #b5cea8;">3</span>, <span style="color: #b5cea8;">4</span>]<br>
+                    <span style="color: #569cd6;">y</span> = [<span style="color: #b5cea8;">10</span>, <span style="color: #b5cea8;">20</span>, <span style="color: #b5cea8;">25</span>, <span style="color: #b5cea8;">30</span>]<br><br>
+                    plt.<span style="color: #dcdcaa;">plot</span>(<span style="color: #569cd6;">x</span>, <span style="color: #569cd6;">y</span>, marker=<span style="color: #ce9178;">'o'</span>)<br>
+                    plt.<span style="color: #dcdcaa;">title</span>(<span style="color: #ce9178;">"Gráfico de Línea Simple"</span>)<br>
+                    plt.<span style="color: #dcdcaa;">xlabel</span>(<span style="color: #ce9178;">"Eje X"</span>)<br>
+                    plt.<span style="color: #dcdcaa;">ylabel</span>(<span style="color: #ce9178;">"Eje Y"</span>)<br>
+                    plt.<span style="color: #dcdcaa;">show</span>()
+                </div>
+            </div>
+            <div style="flex: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 0 0 30px;">
+                <img src="https://sfile.chatglm.cn/images-ppt/0f6e3e4c3d2d.png" alt="Ejemplo de gráfico en Matplotlib" style="width: 100%; max-width: 500px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
+                <div style="background-color: #e3f2fd; border-left: 4px solid #1976d2; border-radius: 4px; padding: 15px; margin-top: 20px;">
+                    <div style="display: flex; align-items: center; font-size: 20px; font-weight: 600; margin-bottom: 10px; color: #1976d2;">
+                        <i class="material-icons" style="margin-right: 10px;">info</i>
+                        <div>Consejo</div>
+                    </div>
+                    <p style="font-size: 18px; line-height: 1.4;">
+                        Usa <span style="color: #1976d2; font-weight: 600;">Seaborn</span> para gráficos más avanzados y estilizados.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="header" style="background-color: #1976d2; color: white; padding: 40px 70px 20px;">
+            <h1 style="font-size: 40px; font-weight: 700;">Conclusiones y Referencias</h1>
+        </div>
+        <div class="content" style="display: flex; padding: 0 70px 40px;">
+            <div style="flex: 1; padding: 30px 30px 0 0;">
+                <div style="background-color: #e3f2fd; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <div style="display: flex; align-items: center; font-size: 24px; font-weight: 600; margin-bottom: 15px; color: #1976d2;">
+                        <i class="material-icons" style="margin-right: 15px; font-size: 28px;">summarize</i>
+                        <div>Puntos Clave</div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                        <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">code</i>
+                        <p style="font-size: 20px; line-height: 1.4;">Python: lenguaje <span style="color: #1976d2; font-weight: 600;">potente</span>, <span style="color: #1976d2; font-weight: 600;">fácil de aprender</span> y <span style="color: #1976d2; font-weight: 600;">versátil</span></p>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                        <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">public</i>
+                        <p style="font-size: 20px; line-height: 1.4;">Código abierto: acceso <span style="color: #1976d2; font-weight: 600;">libre</span> y <span style="color: #1976d2; font-weight: 600;">comunidad activa</span></p>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                        <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">data_object</i>
+                        <p style="font-size: 20px; line-height: 1.4;">Bibliotecas especializadas: <span style="color: #1976d2; font-weight: 600;">NumPy</span>, <span style="color: #1976d2; font-weight: 600;">Pandas</span>, <span style="color: #1976d2; font-weight: 600;">Matplotlib</span></p>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                        <i class="material-icons" style="color: #1976d2; margin-right: 15px; font-size: 20px;">table_chart</i>
+                        <p style="font-size: 20px; line-height: 1.4;">Pandas: herramienta <span style="color: #1976d2; font-weight: 600;">fundamental</span> para análisis de datos</p>
+                    </div>
+                </div>
+               
+                <div style="background-color: #fff3e0; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <div style="display: flex; align-items: center; font-size: 24px; font-weight: 600; margin-bottom: 15px; color: #ff9800;">
+                        <i class="material-icons" style="margin-right: 15px; font-size: 28px;">trending_up</i>
+                        <div>Próximos Pasos</div>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <i class="material-icons" style="color: #ff9800; margin-right: 15px; font-size: 20px;">play_circle</i>
+                        <p style="font-size: 20px; line-height: 1.4;">Practicar con conjuntos de datos reales</p>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <i class="material-icons" style="color: #ff9800; margin-right: 15px; font-size: 20px;">explore</i>
+                        <p style="font-size: 20px; line-height: 1.4;">Explorar bibliotecas avanzadas (Scikit-learn, TensorFlow)</p>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <i class="material-icons" style="color: #ff9800; margin-right: 15px; font-size: 20px;">groups</i>
+                        <p style="font-size: 20px; line-height: 1.4;">Participar en proyectos de código abierto</p>
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 1; padding: 30px 0 0 30px;">
+                <div style="display: flex; align-items: center; font-size: 24px; font-weight: 600; margin-bottom: 15px; color: #1976d2;">
+                    <i class="material-icons" style="margin-right: 15px; font-size: 28px;">menu_book</i>
+                    <div>Referencias Bibliográficas</div>
+                </div>
+                <div style="background-color: #f5f5f5; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); max-height: 450px; overflow-y: auto;">
+                    <div style="margin-bottom: 15px; font-size: 18px; line-height: 1.4;">
+                        <span style="font-weight: 600;">Alonso Lascurain, G.</span> (2021). <span style="font-style: italic;">Análisis y Manipulación de Datos - Elearning Campus To Business</span>. <span style="color: #555;">Cámara de Comercio de Bilbao.</span>
+                    </div>
+                    <div style="margin-bottom: 15px; font-size: 18px; line-height: 1.4;">
+                        <span style="font-weight: 600;">Datademia.</span> (s.f.). <span style="font-style: italic;">Top paquetes para el análisis de datos en Python</span>. <span style="color: #555;">Recuperado de Datademia.</span>
+                    </div>
+                    <div style="margin-bottom: 15px; font-size: 18px; line-height: 1.4;">
+                        <span style="font-weight: 600;">Ministerio de Asuntos Económicos y Transformación Digital.</span> (2024). <span style="font-style: italic;">Guía práctica de introducción al Análisis Exploratorio de Datos en Python</span>. <span style="color: #555;">Iniciativa Aporta, Red.es.</span>
+                    </div>
+                    <div style="margin-bottom: 15px; font-size: 18px; line-height: 1.4;">
+                        <span style="font-weight: 600;">Proyecto 52.</span> (s.f.). <span style="font-style: italic;">C3E2 - Manipulación de Datos con Pandas (Técnicas prácticas)</span> [Video]. <span style="color: #555;">YouTube.</span>
+                    </div>
+                    <div style="margin-bottom: 15px; font-size: 18px; line-height: 1.4;">
+                        <span style="font-weight: 600;">Python Software Foundation.</span> (2025). <span style="font-style: italic;">El tutorial de Python</span> (Versión 3.14.1). <span style="color: #555;">Documentación de Python.</span>
+                    </div>
+                    <div style="margin-bottom: 15px; font-size: 18px; line-height: 1.4;">
+                        <span style="font-weight: 600;">Rodríguez García, M. I., Carrasco García, M. G., González Enrique, J., Ruiz Aguilar, J. J., & Turias Domínguez, I. J.</span> (s.f.). <span style="font-style: italic;">Instrucciones: Funciones Python</span>. <span style="color: #555;">OCW Universidad de Cádiz.</span>
+                    </div>
+                    <div style="margin-bottom: 15px; font-size: 18px; line-height: 1.4;">
+                        <span style="font-weight: 600;">Universidad Nacional de Quilmes.</span> (2020). <span style="font-style: italic;">Guía de instalación y ejecución de Python: Proyecto de extensión de bioinformática en el aula</span>. <span style="color: #555;">Structural Bioinformatics Group.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Accordion and Particles -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Accordion
+        const acc = document.getElementsByClassName("accordion");
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
+        }
+
+        // Particles Canvas
+        const canvas = document.createElement('canvas');
+        canvas.id = 'particles-canvas';
+        document.body.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        const particles = [];
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 1,
+                color: `rgba(255,255,255,${Math.random() * 0.5 + 0.3})`,
+                speedX: Math.random() * 2 - 1,
+                speedY: Math.random() * 2 - 1
+            });
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+                if (p.x > canvas.width || p.x < 0) p.speedX = -p.speedX;
+                if (p.y > canvas.height || p.y < 0) p.speedY = -p.speedY;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
