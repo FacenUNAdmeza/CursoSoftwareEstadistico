@@ -1,57 +1,363 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>Unidad 3 · Material de lectura</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f4f7fa;
-      color: #222;
-      line-height: 1.7;
+<meta charset="UTF-8">
+<style>
+    /* Estilos Generales para dar un aspecto moderno y limpio */
+    .stata-container {
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1000px;
+        margin: 0 auto;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-    header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 1rem 1.5rem;
+    
+    /* Cabecera Hero */
+    .stata-header {
+        background: linear-gradient(135deg, #1a5f7a 0%, #164f6b 100%); /* Azul Stata */
+        color: white;
+        padding: 40px;
+        border-radius: 8px 8px 0 0;
+        text-align: center;
+        margin-bottom: 30px;
     }
-    header h1 {
-      font-size: 1.4rem;
-      margin-bottom: 0.2rem;
+    
+    .stata-header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        font-weight: 700;
+        letter-spacing: 1px;
     }
-    header a {
-      color: #ecf0f1;
-      text-decoration: none;
-      font-size: 0.9rem;
+    
+    .stata-header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+        margin-top: 10px;
     }
-    header a:hover { text-decoration: underline; }
-    main {
-      max-width: 800px;
-      margin: 2rem auto 3rem auto;
-      padding: 0 1.5rem;
+
+    /* Navegación Interna */
+    .toc {
+        background: #ffffff;
+        border-left: 5px solid #2d7a9e;
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
+    
+    .toc h3 { margin-top: 0; color: #2d7a9e; }
+    .toc ul { list-style: none; padding: 0; }
+    .toc li { margin-bottom: 8px; }
+    .toc a { text-decoration: none; color: #555; font-weight: 600; transition: color 0.3s; }
+    .toc a:hover { color: #1a5f7a; }
+
+    /* Tarjetas de Contenido */
+    .content-card {
+        background: white;
+        padding: 30px;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
     h2 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-      color: #2980b9;
+        color: #1a5f7a;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 10px;
+        margin-top: 0;
     }
-    p { margin-bottom: 0.9rem; text-align: justify; }
-  </style>
+
+    h3 {
+        color: #2d7a9e;
+        margin-top: 25px;
+    }
+
+    /* Bloques de Código estilo Stata */
+    .code-block {
+        background-color: #1e1e1e; /* Fondo oscuro tipo editor */
+        color: #d4d4d4;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: 'Consolas', 'Monaco', monospace;
+        overflow-x: auto;
+        border-left: 5px solid #4caf50;
+        margin: 15px 0;
+    }
+    
+    .code-comment { color: #6a9955; font-style: italic; } /* Verde para comentarios */
+    .code-command { color: #569cd6; font-weight: bold; } /* Azul para comandos */
+    .code-var { color: #9cdcfe; } /* Azul claro para variables */
+
+    /* Alertas y Tips */
+    .pro-tip {
+        background-color: #e3f2fd;
+        border-left: 5px solid #2196f3;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+    
+    .alert-warning {
+        background-color: #fff3cd;
+        border-left: 5px solid #ffc107;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+
+    /* Listas */
+    ul.feature-list {
+        list-style-type: none; /* Remove default bullets */
+    }
+    
+    ul.feature-list li::before {
+        content: "🔹";  /* Add custom bullet */
+        margin-right: 8px;
+    }
+
+    /* Pie de página */
+    .footer-note {
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: 50px;
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+    }
+    
+    .citation {
+        font-size: 0.75em;
+        vertical-align: super;
+        color: #888;
+        text-decoration: none;
+    }
+</style>
+<title>Manual Esencial de Stata</title>
 </head>
 <body>
-  <header>
-    <h1>Unidad 3 · Material de lectura</h1>
-    <a href="../../index.html">← Volver al inicio del curso</a>
-  </header>
-  <main>
-    <h2>Contenido en preparación</h2>
-    <p>
-      El material de lectura detallado para la Unidad 3 estará disponible próximamente.
-      Esta página se actualizará con los contenidos teóricos, ejemplos y referencias bibliográficas
-      correspondientes.
-    </p>
-  </main>
+
+<div class="stata-container">
+
+    <div class="stata-header">
+        <h1>DOMINANDO STATA</h1>
+        <p>Tu guía completa para el análisis de datos, desde la instalación hasta la visualización.</p>
+    </div>
+
+    <div class="toc">
+        <h3>📚 Índice de Contenidos</h3>
+        <ul>
+            <li><a href="#intro">1. Introducción: ¿Qué es Stata?</a></li>
+            <li><a href="#install">2. Instalación: Guía Paso a Paso</a></li>
+            <li><a href="#interface">3. La Interfaz: Conociendo tu Entorno</a></li>
+            <li><a href="#workflow">4. Flujo de Trabajo Profesional (Do-files)</a></li>
+            <li><a href="#basics">5. Comandos Básicos de Exploración</a></li>
+            <li><a href="#manipulation">6. Manipulación de Datos</a></li>
+            <li><a href="#graphics">7. Visualización de Datos (Gráficos)</a></li>
+            <li><a href="#advanced">8. Fusión de Bases (Merge y Append)</a></li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN -->
+    <div id="intro" class="content-card">
+        <h2>1. Introducción: ¿Qué es Stata?</h2>
+        <p>Stata es un software estadístico integral desarrollado por StataCorp que ha estado en el mercado desde 1985. Se ha convertido en una herramienta fundamental para el análisis de datos en disciplinas como las ciencias sociales, economía, bioestadística y epidemiología <a href="#ref" class="citation"></a>.</p>
+        
+        <p><strong>¿Por qué aprenderlo?</strong></p>
+        <ul class="feature-list">
+            <li>Es capaz de manejar grandes bases de datos.</li>
+            <li>Permite realizar análisis complejos (desde simples pruebas t hasta regresiones multivariadas).</li>
+            <li>Genera gráficos de calidad profesional para publicaciones <a href="#ref" class="citation"></a>.</li>
+        </ul>
+        <p>Es una herramienta versátil que cubre todo el ciclo de vida de los datos: gestión, análisis y visualización.</p>
+    </div>
+
+    <!-- SECCIÓN 2: INSTALACIÓN -->
+    <div id="install" class="content-card">
+        <h2>2. Guía de Instalación</h2>
+        <p>Para instalar Stata 18 en Windows, asegúrate de cumplir con los requisitos mínimos: Windows 10 u 11, al menos 4 GB de memoria (para la versión MP) y conexión a internet <a href="#ref" class="citation"></a>.</p>
+        
+        <h3>Pasos para la instalación:</h3>
+        <ol>
+            <li><strong>Descarga:</strong> Accede al archivo de instalación mediante el link oficial proporcionado con tu licencia <a href="#ref" class="citation"></a>.</li>
+            <li><strong>Ejecución:</strong> Ubica el archivo descargado (ej. <code>SetupStata18.exe</code>), haz clic derecho y selecciona <strong>"Ejecutar como administrador"</strong> <a href="#ref" class="citation"></a>.</li>
+            <li><strong>Asistente:</strong> Sigue las instrucciones del asistente (InstallShield Wizard), acepta el contrato de licencia y haz clic en <strong>Next</strong> <a href="#ref" class="citation"></a>.</li>
+            <li><strong>Información de Usuario:</strong> Ingresa tu nombre y organización. Selecciona "Anyone who uses this computer" <a href="#ref" class="citation"></a>.</li>
+            <li><strong>Selección de Edición:</strong> Elige la versión que adquiriste (Stata/MP, Stata/SE o Stata/BE). Esto debe coincidir con tu documento de compra <a href="#ref" class="citation"></a>.</li>
+            <li><strong>Ubicación:</strong> Deja la carpeta de destino por defecto (generalmente en el disco C) y la carpeta de trabajo por defecto (Documentos) <a href="#ref" class="citation"></a>.</li>
+            <li><strong>Activación:</strong> Al abrir el software por primera vez, se te pedirá activar la licencia. Ten a mano tu <em>Serial number</em>, <em>Code</em> y <em>Authorization</em> <a href="#ref" class="citation"></a>.</li>
+        </ol>
+    </div>
+
+    <!-- SECCIÓN 3: INTERFAZ -->
+    <div id="interface" class="content-card">
+        <h2>3. La Interfaz: Tu Cabina de Mando</h2>
+        <p>Al abrir Stata, verás una interfaz dividida en varias ventanas clave. Entenderlas es vital para no perderse <a href="#ref" class="citation"></a> <a href="#ref" class="citation"></a>:</p>
+
+        <ul>
+            <li><strong>🖥️ Results (Centro):</strong> Aquí aparecen los resultados de tus análisis, tablas, errores y mensajes del sistema. Es tu "salida" principal <a href="#ref" class="citation"></a>.</li>
+            <li><strong>⌨️ Command (Abajo):</strong> La barra donde escribes órdenes directas. Al presionar Enter, se ejecutan <a href="#ref" class="citation"></a>.</li>
+            <li><strong>📜 History / Review (Izquierda):</strong> Muestra el historial de todos los comandos que has ejecutado. Muy útil para repetir acciones haciendo clic en ellas <a href="#ref" class="citation"></a>.</li>
+            <li><strong>📊 Variables (Arriba derecha):</strong> Lista todas las variables cargadas en tu base de datos actual <a href="#ref" class="citation"></a>.</li>
+            <li><strong>⚙️ Properties (Abajo derecha):</strong> Muestra detalles de la variable seleccionada (tipo, etiqueta, formato) o de la base de datos en general <a href="#ref" class="citation"></a>.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN 4: FLUJO DE TRABAJO (DO-FILES) -->
+    <div id="workflow" class="content-card">
+        <h2>4. ¡El Secreto del Éxito! Trabaja con Do-files</h2>
+        <div class="alert-warning">
+            <strong>⚠️ Regla de Oro:</strong> Aunque puedes escribir comandos directamente en la ventana principal, <strong>siempre debes trabajar en un Do-file</strong> para proyectos serios <a href="#ref" class="citation"></a> <a href="#ref" class="citation"></a>.
+        </div>
+        
+        <h3>¿Qué es un Do-file?</h3>
+        <p>Es un archivo de texto simple (extensión <code>.do</code>) que guarda todas tus instrucciones. Te permite corregir errores, guardar tu trabajo y reproducir el análisis en el futuro <a href="#ref" class="citation"></a> <a href="#ref" class="citation"></a>.</p>
+
+        <h3>Buenas Prácticas:</h3>
+        <ul>
+            <li><strong>Comenta tu código:</strong> Usa asteriscos (<code>*</code>) al inicio de una línea o <code>/* */</code> para bloques de texto. Stata ignorará esto, pero a ti te servirá para recordar qué hiciste <a href="#ref" class="citation"></a> <a href="#ref" class="citation"></a>.</li>
+            <li><strong>Organización:</strong> Usa un encabezado para describir qué hace el archivo. Limpia la memoria al inicio con <code>clear all</code> <a href="#ref" class="citation"></a>.</li>
+        </ul>
+
+        <div class="code-block">
+            <span class="code-comment">* Ejemplo de estructura de un Do-file</span><br>
+            <span class="code-command">clear all</span> <span class="code-comment">// Limpia la memoria</span><br>
+            <span class="code-command">cd</span> "C:\MisDocumentos\ProyectoStata" <span class="code-comment">// Define carpeta de trabajo</span><br>
+            <br>
+            <span class="code-comment">/* Importar datos */</span><br>
+            <span class="code-command">sysuse</span> auto, <span class="code-command">clear</span> <span class="code-comment">// Carga una base de ejemplo</span><br>
+            <br>
+            <span class="code-comment">* Análisis descriptivo</span><br>
+            <span class="code-command">summarize</span> price mpg
+        </div>
+    </div>
+
+    <!-- SECCIÓN 5: COMANDOS BÁSICOS -->
+    <div id="basics" class="content-card">
+        <h2>5. Comandos Básicos de Exploración</h2>
+        <p>Antes de analizar, necesitas conocer tus datos. Aquí tienes los comandos esenciales que debes memorizar <a href="#ref" class="citation"></a>.</p>
+
+        <h3>📂 Cargar y Ver Datos</h3>
+        <ul>
+            <li><code>browse</code>: Abre una ventana tipo hoja de cálculo para ver los datos (solo lectura) <a href="#ref" class="citation"></a> <a href="#ref" class="citation"></a>.</li>
+            <li><code>edit</code>: Igual que browse, pero permite modificar datos manualmente (¡cuidado!) <a href="#ref" class="citation"></a>.</li>
+            <li><code>list in 1/10</code>: Muestra las primeras 10 observaciones en la ventana de resultados <a href="#ref" class="citation"></a>.</li>
+        </ul>
+
+        <h3>🔍 Describir Datos</h3>
+        <ul>
+            <li><code>describe</code>: Muestra la estructura de la base: número de observaciones, lista de variables y tipos de almacenamiento <a href="#ref" class="citation"></a> <a href="#ref" class="citation"></a>.</li>
+            <li><code>codebook</code>: Es como un diccionario de datos. Muestra detalles profundos de cada variable (rango, media, valores perdidos, etiquetas) <a href="#ref" class="citation"></a> <a href="#ref" class="citation"></a>.</li>
+        </ul>
+
+        <h3>🧮 Estadísticos Resumen</h3>
+        <ul>
+            <li><code>summarize</code>: El comando más usado. Reporta observaciones, media, desviación estándar, mínimo y máximo <a href="#ref" class="citation"></a>.
+                <br><em>Tip:</em> Usa <code>summarize variable, detail</code> para ver percentiles y curtosis <a href="#ref" class="citation"></a>.</li>
+            <li><code>tabulate variable</code>: Crea tablas de frecuencia para variables categóricas (ej. hombres vs mujeres) <a href="#ref" class="citation"></a>.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN 6: MANIPULACIÓN -->
+    <div id="manipulation" class="content-card">
+        <h2>6. Manipulación de Datos</h2>
+        <p>Rara vez los datos vienen listos. Necesitarás limpiarlos y transformarlos.</p>
+
+        <h3>Crear y Modificar Variables</h3>
+        <ul>
+            <li><strong>Generate (Crear):</strong> <code>generate nueva_var = operacion</code>. Crea una variable nueva <a href="#ref" class="citation"></a> <a href="#ref" class="citation"></a>.</li>
+            <li><strong>Replace (Modificar):</strong> <code>replace var_existente = nuevo_valor if condicion</code>. Cambia el contenido de una variable existente <a href="#ref" class="citation"></a> <a href="#ref" class="citation"></a>.</li>
+        </ul>
+
+        <div class="code-block">
+            <span class="code-comment">* Ejemplo: Crear una variable de edad al cuadrado</span><br>
+            <span class="code-command">generate</span> edad2 = edad^2<br>
+            <br>
+            <span class="code-comment">* Corregir un dato erróneo</span><br>
+            <span class="code-command">replace</span> edad = 25 <span class="code-command">if</span> id_persona == 104
+        </div>
+
+        <h3>Etiquetas (Labels)</h3>
+        <p>Es vital etiquetar para entender qué significan los códigos numéricos (ej. 1=Hombre, 2=Mujer) <a href="#ref" class="citation"></a>.</p>
+        <div class="code-block">
+            <span class="code-command">label define</span> sexo_lbl 1 "Hombre" 2 "Mujer"<br>
+            <span class="code-command">label values</span> sexo sexo_lbl
+        </div>
+
+        <h3>Limpieza</h3>
+        <ul>
+            <li><code>drop variable</code>: Elimina una columna entera.</li>
+            <li><code>drop if edad < 18</code>: Elimina las observaciones (filas) que cumplen la condición <a href="#ref" class="citation"></a>.</li>
+            <li><code>destring</code>: Convierte variables que parecen números pero están guardadas como texto <a href="#ref" class="citation"></a>.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN 7: GRÁFICOS -->
+    <div id="graphics" class="content-card">
+        <h2>7. Visualización de Datos</h2>
+        <p>Stata permite editar gráficos exhaustivamente (colores, leyendas, títulos) <a href="#ref" class="citation"></a>. Aquí algunos ejemplos básicos:</p>
+
+        <ul>
+            <li><strong>Histograma:</strong> Para ver la distribución de una variable numérica.<br>
+                <code>histogram edad, frequency</code> <a href="#ref" class="citation"></a>.</li>
+            
+            <li><strong>Diagrama de Caja (Boxplot):</strong> Ideal para ver dispersión y valores atípicos, quizás separado por grupos.<br>
+                <code>graph box peso, over(sexo)</code> <a href="#ref" class="citation"></a>.</li>
+            
+            <li><strong>Gráfico de Barras:</strong> Para comparar categorías.<br>
+                <code>graph bar (mean) ingresos, over(educacion)</code> <a href="#ref" class="citation"></a>.</li>
+
+            <li><strong>Gráfico de Sectores (Torta):</strong><br>
+                <code>graph pie, over(nacionalidad)</code> <a href="#ref" class="citation"></a>.</li>
+        </ul>
+        <div class="pro-tip">
+            💡 <strong>Consejo:</strong> Usa el editor de gráficos de la interfaz para ajustar colores y títulos manualmente si no conoces el código, y luego guarda o copia el comando que Stata genera <a href="#ref" class="citation"></a>.
+        </div>
+    </div>
+
+    <!-- SECCIÓN 8: AVANZADO (MERGE/APPEND) -->
+    <div id="advanced" class="content-card">
+        <h2>8. Nivel Experto: Unir Bases de Datos</h2>
+        <p>A veces tus datos están en dos archivos separados. ¿Cómo los unes?</p>
+
+        <h3>Append (Agregar Filas)</h3>
+        <p>Úsalo cuando tienes las mismas variables pero nuevas observaciones (ej. datos de enero y datos de febrero). Pones una base "debajo" de la otra <a href="#ref" class="citation"></a>.</p>
+        <div class="code-block">
+            <span class="code-command">use</span> datos_enero.dta, <span class="code-command">clear</span><br>
+            <span class="code-command">append using</span> datos_febrero.dta
+        </div>
+
+        <h3>Merge (Agregar Columnas)</h3>
+        <p>Úsalo cuando tienes los mismos sujetos (identificados por una variable llave o ID) pero quieres agregar nuevas variables (ej. tienes edad en una base y quieres agregar ingresos desde otra base) <a href="#ref" class="citation"></a>.</p>
+        <p>Es importante definir la relación (1:1, 1:m, m:1). Por ejemplo, <strong>1:1</strong> significa que el ID es único en ambas bases <a href="#ref" class="citation"></a>.</p>
+        <div class="code-block">
+            <span class="code-command">use</span> datos_demograficos.dta, <span class="code-command">clear</span><br>
+            <span class="code-command">merge 1:1</span> id_estudiante <span class="code-command">using</span> datos_notas.dta
+        </div>
+        <p>Stata creará una variable <code>_merge</code> que te dice si el cruce fue exitoso (valor 3) o si faltaron datos en alguna de las bases <a href="#ref" class="citation"></a>.</p>
+    </div>
+
+    <div class="content-card" style="background-color: #e8f5e9; border-color: #a5d6a7;">
+        <h3>🚀 ¿Necesitas Ayuda?</h3>
+        <p>Stata tiene una comunidad enorme. Si te atascas:</p>
+        <ol>
+            <li>Usa el comando <code>help nombre_comando</code> dentro de Stata (ej. <code>help regress</code>) <a href="#ref" class="citation"></a>.</li>
+            <li>Usa el comando <code>search "frase clave"</code> para encontrar pruebas estadísticas que desconoces <a href="#ref" class="citation"></a>.</li>
+            <li>Consulta el foro <strong>Statalist.org</strong>, donde expertos responden dudas <a href="#ref" class="citation"></a>.</li>
+        </ol>
+    </div>
+
+    <div class="footer-note">
+        <p><em>Este material ha sido compilado a partir de diversas guías y tutoriales expertos sobre Stata.<br>
+        Recuerda: Aprender Stata es como aprender a cocinar; al principio sigues la receta (el código), pero pronto crearás tus propios platos. ¡A practicar!</em></p>
+    </div>
+
+</div>
+
 </body>
 </html>
