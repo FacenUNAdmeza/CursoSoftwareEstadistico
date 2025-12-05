@@ -63,7 +63,7 @@
     }
     
     /* ==========================================================================
-       FONDO DE PARTÍCULAS
+       FONDO DE PARTÍCULAS ANIMADAS
     ========================================================================== */
     .particles-container {
       position: fixed;
@@ -71,9 +71,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: -2;
       overflow: hidden;
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      background: radial-gradient(circle at 20% 50%, #0f172a 0%, #0b1120 30%, #0a0e1a 70%, #070a14 100%);
     }
     
     #particles-canvas {
@@ -82,72 +82,93 @@
       left: 0;
       width: 100%;
       height: 100%;
-      opacity: 0.7;
+      opacity: 0.9;
+    }
+    
+    /* Efectos de neón */
+    .neon-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 70%);
+      opacity: 0.5;
+      animation: gridMove 20s linear infinite;
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(25px, 25px); }
     }
     
     /* Elementos decorativos flotantes */
-    .floating-shape {
+    .floating-element {
       position: absolute;
       border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.15;
-      animation: float 20s infinite linear;
+      filter: blur(60px);
+      opacity: 0.25;
+      animation: float 25s infinite ease-in-out;
+      mix-blend-mode: screen;
     }
     
-    .floating-shape:nth-child(1) {
-      width: 300px;
-      height: 300px;
+    .floating-element:nth-child(1) {
+      width: 400px;
+      height: 400px;
       top: 10%;
       left: 5%;
       background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
-      animation-duration: 25s;
+      animation-duration: 30s;
+      animation-delay: 0s;
     }
     
-    .floating-shape:nth-child(2) {
-      width: 200px;
-      height: 200px;
+    .floating-element:nth-child(2) {
+      width: 300px;
+      height: 300px;
       top: 70%;
       left: 85%;
       background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
-      animation-duration: 20s;
-      animation-direction: reverse;
+      animation-duration: 25s;
+      animation-delay: 5s;
     }
     
-    .floating-shape:nth-child(3) {
-      width: 150px;
-      height: 150px;
+    .floating-element:nth-child(3) {
+      width: 200px;
+      height: 200px;
       top: 20%;
       left: 90%;
       background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
-      animation-duration: 30s;
-    }
-    
-    .floating-shape:nth-child(4) {
-      width: 250px;
-      height: 250px;
-      top: 80%;
-      left: 10%;
-      background: radial-gradient(circle, var(--success-color) 0%, transparent 70%);
-      animation-duration: 22s;
-      animation-direction: reverse;
+      animation-duration: 35s;
+      animation-delay: 10s;
     }
     
     @keyframes float {
-      0% {
-        transform: translate(0, 0) rotate(0deg);
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
       }
       25% {
-        transform: translate(50px, -30px) rotate(90deg);
+        transform: translate(100px, -50px) scale(1.1);
       }
       50% {
-        transform: translate(0, -60px) rotate(180deg);
+        transform: translate(-50px, -100px) scale(0.9);
       }
       75% {
-        transform: translate(-50px, -30px) rotate(270deg);
+        transform: translate(-100px, 50px) scale(1.05);
       }
-      100% {
-        transform: translate(0, 0) rotate(360deg);
-      }
+    }
+    
+    /* Efecto de conexiones entre partículas */
+    .particle-connections {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
     
     /* ==========================================================================
@@ -165,57 +186,135 @@
     .header {
       padding: 2.5rem 0 3rem;
       text-align: center;
+      position: relative;
+    }
+    
+    /* Efecto de luz detrás del logo */
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+      filter: blur(60px);
+      z-index: -1;
+      opacity: 0.7;
     }
     
     .logo {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
     }
     
     .logo-icon {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-xl);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      box-shadow: var(--shadow-md);
+      font-size: 2.2rem;
+      box-shadow: 
+        0 0 20px rgba(37, 99, 235, 0.5),
+        var(--shadow-lg);
+      animation: pulse 4s infinite ease-in-out;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: translateX(-100%);
+      animation: shine 3s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
     }
     
     .logo-text h1 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 2.2rem;
+      font-size: 2.8rem;
       font-weight: 900;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       letter-spacing: -0.5px;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    
+    .logo-text h1::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      border-radius: 3px;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: lineReveal 1.5s 0.5s forwards;
+    }
+    
+    @keyframes lineReveal {
+      to { transform: scaleX(1); }
     }
     
     .course-subtitle {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: var(--light-2);
       max-width: 900px;
       margin: 0 auto 2rem;
       line-height: 1.6;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
     }
     
     .institution-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.75rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: var(--radius-lg);
       padding: 0.75rem 1.5rem;
       backdrop-filter: blur(10px);
       margin: 0.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    
+    .institution-badge:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-color);
     }
     
     .institution-badge i {
@@ -231,23 +330,42 @@
     }
     
     .stat-card {
-      background: var(--card-bg);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 1.5rem;
+      padding: 1.75rem;
       text-align: center;
       backdrop-filter: blur(10px);
       transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     
     .stat-card:hover {
-      background: var(--card-bg-hover);
-      transform: translateY(-5px);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+      transform: translateY(-8px);
       box-shadow: var(--shadow-lg);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .stat-card:hover::before {
+      opacity: 1;
     }
     
     .stat-card i {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 0.75rem;
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       -webkit-background-clip: text;
@@ -256,13 +374,14 @@
     }
     
     .stat-card .number {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       margin-bottom: 0.25rem;
       background: linear-gradient(90deg, var(--light-1), var(--light-2));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
     
     .stat-card .label {
@@ -270,189 +389,36 @@
       color: var(--light-3);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-    }
-    
-    /* Unidades */
-    .units-section {
-      margin-bottom: 4rem;
-    }
-    
-    .section-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .section-title i {
-      color: var(--primary-color);
-    }
-    
-    /* Grid de unidades */
-    .units-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-    
-    .unit-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem;
-      backdrop-filter: blur(10px);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .unit-card:hover {
-      background: var(--card-bg-hover);
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-    
-    .unit-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
-    }
-    
-    .unit-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-    }
-    
-    .unit-number {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      border-radius: 50%;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: white;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.25s ease;
-    }
-    
-    .unit-type {
-      font-size: 0.8rem;
-      padding: 0.25rem 0.75rem;
-      background: rgba(6, 182, 212, 0.2);
-      border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 20px;
-      color: var(--accent-color);
-    }
-    
-    .unit-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      line-height: 1.4;
-    }
-    
-    .unit-description {
-      color: var(--light-2);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-    
-    .unit-software {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-    
-    .software-tag {
-      font-size: 0.75rem;
-      padding: 0.35rem 0.75rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      color: var(--light-2);
-    }
-    
-    .unit-links {
-      display: flex;
-      gap: 0.75rem;
-    }
-    
-    .unit-link {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      color: var(--light-1);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: var(--transition);
-      flex: 1;
-      justify-content: center;
-    }
-    
-    .unit-link:hover {
-      background: rgba(37, 99, 235, 0.2);
-      border-color: rgba(37, 99, 235, 0.4);
-      transform: translateY(-2px);
-    }
-    
-    .unit-link.lecture {
-      background: rgba(16, 185, 129, 0.1);
-      border-color: rgba(16, 185, 129, 0.2);
-    }
-    
-    .unit-link.lecture:hover {
-      background: rgba(16, 185, 129, 0.2);
-    }
-    
-    .unit-link.presentation {
-      background: rgba(245, 158, 11, 0.1);
-      border-color: rgba(245, 158, 11, 0.2);
-    }
-    
-    .unit-link.presentation:hover {
-      background: rgba(245, 158, 11, 0.2);
-    }
-    
-    .unit-link.activity {
-      background: rgba(124, 58, 237, 0.1);
-      border-color: rgba(124, 58, 237, 0.2);
-    }
-    
-    .unit-link.activity:hover {
-      background: rgba(124, 58, 237, 0.2);
+      font-weight: 600;
     }
     
     /* Progreso del curso */
     .progress-section {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(124, 58, 237, 0.1));
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: var(--radius-lg);
       padding: 2rem;
       margin-bottom: 3rem;
       backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .progress-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
+      transform: translateX(-100%);
+      animation: shimmer 3s infinite;
+    }
+    
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
     }
     
     .progress-header {
@@ -463,33 +429,60 @@
     }
     
     .progress-title {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .progress-title i {
+      color: var(--primary-color);
     }
     
     .progress-percentage {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 800;
       background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      text-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
     }
     
     .progress-bar {
-      height: 10px;
+      height: 12px;
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 5px;
+      border-radius: 6px;
       overflow: hidden;
       margin-bottom: 0.75rem;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
     }
     
     .progress-fill {
       height: 100%;
       background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-      border-radius: 5px;
+      border-radius: 6px;
       width: 20%;
-      transition: width 1s ease;
+      transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: translateX(-100%);
+      animation: progressShine 2s infinite;
+    }
+    
+    @keyframes progressShine {
+      100% { transform: translateX(100%); }
     }
     
     .progress-stats {
@@ -497,21 +490,329 @@
       justify-content: space-between;
       color: var(--light-3);
       font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    /* Unidades */
+    .units-section {
+      margin-bottom: 4rem;
+    }
+    
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 0.75rem;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      border-radius: 2px;
+    }
+    
+    .section-title i {
+      color: var(--primary-color);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Grid de unidades */
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 3rem;
+    }
+    
+    .unit-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .unit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.05));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .unit-card:hover {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .unit-card:hover::before {
+      opacity: 1;
+    }
+    
+    .unit-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+      opacity: 0.8;
+    }
+    
+    .unit-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .unit-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .unit-number::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      width: 20px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(30deg);
+      animation: numberShine 3s infinite;
+    }
+    
+    @keyframes numberShine {
+      0%, 100% { left: -10px; }
+      50% { left: 100%; }
+    }
+    
+    .unit-type {
+      font-size: 0.8rem;
+      padding: 0.35rem 1rem;
+      background: rgba(6, 182, 212, 0.2);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      border-radius: 20px;
+      color: var(--accent-color);
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .unit-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .unit-description {
+      color: var(--light-2);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .unit-software {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .software-tag {
+      font-size: 0.75rem;
+      padding: 0.4rem 0.9rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      color: var(--light-2);
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .software-tag:hover {
+      background: rgba(37, 99, 235, 0.2);
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+    
+    /* Enlaces de recursos - AHORA 4 POR UNIDAD */
+    .unit-resources {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .resource-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--light-1);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: var(--transition);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .resource-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    
+    .resource-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .resource-link:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .resource-link i {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .resource-link:hover i {
+      transform: scale(1.2);
+    }
+    
+    /* Colores específicos para cada tipo de recurso */
+    .resource-link.material {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    
+    .resource-link.material:hover {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.5);
+    }
+    
+    .resource-link.presentation {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+    
+    .resource-link.presentation:hover {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.5);
+    }
+    
+    .resource-link.video {
+      background: rgba(239, 68, 68, 0.12);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    
+    .resource-link.video:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.5);
+    }
+    
+    .resource-link.activity {
+      background: rgba(124, 58, 237, 0.12);
+      border-color: rgba(124, 58, 237, 0.3);
+    }
+    
+    .resource-link.activity:hover {
+      background: rgba(124, 58, 237, 0.2);
+      border-color: rgba(124, 58, 237, 0.5);
+    }
+    
+    .resource-name {
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
     }
     
     /* Footer */
     .footer {
       text-align: center;
-      padding: 2rem 0 3rem;
+      padding: 2.5rem 0 3.5rem;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--light-3);
       font-size: 0.9rem;
+      position: relative;
+      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.7);
+      margin-top: 3rem;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary-color), var(--secondary-color), transparent);
     }
     
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 2rem;
       margin: 1.5rem 0;
     }
     
@@ -519,14 +820,62 @@
       color: var(--light-2);
       text-decoration: none;
       transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
     }
     
     .footer-link:hover {
       color: var(--primary-color);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-3px);
+    }
+    
+    .institution-info {
+      margin: 1.5rem 0;
+      line-height: 1.6;
+    }
+    
+    .institution-info p:first-child {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--light-2);
+      margin-bottom: 0.5rem;
     }
     
     .copyright {
-      margin-top: 1rem;
+      margin-top: 2rem;
+      color: var(--light-3);
+      font-size: 0.85rem;
+    }
+    
+    /* Botón flotante */
+    .floating-button {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    
+    .floating-button:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
     }
     
     /* ==========================================================================
@@ -534,29 +883,46 @@
     ========================================================================== */
     @media (max-width: 1200px) {
       .units-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .logo-text h1 {
+        font-size: 2.3rem;
+      }
+      
+      .units-grid {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       }
     }
     
     @media (max-width: 768px) {
       .container {
-        padding: 0 1.25rem;
+        padding: 0 1.5rem;
+      }
+      
+      .logo {
+        flex-direction: column;
+        gap: 1rem;
       }
       
       .logo-text h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
+        text-align: center;
       }
       
       .course-subtitle {
         font-size: 1rem;
+        padding: 1rem;
       }
       
       .units-grid {
         grid-template-columns: 1fr;
       }
       
-      .unit-links {
-        flex-direction: column;
+      .unit-resources {
+        grid-template-columns: repeat(2, 1fr);
       }
       
       .stats-container {
@@ -566,92 +932,145 @@
       .progress-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.5rem;
+        gap: 0.75rem;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
       }
     }
     
-    @media (max-width: 480px) {
+    @media (max-width: 576px) {
       .stats-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .unit-resources {
         grid-template-columns: 1fr;
       }
       
       .unit-header {
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 1rem;
       }
       
       .unit-type {
         align-self: flex-start;
       }
+      
+      .floating-button {
+        bottom: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
     }
+    
+    /* Efectos de entrada */
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    .slide-up {
+      animation: slideUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Retrasos para animaciones secuenciales */
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
   </style>
 </head>
 <body>
-  <!-- Fondo de partículas animadas -->
+  <!-- Fondo de partículas animadas mejorado -->
   <div class="particles-container">
-    <div class="floating-shape"></div>
-    <div class="floating-shape"></div>
-    <div class="floating-shape"></div>
-    <div class="floating-shape"></div>
-    
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="neon-grid"></div>
     <canvas id="particles-canvas"></canvas>
+    <div class="particle-connections" id="connections"></div>
   </div>
   
   <!-- Contenido principal -->
   <div class="container">
     <!-- Header -->
-    <header class="header">
+    <header class="header fade-in">
       <div class="logo">
         <div class="logo-icon">
-          <i class="fas fa-chart-line"></i>
+          <i class="fas fa-chart-network"></i>
         </div>
         <div class="logo-text">
-          <h1>Softwares Estadísticos (Electiva)</h1>
+          <h1>Softwares Estadísticos</h1>
+          <h2 style="font-size: 1.2rem; color: var(--accent-color); margin-top: 0.5rem;">Electiva · Plan 2025</h2>
         </div>
       </div>
       
-      <p class="course-subtitle">
-        Asignatura de la Licenciatura en Matemática Estadística (Plan 2025) orientada al uso de SPSS, Stata, R y Python para el procesamiento
-        y análisis exploratorio de datos, promoviendo flujos de trabajo reproducibles.
+      <p class="course-subtitle slide-up delay-1">
+        Asignatura de la Licenciatura en Matemática Estadística (Plan 2025) orientada al dominio de SPSS, Stata, R y Python para el procesamiento
+        y análisis exploratorio de datos, promoviendo flujos de trabajo reproducibles y análisis estadísticos robustos.
       </p>
       
-      <div class="institution-badge">
+      <div class="institution-badge slide-up delay-2">
         <i class="fas fa-university"></i>
-        <span>FACEN - Universidad Nacional de Asunción · Departamento de Estadística</span>
+        <span>FACEN - Universidad Nacional de Asunción</span>
+        <i class="fas fa-chart-bar"></i>
+        <span>Departamento de Estadística</span>
       </div>
     </header>
     
-    <!-- Estadísticas del curso (según programa oficial) -->
+    <!-- Estadísticas del curso -->
     <div class="stats-container">
-      <div class="stat-card">
-        <i class="fas fa-book-open"></i>
+      <div class="stat-card slide-up delay-1">
+        <i class="fas fa-book-open-reader"></i>
         <div class="number">5</div>
-        <div class="label">Unidades</div>
+        <div class="label">Unidades Temáticas</div>
       </div>
       
-      <div class="stat-card">
+      <div class="stat-card slide-up delay-2">
         <i class="fas fa-laptop-code"></i>
         <div class="number">4</div>
-        <div class="label">Softwares</div>
+        <div class="label">Softwares Principales</div>
       </div>
       
-      <div class="stat-card">
-        <i class="fas fa-clock"></i>
-        <div class="number">16</div>
-        <div class="label">Sesiones</div>
+      <div class="stat-card slide-up delay-3">
+        <i class="fas fa-clock-rotate-left"></i>
+        <div class="number">64</div>
+        <div class="label">Horas Totales</div>
       </div>
       
-      <div class="stat-card">
+      <div class="stat-card slide-up delay-4">
         <i class="fas fa-graduation-cap"></i>
         <div class="number">8</div>
-        <div class="label">Créditos</div>
+        <div class="label">Créditos Académicos</div>
       </div>
     </div>
     
     <!-- Progreso del curso -->
-    <section class="progress-section">
+    <section class="progress-section slide-up delay-3">
       <div class="progress-header">
-        <div class="progress-title">Progreso del Curso</div>
+        <div class="progress-title">
+          <i class="fas fa-chart-line"></i> Progreso del Curso
+        </div>
         <div class="progress-percentage">20%</div>
       </div>
       
@@ -660,22 +1079,22 @@
       </div>
       
       <div class="progress-stats">
-        <span>Unidad I en desarrollo</span>
-        <span>4 unidades restantes</span>
+        <span><i class="fas fa-spinner"></i> Unidad I en desarrollo</span>
+        <span><i class="fas fa-arrow-right"></i> 4 unidades restantes</span>
       </div>
     </section>
     
-    <!-- Unidades del curso (ajustadas al programa) -->
+    <!-- Unidades del curso -->
     <section class="units-section">
-      <h2 class="section-title">
-        <i class="fas fa-layer-group"></i> Unidades del Curso
+      <h2 class="section-title slide-up">
+        <i class="fas fa-cubes"></i> Unidades del Curso
       </h2>
       
       <div class="units-grid">
         <!-- Unidad I -->
-        <div class="unit-card">
+        <div class="unit-card slide-up delay-1">
           <div class="unit-header">
-            <div class="unit-number">1</div>
+            <div class="unit-number">I</div>
             <div class="unit-type">Transversal</div>
           </div>
           
@@ -693,23 +1112,33 @@
             <span class="software-tag">Python</span>
           </div>
           
-          <div class="unit-links">
-            <a href="Unidad1/material_de_lectura/index.html" class="unit-link lecture">
-              <i class="fas fa-book"></i> Material
+          <div class="unit-resources">
+            <a href="Unidad1/material_de_lectura/index.html" class="resource-link material">
+              <i class="fas fa-book-open"></i>
+              <span class="resource-name">Material</span>
             </a>
-            <a href="Unidad1/presentacion/index.html" class="unit-link presentation">
-              <i class="fas fa-tv"></i> Presentación
+            
+            <a href="Unidad1/presentacion/index.html" class="resource-link presentation">
+              <i class="fas fa-presentation-screen"></i>
+              <span class="resource-name">Presentación</span>
             </a>
-            <a href="Unidad1/actividad_aprendizaje/index.html" class="unit-link activity">
-              <i class="fas fa-puzzle-piece"></i> Actividad
+            
+            <a href="Unidad1/video_tutorial/index.html" class="resource-link video">
+              <i class="fas fa-video"></i>
+              <span class="resource-name">Video Tutorial</span>
+            </a>
+            
+            <a href="Unidad1/actividad_aprendizaje/index.html" class="resource-link activity">
+              <i class="fas fa-puzzle-piece"></i>
+              <span class="resource-name">Actividad</span>
             </a>
           </div>
         </div>
         
         <!-- Unidad II: Software SPSS -->
-        <div class="unit-card">
+        <div class="unit-card slide-up delay-2">
           <div class="unit-header">
-            <div class="unit-number">2</div>
+            <div class="unit-number">II</div>
             <div class="unit-type">Software propietario</div>
           </div>
           
@@ -723,25 +1152,36 @@
           <div class="unit-software">
             <span class="software-tag">SPSS</span>
             <span class="software-tag">PSPP</span>
+            <span class="software-tag">IBM</span>
           </div>
           
-          <div class="unit-links">
-            <a href="Unidad2/material_de_lectura/index.html" class="unit-link lecture">
-              <i class="fas fa-book"></i> Material
+          <div class="unit-resources">
+            <a href="Unidad2/material_de_lectura/index.html" class="resource-link material">
+              <i class="fas fa-file-pdf"></i>
+              <span class="resource-name">Material</span>
             </a>
-            <a href="Unidad2/presentacion/index.html" class="unit-link presentation">
-              <i class="fas fa-tv"></i> Presentación
+            
+            <a href="Unidad2/presentacion/index.html" class="resource-link presentation">
+              <i class="fas fa-slideshare"></i>
+              <span class="resource-name">Presentación</span>
             </a>
-            <a href="Unidad2/actividad_aprendizaje/index.html" class="unit-link activity">
-              <i class="fas fa-question-circle"></i> Actividad
+            
+            <a href="Unidad2/video_tutorial/index.html" class="resource-link video">
+              <i class="fas fa-film"></i>
+              <span class="resource-name">Video Tutorial</span>
+            </a>
+            
+            <a href="Unidad2/actividad_aprendizaje/index.html" class="resource-link activity">
+              <i class="fas fa-tasks"></i>
+              <span class="resource-name">Actividad</span>
             </a>
           </div>
         </div>
         
         <!-- Unidad III: Software Stata -->
-        <div class="unit-card">
+        <div class="unit-card slide-up delay-3">
           <div class="unit-header">
-            <div class="unit-number">3</div>
+            <div class="unit-number">III</div>
             <div class="unit-type">Software propietario</div>
           </div>
           
@@ -754,25 +1194,37 @@
           
           <div class="unit-software">
             <span class="software-tag">Stata</span>
+            <span class="software-tag">MP/SE</span>
+            <span class="software-tag">StataCorp</span>
           </div>
           
-          <div class="unit-links">
-            <a href="Unidad3/material_de_lectura/index.html" class="unit-link lecture">
-              <i class="fas fa-book"></i> Material
+          <div class="unit-resources">
+            <a href="Unidad3/material_de_lectura/index.html" class="resource-link material">
+              <i class="fas fa-book"></i>
+              <span class="resource-name">Material</span>
             </a>
-            <a href="Unidad3/presentacion/index.html" class="unit-link presentation">
-              <i class="fas fa-tv"></i> Presentación
+            
+            <a href="Unidad3/presentacion/index.html" class="resource-link presentation">
+              <i class="fas fa-desktop"></i>
+              <span class="resource-name">Presentación</span>
             </a>
-            <a href="Unidad3/actividad_aprendizaje/index.html" class="unit-link activity">
-              <i class="fas fa-puzzle-piece"></i> Actividad
+            
+            <a href="Unidad3/video_tutorial/index.html" class="resource-link video">
+              <i class="fas fa-play-circle"></i>
+              <span class="resource-name">Video Tutorial</span>
+            </a>
+            
+            <a href="Unidad3/actividad_aprendizaje/index.html" class="resource-link activity">
+              <i class="fas fa-flask"></i>
+              <span class="resource-name">Actividad</span>
             </a>
           </div>
         </div>
         
         <!-- Unidad IV: Software R -->
-        <div class="unit-card">
+        <div class="unit-card slide-up delay-4">
           <div class="unit-header">
-            <div class="unit-number">4</div>
+            <div class="unit-number">IV</div>
             <div class="unit-type">Software libre</div>
           </div>
           
@@ -791,23 +1243,33 @@
             <span class="software-tag">R Markdown</span>
           </div>
           
-          <div class="unit-links">
-            <a href="Unidad4/material_de_lectura/index.html" class="unit-link lecture">
-              <i class="fas fa-book"></i> Material
+          <div class="unit-resources">
+            <a href="Unidad4/material_de_lectura/index.html" class="resource-link material">
+              <i class="fas fa-newspaper"></i>
+              <span class="resource-name">Material</span>
             </a>
-            <a href="Unidad4/presentacion/index.html" class="unit-link presentation">
-              <i class="fas fa-tv"></i> Presentación
+            
+            <a href="Unidad4/presentacion/index.html" class="resource-link presentation">
+              <i class="fas fa-chart-bar"></i>
+              <span class="resource-name">Presentación</span>
             </a>
-            <a href="Unidad4/actividad_aprendizaje/index.html" class="unit-link activity">
-              <i class="fas fa-code"></i> Práctica
+            
+            <a href="Unidad4/video_tutorial/index.html" class="resource-link video">
+              <i class="fas fa-video-slash"></i>
+              <span class="resource-name">Video Tutorial</span>
+            </a>
+            
+            <a href="Unidad4/actividad_aprendizaje/index.html" class="resource-link activity">
+              <i class="fas fa-code"></i>
+              <span class="resource-name">Práctica</span>
             </a>
           </div>
         </div>
         
         <!-- Unidad V: Software Python -->
-        <div class="unit-card">
+        <div class="unit-card slide-up delay-5">
           <div class="unit-header">
-            <div class="unit-number">5</div>
+            <div class="unit-number">V</div>
             <div class="unit-type">Software libre</div>
           </div>
           
@@ -826,15 +1288,25 @@
             <span class="software-tag">NumPy</span>
           </div>
           
-          <div class="unit-links">
-            <a href="Unidad5/material_de_lectura/index.html" class="unit-link lecture">
-              <i class="fas fa-book"></i> Material
+          <div class="unit-resources">
+            <a href="Unidad5/material_de_lectura/index.html" class="resource-link material">
+              <i class="fas fa-file-code"></i>
+              <span class="resource-name">Material</span>
             </a>
-            <a href="Unidad5/presentacion/index.html" class="unit-link presentation">
-              <i class="fas fa-tv"></i> Presentación
+            
+            <a href="Unidad5/presentacion/index.html" class="resource-link presentation">
+              <i class="fas fa-chart-pie"></i>
+              <span class="resource-name">Presentación</span>
             </a>
-            <a href="Unidad5/actividad_aprendizaje/index.html" class="unit-link activity">
-              <i class="fas fa-project-diagram"></i> Proyecto
+            
+            <a href="Unidad5/video_tutorial/index.html" class="resource-link video">
+              <i class="fas fa-youtube"></i>
+              <span class="resource-name">Video Tutorial</span>
+            </a>
+            
+            <a href="Unidad5/actividad_aprendizaje/index.html" class="resource-link activity">
+              <i class="fas fa-project-diagram"></i>
+              <span class="resource-name">Proyecto</span>
             </a>
           </div>
         </div>
@@ -842,13 +1314,16 @@
     </section>
     
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer slide-up delay-6">
       <div class="footer-links">
         <a href="#" class="footer-link">
           <i class="fas fa-info-circle"></i> Información del Curso
         </a>
         <a href="#" class="footer-link">
           <i class="fas fa-download"></i> Recursos Descargables
+        </a>
+        <a href="#" class="footer-link">
+          <i class="fas fa-calendar-alt"></i> Calendario Académico
         </a>
         <a href="#" class="footer-link">
           <i class="fas fa-envelope"></i> Contacto
@@ -866,29 +1341,40 @@
     </footer>
   </div>
   
-  <!-- Script para partículas animadas -->
+  <!-- Botón flotante -->
+  <a href="#" class="floating-button">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+  
+  <!-- Script para partículas animadas mejoradas -->
   <script>
     // Configuración del canvas de partículas
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
+    const connections = document.getElementById('connections');
+    
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 100 };
     
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      initParticles();
     }
     
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     
-    const particles = [];
-    const particleCount = 150;
-    const colors = [
-      'rgba(37, 99, 235, 0.7)',
-      'rgba(124, 58, 237, 0.7)',
-      'rgba(6, 182, 212, 0.7)',
-      'rgba(16, 185, 129, 0.7)',
-      'rgba(245, 158, 11, 0.7)',
-    ];
+    // Track mouse position
+    canvas.addEventListener('mousemove', (e) => {
+      mouse.x = e.x;
+      mouse.y = e.y;
+    });
+    
+    canvas.addEventListener('mouseleave', () => {
+      mouse.x = undefined;
+      mouse.y = undefined;
+    });
     
     class Particle {
       constructor() {
@@ -897,7 +1383,8 @@
         this.size = Math.random() * 3 + 1;
         this.speedX = Math.random() * 1 - 0.5;
         this.speedY = Math.random() * 1 - 0.5;
-        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.color = `hsl(${Math.random() * 60 + 200}, 70%, 60%)`;
+        this.originalColor = this.color;
         this.alpha = Math.random() * 0.5 + 0.3;
         this.waveOffset = Math.random() * Math.PI * 2;
       }
@@ -906,27 +1393,58 @@
         this.x += this.speedX;
         this.y += this.speedY;
         
-        if (Math.random() > 0.7) {
-          this.x += Math.sin(this.waveOffset + Date.now() * 0.001) * 0.3;
-          this.y += Math.cos(this.waveOffset + Date.now() * 0.001) * 0.3;
+        // Add wave-like motion
+        this.x += Math.sin(this.waveOffset + Date.now() * 0.001) * 0.2;
+        this.y += Math.cos(this.waveOffset + Date.now() * 0.001) * 0.2;
+        
+        // Bounce off edges
+        if (this.x > canvas.width) this.x = 0;
+        else if (this.x < 0) this.x = canvas.width;
+        
+        if (this.y > canvas.height) this.y = 0;
+        else if (this.y < 0) this.y = canvas.height;
+        
+        // Mouse interaction
+        if (mouse.x !== undefined && mouse.y !== undefined) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < mouse.radius) {
+            const force = (mouse.radius - distance) / mouse.radius;
+            this.x -= dx * force * 0.05;
+            this.y -= dy * force * 0.05;
+            this.color = `hsl(${Math.random() * 30 + 350}, 90%, 70%)`;
+          } else {
+            this.color = this.originalColor;
+          }
         }
         
-        if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-        if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-        
-        this.size = Math.max(1, this.size + Math.sin(Date.now() * 0.001 + this.waveOffset) * 0.1);
+        // Pulsating size
+        this.size = Math.max(1, this.size + Math.sin(Date.now() * 0.002 + this.waveOffset) * 0.1);
       }
       
       draw() {
         ctx.beginPath();
-        ctx.fillStyle = this.color.replace('0.7', this.alpha.toString());
+        ctx.fillStyle = this.color.replace(')', `, ${this.alpha})`).replace('hsl', 'hsla');
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Add glow effect
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+        ctx.fillStyle = this.color.replace(')', `, ${this.alpha * 0.3})`).replace('hsl', 'hsla');
         ctx.fill();
       }
     }
     
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
+    function initParticles() {
+      particles = [];
+      const particleCount = Math.min(200, Math.floor((canvas.width * canvas.height) / 8000));
+      
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
     }
     
     function drawConnections() {
@@ -939,7 +1457,7 @@
           if (distance < 100) {
             const opacity = 0.2 * (1 - distance / 100);
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(150, 150, 255, ${opacity})`;
+            ctx.strokeStyle = `hsla(${Math.random() * 60 + 200}, 70%, 70%, ${opacity})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -950,8 +1468,7 @@
     }
     
     function animate() {
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       particles.forEach(particle => {
         particle.update();
@@ -963,12 +1480,17 @@
       requestAnimationFrame(animate);
     }
     
+    initParticles();
     animate();
     
+    // Efectos de interacción para las tarjetas
     document.querySelectorAll('.unit-card').forEach(card => {
       card.addEventListener('mouseenter', function() {
         const number = this.querySelector('.unit-number');
-        number.style.transform = 'scale(1.2) rotate(10deg)';
+        number.style.transform = 'scale(1.3) rotate(15deg)';
+        
+        // Efecto de partículas que salen de la tarjeta
+        createCardParticles(this);
       });
       
       card.addEventListener('mouseleave', function() {
@@ -977,29 +1499,84 @@
       });
     });
     
-    canvas.addEventListener('mousemove', (e) => {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
+    function createCardParticles(card) {
+      const rect = card.getBoundingClientRect();
+      const particleCount = 5;
       
-      particles.forEach(particle => {
-        const dx = mouseX - particle.x;
-        const dy = mouseY - particle.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance < 100) {
-          particle.x -= dx * 0.02;
-          particle.y -= dy * 0.02;
-        }
-      });
-    });
+      for (let i = 0; i < particleCount; i++) {
+        setTimeout(() => {
+          const particle = document.createElement('div');
+          particle.style.position = 'fixed';
+          particle.style.width = '4px';
+          particle.style.height = '4px';
+          particle.style.backgroundColor = '#2563eb';
+          particle.style.borderRadius = '50%';
+          particle.style.left = `${rect.left + Math.random() * rect.width}px`;
+          particle.style.top = `${rect.top + Math.random() * rect.height}px`;
+          particle.style.pointerEvents = 'none';
+          particle.style.zIndex = '1000';
+          document.body.appendChild(particle);
+          
+          // Animación
+          const animation = particle.animate([
+            { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+            { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(0)`, opacity: 0 }
+          ], {
+            duration: 800,
+            easing: 'ease-out'
+          });
+          
+          animation.onfinish = () => particle.remove();
+        }, i * 100);
+      }
+    }
     
+    // Animación de la barra de progreso
     const progressFill = document.querySelector('.progress-fill');
     const progressPercentage = document.querySelector('.progress-percentage');
     
     setTimeout(() => {
       progressFill.style.width = '20%';
       progressPercentage.textContent = '20%';
-    }, 500);
+    }, 800);
+    
+    // Efectos de entrada con scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+    
+    // Observar elementos para animar
+    document.querySelectorAll('.slide-up').forEach(el => observer.observe(el));
+    
+    // Botón flotante para subir
+    const floatBtn = document.querySelector('.floating-button');
+    floatBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Mostrar/ocultar botón flotante según scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        floatBtn.style.opacity = '1';
+        floatBtn.style.visibility = 'visible';
+      } else {
+        floatBtn.style.opacity = '0';
+        floatBtn.style.visibility = 'hidden';
+      }
+    });
   </script>
 </body>
 </html>
