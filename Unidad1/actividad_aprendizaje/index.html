@@ -1,275 +1,414 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>Unidad 1 · Actividad de clasificación de software</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recurso Didáctico: Herramientas Estadísticas</title>
+<style>
+    /* Estilos Generales para Lectura en Moodle */
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f0f2f5;
-      color: #222;
-      line-height: 1.6;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 1.8;
+        color: #2c3e50;
+        background-color: #f4f6f9;
+        margin: 0;
+        padding: 20px;
     }
-    header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 1rem 1.5rem;
+    .content-wrapper {
+        max-width: 950px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 50px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
-    header h1 {
-      font-size: 1.4rem;
-      margin-bottom: 0.15rem;
+    
+    /* Tipografía y Encabezados */
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 20px;
     }
-    header p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-    header a {
-      color: #ecf0f1;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    header a:hover {
-      text-decoration: underline;
-    }
-    main {
-      max-width: 960px;
-      margin: 2rem auto 3rem auto;
-      padding: 0 1.5rem;
+    h1 span {
+        display: block;
+        font-size: 0.5em;
+        color: #7f8c8d;
+        font-weight: normal;
+        margin-top: 10px;
     }
     h2 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-      color: #2980b9;
+        color: #2980b9;
+        margin-top: 40px;
+        border-left: 5px solid #2980b9;
+        padding-left: 15px;
     }
-    .activity-box {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-      margin-top: 1.5rem;
+    h3 {
+        color: #16a085;
+        margin-top: 30px;
     }
-    .items {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
+    p {
+        margin-bottom: 20px;
+        text-align: justify;
     }
-    .item {
-      background: #2980b9;
-      color: #fff;
-      padding: 0.5rem 1.1rem;
-      border-radius: 999px;
-      cursor: grab;
-      user-select: none;
-      font-size: 0.95rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+    /* Cajas Didácticas */
+    .definition-box {
+        background-color: #e8f6f3;
+        border: 1px solid #1abc9c;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 25px 0;
     }
-    .item.dragging {
-      opacity: 0.6;
-      transform: scale(0.96);
-      cursor: grabbing;
+    .definition-title {
+        font-weight: bold;
+        color: #16a085;
+        display: block;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-size: 0.9em;
     }
-    .bins {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: space-around;
-      margin-top: 0.5rem;
+    .tip-box {
+        background-color: #fef9e7;
+        border-left: 5px solid #f1c40f;
+        padding: 15px;
+        margin: 20px 0;
+        font-style: italic;
     }
-    .bin {
-      flex: 1 1 260px;
-      min-height: 180px;
-      border-radius: 10px;
-      border: 2px dashed #3498db;
-      background: #f7fbff;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
+    .warning-box {
+        background-color: #fdedec;
+        border: 1px solid #e74c3c;
+        padding: 15px;
+        border-radius: 5px;
+        color: #c0392b;
     }
-    .bin h3 {
-      font-size: 1.05rem;
-      margin-bottom: 0.6rem;
-      text-align: center;
-      color: #2c3e50;
+
+    /* Tablas */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 0;
+        font-size: 0.95em;
     }
-    .bin.drag-over {
-      background: #fff7f4;
-      border-color: #e67e22;
+    th {
+        background-color: #34495e;
+        color: #ffffff;
+        padding: 15px;
+        text-align: left;
     }
-    .feedback {
-      margin-top: 1.2rem;
-      text-align: center;
-      font-weight: 600;
-      min-height: 1.4rem;
+    td {
+        border-bottom: 1px solid #bdc3c7;
+        padding: 12px;
     }
-    .feedback.ok {
-      color: #27ae60;
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
     }
-    .feedback.error {
-      color: #e74c3c;
+
+    /* Elementos Visuales */
+    .img-placeholder {
+        background-color: #ecf0f1;
+        border: 2px dashed #95a5a6;
+        color: #7f8c8d;
+        padding: 40px;
+        text-align: center;
+        margin: 30px 0;
+        border-radius: 10px;
     }
-    .reset-btn {
-      margin-top: 1rem;
-      display: inline-block;
-      padding: 0.55rem 1.3rem;
-      border-radius: 999px;
-      border: none;
-      background: #f39c12;
-      color: #fff;
-      cursor: pointer;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: background 0.2s ease, transform 0.2s ease;
+    .img-caption {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.9em;
+        font-weight: bold;
     }
-    .reset-btn:hover {
-      background: #e67e22;
-      transform: translateY(-1px);
+
+    /* Navegación y Referencias */
+    .toc {
+        background-color: #eaeded;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 40px;
     }
-    .nota {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 1rem;
+    .toc ul {
+        list-style: none;
+        padding-left: 0;
     }
-  </style>
+    .toc a {
+        text-decoration: none;
+        color: #2980b9;
+        font-weight: bold;
+    }
+    .toc a:hover {
+        text-decoration: underline;
+    }
+    .references {
+        font-size: 0.85em;
+        color: #555;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+        margin-top: 50px;
+    }
+    .citation {
+        color: #2980b9;
+        font-weight: bold;
+        font-size: 0.8em;
+        vertical-align: super;
+    }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Unidad 1 · Actividad de clasificación de software</h1>
-    <p>Arrastre cada software a la categoría que considere más adecuada.</p>
-    <a href="../../index.html">← Volver al inicio del curso</a>
-  </header>
 
-  <main>
-    <section>
-      <h2>Objetivo</h2>
-      <p>
-        Clasificar diferentes programas según el tipo de interacción predominante: si se utilizan principalmente
-        mediante una <strong>interfaz gráfica</strong> (menús, ventanas, formularios) o mediante
-        <strong>código/comandos</strong> (scripts, consola).
-      </p>
-    </section>
+<div class="content-wrapper">
 
-    <section class="activity-box" aria-label="Actividad de clasificación de software">
-      <div class="items" id="items">
-        <div class="item" draggable="true" data-software="R">R</div>
-        <div class="item" draggable="true" data-software="Python">Python</div>
-        <div class="item" draggable="true" data-software="Stata">Stata</div>
-        <div class="item" draggable="true" data-software="SPSS">SPSS</div>
-        <div class="item" draggable="true" data-software="PSPP">PSPP</div>
-        <div class="item" draggable="true" data-software="Jamovi">Jamovi</div>
-      </div>
+    <h1>Dominando el Análisis de Datos<span>Guía esencial de Software Estadístico para Estudiantes Universitarios</span></h1>
 
-      <div class="bins">
-        <div class="bin" data-category="code" aria-label="Basado en código">
-          <h3>Basado en código / comandos</h3>
-        </div>
-        <div class="bin" data-category="gui" aria-label="Interfaz gráfica">
-          <h3>Interfaz gráfica (menús y ventanas)</h3>
-        </div>
-      </div>
+    <div class="tip-box">
+        <strong>👋 Hola estudiante:</strong> Este material ha sido diseñado para guiarte en el complejo mundo del software estadístico. No importa si eres de Ciencias Sociales, Ingeniería, Salud o Economía; aquí descubrirás qué herramienta aprender, por qué es importante y cómo puede impulsar tu futuro profesional.
+    </div>
 
-      <div id="feedback" class="feedback" aria-live="polite"></div>
-      <button class="reset-btn" id="reset-btn">Reiniciar actividad</button>
+    <div class="toc">
+        <h3>📚 Tabla de Contenidos</h3>
+        <ul>
+            <li><a href="#intro">1. ¿Qué es un Paquete Estadístico y por qué lo necesitas?</a></li>
+            <li><a href="#menu-vs-codigo">2. El gran dilema: ¿Menús (GUI) o Código (CLI)?</a></li>
+            <li><a href="#gigantes">3. Conociendo a los gigantes: SPSS, R y Python</a></li>
+            <li><a href="#comparativa">4. Comparativa: ¿Cuál elijo para mi tesis o trabajo?</a></li>
+            <li><a href="#barreras">5. La realidad académica: Retos y brechas digitales</a></li>
+            <li><a href="#caso-practico">6. En acción: Un caso real con Python (COVID-19)</a></li>
+            <li><a href="#conclusion">7. Conclusión: Tu ruta de aprendizaje</a></li>
+            <li><a href="#referencias">8. Referencias Bibliográficas</a></li>
+        </ul>
+    </div>
 
-      <p class="nota">
-        Nota: la clasificación tiene un carácter orientativo. Muchos programas ofrecen tanto interfaz gráfica como
-        posibilidades de programación (por ejemplo, RStudio o SPSS con sintaxis).
-      </p>
-    </section>
-  </main>
+    <!-- SECCIÓN 1 -->
+    <h2 id="intro">1. ¿Qué es un Paquete Estadístico y por qué lo necesitas?</h2>
+    
+    <p>Imagina que tienes que analizar una encuesta con 1,000 respuestas o una base de datos con millones de registros médicos. Hacerlo a mano o con una calculadora es imposible. Aquí es donde entra el <strong>paquete estadístico</strong>.</p>
+    
+    <div class="definition-box">
+        <span class="definition-title">Definición Clave</span>
+        Un <strong>paquete estadístico</strong> es un programa informático diseñado específicamente para resolver problemas en el área de la estadística. Permiten realizar desde cálculos básicos hasta modelos complejos de predicción e inteligencia artificial.
+    </div>
 
-  <script>
-    (function () {
-      var items = document.querySelectorAll(".item");
-      var bins = document.querySelectorAll(".bin");
-      var feedback = document.getElementById("feedback");
-      var resetBtn = document.getElementById("reset-btn");
-      var container = document.getElementById("items");
+    <p>Estas herramientas han revolucionado la investigación. Lo que antes tomaba meses de cálculos manuales, ahora un ordenador lo resuelve en segundos, permitiendo realizar cientos de contrastes de hipótesis o iteraciones de algoritmos al instante.</p>
 
-      var correct = {
-        "R": "code",
-        "Python": "code",
-        "Stata": "code",
-        "SPSS": "gui",
-        "PSPP": "gui",
-        "Jamovi": "gui"
-      };
+    <p>Para elegir el adecuado, debes hacerte preguntas estratégicas antes de empezar:</p>
+    <ul>
+        <li>¿Funciona en mi ordenador (Windows/Mac/Linux)?</li>
+        <li>¿Tengo dinero para la licencia o necesito algo gratuito?</li>
+        <li>¿Qué usan mis profesores y futuros colegas?</li>
+        <li>¿Tengo tiempo para aprender a programar o necesito algo visual?</li>
+    </ul>
 
-      var dragged = null;
+    <hr>
 
-      items.forEach(function (item) {
-        item.addEventListener("dragstart", function (e) {
-          dragged = item;
-          item.classList.add("dragging");
-          e.dataTransfer.effectAllowed = "move";
-        });
+    <!-- SECCIÓN 2 -->
+    <h2 id="menu-vs-codigo">2. El gran dilema: ¿Menús (GUI) o Código (CLI)?</h2>
+    
+    <p>Antes de ver nombres de programas, debes entender que existen dos "filosofías" de trabajo. En el mundo del análisis de datos, te encontrarás con este debate constantemente,:</p>
 
-        item.addEventListener("dragend", function () {
-          item.classList.remove("dragging");
-          dragged = null;
-        });
-      });
+    <h3>A. Interfaz Gráfica de Usuario (GUI)</h3>
+    <p>Es lo que probablemente ya conoces. Ventanas, botones y menús desplegables. Usas el ratón para decir "Analizar -> Estadísticos Descriptivos -> Frecuencias".</p>
+    <ul>
+        <li><strong>Ventaja:</strong> Muy fácil de aprender. Intuitivo.</li>
+        <li><strong>Desventaja:</strong> Es "encorsetado". Solo puedes hacer lo que el menú te permite. Si quieres hacer algo muy nuevo o específico, quizás no puedas.</li>
+        <li><strong>Ejemplos:</strong> SPSS, Excel, JASP.</li>
+    </ul>
 
-      bins.forEach(function (bin) {
-        bin.addEventListener("dragover", function (e) {
-          e.preventDefault();
-          bin.classList.add("drag-over");
-        });
+    <h3>B. Interfaz de Línea de Comandos (CLI)</h3>
+    <p>Aquí escribes instrucciones (código) en un lenguaje de programación. Puede parecer intimidante al principio ("parece la NASA en 1968" dirían algunos), pero es increíblemente poderoso.</p>
+    <ul>
+        <li><strong>Ventaja:</strong> Flexibilidad total. Puedes crear nuevos métodos, automatizar tareas repetitivas y compartir tu código para que otros repliquen tu trabajo exactamente,.</li>
+        <li><strong>Desventaja:</strong> La curva de aprendizaje es alta. Es como aprender un nuevo idioma.</li>
+        <li><strong>Ejemplos:</strong> R, Python.</li>
+    </ul>
 
-        bin.addEventListener("dragleave", function () {
-          bin.classList.remove("drag-over");
-        });
+    <div class="img-placeholder">
+        [ILUSTRACIÓN 1: GUI vs CLI]
+        <span class="img-caption">Imagen sugerida: A la izquierda, una captura de pantalla de SPSS mostrando sus menús desplegables. A la derecha, una captura de RStudio mostrando un script de código.</span>
+    </div>
 
-        bin.addEventListener("drop", function (e) {
-          e.preventDefault();
-          bin.classList.remove("drag-over");
-          if (dragged && !bin.contains(dragged)) {
-            bin.appendChild(dragged);
-            checkStatus();
-          }
-        });
-      });
+    <hr>
 
-      function checkStatus() {
-        var correctCount = 0;
-        var total = items.length;
+    <!-- SECCIÓN 3 -->
+    <h2 id="gigantes">3. Conociendo a los gigantes: SPSS, R y Python</h2>
 
-        bins.forEach(function (bin) {
-          var category = bin.getAttribute("data-category");
-          var children = bin.querySelectorAll(".item");
-          children.forEach(function (child) {
-            var software = child.getAttribute("data-software");
-            if (correct[software] === category) {
-              correctCount += 1;
-            }
-          });
-        });
+    <p>El mercado está lleno de opciones. Analicemos las tres más importantes que encontrarás en tu vida universitaria y profesional.</p>
 
-        if (correctCount === total) {
-          feedback.textContent = "Excelente, ha clasificado correctamente todos los softwares.";
-          feedback.className = "feedback ok";
-        } else {
-          feedback.textContent = "Hay elementos por revisar. Intente ajustar su clasificación.";
-          feedback.className = "feedback error";
-        }
-      }
+    <h3>3.1. IBM SPSS Statistics: El clásico confiable</h3>
+    <p>Nació en 1968 (¡hace más de 50 años!) como <em>Statistical Package for the Social Sciences</em>. Fue creado para que los investigadores sociales pudieran hacer sus propios análisis sin depender de programadores,.</p>
+    
+    <ul>
+        <li><strong>¿Cómo es?</strong> Funciona como una hoja de cálculo vitaminada. Tiene una "Vista de Datos" (números) y una "Vista de Variables" (donde defines qué significa cada número).</li>
+        <li><strong>Puntos fuertes:</strong> Es el rey en Ciencias Sociales (Psicología, Sociología). Muy fácil de usar mediante menús.</li>
+        <li><strong>Puntos débiles:</strong> Es caro. Las licencias cuestan miles de dólares (aunque las universidades suelen tener convenios). Sus gráficos son funcionales pero difíciles de personalizar estéticamente.</li>
+    </ul>
 
-      resetBtn.addEventListener("click", function () {
-        items.forEach(function (item) {
-          container.appendChild(item);
-        });
-        feedback.textContent = "";
-        feedback.className = "feedback";
-      });
-    })();
-  </script>
+    <h3>3.2. R: La potencia estadística gratuita</h3>
+    <p>R es un lenguaje de programación creado en 1993 por estadísticos (Ross Ihaka y Robert Gentleman). Es Software Libre (gratuito) y parte del proyecto GNU,.</p>
+    
+    <ul>
+        <li><strong>¿Cómo es?</strong> Se usa escribiendo código, aunque programas como <strong>RStudio</strong> facilitan mucho la vida.</li>
+        <li><strong>Puntos fuertes:</strong> Está diseñado <em>para</em> estadística. Tiene miles de paquetes gratuitos (en CRAN) para cualquier cosa imaginable (Bioinformática, Econometría, etc.). Sus gráficos con la librería <code>ggplot2</code> son de calidad profesional.</li>
+        <li><strong>Puntos débiles:</strong> Curva de aprendizaje empinada al inicio. Si te equivocas en una coma, el código no funciona.</li>
+    </ul>
+
+    <h3>3.3. Python: El todoterreno de la Ciencia de Datos</h3>
+    <p>Python es un lenguaje de programación general (se usa para hacer webs, juegos, etc.), pero recientemente se ha convertido en líder para el análisis de datos gracias a bibliotecas específicas.</p>
+    
+    <ul>
+        <li><strong>¿Cómo es?</strong> Programación pura. Usas entornos como Jupyter Notebooks que mezclan código, resultados y texto explicativo.</li>
+        <li><strong>Bibliotecas clave:</strong>
+            <ul>
+                <li><em>Pandas:</em> Para manipular datos como si fueran tablas de Excel.</li>
+                <li><em>Matplotlib:</em> Para crear gráficos.</li>
+            </ul>
+        </li>
+        <li><strong>Puntos fuertes:</strong> Maneja "Big Data" mejor que nadie. Es ideal si quieres dedicarte a la Inteligencia Artificial o al Aprendizaje Automático (Machine Learning).</li>
+    </ul>
+
+    <div class="img-placeholder">
+        [ILUSTRACIÓN 2: Logos de Software]
+        <span class="img-caption">Imagen sugerida: Logotipos de SPSS, R y Python dispuestos horizontalmente. Debajo de SPSS poner "Ciencias Sociales / GUI"; debajo de R poner "Estadística Pura / Académico"; debajo de Python poner "Data Science / Big Data".</span>
+    </div>
+
+    <hr>
+
+    <!-- SECCIÓN 4 -->
+    <h2 id="comparativa">4. Comparativa: ¿Cuál elijo para mi tesis o trabajo?</h2>
+
+    <p>No existe el "mejor" software, sino el más adecuado para ti. Aquí tienes una guía rápida basada en experiencias docentes,:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Característica</th>
+                <th>SPSS</th>
+                <th>R / RStudio</th>
+                <th>Python</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Curva de Aprendizaje</strong></td>
+                <td>🟢 Baja (Fácil)</td>
+                <td>🔴 Alta (Difícil al inicio)</td>
+                <td>🟡 Media (Lógica general)</td>
+            </tr>
+            <tr>
+                <td><strong>Costo</strong></td>
+                <td>💰 Pago (Licencias caras)</td>
+                <td>🆓 Gratis (Open Source)</td>
+                <td>🆓 Gratis (Open Source)</td>
+            </tr>
+            <tr>
+                <td><strong>Flexibilidad</strong></td>
+                <td>Limitada a los menús</td>
+                <td>Extrema (Creas lo que quieras)</td>
+                <td>Extrema (Integración con Apps)</td>
+            </tr>
+            <tr>
+                <td><strong>Gráficos</strong></td>
+                <td>Estándar / Rígidos</td>
+                <td>Calidad de publicación</td>
+                <td>Altamente personalizables</td>
+            </tr>
+            <tr>
+                <td><strong>Recomendado para:</strong></td>
+                <td>Principiantes, Ciencias Sociales, Salud.</td>
+                <td>Investigadores, Estadísticos, Biólogos.</td>
+                <td>Ingenieros, Data Scientists, Big Data.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="tip-box">
+        <strong>💡 Consejo Pro:</strong> Si estás empezando y tu universidad te da SPSS, úsalo para entender los conceptos. Pero si quieres destacar en el mercado laboral actual, aprender <strong>R</strong> o <strong>Python</strong> es una inversión que te diferenciará del resto.
+    </div>
+
+    <hr>
+
+    <!-- SECCIÓN 5 -->
+    <h2 id="barreras">5. La realidad académica: Retos y brechas digitales</h2>
+    
+    <p>Es posible que notes que algunos de tus profesores no utilizan estas herramientas modernas. Un estudio reciente sobre docentes universitarios en Ecuador reveló datos preocupantes que afectan tu formación.</p>
+
+    <h3>¿Por qué no se usan más?</h3>
+    <p>El estudio encontró que el <strong>57% de los docentes</strong> no utilizan softwares estadísticos en sus investigaciones. Las razones principales son:</p>
+    <ol>
+        <li><strong>Falta de formación:</strong> Muchos desconocen cómo usarlos más allá de lo básico.</li>
+        <li><strong>Costos:</strong> Las universidades a veces no pueden pagar las licencias de programas como SPSS.</li>
+        <li><strong>Resistencia:</strong> Miedo al cambio tecnológico o barreras con el idioma (mucho software está en inglés),.</li>
+    </ol>
+
+    <div class="warning-box">
+        <strong>⚠️ Impacto en la calidad:</strong> Cuando no se usa software adecuado, las investigaciones tienden a ser menos rigurosas, con análisis superficiales y menor probabilidad de ser publicadas en revistas importantes,. Como estudiante, debes romper este ciclo aprendiendo herramientas digitales desde ahora.
+    </div>
+
+    <hr>
+
+    <!-- SECCIÓN 6 -->
+    <h2 id="caso-practico">6. En acción: Un caso real con Python (COVID-19)</h2>
+    
+    <p>Para que veas que esto no es solo teoría, veamos un ejemplo real de investigación utilizando <strong>Python</strong>. Se analizó una base de datos masiva sobre COVID-19 en México.</p>
+
+    <h3>El problema de los "Grandes Datos"</h3>
+    <p>La base de datos tenía más de <strong>18 millones de registros</strong>. Si intentaras abrir esto en Excel tradicional, el programa colapsaría (Excel tiene un límite de 1 millón de filas). Python, sin embargo, pudo manejarlo sin problemas,.</p>
+
+    <h3>¿Qué hicieron?</h3>
+    <ol>
+        <li><strong>Procesamiento:</strong> Usaron la librería <em>Pandas</em> para limpiar y organizar esos 18 millones de filas.</li>
+        <li><strong>Visualización:</strong> Crearon gráficos avanzados como "Diagramas de Violín" (ver ilustración abajo) para entender la relación entre edad, sexo e hipertensión en pacientes positivos.</li>
+        <li><strong>Mapas:</strong> Usaron una librería llamada <em>Folium</em> para crear mapas interactivos de calor sobre los casos por estado.</li>
+    </ol>
+
+    <div class="img-placeholder">
+        [ILUSTRACIÓN 3: Diagrama de Violín]
+        <span class="img-caption">Referencia visual: Un gráfico en forma de violín (ancho en el medio, estrecho en los extremos) comparando edades y enfermedades. Esto muestra la densidad de los datos mejor que un simple promedio. Fuente:.</span>
+    </div>
+
+    <p><strong>Resultado:</strong> Descubrieron patrones complejos, como que la hipertensión y la diabetes eran las comorbilidades principales en los fallecidos, con una precisión que hubiera sido difícil de lograr manualmente.</p>
+
+    <hr>
+
+    <!-- SECCIÓN 7 -->
+    <h2 id="conclusion">7. Conclusión: Tu ruta de aprendizaje</h2>
+    
+    <p>Dominar estas herramientas es un superpoder en el mundo moderno. Ya no basta con tener los datos; necesitas saber interrogarlos.</p>
+    
+    <ul>
+        <li>Si tu carrera es humanista y buscas rapidez: <strong>Domina SPSS.</strong></li>
+        <li>Si te apasiona la investigación científica y quieres publicar: <strong>Aprende R.</strong></li>
+        <li>Si te ves trabajando con tecnología, apps y big data: <strong>Lánzate a por Python.</strong></li>
+    </ul>
+
+    <p>Recuerda: <em>"Sea SPSS o R, lo esencial es transformar los datos en conocimiento y tomar decisiones basadas en análisis rigurosos"</em>. ¡No tengas miedo de empezar!</p>
+
+    <hr>
+
+    <h2 id="referencias">8. Referencias Bibliográficas</h2>
+    <div class="references">
+        <p>Canaldocente.es. (2025, 9 de abril). <em>SPSS versus R: Mi experiencia en el aula y recomendaciones para elegir la herramienta adecuada</em>.</p>
+        
+        <p>Guamán Tacuri, J. D. (2025). Barreras en el uso de softwares estadísticos en la investigación académica de docentes de educación superior. <em>Revista Científica Multidisciplinar SAGA, 2</em>(2), 749-760. https://doi.org/10.63415/saga.v2i2.151</p>
+        
+        <p>IBM. (s.f.). <em>IBM SPSS Statistics</em>. Recuperado de https://www.ibm.com/spss</p>
+        
+        <p>Molina, R. (2021, 6 de mayo). <em>16 Software para Análisis Estadísticos y Visualización de Datos</em>. Reptantia.</p>
+        
+        <p>Rodriguez-Rivas, J. G., & Rodríguez Castillo, S. (s.f.). Uso de Python para el análisis de datos aplicado en la investigación. <em>Revista INCAING</em>.</p>
+        
+        <p>Reddit. (s.f.). <em>Programación R vs SPSS: ¿beneficios de cada uno?</em> r/AskStatistics.</p>
+        
+        <p>Wikipedia. (s.f.). <em>Paquete estadístico</em>. Recuperado de https://es.wikipedia.org/wiki/Paquete_estadístico</p>
+        
+        <p>Wikipedia. (s.f.). <em>R (lenguaje de programación)</em>. Recuperado de https://es.wikipedia.org/wiki/R_(lenguaje_de_programación)</p>
+        
+        <p>Wikipedia. (s.f.). <em>SPSS</em>. Recuperado de https://en.wikipedia.org/wiki/SPSS</p>
+    </div>
+
+</div>
+
 </body>
 </html>
