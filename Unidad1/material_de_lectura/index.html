@@ -1,286 +1,311 @@
+Aquí tienes el informe completo y detallado, diseñado con un formato HTML moderno, limpio y visualmente atractivo ("super genial") para que puedas incrustarlo directamente en tu aula virtual Moodle.
+
+He incluido estilos CSS internos para asegurar que se vea bien, con cajas de información, tablas y una estructura clara. Al final, encontrarás las referencias en formato APA basadas estrictamente en las fuentes proporcionadas.
+
+### Instrucciones para Moodle:
+1.  En Moodle, activa la edición.
+2.  Añade una "Página" o "Etiqueta".
+3.  En el editor de texto, busca el botón **</>** o **HTML**.
+4.  Copia y pega el siguiente código completo.
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>Unidad 1 · Material de lectura</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<meta charset="UTF-8">
+<style>
+    /* Estilos Generales */
+    .spss-report-container {
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: #fdfdfd;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segue UI", sans-serif;
-      background: #f4f7fa;
-      color: #222;
-      line-height: 1.7;
+    
+    /* Encabezados */
+    .spss-header {
+        background: linear-gradient(135deg, #003366 0%, #0055a5 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 8px 8px 0 0;
+        margin-bottom: 20px;
+        text-align: center;
     }
-    header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 1rem 1.5rem;
-    }
-    header h1 {
-      font-size: 1.5rem;
-      margin-bottom: 0.25rem;
-    }
-    header p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-    header a {
-      color: #ecf0f1;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    header a:hover {
-      text-decoration: underline;
-    }
-    main {
-      max-width: 920px;
-      margin: 2rem auto 3rem auto;
-      padding: 0 1.5rem;
-    }
+    .spss-header h1 { margin: 0; font-size: 2.5em; }
+    .spss-header p { margin: 5px 0 0; font-size: 1.2em; opacity: 0.9; }
+
     h2 {
-      font-size: 1.35rem;
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
-      color: #2980b9;
+        color: #0055a5;
+        border-bottom: 2px solid #0055a5;
+        padding-bottom: 10px;
+        margin-top: 40px;
     }
+    
     h3 {
-      font-size: 1.1rem;
-      margin-top: 1.25rem;
-      margin-bottom: 0.35rem;
-      color: #34495e;
+        color: #003366;
+        margin-top: 25px;
+        font-weight: 600;
     }
-    p {
-      margin-bottom: 0.9rem;
-      text-align: justify;
+
+    /* Cajas de contenido */
+    .info-box {
+        background-color: #e7f3fe;
+        border-left: 5px solid #2196F3;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 4px;
     }
-    ul {
-      margin: 0.3rem 0 0.9rem 1.3rem;
-      padding-left: 0.2rem;
+    
+    .warning-box {
+        background-color: #fff3cd;
+        border-left: 5px solid #ffc107;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 4px;
     }
-    li {
-      margin-bottom: 0.35rem;
+
+    .step-box {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
     }
-    .highlight {
-      background: #fdfdfd;
-      border-left: 4px solid #3498db;
-      padding: 0.9rem 1rem;
-      margin: 1.2rem 0;
-      border-radius: 4px;
+
+    /* Listas */
+    .spss-list {
+        list-style-type: none;
+        padding-left: 0;
     }
-    .badge {
-      display: inline-block;
-      font-size: 0.8rem;
-      background: #ecf0f1;
-      color: #555;
-      padding: 0.1rem 0.5rem;
-      border-radius: 999px;
-      margin-right: 0.4rem;
-      margin-top: 0.1rem;
+    .spss-list li {
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 10px;
     }
-    footer {
-      max-width: 920px;
-      margin: 0 auto 2rem auto;
-      padding: 0 1.5rem;
-      font-size: 0.85rem;
-      color: #777;
+    .spss-list li:before {
+        content: "\2713"; /* Checkmark */
+        color: #28a745;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
     }
-  </style>
+
+    /* Tablas */
+    .spss-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 0.95em;
+    }
+    .spss-table th, .spss-table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    .spss-table th {
+        background-color: #0055a5;
+        color: white;
+    }
+    .spss-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Citas y Referencias */
+    .citation {
+        font-size: 0.75em;
+        color: #666;
+        vertical-align: super;
+        text-decoration: none;
+    }
+    .references {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-top: 3px solid #003366;
+        margin-top: 50px;
+    }
+    .references h3 { margin-top: 0; }
+    .ref-item {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        text-indent: -20px;
+        font-size: 0.9em;
+    }
+</style>
 </head>
 <body>
-  <header>
-    <div style="display:flex;flex-direction:column;gap:0.2rem;">
-      <div>
-        <strong>Unidad 1 · Introducción a los softwares estadísticos</strong>
-      </div>
-      <p>Curso de Software Estadístico · FACEN-UNA</p>
-      <a href="../../index.html">← Volver al inicio del curso</a>
+
+<div class="spss-report-container">
+
+    <div class="spss-header">
+        <h1>Manual Técnico de IBM SPSS Statistics</h1>
+        <p>Guía integral para la gestión, transformación y análisis de datos</p>
     </div>
-  </header>
 
-  <main>
-    <section>
-      <h2>1. Introducción a los softwares estadísticos</h2>
-      <p>
-        En la práctica moderna de la estadística resulta prácticamente imprescindible utilizar un software especializado.
-        Estos programas permiten gestionar bases de datos, aplicar métodos de análisis, generar gráficos y elaborar
-        reportes de manera eficiente y reproducible. A diferencia de una calculadora o una hoja de cálculo básica,
-        los softwares estadísticos están diseñados para manejar volúmenes importantes de información y para implementar
-        procedimientos estadísticos estándar de forma confiable.
-      </p>
-      <p>
-        Existen dos grandes familias de herramientas:
-      </p>
-      <ul>
-        <li>
-          <strong>Softwares orientados a interfaz gráfica</strong>
-          <span class="badge">SPSS</span>
-          <span class="badge">PSPP</span>
-          <span class="badge">Jamovi</span>
-          que permiten trabajar principalmente mediante menús, cuadros de diálogo y hojas de datos.
-        </li>
-        <li>
-          <strong>Softwares orientados a código o scripts</strong>
-          <span class="badge">R</span>
-          <span class="badge">Stata</span>
-          <span class="badge">Python</span>
-          donde el análisis se especifica escribiendo instrucciones, lo que favorece la
-          reproducibilidad y la automatización de tareas.
-        </li>
-      </ul>
-      <div class="highlight">
-        <p>
-          El énfasis principal de esta unidad se centra en tres ideas:
-        </p>
+    <div class="info-box">
+        <strong>Resumen:</strong> Este informe consolida los procedimientos técnicos para la instalación, gestión de bases de datos y ejecución de análisis estadísticos (descriptivos e inferenciales) en IBM SPSS Statistics, basado en la documentación técnica y tutoriales especializados.
+    </div>
+
+    <h2>1. Instalación y Configuración</h2>
+    <div class="step-box">
+        <h3>Requisitos y Proceso de Instalación</h3>
+        <p>La instalación de IBM SPSS Statistics en sistemas Windows requiere privilegios de administrador. Se recomienda ejecutar el instalador (archivo <code>.exe</code>) haciendo clic derecho y seleccionando "Ejecutar como administrador". Es importante tener en cuenta que configuraciones estrictas del Control de Cuentas de Usuario (UAC) o antivirus podrían afectar el proceso.</p>
+        
+        <h3>Activación de la Licencia</h3>
+        <p>Una vez instalado el software, se debe activar mediante el "Asistente de Licenciamiento":</p>
+        <ol>
+            <li>Inicie el asistente y seleccione "Licencia de usuario autorizado" (generalmente para copias únicas).</li>
+            <li>Introduzca el código de autorización de 20 dígitos alfanuméricos provisto por su institución o proveedor.</li>
+            <li>El sistema verificará la licencia a través de internet y confirmará la activación de los módulos.</li>
+        </ol>
+    </div>
+
+    <h2>2. Gestión de Datos y Variables</h2>
+    
+    <h3>Interfaz Principal</h3>
+    <p>El Editor de Datos de SPSS cuenta con dos vistas fundamentales:</p>
+    <ul class="spss-list">
+        <li><strong>Vista de Variables:</strong> Se utiliza para definir las propiedades de las variables, como el nombre, tipo, etiqueta, valores y nivel de medida.</li>
+        <li><strong>Vista de Datos:</strong> Muestra los valores reales de los datos. Las filas representan casos (sujetos) y las columnas representan variables.</li>
+    </ul>
+
+    <h3>Definición de Propiedades de Variable</h3>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Propiedad</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Nombre</strong></td>
+                <td>Debe ser único, comenzar con una letra o carácter especial (@, #, $) y no contener espacios.</td>
+            </tr>
+            <tr>
+                <td><strong>Tipo</strong></td>
+                <td>Define la naturaleza del dato. Los más comunes son <em>Numérico</em> (para cálculos) y <em>Cadena</em> (alfanuméricos/texto).</td>
+            </tr>
+            <tr>
+                <td><strong>Etiqueta</strong></td>
+                <td>Descripción extendida de la variable (hasta 256 caracteres) que aparece en los resultados.</td>
+            </tr>
+            <tr>
+                <td><strong>Valores</strong></td>
+                <td>Asigna etiquetas descriptivas a códigos numéricos (ej. 1 = Masculino, 2 = Femenino). Es crucial para variables categóricas.</td>
+            </tr>
+            <tr>
+                <td><strong>Medida</strong></td>
+                <td>Define la escala de medición: <em>Nominal</em> (categorías sin orden), <em>Ordinal</em> (categorías con jerarquía) o <em>Escala</em> (intervalo/razón).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Importación de Datos</h3>
+    <p>SPSS permite abrir archivos de datos de diversos formatos sin necesidad de conversión intermedia. Para importar desde Excel:</p>
+    <ol>
+        <li>Vaya a <code>Archivo > Abrir > Datos</code> o <code>Archivo > Importar datos</code>.</li>
+        <li>Seleccione el archivo Excel. Puede optar por leer los nombres de variables de la primera fila de datos.</li>
+    </ol>
+
+    <h2>3. Transformación y Manipulación de Datos</h2>
+
+    <div class="step-box">
+        <h3>Recodificación de Variables</h3>
+        <p>La recodificación permite modificar los valores de los datos para agrupar categorías o corregir errores. Existen dos métodos principales:</p>
         <ul>
-          <li>Reconocer qué tipos de programas se consideran software estadístico.</li>
-          <li>Aprender a instalar y ejecutar las herramientas básicas.</li>
-          <li>Identificar las partes principales de la interfaz de trabajo.</li>
+            <li><strong>En las mismas variables:</strong> Reemplaza los valores originales. Es una modificación destructiva.</li>
+            <li><strong>En distintas variables (Recomendado):</strong> Crea una nueva variable con los valores recodificados, preservando la original para futuras referencias. Es útil para convertir variables continuas (ej. edad) en rangos (ej. grupos de edad).</li>
         </ul>
-      </div>
-    </section>
 
-    <section>
-      <h2>2. Instalación básica de los principales softwares</h2>
+        <h3>Calcular Variable</h3>
+        <p>Permite generar nuevas variables basadas en transformaciones numéricas de las existentes (ej. sumas, promedios). Se accede desde <code>Transformar > Calcular variable</code>. Se pueden utilizar operadores aritméticos y funciones estadísticas como <code>SUM</code> o <code>MEAN</code>.</p>
+    </div>
 
-      <h3>2.1 Instalación de R y RStudio</h3>
-      <p>
-        R es un lenguaje de programación y entorno de trabajo orientado al análisis de datos. RStudio es una interfaz
-        integrada (IDE) que facilita su uso mediante paneles, menús y herramientas adicionales. El proceso típico de
-        instalación incluye:
-      </p>
-      <ul>
-        <li>Acceder al sitio oficial de R (CRAN) y descargar el instalador para el sistema operativo correspondiente.</li>
-        <li>Ejecutar el instalador de R utilizando la configuración por defecto.</li>
-        <li>Descargar RStudio Desktop (versión gratuita) desde el sitio oficial de RStudio.</li>
-        <li>Instalar RStudio; al iniciarlo, el programa detecta automáticamente la instalación de R.</li>
-        <li>Verificar que la consola de R se encuentra operativa dentro de RStudio.</li>
-      </ul>
+    <h3>Ordenar y Filtrar Casos</h3>
+    <p>Para organizar el análisis:</p>
+    <ul>
+        <li><strong>Ordenar Casos:</strong> (<code>Datos > Ordenar casos</code>) Organiza las filas en orden ascendente o descendente según una o más variables.</li>
+        <li><strong>Seleccionar Casos (Filtrar):</strong> (<code>Datos > Seleccionar casos</code>) Permite analizar un subconjunto específico de datos que cumpla una condición (ej. puntuación < 10). Los casos no seleccionados pueden descartarse, eliminarse o copiarse a un nuevo conjunto de datos.</li>
+    </ul>
 
-      <h3>2.2 Instalación de Python y Anaconda</h3>
-      <p>
-        Python es un lenguaje de programación de propósito general con un ecosistema muy rico para ciencia de datos.
-        Anaconda es una distribución que incluye Python, bibliotecas científicas y herramientas como JupyterLab.
-      </p>
-      <ul>
-        <li>Acceder al sitio oficial de Anaconda y descargar el instalador para Python.</li>
-        <li>Instalar la distribución aceptando las opciones recomendadas.</li>
-        <li>Iniciar Anaconda Navigator y lanzar JupyterLab o Jupyter Notebook.</li>
-        <li>Verificar que la consola de Python y los notebooks funcionan correctamente.</li>
-      </ul>
+    <h2>4. Análisis Estadístico Descriptivo</h2>
 
-      <h3>2.3 SPSS / PSPP u otro software con interfaz gráfica</h3>
-      <p>
-        Algunos entornos estadísticos se centran en la interacción gráfica mediante menús. SPSS es un software comercial
-        ampliamente utilizado; PSPP y Jamovi son alternativas libres con lógica similar.
-      </p>
-      <ul>
-        <li>Verificar si la institución dispone de licencia de SPSS u otra herramienta comercial.</li>
-        <li>En caso de usar PSPP o Jamovi, descargar la versión correspondiente desde su sitio oficial.</li>
-        <li>Instalar el programa y comprobar que se abren correctamente la hoja de datos y la ventana de resultados.</li>
-      </ul>
-    </section>
+    <div class="info-box">
+        <strong>Nota sobre Datos Faltantes:</strong> Antes de analizar, decida cómo manejar los datos faltantes. Puede excluir casos según lista (si falta algún dato en las variables analizadas, se excluye el caso completo) o según pareja/análisis (se usa la mayor cantidad de datos posible por par de variables).
+    </div>
 
-    <section>
-      <h2>3. Elementos visuales de la interfaz</h2>
-      <p>
-        A pesar de las diferencias de diseño, la mayoría de los softwares estadísticos comparten una estructura visual
-        similar. Reconocer estos elementos facilita adaptarse rápidamente a nuevos entornos.
-      </p>
-      <ul>
-        <li>
-          <strong>Barra de menús</strong>. Proporciona acceso a las funciones principales del programa
-          (archivo, edición, análisis, gráficos, ayuda, entre otros).
-        </li>
-        <li>
-          <strong>Barras de herramientas</strong>. Contienen iconos para acciones frecuentes como abrir,
-          guardar, ejecutar código o crear gráficos.
-        </li>
-        <li>
-          <strong>Ventana de datos</strong>. Muestra la tabla con variables en columnas y observaciones en filas,
-          típica de SPSS, PSPP y Jamovi.
-        </li>
-        <li>
-          <strong>Consola o ventana de comandos</strong>. Permite escribir instrucciones que el software ejecuta,
-          mostrando los resultados de manera inmediata.
-        </li>
-        <li>
-          <strong>Editor de scripts</strong>. Área donde se escriben y guardan secuencias de comandos reutilizables,
-          fundamental para la reproducibilidad del análisis.
-        </li>
-        <li>
-          <strong>Paneles de resultados y gráficos</strong>. Muestran tablas de salida, resúmenes, mensajes y figuras.
-        </li>
-      </ul>
-    </section>
+    <h3>Procedimientos Clave</h3>
+    <ul class="spss-list">
+        <li><strong>Frecuencias:</strong> Ideal para variables categóricas. Proporciona recuentos, porcentajes y gráficos (barras, sectores, histogramas). Útil para una primera inspección de los datos.</li>
+        <li><strong>Descriptivos:</strong> Genera estadísticos de resumen univariados para variables cuantitativas (Media, Desviación Típica, Mínimo, Máximo, Curtosis, Asimetría) y permite guardar puntuaciones tipificadas (Z-scores).</li>
+        <li><strong>Explorar:</strong> Ofrece estadísticos más detallados y gráficos para identificar valores atípicos (outliers) y comprobar supuestos de normalidad (pruebas Kolmogorov-Smirnov y Shapiro-Wilk).</li>
+        <li><strong>Tablas de Contingencia (Crosstabs):</strong> Analiza la relación entre dos o más variables categóricas. Permite calcular la prueba de Chi-cuadrado para independencia y medidas de asociación.</li>
+    </ul>
 
-    <section>
-      <h2>4. Flujo de trabajo básico en un software estadístico</h2>
-      <p>
-        Antes de aprender comandos específicos, resulta útil tener en mente una secuencia de pasos generales que se repite
-        en la mayoría de los proyectos de análisis de datos:
-      </p>
-      <ul>
-        <li>Definir la carpeta de trabajo donde se almacenarán los datos y los resultados.</li>
-        <li>Abrir el software y, si corresponde, crear un proyecto o sesión de trabajo.</li>
-        <li>Importar el conjunto de datos desde un archivo (CSV, Excel, SAV, entre otros).</li>
-        <li>Verificar tipos de variables (numéricas, categóricas, fechas) y valores faltantes.</li>
-        <li>Realizar una primera exploración descriptiva: tablas de frecuencia, medidas de tendencia central, gráficos simples.</li>
-        <li>Guardar los scripts o proyectos que documentan los pasos realizados.</li>
-        <li>Respaldar los archivos de datos y resultados en una ubicación segura.</li>
-      </ul>
-    </section>
+    <h2>5. Análisis Inferencial y Comparación de Medias</h2>
 
-    <section>
-      <h2>5. Buenas prácticas iniciales</h2>
-      <p>
-        La organización del trabajo y la documentación sistemática son tan importantes como el dominio de los comandos.
-        Algunas recomendaciones básicas son:
-      </p>
-      <ul>
-        <li>Mantener una estructura de carpetas clara: datos originales, datos procesados, scripts, resultados.</li>
-        <li>Evitar modificar directamente los datos originales; trabajar siempre con copias de trabajo.</li>
-        <li>Utilizar nombres informativos y coherentes para archivos y proyectos.</li>
-        <li>Documentar decisiones en comentarios o archivos de notas (por ejemplo, cambios en variables o filtros aplicados).</li>
-        <li>Realizar respaldos periódicos, idealmente en más de un dispositivo o servicio en la nube.</li>
-        <li>Registrar la versión del software y de los paquetes utilizados cuando se generan resultados finales.</li>
-      </ul>
-    </section>
+    <h3>Pruebas T (Comparación de dos grupos)</h3>
+    <ul>
+        <li><strong>Muestras Independientes:</strong> Compara las medias de dos grupos distintos (ej. tratamiento vs. control). Requiere una variable de agrupación.</li>
+        <li><strong>Muestras Relacionadas (Paired):</strong> Compara las medias de dos variables en el mismo grupo (ej. pre-test y post-test).</li>
+        <li><strong>Una Muestra:</strong> Contrasta si la media de una variable difiere de una constante especificada.</li>
+    </ul>
 
-    <section>
-      <h2>6. Recursos introductorios para seguir aprendiendo</h2>
-      <p>
-        Existen múltiples recursos para profundizar en el uso de software estadístico. Algunos ejemplos son:
-      </p>
-      <h3>Bibliografía introductoria</h3>
-      <ul>
-        <li>Field, A. (2018). <em>Discovering Statistics Using IBM SPSS Statistics</em>. Sage.</li>
-        <li>Wickham, H., y Grolemund, G. (2017). <em>R for Data Science</em>. O'Reilly.</li>
-        <li>Navidi, W. (2015). <em>Estadística para ingenieros y científicos</em> (capítulos sobre software).</li>
-      </ul>
-      <h3>Tutoriales y cursos abiertos</h3>
-      <ul>
-        <li>Cursos introductorios de R y RStudio en plataformas como Coursera, edX y DataCamp (modalidad gratuita).</li>
-        <li>Tutoriales de instalación y primeros pasos con SPSS, PSPP o Jamovi, disponibles en páginas institucionales.</li>
-        <li>Guías introductorias a Python científico (NumPy, pandas) en la documentación oficial.</li>
-      </ul>
-      <h3>Comunidades y foros de apoyo</h3>
-      <ul>
-        <li>Stack Overflow, secciones dedicadas a R, Python y SPSS.</li>
-        <li>RStudio Community, para dudas específicas sobre R y RStudio.</li>
-        <li>Foros de usuarios de Jamovi, PSPP y otros softwares libres.</li>
-      </ul>
-    </section>
-  </main>
+    <h3>ANOVA de un Factor</h3>
+    <p>Utilizado para contrastar la hipótesis de que las medias de tres o más grupos son iguales. Incluye pruebas <em>Post Hoc</em> (como Tukey o Bonferroni) para determinar exactamente qué medias difieren una vez se ha establecido que existen diferencias significativas.</p>
 
-  <footer>
-    <p>
-      Material de lectura de la Unidad 1 del curso de Software Estadístico, elaborado para uso académico interno.
-    </p>
-  </footer>
+    <h2>6. Correlación, Regresión y Otros Análisis</h2>
+
+    <table class="spss-table">
+        <tr>
+            <th>Análisis</th>
+            <th>Descripción y Aplicación</th>
+        </tr>
+        <tr>
+            <td><strong>Correlaciones Bivariadas</strong></td>
+            <td>Calcula coeficientes como Pearson (datos paramétricos) o Spearman (datos ordinales/no paramétricos) para medir la relación lineal o de rango entre variables.</td>
+        </tr>
+        <tr>
+            <td><strong>Regresión Lineal</strong></td>
+            <td>Estima los coeficientes de una ecuación lineal para predecir el valor de una variable dependiente basándose en variables independientes. Incluye diagnósticos de colinealidad y análisis de residuos.</td>
+        </tr>
+        <tr>
+            <td><strong>Análisis Factorial</strong></td>
+            <td>Técnica de reducción de datos para identificar factores subyacentes que expliquen las correlaciones entre un conjunto de variables observadas. Incluye métodos de rotación como Varimax.</td>
+        </tr>
+        <tr>
+            <td><strong>Análisis de Conglomerados</strong></td>
+            <td>Identifica grupos homogéneos de casos. Métodos disponibles: K-medias (para grandes conjuntos de datos), Jerárquico (para conjuntos pequeños) y Bietápico (maneja variables categóricas y continuas).</td>
+        </tr>
+        <tr>
+            <td><strong>Pruebas No Paramétricas</strong></td>
+            <td>Utilizadas cuando no se cumplen los supuestos de normalidad. Incluye pruebas como U de Mann-Whitney, Wilcoxon y Kruskal-Wallis.</td>
+        </tr>
+    </table>
+
+    <div class="references">
+        <h3>Referencias Bibliográficas (APA)</h3>
+        <ul class="reference-list">
+            <li class="ref-item">García-Bellido, R., González Such, J., & Jornet Meliá, J. M. (s.f.). <em>SPSS: Transformar variables</em>. Universitat de València. [Fuente 2450]</li>
+            <li class="ref-item">IBM Corporation. (2011). <em>IBM SPSS Statistics Base 20</em>. Universidad de Granada. [Fuente 1533]</li>
+            <li class="ref-item">IBM Corporation. (2019). <em>Guía del usuario de IBM SPSS Statistics 26 Core System</em>. [Fuente 35]</li>
+            <li class="ref-item">IBM. (s.f.). <em>Para obtener gráficos de barras simples, agrupados o apilados</em>. [Fuente 2422]</li>
+            <li class="ref-item">Joanne Tapia. (s.f.). <em>Tablas de frecuencias, medidas de tendencia central y dispersion SPSS</em> [Video]. YouTube. [Fuente 2423]</li>
+            <li class="ref-item">LearnToResearch. (s.f.). <em>#06: Cómo usar IBM SPSS Statistics Tutorial paso a paso (Parte I)</em> [Video]. YouTube. [Fuente 1]</li>
+            <li class="ref-item">Reddit. (s.f.). <em>[P][R] ¿La mejor forma de manejar datos faltantes o inconsistentes en SPSS?</em>. [Fuente 2434]</li>
+            <li class="ref-item">Research Studio. (s.f.). <em>Managing Data - Sorting and filtering data</em> [Video]. YouTube. [Fuente 2417]</li>
+            <li class="ref-item">SPSS FREE. (s.f.). <em>Comparacion de Metodos Recodificar de SPSS</em>. [Fuente 22]</li>
+            <li class="ref-item">Universidad de Huelva. (s.f.). <em>Cómo instalar SPSS con licencia usuario autorizado en Windows</em>. [Fuente 28]</li>
+        </ul>
+    </div>
+
+</div>
+
 </body>
 </html>
+```
