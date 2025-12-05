@@ -1,98 +1,109 @@
-Aquí tienes el informe completo y detallado, diseñado con un formato HTML moderno, limpio y visualmente atractivo ("super genial") para que puedas incrustarlo directamente en tu aula virtual Moodle.
-
-He incluido estilos CSS internos para asegurar que se vea bien, con cajas de información, tablas y una estructura clara. Al final, encontrarás las referencias en formato APA basadas estrictamente en las fuentes proporcionadas.
-
-### Instrucciones para Moodle:
-1.  En Moodle, activa la edición.
-2.  Añade una "Página" o "Etiqueta".
-3.  En el editor de texto, busca el botón **</>** o **HTML**.
-4.  Copia y pega el siguiente código completo.
-
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <style>
-    /* Estilos Generales */
-    .spss-report-container {
+    /* Estilos Generales para Moodle */
+    .spss-container {
         font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        line-height: 1.6;
         color: #333;
-        max-width: 1200px;
-        margin: 0 auto;
-        background-color: #fdfdfd;
+        background-color: #fff;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border: 1px solid #e0e0e0;
+        max-width: 1200px;
+        margin: 0 auto;
     }
     
-    /* Encabezados */
-    .spss-header {
-        background: linear-gradient(135deg, #003366 0%, #0055a5 100%);
+    /* Títulos */
+    .spss-title {
+        background: linear-gradient(to right, #003366, #0055a5);
         color: white;
         padding: 20px;
         border-radius: 8px 8px 0 0;
-        margin-bottom: 20px;
         text-align: center;
+        margin-bottom: 30px;
     }
-    .spss-header h1 { margin: 0; font-size: 2.5em; }
-    .spss-header p { margin: 5px 0 0; font-size: 1.2em; opacity: 0.9; }
+    .spss-title h1 { margin: 0; font-size: 2.2em; font-weight: 700; }
+    .spss-title p { margin: 10px 0 0; font-size: 1.1em; opacity: 0.9; }
 
     h2 {
         color: #0055a5;
-        border-bottom: 2px solid #0055a5;
+        border-bottom: 2px solid #eaeaea;
         padding-bottom: 10px;
         margin-top: 40px;
+        font-size: 1.8em;
     }
     
     h3 {
         color: #003366;
         margin-top: 25px;
-        font-weight: 600;
+        font-size: 1.4em;
+        display: flex;
+        align-items: center;
+    }
+    
+    h3::before {
+        content: '📌';
+        margin-right: 10px;
+        font-size: 0.8em;
     }
 
-    /* Cajas de contenido */
-    .info-box {
-        background-color: #e7f3fe;
+    /* Cajas de contenido destacado */
+    .box-concept {
+        background-color: #e3f2fd;
         border-left: 5px solid #2196F3;
         padding: 15px;
-        margin: 15px 0;
+        margin: 20px 0;
         border-radius: 4px;
     }
     
-    .warning-box {
-        background-color: #fff3cd;
-        border-left: 5px solid #ffc107;
+    .box-warning {
+        background-color: #fff3e0;
+        border-left: 5px solid #ff9800;
         padding: 15px;
-        margin: 15px 0;
+        margin: 20px 0;
         border-radius: 4px;
     }
 
-    .step-box {
-        background-color: #f8f9fa;
-        border: 1px solid #e9ecef;
+    .box-example {
+        background-color: #f1f8e9;
+        border: 1px solid #c5e1a5;
         padding: 20px;
+        margin: 20px 0;
         border-radius: 8px;
-        margin-bottom: 20px;
+        position: relative;
+    }
+    .box-example::before {
+        content: '💡 Ejemplo Práctico';
+        position: absolute;
+        top: -12px;
+        left: 20px;
+        background: #7cb342;
+        color: white;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        font-weight: bold;
     }
 
-    /* Listas */
-    .spss-list {
-        list-style-type: none;
-        padding-left: 0;
+    /* Simulación de Imágenes / Placeholders */
+    .img-placeholder {
+        background-color: #f5f5f5;
+        border: 2px dashed #ccc;
+        color: #666;
+        padding: 30px;
+        text-align: center;
+        margin: 20px 0;
+        border-radius: 8px;
+        font-style: italic;
     }
-    .spss-list li {
-        position: relative;
-        padding-left: 25px;
-        margin-bottom: 10px;
-    }
-    .spss-list li:before {
-        content: "\2713"; /* Checkmark */
-        color: #28a745;
-        font-weight: bold;
-        position: absolute;
-        left: 0;
+    .img-caption {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 5px;
     }
 
     /* Tablas */
@@ -101,206 +112,230 @@ He incluido estilos CSS internos para asegurar que se vea bien, con cajas de inf
         border-collapse: collapse;
         margin: 20px 0;
         font-size: 0.95em;
-    }
-    .spss-table th, .spss-table td {
-        padding: 12px 15px;
-        border: 1px solid #ddd;
-        text-align: left;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
     .spss-table th {
         background-color: #0055a5;
         color: white;
+        padding: 12px;
+        text-align: left;
     }
-    .spss-table tr:nth-child(even) {
-        background-color: #f2f2f2;
+    .spss-table td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
     }
+    .spss-table tr:nth-child(even) { background-color: #f9f9f9; }
 
-    /* Citas y Referencias */
+    /* Referencias */
     .citation {
         font-size: 0.75em;
-        color: #666;
+        color: #888;
         vertical-align: super;
         text-decoration: none;
+        margin-left: 2px;
     }
-    .references {
-        background-color: #f9f9f9;
+    
+    .references-section {
+        background-color: #f8f9fa;
         padding: 20px;
-        border-top: 3px solid #003366;
         margin-top: 50px;
+        border-top: 4px solid #003366;
     }
-    .references h3 { margin-top: 0; }
-    .ref-item {
-        margin-bottom: 10px;
-        padding-left: 20px;
-        text-indent: -20px;
-        font-size: 0.9em;
+    
+    code {
+        background-color: #eee;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+        color: #d32f2f;
     }
 </style>
 </head>
 <body>
 
-<div class="spss-report-container">
+<div class="spss-container">
 
-    <div class="spss-header">
-        <h1>Manual Técnico de IBM SPSS Statistics</h1>
-        <p>Guía integral para la gestión, transformación y análisis de datos</p>
+    <div class="spss-title">
+        <h1>Guía Completa de IBM SPSS Statistics</h1>
+        <p>Manual paso a paso para estudiantes: Desde la instalación hasta el análisis avanzado</p>
     </div>
 
-    <div class="info-box">
-        <strong>Resumen:</strong> Este informe consolida los procedimientos técnicos para la instalación, gestión de bases de datos y ejecución de análisis estadísticos (descriptivos e inferenciales) en IBM SPSS Statistics, basado en la documentación técnica y tutoriales especializados.
+    <div class="box-concept">
+        <strong>Objetivo:</strong> Este recurso está diseñado para que domines el flujo de trabajo en SPSS: preparar tus datos, transformarlos si es necesario y aplicar las pruebas estadísticas correctas para tu investigación.
     </div>
 
-    <h2>1. Instalación y Configuración</h2>
-    <div class="step-box">
-        <h3>Requisitos y Proceso de Instalación</h3>
-        <p>La instalación de IBM SPSS Statistics en sistemas Windows requiere privilegios de administrador. Se recomienda ejecutar el instalador (archivo <code>.exe</code>) haciendo clic derecho y seleccionando "Ejecutar como administrador". Es importante tener en cuenta que configuraciones estrictas del Control de Cuentas de Usuario (UAC) o antivirus podrían afectar el proceso.</p>
-        
-        <h3>Activación de la Licencia</h3>
-        <p>Una vez instalado el software, se debe activar mediante el "Asistente de Licenciamiento":</p>
-        <ol>
-            <li>Inicie el asistente y seleccione "Licencia de usuario autorizado" (generalmente para copias únicas).</li>
-            <li>Introduzca el código de autorización de 20 dígitos alfanuméricos provisto por su institución o proveedor.</li>
-            <li>El sistema verificará la licencia a través de internet y confirmará la activación de los módulos.</li>
-        </ol>
-    </div>
-
-    <h2>2. Gestión de Datos y Variables</h2>
+    <!-- SECCIÓN 1: INSTALACIÓN -->
+    <h2>1. Primeros Pasos: Instalación y Licencia</h2>
     
-    <h3>Interfaz Principal</h3>
-    <p>El Editor de Datos de SPSS cuenta con dos vistas fundamentales:</p>
-    <ul class="spss-list">
-        <li><strong>Vista de Variables:</strong> Se utiliza para definir las propiedades de las variables, como el nombre, tipo, etiqueta, valores y nivel de medida.</li>
-        <li><strong>Vista de Datos:</strong> Muestra los valores reales de los datos. Las filas representan casos (sujetos) y las columnas representan variables.</li>
-    </ul>
+    <div class="box-warning">
+        <strong>⚠️ Importante:</strong> Para instalar IBM SPSS en Windows, se requiere realizar el proceso con una cuenta de administrador. Se recomienda hacer clic derecho sobre el archivo instalador (ej. <code>SPSSSC_64b_29.0_MW_ML.exe</code>) y seleccionar <strong>"Ejecutar como administrador"</strong>.
+    </div>
 
-    <h3>Definición de Propiedades de Variable</h3>
+    <p>Una vez finalizada la instalación, deberás activar el software:</p>
+    <ol>
+        <li>Abre el <strong>Asistente de Licenciamiento</strong>.</li>
+        <li>Selecciona la opción <em>"Licencia de usuario autorizado"</em> (generalmente para copias únicas compradas o provistas por la universidad).</li>
+        <li>Introduce el código de autorización de 20 dígitos alfanuméricos.</li>
+        <li>El sistema verificará la licencia vía internet y confirmará los módulos activos.</li>
+    </ol>
+
+    <!-- SECCIÓN 2: INTERFAZ -->
+    <h2>2. Entendiendo la Interfaz: Vista de Datos vs. Variables</h2>
+
+    <p>El Editor de Datos es la ventana principal y tiene dos pestañas en la parte inferior que debes conocer perfectamente:</p>
+
+    <div class="img-placeholder">
+        [Aquí iría una captura de pantalla mostrando las pestañas inferiores izquierda: "Vista de Datos" y "Vista de Variables"]
+        <span class="img-caption">Figura 1: Pestañas de navegación en el Editor de Datos.</span>
+    </div>
+
     <table class="spss-table">
         <thead>
             <tr>
-                <th>Propiedad</th>
-                <th>Descripción</th>
+                <th>Vista</th>
+                <th>Función Principal</th>
+                <th>Ejemplo de Uso</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><strong>Nombre</strong></td>
-                <td>Debe ser único, comenzar con una letra o carácter especial (@, #, $) y no contener espacios.</td>
+                <td><strong>Vista de Variables</strong></td>
+                <td>Define las <em>propiedades</em> (metadatos). Aquí configuras qué significa cada columna.</td>
+                <td>Nombrar una variable "Edad", definirla como Numérica y etiquetarla como "Edad del encuestado".</td>
             </tr>
             <tr>
-                <td><strong>Tipo</strong></td>
-                <td>Define la naturaleza del dato. Los más comunes son <em>Numérico</em> (para cálculos) y <em>Cadena</em> (alfanuméricos/texto).</td>
-            </tr>
-            <tr>
-                <td><strong>Etiqueta</strong></td>
-                <td>Descripción extendida de la variable (hasta 256 caracteres) que aparece en los resultados.</td>
-            </tr>
-            <tr>
-                <td><strong>Valores</strong></td>
-                <td>Asigna etiquetas descriptivas a códigos numéricos (ej. 1 = Masculino, 2 = Femenino). Es crucial para variables categóricas.</td>
-            </tr>
-            <tr>
-                <td><strong>Medida</strong></td>
-                <td>Define la escala de medición: <em>Nominal</em> (categorías sin orden), <em>Ordinal</em> (categorías con jerarquía) o <em>Escala</em> (intervalo/razón).</td>
+                <td><strong>Vista de Datos</strong></td>
+                <td>Muestra los <em>valores reales</em> (la matriz de datos). Las filas son sujetos (casos) y las columnas son variables.</td>
+                <td>Ver que el Sujeto 1 tiene 25 años y el Sujeto 2 tiene 30.</td>
             </tr>
         </tbody>
     </table>
 
-    <h3>Importación de Datos</h3>
-    <p>SPSS permite abrir archivos de datos de diversos formatos sin necesidad de conversión intermedia. Para importar desde Excel:</p>
-    <ol>
-        <li>Vaya a <code>Archivo > Abrir > Datos</code> o <code>Archivo > Importar datos</code>.</li>
-        <li>Seleccione el archivo Excel. Puede optar por leer los nombres de variables de la primera fila de datos.</li>
-    </ol>
+    <h3>Propiedades Clave de las Variables</h3>
+    <p>En la <em>Vista de Variables</em>, configura correctamente estos campos para evitar errores:</p>
+    <ul>
+        <li><strong>Nombre:</strong> Sin espacios, corto y único (ej. <code>nivel_socioeconomico</code>).</li>
+        <li><strong>Etiqueta:</strong> Descripción larga y legible que aparecerá en los gráficos (ej. "Nivel Socioeconómico de la Familia").</li>
+        <li><strong>Valores:</strong> Crucial para variables cualitativas. Asigna números a categorías de texto.
+            <div class="box-example">
+                <strong>Ejemplo de Etiquetas de Valor:</strong><br>
+                Si tienes la variable <em>Género</em>, no escribas "Hombre" o "Mujer" en cada celda. <br>
+                1. Configura la variable como <strong>Numérica</strong>.<br>
+                2. En la columna <strong>Valores</strong>, asigna: <code>1 = Masculino</code>, <code>2 = Femenino</code>.<br>
+                Esto facilita el análisis estadístico posterior.
+            </div>
+        </li>
+        <li><strong>Medida:</strong> Define si el dato es <em>Nominal</em> (sin orden, ej. color), <em>Ordinal</em> (con jerarquía, ej. nivel educativo) o <em>Escala</em> (números reales, ej. edad, salario).</li>
+    </ul>
 
-    <h2>3. Transformación y Manipulación de Datos</h2>
+    <!-- SECCIÓN 3: GESTIÓN DE DATOS -->
+    <h2>3. Gestión y Transformación de Datos</h2>
 
-    <div class="step-box">
-        <h3>Recodificación de Variables</h3>
-        <p>La recodificación permite modificar los valores de los datos para agrupar categorías o corregir errores. Existen dos métodos principales:</p>
-        <ul>
-            <li><strong>En las mismas variables:</strong> Reemplaza los valores originales. Es una modificación destructiva.</li>
-            <li><strong>En distintas variables (Recomendado):</strong> Crea una nueva variable con los valores recodificados, preservando la original para futuras referencias. Es útil para convertir variables continuas (ej. edad) en rangos (ej. grupos de edad).</li>
-        </ul>
+    <h3>Importar desde Excel</h3>
+    <p>No es necesario escribir los datos manualmente si ya los tienes. Puedes importar directamente desde Excel yendo a <code>Archivo > Abrir > Datos</code> o <code>Importar datos</code>. Asegúrate de marcar la opción para leer los nombres de las variables de la primera fila.</p>
 
-        <h3>Calcular Variable</h3>
-        <p>Permite generar nuevas variables basadas en transformaciones numéricas de las existentes (ej. sumas, promedios). Se accede desde <code>Transformar > Calcular variable</code>. Se pueden utilizar operadores aritméticos y funciones estadísticas como <code>SUM</code> o <code>MEAN</code>.</p>
+    <h3>Recodificar Variables</h3>
+    <p>A veces necesitas agrupar datos, por ejemplo, convertir edades exactas en "Grupos de Edad".</p>
+    <ul>
+        <li>Ve a <code>Transformar > Recodificar en distintas variables</code> (recomendado para no perder el dato original).</li>
+        <li>Selecciona la variable antigua (ej. <code>Edad</code>) y nombra la nueva (ej. <code>Rango_Edad</code>).</li>
+        <li>Define los rangos en "Valores antiguos y nuevos" (ej. 0-18 = 1 [Menor], 19-65 = 2 [Adulto]).</li>
+    </ul>
+
+    <h3>Calcular Variable</h3>
+    <p>Útil para sumar puntuaciones de un test o crear índices.</p>
+    <div class="box-example">
+        <strong>Ejemplo: Sumar ítems de un test</strong><br>
+        Supongamos que quieres sumar los ítems <code>m_09</code> y <code>m_15</code> para crear una puntuación total.<br>
+        1. Ve a <code>Transformar > Calcular variable</code>.<br>
+        2. Variable de destino: <code>Total_Score</code>.<br>
+        3. Expresión numérica: <code>m_09 + m_15</code> o usando la función <code>SUM(m_09, m_15)</code>.<br>
+        El programa creará una nueva columna con la suma para cada sujeto.
     </div>
 
-    <h3>Ordenar y Filtrar Casos</h3>
-    <p>Para organizar el análisis:</p>
+    <!-- SECCIÓN 4: ANÁLISIS DESCRIPTIVO -->
+    <h2>4. Análisis Descriptivo: Conociendo tus Datos</h2>
+
+    <p>Antes de probar hipótesis, debes describir tu muestra.</p>
+
+    <h3>Para Variables Categóricas (Nominales/Ordinales)</h3>
+    <p>Usa <strong>Frecuencias</strong> (<code>Analizar > Estadísticos descriptivos > Frecuencias</code>). Obtendrás tablas con recuentos y porcentajes.</p>
     <ul>
-        <li><strong>Ordenar Casos:</strong> (<code>Datos > Ordenar casos</code>) Organiza las filas en orden ascendente o descendente según una o más variables.</li>
-        <li><strong>Seleccionar Casos (Filtrar):</strong> (<code>Datos > Seleccionar casos</code>) Permite analizar un subconjunto específico de datos que cumpla una condición (ej. puntuación < 10). Los casos no seleccionados pueden descartarse, eliminarse o copiarse a un nuevo conjunto de datos.</li>
+        <li><em>Gráficos recomendados:</em> De sectores (pastel) o de barras.</li>
     </ul>
 
-    <h2>4. Análisis Estadístico Descriptivo</h2>
+    <h3>Para Variables Cuantitativas (Escala)</h3>
+    <p>Usa <strong>Descriptivos</strong> o <strong>Explorar</strong>. Aquí buscamos la media, desviación típica, mínimos y máximos.</p>
+    <ul>
+        <li><strong>Explorar</strong> (<code>Analizar > Estadísticos descriptivos > Explorar</code>) es más potente: te permite ver diagramas de caja (Boxplots) para detectar valores atípicos (outliers) y realizar pruebas de normalidad como <em>Kolmogorov-Smirnov</em> o <em>Shapiro-Wilk</em>.</li>
+    </ul>
 
-    <div class="info-box">
-        <strong>Nota sobre Datos Faltantes:</strong> Antes de analizar, decida cómo manejar los datos faltantes. Puede excluir casos según lista (si falta algún dato en las variables analizadas, se excluye el caso completo) o según pareja/análisis (se usa la mayor cantidad de datos posible por par de variables).
+    <div class="box-concept">
+        <strong>¿Qué es la Normalidad?</strong><br>
+        Es saber si tus datos siguen una distribución en forma de campana (Campana de Gauss). Esto es vital para decidir si usas pruebas paramétricas (como la prueba T) o no paramétricas.
     </div>
 
-    <h3>Procedimientos Clave</h3>
-    <ul class="spss-list">
-        <li><strong>Frecuencias:</strong> Ideal para variables categóricas. Proporciona recuentos, porcentajes y gráficos (barras, sectores, histogramas). Útil para una primera inspección de los datos.</li>
-        <li><strong>Descriptivos:</strong> Genera estadísticos de resumen univariados para variables cuantitativas (Media, Desviación Típica, Mínimo, Máximo, Curtosis, Asimetría) y permite guardar puntuaciones tipificadas (Z-scores).</li>
-        <li><strong>Explorar:</strong> Ofrece estadísticos más detallados y gráficos para identificar valores atípicos (outliers) y comprobar supuestos de normalidad (pruebas Kolmogorov-Smirnov y Shapiro-Wilk).</li>
-        <li><strong>Tablas de Contingencia (Crosstabs):</strong> Analiza la relación entre dos o más variables categóricas. Permite calcular la prueba de Chi-cuadrado para independencia y medidas de asociación.</li>
-    </ul>
+    <!-- SECCIÓN 5: ANÁLISIS INFERENCIAL -->
+    <h2>5. Análisis Inferencial: Probando Hipótesis</h2>
 
-    <h2>5. Análisis Inferencial y Comparación de Medias</h2>
-
-    <h3>Pruebas T (Comparación de dos grupos)</h3>
-    <ul>
-        <li><strong>Muestras Independientes:</strong> Compara las medias de dos grupos distintos (ej. tratamiento vs. control). Requiere una variable de agrupación.</li>
-        <li><strong>Muestras Relacionadas (Paired):</strong> Compara las medias de dos variables en el mismo grupo (ej. pre-test y post-test).</li>
-        <li><strong>Una Muestra:</strong> Contrasta si la media de una variable difiere de una constante especificada.</li>
-    </ul>
-
-    <h3>ANOVA de un Factor</h3>
-    <p>Utilizado para contrastar la hipótesis de que las medias de tres o más grupos son iguales. Incluye pruebas <em>Post Hoc</em> (como Tukey o Bonferroni) para determinar exactamente qué medias difieren una vez se ha establecido que existen diferencias significativas.</p>
-
-    <h2>6. Correlación, Regresión y Otros Análisis</h2>
+    <p>Aquí es donde decides si las diferencias que ves son reales o fruto del azar. Elige la prueba según tus datos:</p>
 
     <table class="spss-table">
-        <tr>
-            <th>Análisis</th>
-            <th>Descripción y Aplicación</th>
-        </tr>
-        <tr>
-            <td><strong>Correlaciones Bivariadas</strong></td>
-            <td>Calcula coeficientes como Pearson (datos paramétricos) o Spearman (datos ordinales/no paramétricos) para medir la relación lineal o de rango entre variables.</td>
-        </tr>
-        <tr>
-            <td><strong>Regresión Lineal</strong></td>
-            <td>Estima los coeficientes de una ecuación lineal para predecir el valor de una variable dependiente basándose en variables independientes. Incluye diagnósticos de colinealidad y análisis de residuos.</td>
-        </tr>
-        <tr>
-            <td><strong>Análisis Factorial</strong></td>
-            <td>Técnica de reducción de datos para identificar factores subyacentes que expliquen las correlaciones entre un conjunto de variables observadas. Incluye métodos de rotación como Varimax.</td>
-        </tr>
-        <tr>
-            <td><strong>Análisis de Conglomerados</strong></td>
-            <td>Identifica grupos homogéneos de casos. Métodos disponibles: K-medias (para grandes conjuntos de datos), Jerárquico (para conjuntos pequeños) y Bietápico (maneja variables categóricas y continuas).</td>
-        </tr>
-        <tr>
-            <td><strong>Pruebas No Paramétricas</strong></td>
-            <td>Utilizadas cuando no se cumplen los supuestos de normalidad. Incluye pruebas como U de Mann-Whitney, Wilcoxon y Kruskal-Wallis.</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Pregunta de Investigación</th>
+                <th>Prueba Estadística</th>
+                <th>Ruta en SPSS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>¿Existe relación entre dos variables categóricas? (ej. Fumar vs. Cáncer)</td>
+                <td><strong>Chi-cuadrado</strong> (Tablas de contingencia)</td>
+                <td><code>Analizar > Estadísticos descriptivos > Tablas de contingencia</code></td>
+            </tr>
+            <tr>
+                <td>¿Hay diferencia entre dos grupos independientes? (ej. Hombres vs. Mujeres en salario)</td>
+                <td><strong>Prueba T para muestras independientes</strong></td>
+                <td><code>Analizar > Comparar medias > Prueba T para muestras independientes</code></td>
+            </tr>
+            <tr>
+                <td>¿Hay diferencia en el mismo grupo antes y después? (ej. Pre-test vs. Post-test)</td>
+                <td><strong>Prueba T para muestras relacionadas</strong></td>
+                <td><code>Analizar > Comparar medias > Prueba T para muestras relacionadas</code></td>
+            </tr>
+            <tr>
+                <td>¿Hay diferencia entre 3 o más grupos? (ej. Tratamiento A, B y Control)</td>
+                <td><strong>ANOVA de un factor</strong></td>
+                <td><code>Analizar > Comparar medias > ANOVA de un factor</code></td>
+            </tr>
+            <tr>
+                <td>¿Están relacionadas dos variables numéricas? (ej. Edad y Peso)</td>
+                <td><strong>Correlación de Pearson</strong></td>
+                <td><code>Analizar > Correlaciones > Bivariadas</code></td>
+            </tr>
+        </tbody>
     </table>
 
-    <div class="references">
-        <h3>Referencias Bibliográficas (APA)</h3>
-        <ul class="reference-list">
-            <li class="ref-item">García-Bellido, R., González Such, J., & Jornet Meliá, J. M. (s.f.). <em>SPSS: Transformar variables</em>. Universitat de València. [Fuente 2450]</li>
-            <li class="ref-item">IBM Corporation. (2011). <em>IBM SPSS Statistics Base 20</em>. Universidad de Granada. [Fuente 1533]</li>
-            <li class="ref-item">IBM Corporation. (2019). <em>Guía del usuario de IBM SPSS Statistics 26 Core System</em>. [Fuente 35]</li>
-            <li class="ref-item">IBM. (s.f.). <em>Para obtener gráficos de barras simples, agrupados o apilados</em>. [Fuente 2422]</li>
-            <li class="ref-item">Joanne Tapia. (s.f.). <em>Tablas de frecuencias, medidas de tendencia central y dispersion SPSS</em> [Video]. YouTube. [Fuente 2423]</li>
-            <li class="ref-item">LearnToResearch. (s.f.). <em>#06: Cómo usar IBM SPSS Statistics Tutorial paso a paso (Parte I)</em> [Video]. YouTube. [Fuente 1]</li>
-            <li class="ref-item">Reddit. (s.f.). <em>[P][R] ¿La mejor forma de manejar datos faltantes o inconsistentes en SPSS?</em>. [Fuente 2434]</li>
-            <li class="ref-item">Research Studio. (s.f.). <em>Managing Data - Sorting and filtering data</em> [Video]. YouTube. [Fuente 2417]</li>
-            <li class="ref-item">SPSS FREE. (s.f.). <em>Comparacion de Metodos Recodificar de SPSS</em>. [Fuente 22]</li>
-            <li class="ref-item">Universidad de Huelva. (s.f.). <em>Cómo instalar SPSS con licencia usuario autorizado en Windows</em>. [Fuente 28]</li>
+    <div class="box-warning">
+        <strong>Interpretación del valor p (Sig.):</strong><br>
+        En general, si el valor de <strong>Sig. (bilateral)</strong> es menor que <strong>0.05</strong>, rechazamos la hipótesis nula. Esto significa que <strong>SÍ</strong> hay diferencias significativas o relación entre las variables.
+    </div>
+
+    <!-- REFERENCIAS -->
+    <div class="references-section">
+        <h3>Referencias Bibliográficas (Formato APA)</h3>
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li style="margin-bottom: 10px; padding-left: 20px; text-indent: -20px;">García-Bellido, R., González Such, J., & Jornet Meliá, J. M. (s.f.). <em>SPSS: Transformar variables</em>. Universitat de València. [Fuente 2450]</li>
+            <li style="margin-bottom: 10px; padding-left: 20px; text-indent: -20px;">IBM Corporation. (2011). <em>IBM SPSS Statistics Base 20</em>. Universidad de Granada. [Fuente 1533]</li>
+            <li style="margin-bottom: 10px; padding-left: 20px; text-indent: -20px;">IBM Corporation. (2019). <em>Guía del usuario de IBM SPSS Statistics 26 Core System</em>. [Fuente 35]</li>
+            <li style="margin-bottom: 10px; padding-left: 20px; text-indent: -20px;">IBM. (s.f.). <em>Para obtener gráficos de barras simples, agrupados o apilados</em>. [Fuente 2422]</li>
+            <li style="margin-bottom: 10px; padding-left: 20px; text-indent: -20px;">Joanne Tapia. (s.f.). <em>Tablas de frecuencias, medidas de tendencia central y dispersion SPSS</em> [Video]. YouTube. [Fuente 2423]</li>
+            <li style="margin-bottom: 10px; padding-left: 20px; text-indent: -20px;">LearnToResearch. (s.f.). <em>#06: Cómo usar IBM SPSS Statistics Tutorial paso a paso (Parte I)</em> [Video]. YouTube. [Fuente 1]</li>
+            <li style="margin-bottom: 10px; padding-left: 20px; text-indent: -20px;">Reddit. (s.f.). <em>[P][R] ¿La mejor forma de manejar datos faltantes o inconsistentes en SPSS?</em>. [Fuente 2434]</li>
+            <li style="margin-bottom: 10px; padding-left: 20px; text-indent: -20px;">Research Studio. (s.f.). <em>Managing Data - Sorting and filtering data</em> [Video]. YouTube. [Fuente 2417]</li>
+            <li style="margin-bottom: 10px; padding-left: 20px; text-indent: -20px;">SPSS FREE. (s.f.). <em>Comparacion de Metodos Recodificar de SPSS</em>. [Fuente 22]</li>
+            <li style="margin-bottom: 10px; padding-left: 20px; text-indent: -20px;">Universidad de Huelva. (s.f.). <em>Cómo instalar SPSS con licencia usuario autorizado en Windows</em>. [Fuente 28]</li>
         </ul>
     </div>
 
@@ -308,4 +343,3 @@ He incluido estilos CSS internos para asegurar que se vea bien, con cajas de inf
 
 </body>
 </html>
-```
